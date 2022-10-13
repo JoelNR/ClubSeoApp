@@ -1,0 +1,90 @@
+<header *ngIf="mobile"
+  class="flex justify-between w-full text-center items-center text-h4-m font-medium text-white pl-9 pr-5 md:px-12 pt-14 bg-petrol-100 fixed top-0 z-50 pb-2.5">
+  <div class="flex justify-start w-1/5">
+    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd"
+        d="M11.7071 6.09563C12.0976 6.48615 12.0976 7.11932 11.7071 7.50984L7.41421 11.8027H19C19.5523 11.8027 20 12.2504 20 12.8027C20 13.355 19.5523 13.8027 19 13.8027H7.41421L11.7071 18.0956C12.0976 18.4862 12.0976 19.1193 11.7071 19.5098C11.3166 19.9004 10.6834 19.9004 10.2929 19.5098L4.29289 13.5098C3.90237 13.1193 3.90237 12.4862 4.29289 12.0956L10.2929 6.09563C10.6834 5.7051 11.3166 5.7051 11.7071 6.09563Z"
+        fill="white" />
+    </svg>
+
+    <h4 class="pl-2 items-center hidden md:flex">
+      Atrás
+    </h4>
+  </div>
+  <h4 class="flex justify-center w-3/5">
+    {{headerLabel}}
+  </h4>
+  <div class="flex justify-end w-1/5">
+    <h4 class="pr-2 items-center hidden md:flex">
+      Cerrar
+    </h4>
+    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd"
+        d="M5.41643 5.6989C5.80695 5.30837 6.44012 5.30837 6.83064 5.6989L12.1235 10.9918L17.4164 5.6989C17.807 5.30837 18.4401 5.30837 18.8306 5.6989C19.2212 6.08942 19.2212 6.72259 18.8306 7.11311L13.5377 12.406L18.8306 17.6989C19.2212 18.0894 19.2212 18.7226 18.8306 19.1131C18.4401 19.5036 17.807 19.5036 17.4164 19.1131L12.1235 13.8202L6.83064 19.1131C6.44012 19.5036 5.80695 19.5036 5.41643 19.1131C5.0259 18.7226 5.0259 18.0894 5.41643 17.6989L10.7093 12.406L5.41643 7.11311C5.0259 6.72259 5.0259 6.08942 5.41643 5.6989Z"
+        fill="white" />
+    </svg>
+  </div>
+</header>
+
+<header *ngIf="!mobile"
+  class="fixed top-0 z-50 w-full flex justify-center items-center border-b border-solid default-gradient">
+  <div class="justify-between flex w-full lg:max-w-300">
+    <div class="py-2 flex items-center pl-5">
+      <img src="/assets/img/logo.gif" alt="logo" class="h-10">
+    </div>
+    <div class="text-white text-base hidden lg:flex text-center justify-center items-center">
+      <a *ngFor="let option of headerOptions" [routerLink]="option.link" class="px-5 inline-flex" [ngClass]="{
+      'text-aquamarin-80 nav-active': isActive(option.link),
+      'text-violet-60 nav-active-violet': isActive(option.link),
+      'text-white': !isActive(option.link)
+      }">
+        <span>{{ option.label }}</span>
+      </a>
+    </div>
+    <div class="flex lg:hidden justify-end items-center pr-4 md:pr-9">
+      <ion-button id="main" color="primary" size="small" class="">
+        <div class="flex items-center">
+          <div class="justify-start pr-2">
+            <svg width="13" height="9" viewBox="0 0 13 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0.5" y1="0.5" x2="12.5" y2="0.5" stroke="white" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <line y1="4.5" x2="13" y2="4.5" stroke="white" />
+              <line y1="8.5" x2="13" y2="8.5" stroke="white" />
+            </svg>
+          </div>
+          Menú
+        </div>
+      </ion-button>
+    </div>
+
+    <div class="justify-end items-center pr-5 hidden lg:flex">
+      <ion-button class="image" id="{{popoverTrigger}}" size="small" color="primary">
+        <div class="flex items-center">
+          <div class="justify-start pr-2">
+            <svg width="13" height="9" viewBox="0 0 13 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0.5" y1="0.5" x2="12.5" y2="0.5" stroke="white" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <line y1="4.5" x2="13" y2="4.5" stroke="white" />
+              <line y1="8.5" x2="13" y2="8.5" stroke="white" />
+            </svg>
+
+          </div>
+          <div class="justify-end">
+            <img class="rounded-full h-7 w-7 object-cover" [src]="'/assets/img/default-avatar.png'" alt="avatar">
+          </div>
+        </div>
+      </ion-button>
+      <ion-popover trigger="{{popoverTrigger}}" animated="false" dismiss-on-select="true" mode="ios" arrow="true">
+        <ng-template>
+          <ion-content class="rounded-2xl">
+            <div class="items-center flex justify-center flex-col">
+              <a *ngFor="let option of profileOptions" [routerLink]="option.link" class="px-5">
+                <span>{{ option.label }}</span>
+              </a>
+            </div>
+          </ion-content>
+        </ng-template>
+      </ion-popover>
+    </div>
+  </div>
+</header>

@@ -29,6 +29,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.default-gradient{
+    background: linear-gradient(129.17deg, #F09819 0%, #FF512F 100%);
+}
+
 .web-modal {
     & {
         @apply flex items-center justify-center h-full;
