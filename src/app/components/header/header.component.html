@@ -42,7 +42,7 @@
       </a>
     </div>
     <div class="flex lg:hidden justify-end items-center pr-4 md:pr-9">
-      <ion-button id="main" color="primary" size="small" class="">
+      <ion-button (click)="openMenu()" id="main" color="secondary" size="small" class="">
         <div class="flex items-center">
           <div class="justify-start pr-2">
             <svg width="13" height="9" viewBox="0 0 13 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,10 +55,63 @@
           Menú
         </div>
       </ion-button>
+
+      <ion-menu id="slide" side="end" menuId="end" type="overlay" contentId="main" [swipeGesture]="false">
+        <ion-header>
+          <ion-toolbar class="ion-toolbar-petrol" [ngClass]="{'ion-toolbar-violet': isActive(headerOptions[1].link)}">
+            <div class="flex justify-end items-end place-content-end pr-4 h-full">
+              <ion-button (click)="closeMenu()" color="secondary" size="small" class="button-menu">
+                <div class="flex items-center">
+                  <div class="justify-start pr-2">
+                    <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M0.292893 0.417893C0.683417 0.0273689 1.31658 0.0273689 1.70711 0.417893L7 5.71079L12.2929 0.417893C12.6834 0.0273689 13.3166 0.0273689 13.7071 0.417893C14.0976 0.808417 14.0976 1.44158 13.7071 1.83211L8.41421 7.125L13.7071 12.4179C14.0976 12.8084 14.0976 13.4416 13.7071 13.8321C13.3166 14.2226 12.6834 14.2226 12.2929 13.8321L7 8.53921L1.70711 13.8321C1.31658 14.2226 0.683417 14.2226 0.292893 13.8321C-0.0976311 13.4416 -0.0976311 12.8084 0.292893 12.4179L5.58579 7.125L0.292893 1.83211C-0.0976311 1.44158 -0.0976311 0.808417 0.292893 0.417893Z"
+                        fill="white" />
+                    </svg>
+
+                  </div>
+                  Menü
+                </div>
+              </ion-button>
+            </div>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <ion-list class="h4 py-0 cursor-pointer" [ngClass]="{'h4-web': !mobile}">
+            <ion-item *ngFor="let option of headerOptions" class="text-petrol-100 px-5" (click)="navigate(option.link)"
+              [ngClass]="{'text-violet-100': isActive(option.link)}">
+              <div class="pl-5">
+                {{option.label}}
+              </div>
+            </ion-item>
+            <ion-item (click)="show()" class="text-petrol-100 px-5">
+              <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                class="transition duration-300" [ngClass]="{'transform rotate-180': openProfileMenu }">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M19.2774 15.5303C18.9845 15.8232 18.5096 15.8232 18.2167 15.5303L12.7471 10.0607L7.2774 15.5303C6.98451 15.8232 6.50963 15.8232 6.21674 15.5303C5.92385 15.2374 5.92385 14.7626 6.21674 14.4697L12.2167 8.46967C12.5096 8.17678 12.9845 8.17678 13.2774 8.46967L19.2774 14.4697C19.5703 14.7626 19.5703 15.2374 19.2774 15.5303Z"
+                  fill="#005f71" />
+              </svg>
+              <div class="pl-5">
+                Profil
+              </div>
+              <div class="absolute right-2">
+                <img class="rounded-full w-10 h-10 object-cover"
+                  [src]="'/assets/img/default-avatar.png'" alt="avatar">
+              </div>
+            </ion-item>
+          </ion-list>
+          <div *ngIf="openProfileMenu" class="items-center justify-center flex-col bg-petrol-5 px-4">
+            <a *ngFor="let option of profileOptions" (click)="navigate(option.link)"
+              class="flex text-petrol-100 h6  py-4 border-t border-solid border-white px-3 cursor-pointer">
+              {{option.label}}
+            </a>
+          </div>
+        </ion-content>
+      </ion-menu>
     </div>
 
     <div class="justify-end items-center pr-5 hidden lg:flex">
-      <ion-button class="image" id="{{popoverTrigger}}" size="small" color="primary">
+      <ion-button class="image" id="{{popoverTrigger}}" size="small" color="secondary">
         <div class="flex items-center">
           <div class="justify-start pr-2">
             <svg width="13" height="9" viewBox="0 0 13 9" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 
 @Component({
@@ -8,7 +9,7 @@ import { CapacitorBase } from 'src/app/lib/CapacitorBase';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent extends CapacitorBase implements OnInit {
-  headerOptions = [    
+  headerOptions = [
     { label: 'Noticias', link: '/noticias' },
     { label: 'Iniciación', link: '/iniciacion' },
     { label: 'Competiciones', link: '/competiciones' },
@@ -21,10 +22,12 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
     { label: 'Timer', link: '/timer' },
   ]
   popoverTrigger: string
+  openProfileMenu: boolean = false
 
   @Input() headerLabel: string
 
-  constructor(private router: Router,) { 
+  constructor(private router: Router,
+    private menu: MenuController,) {
     super()
   }
 
@@ -32,7 +35,26 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
     this.popoverTrigger = this.router.url
   }
 
-  isActive(link: string){
+  isActive(link: string) {
     return this.router.url.includes(link)
+  }
+
+  openMenu() {
+    this.menu.enable(true, 'end').then(() => {
+      this.menu.open('end');
+    })
+  }
+
+  closeMenu() {
+    this.menu.close('end');
+  }
+
+  navigate(link: string) {
+    this.router.navigate([link]);
+    this.menu.close('end');
+  }
+
+  show(){
+    this.openProfileMenu = !this.openProfileMenu
   }
 }

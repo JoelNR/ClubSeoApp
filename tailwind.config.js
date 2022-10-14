@@ -5,7 +5,7 @@ module.exports = {
     extend: {
 
       maxWidth: {
-        '300': '1200px',
+        '290': '1160px',
       },
         
       colors: {

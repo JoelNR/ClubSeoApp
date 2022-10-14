@@ -1,0 +1,65 @@
+ion-popover {
+    --backdrop-opacity: 0%;
+    --width: 220px;
+    --offset-x: 18px;
+    --offset-y: 15px;
+}
+
+.image::part(native) {
+    @apply pr-1;
+}
+
+ion-button::part(native) {
+    @apply pt-1 pb-1;
+}
+
+.button-menu {
+    --padding-top: 9px;
+    --padding-bottom: 9px;
+    --padding-start: 12px;
+    --padding-end: 12px;
+    --border-radius: 50px;
+    height: 38px;
+    width: 90px;
+}
+
+.menu:hover {
+    background-color: #ebedef;
+}
+
+
+ion-item::part(native) {
+    --border-style: none;
+}
+
+ion-menu {
+    --width: 100%;
+    @apply fixed;
+}
+
+.ion-toolbar-petrol {
+    --background: var(--petrol-100);
+}
+
+.ion-toolbar-violet {
+    --background: var(--violet-120);
+}
+
+ion-toolbar {
+    --min-height: 80px;
+    @apply h-20;
+}
+
+ion-content {
+    --width: 100%;
+}
+
+ion-menu::part(container) {
+    @apply w-full;
+}
+
+@screen md {
+    ion-menu::part(container) {
+        width: 400px;
+    }
+}
