@@ -26,8 +26,35 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 @tailwind base;
-@tailwind components;
+@tailwind components; 
 @tailwind utilities;
+
+.default-gradient{
+    background: linear-gradient(129.17deg, #ff9b54 0%, #fc7e23 100%);/*#F09819  #FF512F*/
+}
+
+.inverse-gradient{
+    background: linear-gradient(129.17deg, #fc7e23 0%, #ff9b54 100%);
+}
+
+ion-button {
+    --box-shadow: none;
+    --border-radius: 16px;
+    @apply font-medium h-auto normal-case tracking-normal;
+    --border-width: 2px;
+    --border-style: solid;
+    --border-color: transparent;
+    &::part(native) {
+        @apply px-5 py-4;
+    }
+    &.button-small {
+        --border-radius: 30px;
+        &::part(native) {
+            @apply px-3 py-2;
+        }
+    }
+}
+
 
 .web-modal {
     & {
