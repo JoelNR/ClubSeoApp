@@ -10,10 +10,11 @@ import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 })
 export class HeaderComponent extends CapacitorBase implements OnInit {
   headerOptions = [
-    { label: 'Noticias', link: '/noticias' },
+    { label: 'Sobre Nosotros', link: '/nosotros' },
     { label: 'Iniciación', link: '/iniciacion' },
     { label: 'Competiciones', link: '/competiciones' },
-    { label: 'Rankings y Récords', link: '/rankings' },
+    { label: 'Arqueros', link: '/arqueros' },
+    { label: 'Plusmarcas', link: '/rankings' },
   ]
   profileOptions = [
     { label: 'Perfil', link: '/perfil' },
@@ -23,8 +24,10 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
   ]
   popoverTrigger: string
   openProfileMenu: boolean = false
+  userLogged: boolean = true
 
   @Input() headerLabel: string
+  @Input() cancelHeaderMobile: boolean = false
 
   constructor(private router: Router,
     private menu: MenuController,) {
