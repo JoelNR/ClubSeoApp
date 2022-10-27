@@ -24,3 +24,179 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.web-modal {
+    & {
+        @apply flex items-center justify-center h-full;
+    }
+    &::part(content) {
+        --max-width: 335px;
+        -webkit-transform: none !important;
+        transform: none !important;
+        @apply relative flex items-center justify-center h-auto rounded-3xl pt-5 pb-10 px-5 m-0;
+        @screen md {
+            --max-width: 480px;
+        }
+        @screen lg {
+            --max-width: 500px;
+        }
+    }
+    &::part(handle) {
+        @apply hidden;
+    }
+    &.auto-height {
+        &.bottom {
+            @apply items-end;
+        }
+        --height: auto;
+        .ion-page {
+            contain: content;
+            @apply relative block;
+            .inner-content {
+                max-height: 80vh;
+                @apply overflow-auto p-2.5;
+            }
+        }
+    }
+    ion-content {
+        --background: var(--clear);
+    }
+}
+
+@screen sm {
+    .web-modal {
+        &::part(content) {
+            @apply p-5 my-0 mx-5;
+        }
+    }
+}
+
+ion-content {
+    --background: var(--clear);
+}
+
+.sheet-modal {
+    &::part(content) {
+        --border-radius: 32px;
+        --max-width: calc(100% - 32px);
+        @apply h-auto;
+    }
+    &.show-modal {
+        @apply flex items-end justify-center h-full;
+    }
+    &::part(content) {
+        --max-width: none;
+        -webkit-transform: none !important;
+        transform: none !important;
+        @apply relative flex items-center justify-center h-auto rounded-t-3xl rounded-b-none p-0 pb-10 m-0;
+    }
+    &::part(handle) {
+        @apply hidden;
+    }
+    &.auto-height {
+        &.bottom {
+            @apply items-end;
+        }
+        --height: auto;
+        .ion-page {
+            contain: content;
+            @apply relative block;
+            .inner-content {
+                max-height: 80vh;
+                @apply overflow-auto p-2.5;
+            }
+        }
+    }
+}
+
+h1{
+
+}
+
+h2{
+
+}
+
+h3{
+
+}
+
+h4{
+
+}
+
+h5{
+
+}
+
+h6{
+
+}
+
+p{
+
+}
+
+@screen sm {
+    h1{
+
+    }
+    
+    h2{
+    
+    }
+    
+    h3{
+    
+    }
+    
+    h4{
+    
+    }
+    
+    h5{
+    
+    }
+    
+    h6{
+    
+    }
+    
+    p{
+    
+    }
+}
+
+@screen lg {
+    h1{
+
+    }
+    
+    h2{
+    
+    }
+    
+    h3{
+    
+    }
+    
+    h4{
+    
+    }
+    
+    h5{
+    
+    }
+    
+    h6{
+    
+    }
+    
+    p{
+    
+    }
+}
