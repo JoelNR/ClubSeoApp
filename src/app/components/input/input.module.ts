@@ -4,11 +4,12 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { InputComponent } from './input.component';
+import { PasswordInputVisibilityComponent } from './password-input-visibility/password-input-visibility.component';
 
 
 
 @NgModule({
-  declarations: [InputComponent],
+  declarations: [InputComponent, PasswordInputVisibilityComponent],
   imports: [
     CommonModule,
     IonicModule,

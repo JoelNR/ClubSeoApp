@@ -1,0 +1,29 @@
+ion-item {
+    --placeholder-opacity: 100%;
+    --border-color: transparent;
+    --padding-start: 20px;
+    --inner-padding-end: 20px;
+    @apply border border-solid border-transparent;
+    &::part(native) {
+        @apply rounded-xl;
+    }   
+    --background: var(--orange-60);
+    --padding-start: 20px;
+    --inner-padding-end: 20px
+}
+
+ion-input {
+    --placeholder-opacity: 100%;
+    --border-color: transparent;
+}
+
+
+ion-item:focus-within {
+    @apply shadow-none border border-solid border-orange;
+}
+
+ion-item.error {
+    --background: rgba(255, 140, 140, 0.2);
+    --border-color: #FF8C8C;
+    @apply border-2 border-solid border-alert-80 shadow-none;
+}

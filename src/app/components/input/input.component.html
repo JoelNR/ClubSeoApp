@@ -1,3 +1,20 @@
-<p>
-  input works!
-</p>
+<ion-item class="rounded-xl mt-2 text-white" lines="none">
+
+  <app-password-input-visibility *ngIf="type==='password'">
+      <ion-input type="{{type}}" autocomplete [(ngModel)]="value" (ngModelChange)="valueChange.emit(value)" (ionFocus)="errorMessage = null" (ionBlur)="OnUdateInputText(matchingValue)" placeholder="{{placeholder}}">
+      </ion-input>
+  </app-password-input-visibility >
+
+  <ion-input *ngIf="type !='password'" [value]="value" autocomplete class="flex-row-reverse" name="input" id="input" #input="ngModel" type="{{type}}" [(ngModel)]="value" (ngModelChange)="valueChange.emit(value)" (ionFocus)="checkFocus()"
+      (ionBlur)="OnUdateInputText(null)" placeholder="{{placeholder}}">
+      <svg *ngIf=" (isShown && input.valid && value !== undefined && value!==null && errorMessage===null) || (errorMessage === 'valid')" class=" icon" width="19" height="15" viewBox="0 0 19 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M18.2988 0.868321C18.7059 1.24151 18.7334 1.87408 18.3602 2.2812L7.3602 14.2812C7.1759 14.4823 6.91746 14.5993 6.64477 14.6052C6.37208 14.6112 6.10881 14.5054 5.91594 14.3126L0.91594 9.31258C0.525416 8.92206 0.525416 8.28889 0.91594 7.89837C1.30646 7.50784 1.93963 7.50784 2.33015 7.89837L6.59163 12.1598L16.8859 0.92975C17.2591 0.522631 17.8917 0.495128 18.2988 0.868321Z" fill="var(--aquamarin-80)"/>
+  </svg>
+  </ion-input>
+
+  <svg *ngIf="type !='password' && errorMessage && errorMessage!=='valid'" class=" icon" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.41618 5.29289C5.80671 4.90237 6.43987 4.90237 6.8304 5.29289L12.1233 10.5858L17.4162 5.29289C17.8067 4.90237 18.4399 4.90237 18.8304 5.29289C19.2209 5.68342 19.2209 6.31658 18.8304 6.70711L13.5375 12L18.8304 17.2929C19.2209 17.6834 19.2209 18.3166 18.8304 18.7071C18.4399 19.0976 17.8067 19.0976 17.4162 18.7071L12.1233 13.4142L6.8304 18.7071C6.43987 19.0976 5.80671 19.0976 5.41618 18.7071C5.02566 18.3166 5.02566 17.6834 5.41618 17.2929L10.7091 12L5.41618 6.70711C5.02566 6.31658 5.02566 5.68342 5.41618 5.29289Z" fill="var(--color)"/>
+  </svg>
+
+</ion-item>
+<div *ngIf="errorMessage && errorMessage!=='valid'" class="formError pl-2 pr-2 pt-2"> {{errorMessage}}</div>

@@ -6,11 +6,11 @@
       </h1>
       <app-back-button class="px-8" [locationBack]="true"></app-back-button>
       <form (ngSubmit)="submit()" (keyup.enter)="submit()" class="flex flex-col w-full justify-center p-8 items-center">
-        <div class="py-2">
-          <app-input></app-input>
+        <div class="py-2 w-full">
+          <app-input placeholder="Email" type="email"></app-input>
         </div>
-        <div class="py-2">
-          <app-input></app-input>
+        <div class="py-2 w-full">
+          <app-input placeholder="Contraseña" type="password"></app-input>
         </div>
         
         <p class="text-xs text-orange w-full flex justify-center pt-3 pb-9">¿Olvidaste la contraseña?</p>
