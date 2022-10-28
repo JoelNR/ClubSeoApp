@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { HeaderComponent } from './header.component';
 import { RouterModule } from '@angular/router';
+import { BackButtonComponent } from './back-button.component';
 
 
 
 @NgModule({
-  declarations: [HeaderComponent],
+  declarations: [BackButtonComponent],
   imports: [
     CommonModule,
     IonicModule,
     RouterModule,
   ],
-  exports:[HeaderComponent]
+  exports:[BackButtonComponent]
 })
-export class HeaderModule { }
+export class BackButtonModule { }

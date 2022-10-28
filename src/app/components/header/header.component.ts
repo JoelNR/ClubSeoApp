@@ -22,9 +22,10 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
     { label: 'Ejercicios', link: '/ejercicios' },
     { label: 'Timer', link: '/timer' },
   ]
+
   popoverTrigger: string
   openProfileMenu: boolean = false
-  userLogged: boolean = true
+  userLogged: boolean = false
 
   @Input() headerLabel: string
   @Input() cancelHeaderMobile: boolean = false
