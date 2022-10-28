@@ -16,10 +16,7 @@ export class InputComponent implements OnInit {
 
   @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
 
-
-
   isShown: boolean = true;
-
   errorMessage: string | null = null;
 
   constructor() { }

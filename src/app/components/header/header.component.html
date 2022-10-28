@@ -87,10 +87,10 @@
 
     <div class="justify-end items-center pr-5 hidden lg:flex">
       <div *ngIf="!userLogged" class="flex justify-between">
-        <div class="pr-4">
+        <div class="pr-4" routerLink="/login">
           Iniciar sesión
         </div>
-        <div>
+        <div routerLink="/registro">
           Registrarse
         </div>
       </div>
