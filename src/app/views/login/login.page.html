@@ -1,0 +1,24 @@
+<ion-content class="flex flex-col">
+    <app-header></app-header>
+    <div class="w-full md:max-w-xl mx-auto flex flex-col p-4">      
+      <h1 class="w-full flex justify-center py-8">
+        Inicio de sesión
+      </h1>
+      <app-back-button class="px-8" [locationBack]="true"></app-back-button>
+      <form (ngSubmit)="submit()" (keyup.enter)="submit()" class="flex flex-col w-full justify-center p-5 sm:p-8 items-center">
+        <div class="py-2 w-full">
+          <app-input placeholder="Email" type="email"></app-input>
+        </div>
+        <div class="py-2 w-full">
+          <app-input placeholder="Contraseña" type="password"></app-input>
+        </div>
+        
+        <p routerLink="/login/reset" class="text-xs text-orange w-full cursor-pointer flex justify-center pt-3 pb-9">¿Olvidaste la contraseña?</p>
+        <div class="w-full">
+          <ion-button type="submit" color="primary" expand="block">Iniciar sesión</ion-button>
+
+          <p class="text-xs w-full flex justify-center pt-2"> ¿Aún no tienes cuenta? <span class="text-orange pl-1 cursor-pointer" routerLink="/registro">¡Registrate aquí!</span></p>
+        </div>
+      </form>
+    </div>
+</ion-content>

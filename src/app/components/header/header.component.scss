@@ -1,8 +1,6 @@
 ion-popover {
     --backdrop-opacity: 0%;
-    --width: 220px;
-    --offset-x: 18px;
-    --offset-y: 15px;
+
 }
 
 .image::part(native) {
@@ -37,14 +35,6 @@ ion-menu {
     @apply fixed;
 }
 
-.ion-toolbar-petrol {
-    --background: var(--petrol-100);
-}
-
-.ion-toolbar-violet {
-    --background: var(--violet-120);
-}
-
 ion-toolbar {
     --min-height: 80px;
     @apply h-20;
@@ -61,5 +51,12 @@ ion-menu::part(container) {
 @screen md {
     ion-menu::part(container) {
         width: 400px;
+    }
+}
+
+header{
+    border-color: black;
+    @media (prefers-color-scheme: dark) {
+        border-color: white;
     }
 }
