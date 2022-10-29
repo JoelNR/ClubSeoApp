@@ -3,7 +3,7 @@ ion-item {
     --border-color: transparent;
     --padding-start: 20px;
     --inner-padding-end: 20px;
-    @apply border border-solid border-transparent;
+    @apply border border-solid border-transparent text-nightblue;
     &::part(native) {
         @apply rounded-xl;
     }   
@@ -19,7 +19,7 @@ ion-input {
 
 
 ion-item:focus-within {
-    @apply shadow-none border border-solid border-orange;
+    @apply shadow-none border border-solid border-orange-100;
 }
 
 ion-item.error {

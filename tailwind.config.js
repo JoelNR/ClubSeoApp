@@ -14,6 +14,7 @@ module.exports = {
         },
         orange: {
             DEFAULT: '#f9a45e',
+            '100':'#ff7700',
             '80': '#fabb86',
             '60': '#fcd1ae',
             '40': '#fde8d6',

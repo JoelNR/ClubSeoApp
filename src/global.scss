@@ -25,6 +25,10 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+h1,h2,h3,h4,p, div {
+    @apply text-nightblue dark:text-white
+}
+
 @tailwind base;
 @tailwind components; 
 @tailwind utilities;
@@ -141,89 +145,25 @@ ion-content {
 }
 
 h1{
-
+    @apply text-3xl
 }
 
 h2{
-
+    @apply text-2xl
 }
 
 h3{
-
+    @apply text-xl
 }
 
 h4{
-
-}
-
-h5{
-
-}
-
-h6{
-
+    @apply text-xs uppercase
 }
 
 p{
-
+    @apply text-base
 }
 
-@screen sm {
-    h1{
-
-    }
-    
-    h2{
-    
-    }
-    
-    h3{
-    
-    }
-    
-    h4{
-    
-    }
-    
-    h5{
-    
-    }
-    
-    h6{
-    
-    }
-    
-    p{
-    
-    }
-}
-
-@screen lg {
-    h1{
-
-    }
-    
-    h2{
-    
-    }
-    
-    h3{
-    
-    }
-    
-    h4{
-    
-    }
-    
-    h5{
-    
-    }
-    
-    h6{
-    
-    }
-    
-    p{
-    
-    }
+div{
+    @apply text-sm
 }
