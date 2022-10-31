@@ -1,7 +1,7 @@
 <header *ngIf="!mobile" class="w-full flex justify-center items-center border-b border-solid">
   <div class="justify-between flex w-full lg:max-w-290">
     <div class="py-2 flex items-center pl-5" [ngClass]="{'w-40 xl:w-44' : !userLogged}">
-      <img src="/assets/img/logo.gif" alt="logo" class="h-10">
+      <img src="/assets/img/logo.gif" routerLink="/inicio" alt="logo" class="h-10 cursor-pointer">
     </div>
     <div class=" text-base hidden lg:flex text-center justify-center items-center">
       <a *ngFor="let option of headerOptions" [routerLink]="option.link" class="px-5 inline-flex" [ngClass]="{
@@ -68,10 +68,10 @@
                 <img class="rounded-full w-10 h-10 object-cover" [src]="'/assets/img/default-avatar.png'" alt="avatar">
               </div>
             </ion-item>
-            <ion-item *ngIf="!userLogged" routerLink="/login" class="px-5">
+            <ion-item *ngIf="!userLogged" routerLink="/login" class="cursor-pointer px-5">
               Iniciar sesión
             </ion-item>
-            <ion-item *ngIf="!userLogged" routerLink="/registro" class="px-5">
+            <ion-item *ngIf="!userLogged" routerLink="/registro" class="cursor-pointer px-5">
               Registrarse
             </ion-item>
           </ion-list>
@@ -87,10 +87,10 @@
 
     <div class="justify-end items-center pr-5 hidden lg:flex">
       <div *ngIf="!userLogged" class="flex justify-between">
-        <div class="pr-4" routerLink="/login">
+        <div class="pr-4 cursor-pointer" routerLink="/login">
           Iniciar sesión
         </div>
-        <div routerLink="/registro">
+        <div class="cursor-pointer" routerLink="/registro">
           Registrarse
         </div>
       </div>

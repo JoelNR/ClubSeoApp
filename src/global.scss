@@ -24,9 +24,16 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+@import 'swiper/scss';
+@import '@ionic/angular/css/ionic-swiper';
+@import 'swiper/scss/autoplay';
+@import 'swiper/scss/keyboard';
+@import 'swiper/scss/pagination';
+@import 'swiper/scss/scrollbar';
+@import 'swiper/scss/zoom';
 
 h1,h2,h3,h4,p, div {
-    @apply text-nightblue dark:text-white
+    @apply text-nightblue dark:text-clear
 }
 
 @tailwind base;
@@ -39,6 +46,9 @@ h1,h2,h3,h4,p, div {
 
 .inverse-gradient{
     background: linear-gradient(129.17deg, #fc7e23 0%, #ff9b54 100%);
+    @media (prefers-color-scheme: dark) {
+        background: linear-gradient(129.17deg, #3c1e11 0%, #dd6b1a 35%, #963f00 100%);
+    }
 }
 
 ion-button {
