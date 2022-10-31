@@ -9,22 +9,28 @@
       Tiro con arco en Gran Canaria
       </h3>
       <app-landing-page-swiper></app-landing-page-swiper>
+      
       <div class="py-8">
+        <h3 class="pb-4">
+          El tiempo en nuestro club
+        </h3>
         <img src="/assets/img/weather.png" class="rounded-2xl" alt="">
       </div>
-      <div class="text-center">
-        <div class="h-40">
-          Noticias
+      <div class="pb-8 rounded-t-xl p-2 sm:pl-5 border border-b-0 border-solid border-white dark:border-nightblue-80">
+        <h3 class="pb-4 sm:pl-4">
+          Nuestras últimas noticias
+        </h3>
+        <div class="grid grid-cols-2 md:grid-cols-3">
+          <div *ngFor="let news of newsArray" class="px-2 pb-4">
+            <app-news-card [imgSrc]="news.imgSrc" [title]="news.title" [description]="news.description" [date]="news.date"></app-news-card>
+          </div>        
         </div>
-        <div class="h-40">
-          Noticias
+        <div class="w-full flex justify-center">
+          <ion-button color="primary" routerLink="/noticias">
+            Ver más
+          </ion-button>
         </div>
-        <div class="h-40">
-          Noticias
-        </div>
-        <div class="h-40">
-          Noticias
-        </div>
+
       </div>
     </div>
     <app-footer></app-footer>

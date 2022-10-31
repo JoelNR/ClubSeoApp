@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom } from 'swiper';
-import { IonicSlides } from '@ionic/angular';
-
-SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 
 @Component({
   selector: 'app-landing-page',
@@ -11,10 +7,12 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 })
 export class LandingPagePage implements OnInit {
 
-  slideOpts = {
-    initialSlide: 0,
-    speed: 50,
-  };
+  newsArray = [{imgSrc: '/assets/img/flechas.jpeg', title : 'Título 1', date: '01/01/2022', description: 'Descripción 1'},
+  {imgSrc: '/assets/img/flechas.jpeg', title : 'Título 2', date: '01/01/2022', description: 'Descripción 2'},
+  {imgSrc: '/assets/img/flechas.jpeg', title : 'Título 3', date: '01/01/2022', description: 'Descripción 3'},
+  {imgSrc: '/assets/img/flechas.jpeg', title : 'Título 4', date: '01/01/2022', description: 'Descripción 4'},
+  {imgSrc: '/assets/img/flechas.jpeg', title : 'Título 5', date: '01/01/2022', description: 'Descripción 5'},
+  {imgSrc: '/assets/img/flechas.jpeg', title : 'Título 6', date: '01/01/2022', description: 'Descripción 6'},]
 
   constructor() { }
 
