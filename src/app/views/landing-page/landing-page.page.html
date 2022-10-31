@@ -16,12 +16,12 @@
         </h3>
         <img src="/assets/img/weather.png" class="rounded-2xl" alt="">
       </div>
-      <div class="pb-8 rounded-t-xl p-2 sm:pl-5 border border-b-0 border-solid border-white dark:border-nightblue-80">
-        <h3 class="pb-4 sm:pl-4">
+      <div class="pb-8 rounded-t-xl p-2 md:pl-5 border border-b-0 border-solid border-white dark:border-nightblue-80">
+        <h3 class="pb-4 pl-2">
           Nuestras últimas noticias
         </h3>
-        <div class="grid grid-cols-2 md:grid-cols-3">
-          <div *ngFor="let news of newsArray" class="px-2 pb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+          <div *ngFor="let news of newsArray" class="px-2 pb-4 w-full">
             <app-news-card [imgSrc]="news.imgSrc" [title]="news.title" [description]="news.description" [date]="news.date"></app-news-card>
           </div>        
         </div>
