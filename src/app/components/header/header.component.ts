@@ -23,7 +23,7 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
     { label: 'Timer', link: '/timer' },
   ]
 
-  popoverTrigger: string
+  trigger: string
   openProfileMenu: boolean = false
   userLogged: boolean = true
 
@@ -36,7 +36,7 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
   }
 
   ngOnInit() {
-    this.popoverTrigger = this.router.url
+    this.trigger = this.router.url
   }
 
   isActive(link: string) {
@@ -44,18 +44,18 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
   }
 
   openMenu() {
-    this.menu.enable(true, 'end').then(() => {
-      this.menu.open('end');
+    this.menu.enable(true, 'end' + this.trigger).then(() => {
+      this.menu.open('end' + this.trigger);
     })
   }
 
   closeMenu() {
-    this.menu.close('end');
+    this.menu.close('end' + this.trigger);
   }
 
   navigate(link: string) {
     this.router.navigate([link]);
-    this.menu.close('end');
+    this.menu.close('end' + this.trigger);
   }
 
   show(){

@@ -27,7 +27,7 @@
         </div>
       </ion-button>
 
-      <ion-menu id="slide" side="end" menuId="end" type="overlay" contentId="main" [swipeGesture]="false">
+      <ion-menu id="slide" side="end" [menuId]="'end' + trigger" type="overlay" contentId="main" [swipeGesture]="false">
         <ion-header>
           <ion-toolbar class="ion-toolbar-petrol" [ngClass]="{'ion-toolbar-violet': isActive(headerOptions[1].link)}">
             <div class="flex justify-end items-end place-content-end pr-4 h-full">
@@ -98,7 +98,7 @@
         </div>
       </div>
 
-      <ion-button *ngIf="userLogged" class="image" id="{{popoverTrigger}}" size="small" color="primary">
+      <ion-button *ngIf="userLogged" class="image" id="{{trigger}}" size="small" color="primary">
         <div class="flex items-center">
           <div class="justify-start pr-2">
             <svg width="13" height="9" viewBox="0 0 13 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -113,7 +113,7 @@
           </div>
         </div>
       </ion-button>
-      <ion-popover trigger="{{popoverTrigger}}" animated="false" dismiss-on-select="true" mode="ios" arrow="true">
+      <ion-popover trigger="{{trigger}}" animated="false" dismiss-on-select="true" mode="ios" arrow="true">
         <ng-template>
           <ion-content class="rounded-2xl">
             <div class="flex flex-col">
