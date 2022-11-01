@@ -5,9 +5,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './record-card.component.html',
   styleUrls: ['./record-card.component.scss'],
 })
-export class RecordCardComponent implements OnInit {
+export class RecordCardComponent extends CapacitorBase implements OnInit {
 
-  constructor() { }
+  constructor() {
+    super()
+   }
 
   ngOnInit() {}
 

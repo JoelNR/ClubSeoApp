@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage extends CapacitorBase implements OnInit {
   firstName: string = 'Joel'
   lastName: string = 'Navarro Rivero'
   profilePictureSrc: string = '/assets/img/iniciacion.jpeg' || '/assets/img/default-avatar.png'
@@ -21,7 +22,9 @@ export class ProfilePage implements OnInit {
   {recordName : 'Recurvo senior', distance:'70m', type: 'Aire Libre', comepetitionName: 'Campeonato 1', date: '01/01/2022'},]
 
   editableProfile: boolean = true
-  constructor() { }
+  constructor() { 
+    super()
+  }
 
   ngOnInit() {
   }
