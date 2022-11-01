@@ -17,7 +17,7 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
     { label: 'Plusmarcas', link: '/rankings' },
   ]
   profileOptions = [
-    { label: 'Perfil', link: '/perfil' },
+    { label: 'Perfil', link: '/perfil/self' },
     { label: 'Regulación', link: '/regulacion' },
     { label: 'Ejercicios', link: '/ejercicios' },
     { label: 'Timer', link: '/timer' },
@@ -25,7 +25,7 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
 
   popoverTrigger: string
   openProfileMenu: boolean = false
-  userLogged: boolean = false
+  userLogged: boolean = true
 
   @Input() headerLabel: string
   @Input() cancelHeaderMobile: boolean = false
@@ -60,5 +60,9 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
 
   show(){
     this.openProfileMenu = !this.openProfileMenu
+  }
+
+  logout(){
+
   }
 }

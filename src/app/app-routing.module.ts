@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
+import { TabsGuard } from './guards/tabs.guard';
 
 const routes: Routes = [
   {
@@ -20,8 +22,15 @@ const routes: Routes = [
   },
   {
     path: 'inicio',
-    loadChildren: () => import('./views/landing-page/landing-page.module').then( m => m.LandingPagePageModule)
+    loadChildren: () => import('./views/landing-page/landing-page.module').then( m => m.LandingPagePageModule),
+    canActivate: [TabsGuard]
+  },
+  {
+    path: 'perfil/:id',
+    loadChildren: () => import('./views/profile/profile.module').then( m => m.ProfilePageModule),
+    canActivate: [AuthGuard]
   }
+
 
 ];
 @NgModule({
