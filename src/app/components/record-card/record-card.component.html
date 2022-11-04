@@ -1,22 +1,29 @@
 
-<div class="flex flex-col text-left rounded-xl shadow-none cursor-pointer w-full max-h-fit p-3 bg-nightblue-50 dark:bg-clear-bg">
-  <div class="flex justify-between pb-4 sm:pb-2">
+<div class="flex flex-col text-left rounded-xl shadow-none w-full max-h-fit p-3 bg-blue-50">
+  <div class="flex justify-between pb-2 border-b border-solid border-clear">
     <div class="text-nightblue-100 ">
       {{recordName}}
     </div>  
-    <div class="text-nightblue-100 ">
-      {{distance}} metros
-    </div>  
+
     <div class="text-nightblue-100 ">
       {{points}} puntos
     </div>
   </div>
-  <div class="flex justify-between">
+  <div class="flex justify-between py-2 border-b border-solid border-clear">
     <div class=" text-nightblue-100 ">
       {{type}}
-    </div>
+    </div>    
     <div class="text-nightblue-100 ">
-      {{date}}
+      {{distance}} metros
+    </div> 
+  </div> 
+  <div class="flex pt-2 justify-between">
+    <div class="text-nightblue-100 ">
+        {{date}}
     </div>
-  </div>
+    <ion-button class="m-0 h-5" color="primary" size="small" fill="outline">
+      Más info
+    </ion-button>    
+  </div>   
+
 </div>

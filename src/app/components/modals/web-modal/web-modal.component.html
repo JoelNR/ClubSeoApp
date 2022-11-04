@@ -1,0 +1,42 @@
+<div class="ion-page">
+  <div class="flex flex-col items-center">
+    <ion-header class="flex flex-col items-center px-0 mb-0 mx-0 text-center ">
+      <div class="flex self-end cursor-pointer pb-6" (click)="dismiss()">
+        <svg class="dark:stroke-clear stroke-nightblue" width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5.5 6L17.2097 17.7097" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+          <path d="M5.5 17.71L17.2097 6.00026" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </div>
+      <ion-toolbar class="pb-2.5">
+        <ion-title class="px-0 text-nightblue dark:text-clear" [innerHTML]="title"></ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content *ngIf="oneButton" class="ion-text-center px-0 sm:px-14 inner-content max-w-xs">
+      <ion-text>
+        <div *ngFor="let text of texts" class="  pb-5">
+          <p>{{text}}</p>
+        </div>
+      </ion-text>
+      <ion-button *ngFor="let button of buttons; index as i" expand="block" [ngClass]="button.classes"
+        [color]="button.color" (click)="button.onClick()">
+        {{button.text}}
+      </ion-button>
+    </ion-content>
+
+    <ion-content *ngIf="!oneButton" class="ion-text-center px-0 sm:px-14 inner-content max-w-xs">
+      <ion-text>
+        <div *ngFor="let text of texts" class=" pb-5">
+          <p>{{text}}</p>
+        </div>
+      </ion-text>
+      <div>
+        <ion-button *ngFor="let button of buttons; index as i" expand="block" [ngClass]="button.classes"
+          [color]="button.color" [fill]="button.fill" (click)="button.onClick()">
+          {{button.text}}
+        </ion-button>
+      </div>
+    </ion-content>
+  </div>
+</div>

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-header',
@@ -31,7 +32,8 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
   @Input() cancelHeaderMobile: boolean = false
 
   constructor(private router: Router,
-    private menu: MenuController,) {
+    private menu: MenuController,
+    private modalService: ModalService) {
     super()
   }
 
@@ -63,6 +65,10 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
   }
 
   logout(){
-
+    this.modalService.showModal(`Desconectarse`,
+      ['¿Estás seguro de que quieres salir de tu cuenta?'],
+      [{text:'Sí, desconectame', color:'primary', onClick: ()=> { this.modalService.dismiss()}},
+      {text:'Cancelar', color:'primary', fill:'outline',onClick: ()=> { this.modalService.dismiss()}}]
+    )
   }
 }

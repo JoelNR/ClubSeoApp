@@ -10,7 +10,7 @@ export class CompetitionCardComponent extends CapacitorBase implements OnInit {
 
   @Input() name: string
   @Input() date: string 
-  @Input() position: string
+  @Input() position: number
   @Input() points: number 
   @Input() category: string 
   @Input() distance: number

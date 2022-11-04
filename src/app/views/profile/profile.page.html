@@ -27,11 +27,11 @@
         
         <div class="w-full lg:w-2/3 ">
           <div class="p-4 rounded-2xl border border-solid border-nightblue-60 dark:border-clear">
-            <h2 class="pb-4">
+            <h2 class="pb-4 sm:px-2">
               Competiciones
             </h2>
-            <div class="w-full">
-              <div *ngFor="let competition of competitionArray; let i=index" class="pb-4 w-full">
+            <div class="w-full grid grid-cols-1 sm:grid-cols-2">
+              <div *ngFor="let competition of competitionArray; let i=index" class="pb-4 sm:px-2">
                 <app-competition-card *ngIf="i < 6" [name]="competition.name" [date]="competition.date" [position]="competition.position"
                 [points]="competition.points" [category]="competition.category" [distance]="competition.distance" 
                 [type]="competition.type"></app-competition-card>
