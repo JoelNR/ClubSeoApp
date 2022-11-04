@@ -28,7 +28,7 @@ export class ProfilePage extends CapacitorBase implements OnInit {
   {recordName : 'Recurvo Junior', distance: 70 , type: 'Aire Libre', points : 600, date: '01/01/2022'},]
 
   editableProfile: boolean = true
-  editProfileActive: boolean = true
+  editProfileActive: boolean = false
 
   constructor() { 
     super()
