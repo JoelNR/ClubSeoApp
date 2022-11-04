@@ -10,7 +10,10 @@ export class ProfilePage extends CapacitorBase implements OnInit {
   firstName: string = 'Joel'
   lastName: string = 'Navarro Rivero'
   profilePictureSrc: string = '/assets/img/iniciacion.jpeg' || '/assets/img/default-avatar.png'
-  category: string = 'Arquero Olímpico'
+  category: string = 'Olímpico'
+  email: string = 'test@test.com'
+  telephone: string = '612345678'
+  categoryOptions: string[] = ['Olímpico', 'Poleas', 'Desnudo','Tradicional', 'Longbow']
   
   competitionArray = [{name: 'IV Tirada de la Liga Atirca',date: '01/02/2022', position: 1, points: 120 , category: 'Arco olímpico', distance: 70 , type: 'Aire Libre'},
   {name: 'Campeonato de Canarias',date: '01/02/2022', position: 2, points: 220 , category: 'Arco olímpico', distance: 70 , type: 'Aire Libre'},
@@ -25,11 +28,79 @@ export class ProfilePage extends CapacitorBase implements OnInit {
   {recordName : 'Recurvo Junior', distance: 70 , type: 'Aire Libre', points : 600, date: '01/01/2022'},]
 
   editableProfile: boolean = true
+  editProfileActive: boolean = true
+
   constructor() { 
     super()
   }
 
   ngOnInit() {
+  }
+
+  updateProfile(){
+    this.editProfileActive = false
+  }
+
+  changeCategory(event){
+    this.category = event.detail.value
+  }
+
+  validateText(text: string): string|null {
+    var text_format = /^[A-Za-z-äöüÄÖÜùûüÿàâæéèêëïîôœÙÛÜŸÀÂÆÉÈÊËÏÎÔŒß' ]*$/;
+    if(text !== undefined && text !== ''){
+      if (!text_format.test(text) ) {
+        return 'El formato no es correcto, no debe incluir números.';
+      }
+      if(text_format.test(text)){
+        return 'valid';
+      }
+      }
+    
+    return null;
+  }
+
+  validatePhone(text: string): string|null {
+    var text_format = /^[0-9]{9}$/;
+    if(text !== undefined && text !== ''){
+      if (!text_format.test(text) ) {
+        return 'El formato no es correcto, debe incluir 9 dígitos.';
+      }
+      if(text_format.test(text)){
+        return 'valid';
+      }
+      }
+    
+    return null;
+  }
+
+  validateEmail(text: string): string|null {
+    var mail_format = /^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    if(text !== undefined && text !== ''){
+      if (!mail_format.test(text) ) {
+        return 'El formato del email no es correcto.';
+      }
+      if(mail_format.test(text)){
+        return 'valid';
+      }
+    }
+    return null;
+
+  }
+
+  validatePassword(text: string): string|null {
+    var password_format = /(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9!@#$%^&*()\\-_=+{}|?>.<,:;]{8,16}/;
+    if(text !== undefined){
+      if (!password_format.test(text) && text !== '') {
+        return 'La contraseña debe estar formada por mínimo 8 carácteres, incluyendo letras y números.';
+      }
+      if(password_format.test(text)){
+      
+        return 'valid';
+      }
+
+    }
+  
+    return null;
   }
 
 }

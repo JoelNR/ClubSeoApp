@@ -7,7 +7,7 @@ ion-item {
     &::part(native) {
         @apply rounded-xl;
     }   
-    --background: var(--orange-60);
+    --background: var(--clear-ocean);
     --padding-start: 20px;
     --inner-padding-end: 20px
 }
