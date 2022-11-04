@@ -12,6 +12,7 @@ import { FooterModule } from 'src/app/components/footer/footer.module';
 import { BackButtonModule } from 'src/app/components/back-button/back-button.module';
 import { CompetitionCardModule } from 'src/app/components/competition-card/competition-card.module';
 import { RecordCardModule } from 'src/app/components/record-card/record-card.module';
+import { InputModule } from 'src/app/components/input/input.module';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { RecordCardModule } from 'src/app/components/record-card/record-card.mod
     FooterModule,
     BackButtonModule,
     CompetitionCardModule,
-    RecordCardModule
+    RecordCardModule,
+    InputModule
   ],
   declarations: [ProfilePage]
 })

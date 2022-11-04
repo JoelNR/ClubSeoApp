@@ -11,17 +11,18 @@ import { ModalService } from 'src/app/services/modal.service';
 })
 export class HeaderComponent extends CapacitorBase implements OnInit {
   headerOptions = [
-    { label: 'Sobre Nosotros', link: '/nosotros' },
-    { label: 'Iniciación', link: '/iniciacion' },
-    { label: 'Competiciones', link: '/competiciones' },
-    { label: 'Arqueros', link: '/arqueros' },
-    { label: 'Plusmarcas', link: '/rankings' },
+    { label: 'Sobre Nosotros',icon: 'reader-outline' , link: '/nosotros' },
+    { label: 'Iniciación',icon: 'megaphone-outline', link: '/iniciacion' },
+    { label: 'Competiciones',icon: 'trophy-outline', link: '/competiciones' },
+    { label: 'Arqueros',icon: 'body-outline', link: '/arqueros' },
+    { label: 'Plusmarcas',icon: 'sparkles-outline', link: '/rankings' },
   ]
   profileOptions = [
-    { label: 'Perfil', link: '/perfil/self' },
-    { label: 'Regulación', link: '/regulacion' },
-    { label: 'Ejercicios', link: '/ejercicios' },
-    { label: 'Timer', link: '/timer' },
+    { label: 'Perfil',icon: 'finger-print-outline', link: '/perfil/self' },
+    { label: 'Entrenamiento',icon: 'analytics-outline', link: '/entrenamiento' },
+    { label: 'Regulación',icon: 'construct-outline', link: '/regulacion' },
+    { label: 'Ejercicios',icon: 'fitness-outline', link: '/ejercicios' },
+    { label: 'Timer',icon: 'alarm-outline', link: '/timer' },
   ]
 
   trigger: string
