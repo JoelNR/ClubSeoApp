@@ -32,20 +32,26 @@
 @import 'swiper/scss/scrollbar';
 @import 'swiper/scss/zoom';
 
-h1,h2,h3,h4,p, div {
+h1,
+h2,
+h3,
+h4,
+p,
+div {
     @apply text-nightblue dark:text-clear
 }
 
 @tailwind base;
-@tailwind components; 
+@tailwind components;
 @tailwind utilities;
 
-.default-gradient{
-    background: linear-gradient(129.17deg, #ff9b54 0%, #fc7e23 100%);/*#F09819  #FF512F*/
+.default-gradient {
+    background: linear-gradient(129.17deg, #ff9b54 0%, #fc7e23 100%);
 }
 
-.inverse-gradient{
+.inverse-gradient {
     background: linear-gradient(129.17deg, #fc7e23 0%, #ff9b54 100%);
+
     @media (prefers-color-scheme: dark) {
         background: linear-gradient(129.17deg, #3c1e11 0%, #dd6b1a 35%, #963f00 100%);
     }
@@ -58,11 +64,14 @@ ion-button {
     --border-width: 2px;
     --border-style: solid;
     --border-color: transparent;
+
     &::part(native) {
         @apply px-5 py-4;
     }
+
     &.button-small {
         --border-radius: 30px;
+
         &::part(native) {
             @apply px-3 py-2;
         }
@@ -74,37 +83,49 @@ ion-button {
     & {
         @apply flex items-center justify-center h-full;
     }
+
     &::part(content) {
         --max-width: 335px;
         -webkit-transform: none !important;
         transform: none !important;
         @apply relative flex items-center justify-center h-auto rounded-3xl pt-5 pb-10 px-5 m-0;
+
         @screen md {
             --max-width: 480px;
         }
+
         @screen lg {
             --max-width: 500px;
         }
     }
+
     &::part(handle) {
         @apply hidden;
     }
+
     &.auto-height {
         &.bottom {
             @apply items-end;
         }
+
         --height: auto;
+
         .ion-page {
             contain: content;
             @apply relative block;
+
             .inner-content {
                 max-height: 80vh;
                 @apply overflow-auto p-2.5;
             }
         }
     }
+
     ion-content {
-        --background: var(--clear);
+        --background: var(--ion-background-color);
+    }
+    ion-toolbar{
+        --background: var(--ion-background-color);
     }
 }
 
@@ -126,54 +147,73 @@ ion-content {
         --max-width: calc(100% - 32px);
         @apply h-auto;
     }
+
     &.show-modal {
         @apply flex items-end justify-center h-full;
     }
+
     &::part(content) {
         --max-width: none;
         -webkit-transform: none !important;
         transform: none !important;
         @apply relative flex items-center justify-center h-auto rounded-t-3xl rounded-b-none p-0 pb-10 m-0;
     }
+
     &::part(handle) {
         @apply hidden;
     }
+
     &.auto-height {
         &.bottom {
             @apply items-end;
         }
+
         --height: auto;
+
         .ion-page {
             contain: content;
             @apply relative block;
+
             .inner-content {
                 max-height: 80vh;
                 @apply overflow-auto p-2.5;
             }
         }
     }
+    ion-content {
+        --background: var(--ion-background-color);
+    }
+    ion-toolbar{
+        --background: var(--ion-background-color);
+    }
 }
 
-h1{
+ion-header {
+    &::after {
+        @apply hidden
+    }
+}
+
+h1 {
     @apply text-3xl
 }
 
-h2{
+h2 {
     @apply text-2xl
 }
 
-h3{
+h3 {
     @apply text-xl
 }
 
-h4{
+h4 {
     @apply text-xs uppercase
 }
 
-p{
+p {
     @apply text-base
 }
 
-div{
+div {
     @apply text-sm
 }

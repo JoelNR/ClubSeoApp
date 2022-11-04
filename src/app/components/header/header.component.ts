@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-header',
@@ -17,26 +18,27 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
     { label: 'Plusmarcas', link: '/rankings' },
   ]
   profileOptions = [
-    { label: 'Perfil', link: '/perfil' },
+    { label: 'Perfil', link: '/perfil/self' },
     { label: 'Regulación', link: '/regulacion' },
     { label: 'Ejercicios', link: '/ejercicios' },
     { label: 'Timer', link: '/timer' },
   ]
 
-  popoverTrigger: string
+  trigger: string
   openProfileMenu: boolean = false
-  userLogged: boolean = false
+  userLogged: boolean = true
 
   @Input() headerLabel: string
   @Input() cancelHeaderMobile: boolean = false
 
   constructor(private router: Router,
-    private menu: MenuController,) {
+    private menu: MenuController,
+    private modalService: ModalService) {
     super()
   }
 
   ngOnInit() {
-    this.popoverTrigger = this.router.url
+    this.trigger = this.router.url
   }
 
   isActive(link: string) {
@@ -44,21 +46,29 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
   }
 
   openMenu() {
-    this.menu.enable(true, 'end').then(() => {
-      this.menu.open('end');
+    this.menu.enable(true, 'end' + this.trigger).then(() => {
+      this.menu.open('end' + this.trigger);
     })
   }
 
   closeMenu() {
-    this.menu.close('end');
+    this.menu.close('end' + this.trigger);
   }
 
   navigate(link: string) {
     this.router.navigate([link]);
-    this.menu.close('end');
+    this.menu.close('end' + this.trigger);
   }
 
   show(){
     this.openProfileMenu = !this.openProfileMenu
+  }
+
+  logout(){
+    this.modalService.showModal(`Desconectarse`,
+      ['¿Estás seguro de que quieres salir de tu cuenta?'],
+      [{text:'Sí, desconectame', color:'primary', onClick: ()=> { this.modalService.dismiss()}},
+      {text:'Cancelar', color:'primary', fill:'outline',onClick: ()=> { this.modalService.dismiss()}}]
+    )
   }
 }

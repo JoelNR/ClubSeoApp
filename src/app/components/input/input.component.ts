@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 
 interface ValidationFunction { (text: string): string | null }
 @Component({
@@ -6,7 +7,7 @@ interface ValidationFunction { (text: string): string | null }
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
 })
-export class InputComponent implements OnInit {
+export class InputComponent extends CapacitorBase implements OnInit {
 
   @Input() type: string = 'text'; //email, password
   @Input() placeholder: string
@@ -19,7 +20,9 @@ export class InputComponent implements OnInit {
   isShown: boolean = true;
   errorMessage: string | null = null;
 
-  constructor() { }
+  constructor() { 
+    super()
+  }
 
   ngOnInit() { }
 

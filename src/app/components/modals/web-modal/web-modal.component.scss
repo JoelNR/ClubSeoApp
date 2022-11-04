@@ -1,0 +1,23 @@
+.ion-page,
+ :host {
+    contain: content;
+    @apply relative w-full;
+    ion-content {
+        contain: content;
+    }
+}
+
+.ion-page ion-content::part(scroll) {
+    @apply relative;
+}
+
+ion-content {
+    &::part(scroll) {
+        @apply overflow-y-hidden;
+    }
+}
+
+ion-button {
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
