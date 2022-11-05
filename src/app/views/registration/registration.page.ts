@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
+import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
   selector: 'app-registration',
@@ -8,7 +9,12 @@ import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 })
 export class RegistrationPage extends CapacitorBase implements OnInit {
 
-  constructor() {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+
+  constructor(private registerService: RegisterService) {
     super()
    }
 
@@ -16,6 +22,6 @@ export class RegistrationPage extends CapacitorBase implements OnInit {
   }
 
   submit(){
-    
+    this.registerService.registrate(this.email,this.password, this.firstName + ' ' + this.lastName).subscribe(x=>{})
   }
 }

@@ -22,12 +22,12 @@
           <div *ngIf="editProfileActive" class="py-4 w-full">
             <div class="pb-4 sm:px-2">
               <div class="pb-1 text-orange-100 text-xs">Nombre</div>
-              <app-input placeholder="Nombre" type="text" [value]="firstName" [validate]="validateText"></app-input>
+              <app-input placeholder="Nombre" type="text" [(value)]="firstName" [validate]="validateText"></app-input>
             </div>
 
             <div class="pb-4 sm:px-2">
               <div class="pb-1 text-orange-100 text-xs">Apellidos</div>
-              <app-input placeholder="Apellidos" type="text" [value]="lastName" [validate]="validateText"></app-input>
+              <app-input placeholder="Apellidos" type="text" [(value)]="lastName" [validate]="validateText"></app-input>
             </div>
 
             <div class="pb-4 sm:px-2">
@@ -56,11 +56,11 @@
             <div class="w-full grid grid-cols-1 sm:grid-cols-2">
               <div class="pb-4 sm:px-2">
                 <div class="pb-1 text-orange-100 text-xs">Correo electrónico</div>
-                <app-input placeholder="Email" type="email" [value]="email" [validate]="validateEmail"></app-input>
+                <app-input placeholder="Email" type="email" [(value)]="email" [validate]="validateEmail"></app-input>
               </div>  
               <div class="pb-4 sm:px-2">
                 <div class="pb-1 text-orange-100 text-xs">Teléfono</div>
-                <app-input placeholder="Teléfono" type="text" [value]="telephone" [validate]="validatePhone"></app-input>
+                <app-input placeholder="Teléfono" type="text" [(value)]="telephone" [validate]="validatePhone"></app-input>
               </div>        
             </div>
             <div class="w-full flex justify-center">

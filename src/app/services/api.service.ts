@@ -2,13 +2,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {shareReplay } from 'rxjs/operators';
+import { shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Api {
-    protected host: string = ''
+    protected host: string = 'http://127.0.0.1:8000'
     private static token?: string = null;
 
     constructor(protected http: HttpClient) {
@@ -89,7 +89,7 @@ export class Api {
         observable.subscribe(response => {
             if ((response as any).data?.token) {
                 Api.token = (response as any).data.token;
-                localStorage.setItem('hb-token', Api.token);
+                localStorage.setItem('seo-token', Api.token);
             }
         });
     }
