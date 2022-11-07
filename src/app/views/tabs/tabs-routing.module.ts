@@ -8,10 +8,9 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: '',
-        redirectTo: '/tabs/tab1',
-        pathMatch: 'full'
-      }
+        path: 'inicio',
+        loadChildren: () => import('../landing-page/landing-page.module').then( m => m.LandingPagePageModule)
+      },
     ]
   },
   {
@@ -23,5 +22,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class TabsPageRoutingModule {}

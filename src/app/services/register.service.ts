@@ -5,10 +5,22 @@ import { Api } from './api.service';
   providedIn: 'root'
 })
 export class RegisterService extends Api {
-    public registrate(email: string, password: string, name: string) {
+    public csrfCookie(){
+        return this.get<any>('/sanctum/csrf-cookie')
+    }
+
+    public registrate(email: string, password: string, firstName: string, lastName: string) {
         return this.post<any>('/register', {
+            firstName,
+            lastName,
             email,
-            name,
+            password
+        })
+    }
+
+    public login(email:string, password: string){
+        return this.post<any>('/login', {
+            email,
             password
         })
     }

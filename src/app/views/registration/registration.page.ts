@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 import { RegisterService } from 'src/app/services/register.service';
 
@@ -14,7 +15,8 @@ export class RegistrationPage extends CapacitorBase implements OnInit {
   email: string
   password: string
 
-  constructor(private registerService: RegisterService) {
+  constructor(private registerService: RegisterService,
+    private router: Router) {
     super()
    }
 
@@ -22,6 +24,10 @@ export class RegistrationPage extends CapacitorBase implements OnInit {
   }
 
   submit(){
-    this.registerService.registrate(this.email,this.password, this.firstName + ' ' + this.lastName).subscribe(x=>{})
+    this.registerService.registrate(this.email,this.password, this.firstName, this.lastName).subscribe(res=>{
+      if (res.data.success){
+        this.router.navigate(['/login'])
+      }
+    })
   }
 }

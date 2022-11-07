@@ -7,10 +7,10 @@
       <app-back-button class="px-8" [locationBack]="true"></app-back-button>
       <form (ngSubmit)="submit()" (keyup.enter)="submit()" class="flex flex-col w-full justify-center p-5 sm:p-8 items-center">
         <div class="py-2 w-full">
-          <app-input placeholder="Email" type="email"></app-input>
+          <app-input placeholder="Email" type="email" [(value)]="email" [validate]="validateEmail"></app-input>
         </div>
         <div class="py-2 w-full">
-          <app-input placeholder="Contraseña" type="password"></app-input>
+          <app-input placeholder="Contraseña" type="password" [(value)]="password" [validate]="validatePassword"></app-input>
         </div>
         
         <p routerLink="/login/reset" class="text-xs text-orange w-full cursor-pointer flex justify-center pt-3 pb-9">¿Olvidaste la contraseña?</p>
