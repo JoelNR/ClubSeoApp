@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
+import { ProfileModel } from 'src/app/models/profile';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,12 +10,10 @@ import { CapacitorBase } from 'src/app/lib/CapacitorBase';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage extends CapacitorBase implements OnInit {
-  firstName: string = 'Joel'
-  lastName: string = 'Navarro Rivero'
+  profileModel: ProfileModel = null
   profilePictureSrc: string = '/assets/img/iniciacion.jpeg' || '/assets/img/default-avatar.png'
-  category: string = 'Olímpico'
-  email: string = 'test@test.com'
-  telephone: string = '612345678'
+  email: string
+  telephone: string
   categoryOptions: string[] = ['Olímpico', 'Poleas', 'Desnudo','Tradicional', 'Longbow']
   
   competitionArray = [{name: 'IV Tirada de la Liga Atirca',date: '01/02/2022', position: 1, points: 120 , category: 'Arco olímpico', distance: 70 , type: 'Aire Libre'},
@@ -27,14 +28,34 @@ export class ProfilePage extends CapacitorBase implements OnInit {
   {recordName : 'Recurvo senior', distance: 18 , type: 'Sala', points : 600, date: '01/01/2022'},
   {recordName : 'Recurvo Junior', distance: 70 , type: 'Aire Libre', points : 600, date: '01/01/2022'},]
 
-  editableProfile: boolean = true
+  editableProfile: boolean = false
   editProfileActive: boolean = false
 
-  constructor() { 
+  constructor(private profileService: ProfileService,
+    private route: ActivatedRoute) { 
     super()
   }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(param => {
+      if(param.get('id')== 'self'){
+        this.profileApiEndpoint(localStorage.getItem('user_id'))
+      } else {
+        this.profileApiEndpoint(param.get('id'))
+      }
+    })
+    
+  }
+
+  profileApiEndpoint(id: string){
+    this.profileService.profile(id).subscribe(res => {
+      this.profileModel = res.data.profile[0]
+      this.email = res.data.email
+      this.telephone = res.data.telephone
+      if (localStorage.getItem('user_id') == this.profileModel.user_id){
+        this.editableProfile = true
+      }
+    })
   }
 
   updateProfile(){
@@ -42,7 +63,14 @@ export class ProfilePage extends CapacitorBase implements OnInit {
   }
 
   changeCategory(event){
-    this.category = event.detail.value
+    this.profileModel.category = event.detail.value
   }
 
+  changePhoto(){
+
+  }
+
+  updateProfilePicture(){
+
+  }
 }

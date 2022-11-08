@@ -74,7 +74,7 @@
               Registrarse
             </ion-item>
           </ion-list>
-          <div *ngIf="openProfileMenu" class="items-center justify-center flex-col bg-petrol-5 px-5">
+          <div *ngIf="openProfileMenu && userLogged" class="items-center justify-center flex-col bg-petrol-5 px-5">
             <div *ngFor="let option of profileOptions; let i=index;" (click)="navigate(option.link)"
               class="flex py-4 items-center px-5 cursor-pointer" [ngClass]="{'border-t border-solid border-white' : i != 0}">
               <ion-icon class="pr-2" color="primary" [name]="option.icon"></ion-icon>

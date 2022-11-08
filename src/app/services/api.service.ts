@@ -35,6 +35,7 @@ export class Api {
     public logout() {
         Api.token = null;
         localStorage.removeItem('seo-token');
+        localStorage.removeItem('user_id');
     }
 
     protected get<T>(endpoint: string, params?: HttpParams|{

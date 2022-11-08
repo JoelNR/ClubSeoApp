@@ -24,7 +24,8 @@ export class LoginPage extends CapacitorBase implements OnInit {
   submit(){
     this.registerService.login(this.email,this.password).subscribe(res => {
       if(res.data.success){
-        RegisterService.setToken(res.token)
+        localStorage.setItem('user_id', res.data.user.id)
+        RegisterService.setToken(res.data.token)
         this.router.navigate(['/perfil/self'])
       }
     })      

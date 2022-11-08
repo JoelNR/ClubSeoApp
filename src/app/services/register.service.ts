@@ -24,5 +24,13 @@ export class RegisterService extends Api {
             password
         })
     }
+
+    public profile(userId: string){
+        return this.get<any>('/profile/' + userId)
+    }
+
+    public logoutFromApp() {
+        return this.post<any>('/logout', {})
+    }
 }
 
