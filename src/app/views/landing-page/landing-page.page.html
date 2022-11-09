@@ -22,7 +22,7 @@
         </h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
           <div *ngFor="let news of newsArray" class="px-2 pb-4 w-full">
-            <app-news-card [imgSrc]="news.imgSrc" [title]="news.title" [description]="news.description" [date]="news.date"></app-news-card>
+            <app-news-card [imgSrc]="news.image" [title]="news.title" [description]="news.content" [date]="news.date"></app-news-card>
           </div>        
         </div>
         <div class="w-full flex justify-center">

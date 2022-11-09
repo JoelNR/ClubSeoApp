@@ -59,7 +59,10 @@ export class ProfilePage extends CapacitorBase implements OnInit {
   }
 
   updateProfile(){
-    this.editProfileActive = false
+    this.profileService.editProfile(this.profileModel.first_name, this.profileModel.last_name, this.profileModel.category, this.email, this.telephone).
+    subscribe(res => {
+      this.editProfileActive = false
+    })
   }
 
   changeCategory(event){

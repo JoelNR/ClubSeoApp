@@ -7,7 +7,17 @@ import { Api } from './api.service';
 })
 export class ProfileService extends Api {
     public profile(userId: string){
-        return this.get<GetProfileApiResponse>('/profile/' + userId)
+      return this.get<GetProfileApiResponse>('/profile/' + userId)
+    }
+
+    public editProfile(first_name:string, last_name:string, category: string, email: string, telephone: string){
+      return this.put<any>('/profile/update/' + + localStorage.getItem('user_id'),{
+        first_name,
+        last_name,
+        category,
+        email,
+        telephone
+      })
     }
 }
 

@@ -7,6 +7,7 @@ import { CapacitorBase } from 'src/app/lib/CapacitorBase';
   styleUrls: ['./news-card.component.scss'],
 })
 export class NewsCardComponent extends CapacitorBase implements OnInit {
+  @Input() id: string
   @Input() imgSrc: string
   @Input() title: string
   @Input() date: string

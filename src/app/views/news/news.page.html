@@ -1,0 +1,26 @@
+<ion-content>
+  <div class="flex flex-col h-full">
+    <app-header></app-header>
+    <div class="flex flex-col text-center grow w-full pt-5 sm:pt-8 lg:max-w-290 px-5 sm:px-8 justify-center mx-auto">
+      <h1 class="pb-4 pl-2">
+        Nuestras últimas noticias
+      </h1>
+      <div class="w-full flex justify-start mb-5 sm:mb-8">
+        <app-back-button [locationBack]="true"></app-back-button>
+      </div>
+      <form (ngSubmit)="search()" class="mb-5 sm:mb-8">
+        <ion-searchbar search-icon="search-outline" [(ngModel)]="searchValue" name="searchValue" placeholder="Buscar una noticia">
+        </ion-searchbar>
+      </form>
+
+      <div class="mb-8 rounded-xl p-2 sm:py-5 md:pl-5  border border-solid border-white dark:border-nightblue-80">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+          <div *ngFor="let news of newsArray" class="px-2 pb-4 w-full">
+            <app-news-card [id]="news.id" [imgSrc]="news.image" [title]="news.title" [description]="news.content" [date]="news.date"></app-news-card>
+          </div>        
+        </div>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </div>
+</ion-content>

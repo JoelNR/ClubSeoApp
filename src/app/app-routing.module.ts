@@ -30,6 +30,11 @@ const routes: Routes = [
     loadChildren: () => import('./views/profile/profile.module').then( m => m.ProfilePageModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'noticias',
+    loadChildren: () => import('./views/news/news.module').then( m => m.NewsPageModule)
+  },
+
 
 
 ];
