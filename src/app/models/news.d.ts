@@ -13,3 +13,11 @@ export interface GetNewsApiResponse{
         news: News[]
     }
 }
+
+export interface GetNewsByIdApiResponse{
+    data: {
+        message: string
+        success: boolean
+        news: News
+    }
+}

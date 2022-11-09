@@ -1,9 +1,26 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>NewsDetails</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <div class="flex flex-col h-full">
+    <app-header></app-header>
+    <div class="flex flex-col text-center grow w-full pt-5 sm:pt-8 lg:max-w-290 px-5 sm:px-8 justify-center mx-auto">
+      <h1 class="pb-4 pl-2">
+        Detalles de la noticia
+      </h1>
+      <div class="w-full flex justify-start mb-5 sm:mb-8">
+        <app-back-button [locationBack]="true"></app-back-button>
+      </div>
 
+      <div *ngIf="newsModel" class="mb-8 rounded-xl p-2 sm:py-5 md:pl-5  border border-solid border-white dark:border-nightblue-80">
+        <h2>
+          {{newsModel.title}}
+        </h2>
+        <div>
+          {{newsModel.content}}
+        </div>
+        <div>
+          {{newsModel.date}}
+        </div>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </div>
 </ion-content>
