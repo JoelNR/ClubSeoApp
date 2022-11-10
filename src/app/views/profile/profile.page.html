@@ -35,12 +35,12 @@
           </div>
           <div *ngIf="editProfileActive" class="py-4 w-full">
             <div class="pb-4 sm:px-2">
-              <div class="pb-1 text-orange-100 text-xs">Nombre</div>
+              <div class="pb-1 text-orange-100 text-xs">Nombre*</div>
               <app-input placeholder="Nombre" type="text" [(value)]="profileModel.first_name" [validate]="validateText"></app-input>
             </div>
 
             <div class="pb-4 sm:px-2">
-              <div class="pb-1 text-orange-100 text-xs">Apellidos</div>
+              <div class="pb-1 text-orange-100 text-xs">Apellidos*</div>
               <app-input placeholder="Apellidos" type="text" [(value)]="profileModel.last_name" [validate]="validateText"></app-input>
             </div>
 
@@ -71,7 +71,7 @@
             </h2>
             <div class="w-full grid grid-cols-1 sm:grid-cols-2">
               <div class="pb-4 sm:px-2">
-                <div class="pb-1 text-orange-100 text-xs">Correo electrónico</div>
+                <div class="pb-1 text-orange-100 text-xs">Correo electrónico*</div>
                 <app-input placeholder="Email" type="email" [(value)]="email" [validate]="validateEmail"></app-input>
               </div>  
               <div class="pb-4 sm:px-2">
@@ -79,8 +79,10 @@
                 <app-input placeholder="Teléfono" type="text" [(value)]="telephone" [validate]="validatePhone"></app-input>
               </div>        
             </div>
+            <span class="text-orange flex justify-center w-full text-xs pb-2">Campos obligatorios con *</span>
             <div class="w-full flex justify-center">
-              <ion-button color="primary" size="small" (click)="updateProfile()">
+              <ion-button color="primary" size="small" (click)="updateProfile()" [disabled]="validateEmail(email) !='valid'  
+              || validatePhone(telephone) !='valid' || validateText(profileModel.first_name)!='valid' || validateText(profileModel.last_name)!='valid'">
                 Guardar cambios
               </ion-button>
             </div>

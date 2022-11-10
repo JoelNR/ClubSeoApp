@@ -10,7 +10,7 @@ export class CapacitorBase {
   }
 
   validateText(text: string): string|null {
-    var text_format = /^[A-Za-z-äöüÄÖÜùûüÿàâæéèêëïîôœÙÛÜŸÀÂÆÉÈÊËÏÎÔŒß' ]*$/;
+    var text_format = /^[a-zA-Z\u00C0-\u017F\s]*$/;
     if(text !== undefined && text !== ''){
       if (!text_format.test(text) ) {
         return 'El formato no es correcto, no debe incluir números.';
@@ -25,8 +25,8 @@ export class CapacitorBase {
 
   validatePhone(text: string): string|null {
     var text_format = /^[0-9]{9}$/;
-    if(text !== undefined && text !== ''){
-      if (!text_format.test(text) ) {
+    if(text !== undefined && text !== '' && text !== null){
+      if (!text_format.test(text)) {
         return 'El formato no es correcto, debe incluir 9 dígitos.';
       }
       if(text_format.test(text)){
@@ -34,7 +34,7 @@ export class CapacitorBase {
       }
       }
     
-    return null;
+    return 'valid';
   }
 
   validateEmail(text: string): string|null {

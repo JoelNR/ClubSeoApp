@@ -1,6 +1,6 @@
 <ion-content class="flex flex-col">
     <app-header></app-header>
-    <div class="w-full md:max-w-xl mx-auto flex flex-col p-4">      
+    <div class="w-full md:max-w-xl mx-auto flex flex-col">      
       <h1 class="w-full flex justify-center py-8">
         Inicio de sesión
       </h1>
@@ -15,7 +15,7 @@
         
         <p routerLink="/login/reset" class="text-xs text-orange w-full cursor-pointer flex justify-center mt-3 mb-9">¿Olvidaste la contraseña?</p>
         <div class="w-full">
-          <ion-button type="submit" color="primary" expand="block">Iniciar sesión</ion-button>
+          <ion-button type="submit" color="primary" expand="block" [disabled]="(email===undefined || validateEmail(email)!=='valid') || (password===undefined || validatePassword(password)!=='valid')">Iniciar sesión</ion-button>
 
           <p class="text-xs w-full flex justify-center pt-2"> ¿Aún no tienes cuenta? <span class="text-orange pl-1 cursor-pointer" routerLink="/registro">¡Registrate aquí!</span></p>
         </div>

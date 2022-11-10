@@ -18,15 +18,17 @@ export class RegisterService extends Api {
         })
     }
 
+    public forgotPassword(email:string){
+        return this.post<any>('/forgot-password', {
+            email
+        })
+    }
+
     public login(email:string, password: string){
         return this.post<any>('/login', {
             email,
             password
         })
-    }
-
-    public profile(userId: string){
-        return this.get<any>('/profile/' + userId)
     }
 
     public logoutFromApp() {
