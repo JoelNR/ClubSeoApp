@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 import { ProfileModel } from 'src/app/models/profile';
@@ -10,8 +11,10 @@ import { ProfileService } from 'src/app/services/profile.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage extends CapacitorBase implements OnInit {
+  @ViewChild('selectPhotoInput') selectPhotoInput: ElementRef<HTMLInputElement>;
   profileModel: ProfileModel = null
-  profilePictureSrc: string = '/assets/img/iniciacion.jpeg' || '/assets/img/default-avatar.png'
+  profilePictureSrc: string = '/assets/img/default-avatar.png'
+  imageFile: File
   email: string
   telephone: string
   categoryOptions: string[] = ['Olímpico', 'Poleas', 'Desnudo','Tradicional', 'Longbow']
@@ -31,12 +34,17 @@ export class ProfilePage extends CapacitorBase implements OnInit {
   editableProfile: boolean = false
   editProfileActive: boolean = false
 
+  formGroup: FormGroup
   constructor(private profileService: ProfileService,
-    private route: ActivatedRoute) { 
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder) {
     super()
   }
 
   ngOnInit() {
+    this.formGroup = this.formBuilder.group({
+      image:null
+    })
     this.route.paramMap.subscribe(param => {
       if(param.get('id')== 'self'){
         this.profileApiEndpoint(localStorage.getItem('user_id'))
@@ -59,7 +67,9 @@ export class ProfilePage extends CapacitorBase implements OnInit {
   }
 
   updateProfile(){
-    this.profileService.editProfile(this.profileModel.first_name, this.profileModel.last_name, this.profileModel.category, this.email, this.telephone).
+    const formData: any = new FormData()
+    formData.append('image', this.formGroup.controls['image'].value)
+    this.profileService.editProfile(this.profileModel.first_name, this.profileModel.last_name, this.profileModel.category, this.email, this.telephone, formData).
     subscribe(res => {
       this.editProfileActive = false
     })
@@ -70,10 +80,15 @@ export class ProfilePage extends CapacitorBase implements OnInit {
   }
 
   changePhoto(){
-
+    this.selectPhotoInput.nativeElement.click();
   }
 
-  updateProfilePicture(){
-
+  updateProfilePicture($event: any){
+    const input = <HTMLInputElement>$event.target
+    if (input.files?.length === 1) {
+      this.formGroup.patchValue({
+        image: input.files[0]
+      })
+    }
   }
 }

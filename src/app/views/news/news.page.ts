@@ -34,9 +34,6 @@ export class NewsPage extends CapacitorBase implements OnInit {
       res.data.news.forEach(newNews => {
         this.newsArray.push(newNews)
       });
-      res.data.news.forEach(newNews => {
-        this.newsArray.push(newNews)
-      });
     })
   }
 

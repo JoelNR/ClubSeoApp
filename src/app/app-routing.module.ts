@@ -34,6 +34,11 @@ const routes: Routes = [
     path: 'noticias',
     loadChildren: () => import('./views/news/news.module').then( m => m.NewsPageModule)
   },
+  {
+    path: 'construccion',
+    loadChildren: () => import('./views/constructionpage/constructionpage.module').then( m => m.ConstructionpagePageModule)
+  },
+
 
 
 

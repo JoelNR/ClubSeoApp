@@ -12,18 +12,18 @@ import { RegisterService } from 'src/app/services/register.service';
 })
 export class HeaderComponent extends CapacitorBase implements OnInit {
   headerOptions = [
-    { label: 'Sobre Nosotros',icon: 'reader-outline' , link: '/nosotros' },
-    { label: 'Iniciación',icon: 'megaphone-outline', link: '/iniciacion' },
-    { label: 'Competiciones',icon: 'trophy-outline', link: '/competiciones' },
-    { label: 'Arqueros',icon: 'body-outline', link: '/arqueros' },
-    { label: 'Plusmarcas',icon: 'sparkles-outline', link: '/rankings' },
+    { label: 'Sobre Nosotros',icon: 'reader-outline' , link: '/construccion' },
+    { label: 'Iniciación',icon: 'megaphone-outline', link: '/construccion' },
+    { label: 'Competiciones',icon: 'trophy-outline', link: '/construccion' },
+    { label: 'Arqueros',icon: 'body-outline', link: '/construccion' },
+    { label: 'Plusmarcas',icon: 'sparkles-outline', link: '/construccion' },
   ]
   profileOptions = [
     { label: 'Perfil',icon: 'finger-print-outline', link: '/perfil/self' },
-    { label: 'Entrenamiento',icon: 'analytics-outline', link: '/entrenamiento' },
-    { label: 'Regulación',icon: 'construct-outline', link: '/regulacion' },
-    { label: 'Ejercicios',icon: 'fitness-outline', link: '/ejercicios' },
-    { label: 'Timer',icon: 'alarm-outline', link: '/timer' },
+    { label: 'Entrenamiento',icon: 'analytics-outline', link: '/construccion' },
+    { label: 'Regulación',icon: 'construct-outline', link: '/construccion' },
+    { label: 'Ejercicios',icon: 'fitness-outline', link: '/construccion' },
+    { label: 'Timer',icon: 'alarm-outline', link: '/construccion' },
   ]
 
   trigger: string
