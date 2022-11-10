@@ -38,6 +38,11 @@ const routes: Routes = [
     path: 'construccion',
     loadChildren: () => import('./views/constructionpage/constructionpage.module').then( m => m.ConstructionpagePageModule)
   },
+  {
+    path: 'nosotros',
+    loadChildren: () => import('./views/about-us/about-us.module').then( m => m.AboutUsPageModule)
+  },
+
 
 
 

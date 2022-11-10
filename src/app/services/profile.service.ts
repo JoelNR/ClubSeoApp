@@ -10,13 +10,18 @@ export class ProfileService extends Api {
       return this.get<GetProfileApiResponse>('/profile/' + userId)
     }
 
-    public editProfile(first_name:string, last_name:string, category: string, email: string, telephone?: string, image?: any){
+    public editProfile(first_name:string, last_name:string, category: string, email: string, telephone?: string){
       return this.put<any>('/profile/update/' + + localStorage.getItem('user_id'),{
         first_name,
         last_name,
         category,
         email,
-        telephone,
+        telephone
+      })
+    }
+
+    public editProfilePhoto(image: FormData){
+      return this.post<any>('/profile/update/photo/' + + localStorage.getItem('user_id'),{
         image
       })
     }

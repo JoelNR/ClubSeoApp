@@ -4,6 +4,7 @@ export interface ProfileModel {
     last_name: string
     category: string
     user_id: string
+    image: string
 }
 
 export interface GetProfileApiResponse{

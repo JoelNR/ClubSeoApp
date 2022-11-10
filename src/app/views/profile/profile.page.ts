@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 import { ProfileModel } from 'src/app/models/profile';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -13,7 +14,6 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class ProfilePage extends CapacitorBase implements OnInit {
   @ViewChild('selectPhotoInput') selectPhotoInput: ElementRef<HTMLInputElement>;
   profileModel: ProfileModel = null
-  profilePictureSrc: string = '/assets/img/default-avatar.png'
   imageFile: File
   email: string
   telephone: string
@@ -37,7 +37,8 @@ export class ProfilePage extends CapacitorBase implements OnInit {
   formGroup: FormGroup
   constructor(private profileService: ProfileService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private http: HttpClient) {
     super()
   }
 
@@ -67,9 +68,7 @@ export class ProfilePage extends CapacitorBase implements OnInit {
   }
 
   updateProfile(){
-    const formData: any = new FormData()
-    formData.append('image', this.formGroup.controls['image'].value)
-    this.profileService.editProfile(this.profileModel.first_name, this.profileModel.last_name, this.profileModel.category, this.email, this.telephone, formData).
+    this.profileService.editProfile(this.profileModel.first_name, this.profileModel.last_name, this.profileModel.category, this.email, this.telephone).
     subscribe(res => {
       this.editProfileActive = false
     })
@@ -90,5 +89,19 @@ export class ProfilePage extends CapacitorBase implements OnInit {
         image: input.files[0]
       })
     }
+    const headers = {
+      'Accept': 'application/json',
+    }
+    headers['Authorization'] = `${ProfileService.getToken()}`;
+    const formData: FormData = new FormData()
+    formData.append('image', this.formGroup.controls['image'].value)
+
+    console.log();
+    
+    this.http.post<any>('http://127.0.0.1:8000/api/profile/photo/' + + localStorage.getItem('user_id'), formData, {
+      headers: headers
+      }).subscribe(res => {
+        this.profileModel.image = res.data.image
+      })
   }
 }
