@@ -91,6 +91,7 @@ export class ProfilePage extends CapacitorBase implements OnInit {
     }
     const headers = {
       'Accept': 'application/json',
+      "ngrok-skip-browser-warning": "69420",
     }
     headers['Authorization'] = `${ProfileService.getToken()}`;
     const formData: FormData = new FormData()
