@@ -2,28 +2,27 @@
   <div class="flex flex-col h-full">
     <app-header></app-header>
     <div class="flex flex-col text-center grow w-full pt-5 sm:pt-8 lg:max-w-290 px-5 sm:px-8 mx-auto">
-      
+      <h1 class="flex justify-center w-full pb-4">
+        Detalles de la noticia
+      </h1>      
       <div class="w-full flex justify-start mb-5 sm:mb-8">
         <app-back-button [locationBack]="true"></app-back-button>
       </div>
-      <div class="w-full flex justify-end">
-        <h1 class="flex justify-center w-full sm:w-2/3 pb-4 pl-2">
-          Detalles de la noticia
-        </h1>
+      <div *ngIf="newsModel" class="w-full flex justify-end">
+        <h2 class="flex justify-center w-full sm:w-2/3 pb-4 pl-2">
+          {{newsModel.title}}
+        </h2>
       </div>
       <div *ngIf="newsModel" class="mb-8 mt-4 flex flex-col sm:flex-row">
         <div class="w-full sm:w-1/3 flex justify-center rounded-2xl mr-4 mb-4 h-40 sm:h-fit">
           <img [src]="newsModel.image" class="rounded-2xl object-cover h-40 sm:h-fit" alt="">
         </div>
-        <div class="w-full sm:w-2/3  border p-4 border-solid rounded-2xl border-nightblue-80 dark:border-clear">
-          <h2>
-            {{newsModel.title}}
-          </h2>
-          <div>
-            {{newsModel.content}}
-          </div>
-          <div>
+        <div class="w-full sm:w-2/3 h-fit border p-4 border-solid rounded-2xl border-nightblue-80 dark:border-clear">
+          <div class="pb-4 w-full flex justify-end">
             {{newsModel.date}}
+          </div>
+          <div class="text-start">
+            {{newsModel.content}}
           </div>
         </div>
         
