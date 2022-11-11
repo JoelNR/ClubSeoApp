@@ -98,7 +98,7 @@ export class ProfilePage extends CapacitorBase implements OnInit {
 
     console.log();
     
-    this.http.post<any>('http://127.0.0.1:8000/api/profile/photo/' + + localStorage.getItem('user_id'), formData, {
+    this.http.post<any>(this.profileService.getHost() + '/profile/photo/' + + localStorage.getItem('user_id'), formData, {
       headers: headers
       }).subscribe(res => {
         this.profileModel.image = res.data.image
