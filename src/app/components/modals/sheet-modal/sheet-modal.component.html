@@ -1,0 +1,34 @@
+<div class="ion-page">
+  <div>
+    <ion-header class="flex flex-col items-center pt-1 pb-2.5 px-0 md:px-14 mt-6 mb-0 mx-0 text-center ">
+      <ion-toolbar>
+        <ion-title class="px-0  mb-0.5 text-nightblue dark:text-clear" [innerHTML]="title"></ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content *ngIf="oneButton" class="ion-text-center px-0 md:px-14 inner-content">
+      <ion-text>
+        <div *ngFor="let text of texts" class="  px-14 pb-6">
+          <p>{{text}}</p>
+        </div>
+      </ion-text>
+      <ion-button *ngFor="let button of buttons; index as i" [ngClass]="button.classes" class="w-min"
+        [color]="button.color" (click)="button.onClick()">
+        {{button.text}}
+      </ion-button>
+    </ion-content>
+
+    <ion-content *ngIf="!oneButton" class="ion-text-center px-0 md:px-14">
+      <ion-text>
+        <div *ngFor="let text of texts" class=" px-14 pb-6">
+          <p>{{text}}</p>
+        </div>
+      </ion-text>
+      <div class="space-x-6">
+        <ion-button *ngFor="let button of buttons; index as i" [ngClass]="button.classes" [color]="button.color"
+          [fill]="button.fill" (click)="button.onClick()">
+          {{button.text}}
+        </ion-button>
+      </div>
+    </ion-content>
+  </div>
+</div>

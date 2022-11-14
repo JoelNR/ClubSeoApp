@@ -2,13 +2,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {shareReplay } from 'rxjs/operators';
+import { shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Api {
-    protected host: string = ''
+    protected host: string = 'https://139e-83-59-214-124.eu.ngrok.io/api'
     private static token?: string = null;
 
     constructor(protected http: HttpClient) {
@@ -16,6 +16,10 @@ export class Api {
             Api.token = localStorage.getItem('seo-token');
         }
 
+    }
+
+    public getHost() {
+        return this.host;
     }
 
     public static getToken(): string {
@@ -35,6 +39,7 @@ export class Api {
     public logout() {
         Api.token = null;
         localStorage.removeItem('seo-token');
+        localStorage.removeItem('user_id');
     }
 
     protected get<T>(endpoint: string, params?: HttpParams|{
@@ -66,7 +71,8 @@ export class Api {
 
     private headers(): { [key: string]: string } {
         const headers = {
-            'Accept': 'application/json, text/plain, */*'
+            'Accept': 'application/json, text/plain, */*',
+            "ngrok-skip-browser-warning": "69420",
         };
         headers['Authorization'] = `${Api.token}`;
 
@@ -89,7 +95,7 @@ export class Api {
         observable.subscribe(response => {
             if ((response as any).data?.token) {
                 Api.token = (response as any).data.token;
-                localStorage.setItem('hb-token', Api.token);
+                localStorage.setItem('seo-token', Api.token);
             }
         });
     }

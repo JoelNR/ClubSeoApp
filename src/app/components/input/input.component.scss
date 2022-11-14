@@ -1,0 +1,29 @@
+ion-item {
+    --placeholder-opacity: 100%;
+    --border-color: transparent;
+    --padding-start: 20px;
+    --inner-padding-end: 20px;
+    @apply border border-solid border-nightblue-80 dark:border-transparent text-nightblue;
+    &::part(native) {
+        @apply rounded-xl;
+    }   
+    --background: var(--clear-ocean);
+    --padding-start: 20px;
+    --inner-padding-end: 20px
+}
+
+ion-input {
+    --placeholder-opacity: 100%;
+    --border-color: transparent;
+}
+
+
+ion-item:focus-within {
+    @apply shadow-none border border-solid border-orange-100;
+}
+
+ion-item.error {
+    --background: rgba(255, 140, 140, 0.2);
+    --border-color: #FF8C8C;
+    @apply border-2 border-solid border-alert-80 shadow-none;
+}

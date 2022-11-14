@@ -1,0 +1,137 @@
+<header *ngIf="!mobile" class="w-full flex justify-center items-center border-b border-solid">
+  <div class="justify-between flex w-full lg:max-w-290 xl:max-w-7xl">
+    <div class="py-2 flex items-center pl-5" [ngClass]="{'w-40 xl:w-44' : !userLogged}">
+      <img src="/assets/img/logo.gif" routerLink="/inicio" alt="logo" class="h-10 cursor-pointer">
+    </div>
+    <div class=" text-base hidden lg:flex text-center justify-center items-center">
+      <a *ngFor="let option of headerOptions" [routerLink]="option.link" class="px-5 items-center inline-flex">
+        <ion-icon color="primary" [name]="option.icon"></ion-icon>
+        <span class="pl-2">{{ option.label }}</span>
+      </a>
+    </div>
+    <div class="flex lg:hidden justify-end items-center pr-4 md:pr-9">
+      <ion-button (click)="openMenu()" id="main" color="primary" size="small" class="">
+        <div class="flex items-center">
+          <div class="justify-start pr-2">
+            <svg width="13" height="9" viewBox="0 0 13 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0.5" y1="0.5" x2="12.5" y2="0.5" stroke="white" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <line y1="4.5" x2="13" y2="4.5" stroke="white" />
+              <line y1="8.5" x2="13" y2="8.5" stroke="white" />
+            </svg>
+          </div>
+          Menú
+        </div>
+      </ion-button>
+
+      <ion-menu id="slide" side="end" [menuId]="'end' + trigger" type="overlay" contentId="main" [swipeGesture]="false">
+        <ion-header>
+          <ion-toolbar class="ion-toolbar-petrol" [ngClass]="{'ion-toolbar-violet': isActive(headerOptions[1].link)}">
+            <div class="flex justify-end items-end place-content-end pr-4 h-full">
+              <ion-button (click)="closeMenu()" color="primary" size="small" class="button-menu">
+                <div class="flex items-center">
+                  <div class="justify-start pr-2">
+                    <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M0.292893 0.417893C0.683417 0.0273689 1.31658 0.0273689 1.70711 0.417893L7 5.71079L12.2929 0.417893C12.6834 0.0273689 13.3166 0.0273689 13.7071 0.417893C14.0976 0.808417 14.0976 1.44158 13.7071 1.83211L8.41421 7.125L13.7071 12.4179C14.0976 12.8084 14.0976 13.4416 13.7071 13.8321C13.3166 14.2226 12.6834 14.2226 12.2929 13.8321L7 8.53921L1.70711 13.8321C1.31658 14.2226 0.683417 14.2226 0.292893 13.8321C-0.0976311 13.4416 -0.0976311 12.8084 0.292893 12.4179L5.58579 7.125L0.292893 1.83211C-0.0976311 1.44158 -0.0976311 0.808417 0.292893 0.417893Z"
+                        fill="white" />
+                    </svg>
+                  </div>
+                  Menú
+                </div>
+              </ion-button>
+            </div>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <ion-list class="py-0 cursor-pointer">
+            <ion-item *ngFor="let option of headerOptions" class="px-5 flex items-center" (click)="navigate(option.link)">
+              <ion-icon color="primary" [name]="option.icon"></ion-icon>
+              <div class="pl-2">
+                {{option.label}}
+              </div>
+            </ion-item>
+            <ion-item *ngIf="userLogged" (click)="show()" class="px-5">
+              <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                class="transition duration-300" [ngClass]="{'transform rotate-180': openProfileMenu }">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M19.2774 15.5303C18.9845 15.8232 18.5096 15.8232 18.2167 15.5303L12.7471 10.0607L7.2774 15.5303C6.98451 15.8232 6.50963 15.8232 6.21674 15.5303C5.92385 15.2374 5.92385 14.7626 6.21674 14.4697L12.2167 8.46967C12.5096 8.17678 12.9845 8.17678 13.2774 8.46967L19.2774 14.4697C19.5703 14.7626 19.5703 15.2374 19.2774 15.5303Z"
+                  fill="#005f71" />
+              </svg>
+              <div class="pl-5 cursor-pointer">
+                Perfil
+              </div>
+              <div class="absolute right-2">
+                <img class="rounded-full w-10 h-10 object-cover" [src]="'/assets/img/default-avatar.png'" alt="avatar">
+              </div>
+            </ion-item>
+            <ion-item *ngIf="!userLogged" routerLink="/login" class="cursor-pointer flex items-center px-5">
+              <ion-icon class="pr-2" color="primary" name="log-in-outline"></ion-icon>
+              Iniciar sesión
+            </ion-item>
+            <ion-item *ngIf="!userLogged" routerLink="/registro" class="cursor-pointer flex items-center px-5">
+              <ion-icon class="pr-2" color="primary"  name="person-circle-outline"></ion-icon>
+              Registrarse
+            </ion-item>
+          </ion-list>
+          <div *ngIf="openProfileMenu && userLogged" class="items-center justify-center flex-col bg-petrol-5 px-5">
+            <div *ngFor="let option of profileOptions; let i=index;" (click)="navigate(option.link)"
+              class="flex py-4 items-center px-5 cursor-pointer" [ngClass]="{'border-t border-solid border-white' : i != 0}">
+              <ion-icon class="pr-2" color="primary" [name]="option.icon"></ion-icon>
+              {{option.label}}
+            </div>
+            <div (click)="logout()" class="flex py-4 border-t border-solid border-white px-5 items-center cursor-pointer">
+              <ion-icon class="pr-2" color="primary" name="log-out-outline"></ion-icon>
+              Cerrar sesión
+            </div>
+          </div>
+        </ion-content>
+      </ion-menu>
+    </div>
+
+    <div class="justify-end items-center pr-5 hidden lg:flex">
+      <div *ngIf="!userLogged" class="xl:flex justify-between">
+        <div class="xl:pr-4 cursor-pointer flex items-center" routerLink="/login">
+          <ion-icon class="pr-2" color="primary" name="log-in-outline"></ion-icon>
+          Iniciar sesión
+        </div>
+        <div class="cursor-pointer flex items-center" routerLink="/registro">
+          <ion-icon class="pr-2" color="primary"  name="person-circle-outline"></ion-icon>
+          Registrarse
+        </div>
+      </div>
+
+      <ion-button *ngIf="userLogged" class="image" id="{{trigger}}" size="small" color="primary">
+        <div class="flex items-center">
+          <div class="justify-start pr-2">
+            <svg width="13" height="9" viewBox="0 0 13 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0.5" y1="0.5" x2="12.5" y2="0.5" stroke="white" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <line y1="4.5" x2="13" y2="4.5" stroke="white" />
+              <line y1="8.5" x2="13" y2="8.5" stroke="white" />
+            </svg>
+          </div>
+          <div class="justify-end">
+            <img class="rounded-full h-5 w-5 object-cover" [src]="'/assets/img/default-avatar.png'" alt="avatar">
+          </div>
+        </div>
+      </ion-button>
+      <ion-popover trigger="{{trigger}}" animated="false" dismiss-on-select="true" mode="ios" arrow="true">
+        <ng-template>
+          <ion-content class="rounded-2xl">
+            <div class="flex flex-col">
+              <div *ngFor="let option of profileOptions" [routerLink]="option.link" class="px-5 py-2 flex items-center cursor-pointer">
+                <ion-icon class="pr-2" color="primary" [name]="option.icon"></ion-icon>
+                <span>{{ option.label }}</span>
+              </div>
+              <div (click)="logout()" class="px-5 py-2 flex items-center cursor-pointer">
+                <ion-icon class="pr-2" color="primary" name="log-out-outline"></ion-icon>
+                <span>Cerrar sesión</span>
+              </div>
+            </div>
+          </ion-content>
+        </ng-template>
+      </ion-popover>
+    </div>
+  </div>
+</header>

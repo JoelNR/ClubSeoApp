@@ -3,12 +3,22 @@ module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
     extend: {
+
+      maxWidth: {
+        '290': '1160px',
+      },
+        
       colors: {
         clear: {
-            DEFAULT: '#ecf1f5'
+            DEFAULT: '#ecf1f5',
+            'bg' : '#bcc0c4'
+        },
+        gold : {
+            DEFAULT: '#b5a964',
         },
         orange: {
             DEFAULT: '#f9a45e',
+            '100':'#ff7700',
             '80': '#fabb86',
             '60': '#fcd1ae',
             '40': '#fde8d6',

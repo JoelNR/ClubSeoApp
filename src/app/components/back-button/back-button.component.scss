@@ -1,0 +1,13 @@
+ion-button {
+    --border-radius: 30px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    --padding-start: 15px;
+    --padding-end: 15px;
+    width: 100px;
+    @apply h-7 m-0;
+}
+
+ion-button::part(native) {
+    @apply p-0;
+}

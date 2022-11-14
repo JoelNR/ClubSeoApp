@@ -1,0 +1,20 @@
+.ion-page,
+ :host {
+    contain: content;
+    @apply relative;
+    ion-content {
+        contain: content;
+    }
+}
+
+.ion-page ion-content::part(scroll) {
+    @apply relative;
+}
+
+.ion-page ion-content::part(scroll) {
+    @apply bottom-auto;
+}
+
+ion-content::part(scroll) {
+    @apply flex flex-col items-center;
+}

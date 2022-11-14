@@ -1,0 +1,39 @@
+<ion-content>
+  <div class="flex flex-col h-full">
+    <app-header></app-header>
+    <div class="flex flex-col grow w-full lg:max-w-290 px-5 sm:px-8 justify-center mx-auto">
+      <h1 class="pt-12 text-center uppercase">
+        Club deportivo SEO      
+      </h1>
+      <h3 class="text-center pb-6">
+      Tiro con arco en Gran Canaria
+      </h3>
+      <div class="h-fit w-full">
+        <app-landing-page-swiper></app-landing-page-swiper>
+      </div>
+      <div class="py-8">
+        <h3 class="pb-4">
+          El tiempo en nuestro club
+        </h3>
+        <img src="/assets/img/weather.png" class="rounded-2xl" alt="">
+      </div>
+      <div class="mb-8 rounded-xl p-2 md:pl-5 border border-solid border-white dark:border-nightblue-80">
+        <h3 class="pb-4 pl-2">
+          Nuestras últimas noticias
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+          <div *ngFor="let news of newsArray" class="px-2 pb-4 w-full">
+            <app-news-card [id]="news.id" [imgSrc]="news.image" [title]="news.title" [description]="news.content" [date]="news.date"></app-news-card>
+          </div>        
+        </div>
+        <div class="w-full flex justify-center">
+          <ion-button color="primary" routerLink="/noticias">
+            Ver más
+          </ion-button>
+        </div>
+
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </div>
+</ion-content>
