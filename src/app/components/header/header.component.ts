@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 import { ModalService } from 'src/app/services/modal.service';
+import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
   selector: 'app-header',
@@ -12,34 +13,38 @@ import { ModalService } from 'src/app/services/modal.service';
 export class HeaderComponent extends CapacitorBase implements OnInit {
   headerOptions = [
     { label: 'Sobre Nosotros',icon: 'reader-outline' , link: '/nosotros' },
-    { label: 'Iniciación',icon: 'megaphone-outline', link: '/iniciacion' },
-    { label: 'Competiciones',icon: 'trophy-outline', link: '/competiciones' },
-    { label: 'Arqueros',icon: 'body-outline', link: '/arqueros' },
-    { label: 'Plusmarcas',icon: 'sparkles-outline', link: '/rankings' },
+    { label: 'Iniciación',icon: 'megaphone-outline', link: '/construccion' },
+    { label: 'Competiciones',icon: 'trophy-outline', link: '/construccion' },
+    { label: 'Arqueros',icon: 'body-outline', link: '/construccion' },
+    { label: 'Plusmarcas',icon: 'sparkles-outline', link: '/construccion' },
   ]
   profileOptions = [
     { label: 'Perfil',icon: 'finger-print-outline', link: '/perfil/self' },
-    { label: 'Entrenamiento',icon: 'analytics-outline', link: '/entrenamiento' },
-    { label: 'Regulación',icon: 'construct-outline', link: '/regulacion' },
-    { label: 'Ejercicios',icon: 'fitness-outline', link: '/ejercicios' },
-    { label: 'Timer',icon: 'alarm-outline', link: '/timer' },
+    { label: 'Entrenamiento',icon: 'analytics-outline', link: '/construccion' },
+    { label: 'Regulación',icon: 'construct-outline', link: '/construccion' },
+    { label: 'Ejercicios',icon: 'fitness-outline', link: '/construccion' },
+    { label: 'Timer',icon: 'alarm-outline', link: '/construccion' },
   ]
 
   trigger: string
   openProfileMenu: boolean = false
-  userLogged: boolean = true
+  userLogged: boolean = false
 
   @Input() headerLabel: string
   @Input() cancelHeaderMobile: boolean = false
 
   constructor(private router: Router,
     private menu: MenuController,
-    private modalService: ModalService) {
+    private modalService: ModalService,
+    private registerService: RegisterService) {
     super()
   }
 
   ngOnInit() {
     this.trigger = this.router.url
+    if(localStorage.getItem('seo-token')){
+      this.userLogged = true
+    }
   }
 
   isActive(link: string) {
@@ -68,7 +73,15 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
   logout(){
     this.modalService.showModal(`Desconectarse`,
       ['¿Estás seguro de que quieres salir de tu cuenta?'],
-      [{text:'Sí, desconectame', color:'primary', onClick: ()=> { this.modalService.dismiss()}},
+      [{text:'Sí, desconectame', color:'primary', 
+      onClick: ()=> {this.registerService.logoutFromApp().subscribe(res =>{
+        if(res.data.success){
+          this.registerService.logout()
+          this.userLogged = false
+          this.router.navigate[this.router.url]
+        }
+      })
+      ,this.modalService.dismiss()}},
       {text:'Cancelar', color:'primary', fill:'outline',onClick: ()=> { this.modalService.dismiss()}}]
     )
   }

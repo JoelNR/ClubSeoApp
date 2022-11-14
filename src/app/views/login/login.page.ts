@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
+import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +10,11 @@ import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 })
 export class LoginPage extends CapacitorBase implements OnInit {
 
-  constructor() { 
+  email: string
+  password: string
+
+  constructor(private registerService: RegisterService,
+    private router: Router) { 
     super()
   }
 
@@ -16,6 +22,12 @@ export class LoginPage extends CapacitorBase implements OnInit {
   }
 
   submit(){
-    
+    this.registerService.login(this.email,this.password).subscribe(res => {
+      if(res.data.success){
+        localStorage.setItem('user_id', res.data.user.id)
+        RegisterService.setToken(res.data.token)
+        this.router.navigate(['/perfil/self'])
+      }
+    })      
   }
 }

@@ -3,7 +3,7 @@ ion-item {
     --border-color: transparent;
     --padding-start: 20px;
     --inner-padding-end: 20px;
-    @apply border border-solid border-transparent text-nightblue;
+    @apply border border-solid border-nightblue-80 dark:border-transparent text-nightblue;
     &::part(native) {
         @apply rounded-xl;
     }   

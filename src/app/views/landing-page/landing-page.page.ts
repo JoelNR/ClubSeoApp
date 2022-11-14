@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
+import { News } from 'src/app/models/news';
+import { NewsService } from 'src/app/services/news.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -8,18 +10,21 @@ import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 })
 export class LandingPagePage extends CapacitorBase implements OnInit {
 
-  newsArray = [{imgSrc: '/assets/img/flechas.jpeg', title : 'Título 1', date: '01/01/2022', description: 'Descripción 1'},
-  {imgSrc: '/assets/img/flechas.jpeg', title : 'Título 2', date: '01/01/2022', description: 'Descripción 2'},
-  {imgSrc: '/assets/img/flechas.jpeg', title : 'Título 3', date: '01/01/2022', description: 'Descripción 3'},
-  {imgSrc: '/assets/img/flechas.jpeg', title : 'Título 4', date: '01/01/2022', description: 'Descripción 4'},
-  {imgSrc: '/assets/img/flechas.jpeg', title : 'Título 5', date: '01/01/2022', description: 'Descripción 5'},
-  {imgSrc: '/assets/img/flechas.jpeg', title : 'Título 6', date: '01/01/2022', description: 'Descripción 6'},]
+  newsArray: News[] = []
 
-  constructor() { 
+  constructor(private newsService: NewsService) { 
     super()
   }
 
   ngOnInit() {
+    this.newsService.news().subscribe(res =>{
+      res.data.news.forEach(newNews => {
+        this.newsArray.push(newNews)
+      });
+      res.data.news.forEach(newNews => {
+        this.newsArray.push(newNews)
+      });
+    })
   }
 
 }

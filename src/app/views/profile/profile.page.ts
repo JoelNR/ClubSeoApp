@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
+import { ProfileModel } from 'src/app/models/profile';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,12 +12,11 @@ import { CapacitorBase } from 'src/app/lib/CapacitorBase';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage extends CapacitorBase implements OnInit {
-  firstName: string = 'Joel'
-  lastName: string = 'Navarro Rivero'
-  profilePictureSrc: string = '/assets/img/iniciacion.jpeg' || '/assets/img/default-avatar.png'
-  category: string = 'Olímpico'
-  email: string = 'test@test.com'
-  telephone: string = '612345678'
+  @ViewChild('selectPhotoInput') selectPhotoInput: ElementRef<HTMLInputElement>;
+  profileModel: ProfileModel = null
+  imageFile: File
+  email: string
+  telephone: string
   categoryOptions: string[] = ['Olímpico', 'Poleas', 'Desnudo','Tradicional', 'Longbow']
   
   competitionArray = [{name: 'IV Tirada de la Liga Atirca',date: '01/02/2022', position: 1, points: 120 , category: 'Arco olímpico', distance: 70 , type: 'Aire Libre'},
@@ -27,80 +31,78 @@ export class ProfilePage extends CapacitorBase implements OnInit {
   {recordName : 'Recurvo senior', distance: 18 , type: 'Sala', points : 600, date: '01/01/2022'},
   {recordName : 'Recurvo Junior', distance: 70 , type: 'Aire Libre', points : 600, date: '01/01/2022'},]
 
-  editableProfile: boolean = true
+  editableProfile: boolean = false
   editProfileActive: boolean = false
 
-  constructor() { 
+  formGroup: FormGroup
+  constructor(private profileService: ProfileService,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private http: HttpClient) {
     super()
   }
 
   ngOnInit() {
+    this.formGroup = this.formBuilder.group({
+      image:null
+    })
+    this.route.paramMap.subscribe(param => {
+      if(param.get('id')== 'self'){
+        this.profileApiEndpoint(localStorage.getItem('user_id'))
+      } else {
+        this.profileApiEndpoint(param.get('id'))
+      }
+    })
+    
+  }
+
+  profileApiEndpoint(id: string){
+    this.profileService.profile(id).subscribe(res => {
+      this.profileModel = res.data.profile[0]
+      this.email = res.data.email
+      this.telephone = res.data.telephone
+      if (localStorage.getItem('user_id') == this.profileModel.user_id){
+        this.editableProfile = true
+      }
+    })
   }
 
   updateProfile(){
-    this.editProfileActive = false
+    this.profileService.editProfile(this.profileModel.first_name, this.profileModel.last_name, this.profileModel.category, this.email, this.telephone).
+    subscribe(res => {
+      this.editProfileActive = false
+    })
   }
 
   changeCategory(event){
-    this.category = event.detail.value
+    this.profileModel.category = event.detail.value
   }
 
-  validateText(text: string): string|null {
-    var text_format = /^[A-Za-z-äöüÄÖÜùûüÿàâæéèêëïîôœÙÛÜŸÀÂÆÉÈÊËÏÎÔŒß' ]*$/;
-    if(text !== undefined && text !== ''){
-      if (!text_format.test(text) ) {
-        return 'El formato no es correcto, no debe incluir números.';
-      }
-      if(text_format.test(text)){
-        return 'valid';
-      }
-      }
-    
-    return null;
+  changePhoto(){
+    this.selectPhotoInput.nativeElement.click();
   }
 
-  validatePhone(text: string): string|null {
-    var text_format = /^[0-9]{9}$/;
-    if(text !== undefined && text !== ''){
-      if (!text_format.test(text) ) {
-        return 'El formato no es correcto, debe incluir 9 dígitos.';
-      }
-      if(text_format.test(text)){
-        return 'valid';
-      }
-      }
-    
-    return null;
-  }
-
-  validateEmail(text: string): string|null {
-    var mail_format = /^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-    if(text !== undefined && text !== ''){
-      if (!mail_format.test(text) ) {
-        return 'El formato del email no es correcto.';
-      }
-      if(mail_format.test(text)){
-        return 'valid';
-      }
+  updateProfilePicture($event: any){
+    const input = <HTMLInputElement>$event.target
+    if (input.files?.length === 1) {
+      this.formGroup.patchValue({
+        image: input.files[0]
+      })
     }
-    return null;
-
-  }
-
-  validatePassword(text: string): string|null {
-    var password_format = /(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9!@#$%^&*()\\-_=+{}|?>.<,:;]{8,16}/;
-    if(text !== undefined){
-      if (!password_format.test(text) && text !== '') {
-        return 'La contraseña debe estar formada por mínimo 8 carácteres, incluyendo letras y números.';
-      }
-      if(password_format.test(text)){
-      
-        return 'valid';
-      }
-
+    const headers = {
+      'Accept': 'application/json',
+      "ngrok-skip-browser-warning": "69420",
     }
-  
-    return null;
-  }
+    headers['Authorization'] = `${ProfileService.getToken()}`;
+    const formData: FormData = new FormData()
+    formData.append('image', this.formGroup.controls['image'].value)
 
+    console.log();
+    
+    this.http.post<any>(this.profileService.getHost() + '/profile/photo/' + + localStorage.getItem('user_id'), formData, {
+      headers: headers
+      }).subscribe(res => {
+        this.profileModel.image = res.data.image
+      })
+  }
 }

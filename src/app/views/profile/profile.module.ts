@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,6 +13,7 @@ import { BackButtonModule } from 'src/app/components/back-button/back-button.mod
 import { CompetitionCardModule } from 'src/app/components/competition-card/competition-card.module';
 import { RecordCardModule } from 'src/app/components/record-card/record-card.module';
 import { InputModule } from 'src/app/components/input/input.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -25,7 +26,9 @@ import { InputModule } from 'src/app/components/input/input.module';
     BackButtonModule,
     CompetitionCardModule,
     RecordCardModule,
-    InputModule
+    InputModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   declarations: [ProfilePage]
 })
