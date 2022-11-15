@@ -20,6 +20,8 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
   weatherUnits: WeatherModelUnits
   selectedTime: string
   weatherCondition: string
+  weatherIndex: number = 0
+  windDirection: string
 
   constructor(private newsService: NewsService,
     private ngxService: NgxUiLoaderService,
@@ -91,16 +93,23 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
       this.weatherModel.time[index] = this.weatherModel.time[index].split('T')[1];
     }
     this.selectedTime = this.weatherModel.time[0];
-    this.weatherCondition = this.parseWeatherCode(this.weatherModel.weathercode[0])
+    this.parseWeatherCode(this.weatherModel.weathercode[0])
+    this.parseWindDirection(this.weatherModel.winddirection_10m[0])
   }
 
   changeTime(event:any){
     this.selectedTime = event.target.value
+    for (let index = 0; index < this.weatherModel.time.length; index++) {
+      if ( this.weatherModel.time[index] == this.selectedTime){
+        this.weatherIndex = index
+        this.parseWeatherCode(this.weatherModel.weathercode[index])
+        this.parseWindDirection(this.weatherModel.winddirection_10m[index])
+        return
+      }
+    }
   }
 
   parseWeatherCode(apiCode: number){
-    console.log(apiCode + 'adsad');
-    
     const weatherCode = [{code: 0, description: 'Cielos claros'},
     {code: 1, description: 'Principalmente claro'},
     {code: 2, description: 'Parcialmente nublado'},
@@ -134,10 +143,24 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
       if (element.code === apiCode){
         console.log(element.code);
         console.log(element.description);
-        return element.description
+        this.weatherCondition = element.description
+        return
       }
     });
+  }
 
-    return 'Desconocido'
+  parseWindDirection(grades: number){
+    const directionCode = ['Norte','Nornoroeste','Noreste','Estenoreste','Este','Estesudeste','Sudeste','Sudsudeste',
+    'Sur','Sursudoeste','Sudoeste','Oestesudoeste','Oeste','Oestenoroeste','Noroeste','Nornoroeste','Norte']
+
+    this.windDirection =directionCode[Math.round(grades/22.5)] 
+    // 0 north
+    // 45 noreste
+    // este 90
+    // 135 sureste
+    // south 180
+    // 225 suroeste
+    // west 270
+    // 315 noroeste
   }
 }
