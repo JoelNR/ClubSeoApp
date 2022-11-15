@@ -1,7 +1,7 @@
 <ion-content>
   <div class="flex flex-col h-full">
     <app-header></app-header>
-    <div class="flex flex-col text-center grow w-full pt-5 sm:pt-8 lg:max-w-290 px-5 sm:px-8 mx-auto">
+    <div class="flex relative flex-col text-center grow w-full pt-5 sm:pt-8 lg:max-w-290 px-5 sm:px-8 mx-auto">
       <h1 class="flex justify-center w-full pb-4">
         Detalles de la noticia
       </h1>      
@@ -25,8 +25,9 @@
             {{newsModel.content}}
           </div>
         </div>
-        
       </div>
+      <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-news-details" fgsPosition="center-center" fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
+      </ngx-ui-loader>
     </div>
     <app-footer></app-footer>
   </div>

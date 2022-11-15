@@ -10,6 +10,7 @@ import { NewsDetailsPage } from './news-details.page';
 import { BackButtonModule } from 'src/app/components/back-button/back-button.module';
 import { HeaderModule } from 'src/app/components/header/header.module';
 import { FooterModule } from 'src/app/components/footer/footer.module';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { FooterModule } from 'src/app/components/footer/footer.module';
     NewsDetailsPageRoutingModule,
     BackButtonModule,
     HeaderModule,
-    FooterModule
+    FooterModule,
+    NgxUiLoaderModule
   ],
   declarations: [NewsDetailsPage]
 })
