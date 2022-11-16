@@ -1,4 +1,4 @@
-<div (mouseover)="showDate=true" (click)="showDate=!showDate" (mouseout)="showDate=false" class="rounded-xl px-3 text-xs py-0.5 text-nightblue  bg-yellow-500">
+<div (click)="showDate=!showDate" class="rounded-xl cursor-pointer px-3 text-xs py-0.5 text-nightblue  bg-yellow-500">
   <span *ngIf="!showDate">Hace {{getTimeElapsed(date)}}</span>
   <span *ngIf="showDate">{{date}}</span>
 </div>

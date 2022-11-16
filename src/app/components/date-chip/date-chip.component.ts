@@ -14,9 +14,10 @@ export class DateChipComponent implements OnInit {
 
   ngOnInit() {
     dayjs.extend(relativeTime);
+    this.date = dayjs(this.date).format('DD/MM/YYYY')
   }
 
   getTimeElapsed(date: string){
-    return dayjs(dayjs(date)).fromNow(true)
+    return dayjs(dayjs(date).format('DD/MM/YYYY')).fromNow(true)
   }
 }
