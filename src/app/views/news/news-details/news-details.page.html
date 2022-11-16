@@ -19,9 +19,9 @@
         </div>
         <div class="w-full sm:w-2/3 h-fit border p-4 border-solid rounded-2xl border-nightblue-80 dark:border-clear">
           <div class="pb-4 w-full flex justify-end">
-            {{newsModel.date}}
+            <app-date-chip [date]="newsModel.date"></app-date-chip>
           </div>
-          <div class="text-start">
+          <div class="text-justify">
             {{newsModel.content}}
           </div>
         </div>

@@ -2,17 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
-import { NewsCardComponent } from './news-card.component';
+import { DateChipComponent } from './date-chip.component';
 
 
 
 @NgModule({
-  declarations: [NewsCardComponent],
+  declarations: [DateChipComponent],
   imports: [
     CommonModule,
     IonicModule,
     RouterModule,
   ],
-  exports:[NewsCardComponent]
+  exports:[DateChipComponent]
 })
-export class NewsCardModule { }
+export class DateChipModule { }

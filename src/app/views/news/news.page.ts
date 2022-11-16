@@ -12,7 +12,8 @@ import { NewsService } from 'src/app/services/news.service';
 export class NewsPage extends CapacitorBase implements OnInit {
 
   newsArray: News[] = []
-  public searchValue: string;
+  searchKeyword: string = ""
+  results: any
 
   constructor(private newsService: NewsService,
     private ngxService: NgxUiLoaderService) { 
@@ -22,26 +23,18 @@ export class NewsPage extends CapacitorBase implements OnInit {
   ngOnInit() {
     this.ngxService.startLoader("loader-news");
     this.newsService.news().subscribe(res =>{
-      res.data.news.forEach(newNews => {
-        this.newsArray.push(newNews)
-      });
-      res.data.news.forEach(newNews => {
-        this.newsArray.push(newNews)
-      });
-      res.data.news.forEach(newNews => {
-        this.newsArray.push(newNews)
-      });
-      res.data.news.forEach(newNews => {
-        this.newsArray.push(newNews)
-      });
-      res.data.news.forEach(newNews => {
-        this.newsArray.push(newNews)
-      });
+      this.newsArray = res.data.news
+      this.results = this.newsArray
       this.ngxService.stopLoader("loader-news");
     })
   }
 
   search(){
+    if (this.searchKeyword === "") {
+      this.results = [...this.newsArray]
+      return
+    }
 
+    this.results = this.newsArray.filter(result => result.title.toLowerCase().includes(this.searchKeyword.toLowerCase()))
   }
 }

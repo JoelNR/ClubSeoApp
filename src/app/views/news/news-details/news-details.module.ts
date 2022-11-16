@@ -11,6 +11,8 @@ import { BackButtonModule } from 'src/app/components/back-button/back-button.mod
 import { HeaderModule } from 'src/app/components/header/header.module';
 import { FooterModule } from 'src/app/components/footer/footer.module';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { NewsCardModule } from 'src/app/components/news-card/news-card.module';
+import { DateChipModule } from 'src/app/components/date-chip/date-chip.module';
 
 @NgModule({
   imports: [
@@ -21,7 +23,9 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     BackButtonModule,
     HeaderModule,
     FooterModule,
-    NgxUiLoaderModule
+    NgxUiLoaderModule,
+    NewsCardModule,
+    DateChipModule
   ],
   declarations: [NewsDetailsPage]
 })

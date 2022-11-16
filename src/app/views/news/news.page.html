@@ -8,14 +8,26 @@
       <div class="w-full flex justify-start mb-5 sm:mb-8">
         <app-back-button [locationBack]="true"></app-back-button>
       </div>
-      <form (ngSubmit)="search()" class="mb-5 sm:mb-8">
-        <ion-searchbar search-icon="search-outline" [(ngModel)]="searchValue" name="searchValue" placeholder="Buscar una noticia">
+      <div class="mb-5 sm:mb-8">
+        <ion-searchbar search-icon="search-outline" [(ngModel)]="searchKeyword" (ionChange)="search()" name="searchKeyword" placeholder="Buscar una noticia">
         </ion-searchbar>
-      </form>
+      </div>
 
       <div class="mb-8 relative rounded-xl p-2 sm:py-5 md:pl-5  border border-solid border-white dark:border-nightblue-80">
+        <h3 class="pb-4" *ngIf="searchKeyword == ''">
+          Todas las noticias
+        </h3>
+        <div *ngIf="searchKeyword != ''" class="flex justify-between">
+          <h3 >
+            Noticias para la busqueda de {{searchKeyword}}
+          </h3>
+          <ion-button color="primary" class="h-7 lg:pr-2 xl:pr-3" (click)="searchKeyword = '';">
+            Reiniciar busqueda
+        </ion-button>          
+        </div>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-          <div *ngFor="let news of newsArray" class="px-2 pb-4 w-full">
+          <div *ngFor="let news of results" class="px-2 pb-4 w-full">
             <app-news-card [id]="news.id" [imgSrc]="news.image" [title]="news.title" [description]="news.content" [date]="news.date"></app-news-card>
           </div>        
         </div>

@@ -12,7 +12,7 @@ import { FooterModule } from 'src/app/components/footer/footer.module';
 import { SwiperModule } from 'swiper/angular';
 import { LandingPageSwiperComponent } from 'src/app/components/landing-page-swiper/landing-page-swiper.component';
 import { SwiperItemComponent } from 'src/app/components/landing-page-swiper/swiper-item/swiper-item.component';
-import { NewsCardModule } from 'src/app/components/news-card/news-card-module';
+import { NewsCardModule } from 'src/app/components/news-card/news-card.module';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @NgModule({
