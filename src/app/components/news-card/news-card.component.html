@@ -3,15 +3,15 @@
     <img [src]="imgSrc" alt="" class="h-48 w-full rounded-xl rounded-b-none pb-2 object-cover">
   </div>
 
-  <div class=" text-lg text-nightblue-100 px-2 mr-2 mb-2 line-clamp-2 h-14">
+  <div class=" text-lg text-nightblue-100 px-2 mr-2 mb-2 line-clamp-2 sm:h-14">
     {{title}}  
   </div>  
 
-  <p class=" text-xs text-nightblue-100 px-2 mb-2 mr-2 line-clamp-2 h-8">
+  <p class=" text-xs text-nightblue-100 px-2 mb-2 mr-2 line-clamp-2 sm:h-8">
     {{description}}
   </p>  
-  <div class="flex justify-between text-xs px-2 pb-2 text-nightblue-100 mr-2 mt-2 ">
-    {{date}}
+  <div class="flex justify-between  px-2 pb-2 text-nightblue-100 mr-2 mt-2 ">
+    <app-date-chip [date]="date"></app-date-chip>
     <ion-button class="m-0 h-5" color="primary" [routerLink]="'/noticias/detalles/' + id" size="small">
       Leer más
     </ion-button>

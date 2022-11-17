@@ -5,6 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 import { ProfileModel } from 'src/app/models/profile';
 import { ProfileService } from 'src/app/services/profile.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-profile',
@@ -38,11 +39,13 @@ export class ProfilePage extends CapacitorBase implements OnInit {
   constructor(private profileService: ProfileService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private ngxService: NgxUiLoaderService) {
     super()
   }
 
   ngOnInit() {
+    this.ngxService.startLoader('loader-profile')
     this.formGroup = this.formBuilder.group({
       image:null
     })
@@ -64,6 +67,7 @@ export class ProfilePage extends CapacitorBase implements OnInit {
       if (localStorage.getItem('user_id') == this.profileModel.user_id){
         this.editableProfile = true
       }
+      this.ngxService.stopLoader('loader-profile')
     })
   }
 
@@ -83,6 +87,7 @@ export class ProfilePage extends CapacitorBase implements OnInit {
   }
 
   updateProfilePicture($event: any){
+    this.ngxService.startLoader('loader-profile-img')
     const input = <HTMLInputElement>$event.target
     if (input.files?.length === 1) {
       this.formGroup.patchValue({
@@ -96,13 +101,12 @@ export class ProfilePage extends CapacitorBase implements OnInit {
     headers['Authorization'] = `${ProfileService.getToken()}`;
     const formData: FormData = new FormData()
     formData.append('image', this.formGroup.controls['image'].value)
-
-    console.log();
     
     this.http.post<any>(this.profileService.getHost() + '/profile/photo/' + + localStorage.getItem('user_id'), formData, {
       headers: headers
       }).subscribe(res => {
         this.profileModel.image = res.data.image
+        this.ngxService.stopLoader('loader-profile-img')
       })
   }
 }

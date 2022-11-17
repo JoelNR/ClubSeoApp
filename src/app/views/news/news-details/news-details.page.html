@@ -1,7 +1,7 @@
 <ion-content>
   <div class="flex flex-col h-full">
     <app-header></app-header>
-    <div class="flex flex-col text-center grow w-full pt-5 sm:pt-8 lg:max-w-290 px-5 sm:px-8 mx-auto">
+    <div class="flex relative flex-col text-center grow w-full pt-5 sm:pt-8 lg:max-w-290 px-5 sm:px-8 mx-auto">
       <h1 class="flex justify-center w-full pb-4">
         Detalles de la noticia
       </h1>      
@@ -14,19 +14,23 @@
         </h2>
       </div>
       <div *ngIf="newsModel" class="mb-8 mt-4 flex flex-col sm:flex-row">
-        <div class="w-full sm:w-1/3 flex justify-center rounded-2xl mr-4 mb-4 h-40 sm:h-fit">
-          <img [src]="newsModel.image" class="rounded-2xl object-cover h-40 sm:h-fit" alt="">
+        <div class="w-full hidden sm:flex sm:w-1/3 justify-center rounded-2xl mr-4 mb-4">
+          <img [src]="newsModel.image" class="rounded-2xl object-cover" alt="">
         </div>
         <div class="w-full sm:w-2/3 h-fit border p-4 border-solid rounded-2xl border-nightblue-80 dark:border-clear">
           <div class="pb-4 w-full flex justify-end">
-            {{newsModel.date}}
+            <app-date-chip [date]="newsModel.date"></app-date-chip>
           </div>
-          <div class="text-start">
+          <div class="text-justify">
             {{newsModel.content}}
           </div>
         </div>
-        
+        <div class="w-full flex sm:hidden sm:w-1/3 justify-center rounded-2xl mt-4">
+          <img [src]="newsModel.image" class="rounded-2xl object-cover" alt="">
+        </div>
       </div>
+      <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-news-details" fgsPosition="center-center" fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
+      </ngx-ui-loader>
     </div>
     <app-footer></app-footer>
   </div>

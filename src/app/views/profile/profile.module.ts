@@ -14,6 +14,7 @@ import { CompetitionCardModule } from 'src/app/components/competition-card/compe
 import { RecordCardModule } from 'src/app/components/record-card/record-card.module';
 import { InputModule } from 'src/app/components/input/input.module';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     RecordCardModule,
     InputModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxUiLoaderModule
   ],
   declarations: [ProfilePage]
 })

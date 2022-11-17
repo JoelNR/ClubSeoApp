@@ -42,6 +42,11 @@ const routes: Routes = [
     path: 'nosotros',
     loadChildren: () => import('./views/about-us/about-us.module').then( m => m.AboutUsPageModule)
   },
+  {
+    path: 'iniciacion',
+    loadChildren: () => import('./views/initiation/initiation.module').then( m => m.InitiationPageModule)
+  },
+
 
 
 

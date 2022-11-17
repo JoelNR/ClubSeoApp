@@ -1,37 +1,133 @@
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="flex flex-col h-full">
     <app-header></app-header>
     <div class="flex flex-col grow w-full lg:max-w-290 px-5 sm:px-8 justify-center mx-auto">
       <h1 class="pt-12 text-center uppercase">
-        Club deportivo SEO      
+        Club deportivo SEO
       </h1>
       <h3 class="text-center pb-6">
-      Tiro con arco en Gran Canaria
+        Tiro con arco en Gran Canaria
       </h3>
       <div class="h-fit w-full">
         <app-landing-page-swiper></app-landing-page-swiper>
       </div>
-      <div class="py-8">
-        <h3 class="pb-4">
-          El tiempo en nuestro club
-        </h3>
-        <img src="/assets/img/weather.png" class="rounded-2xl" alt="">
-      </div>
-      <div class="mb-8 rounded-xl p-2 md:pl-5 border border-solid border-white dark:border-nightblue-80">
-        <h3 class="pb-4 pl-2">
-          Nuestras últimas noticias
-        </h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-          <div *ngFor="let news of newsArray" class="px-2 pb-4 w-full">
-            <app-news-card [id]="news.id" [imgSrc]="news.image" [title]="news.title" [description]="news.content" [date]="news.date"></app-news-card>
-          </div>        
+      <div *ngIf="weatherModel"
+        class="my-8 relative rounded-3xl p-4 md:pl-5 border border-solid border-white dark:border-nightblue-80">
+        <div class="flex flex-col sm:flex-row w-full mb-4 sm:px-2 justify-between">
+          <h3 class="text-center mb-2 sm:mb-0 flex items-center">
+            El tiempo de hoy en nuestro club
+          </h3>
+          <ion-list class="p-0 rounded-xl">
+            <ion-item
+              class="bg-blue-50 text-nightblue rounded-xl border border-solid dark:border-white border-nightblue-80">
+              <ion-select [interface]="mobile ? '' : 'popover'" [placeholder]="this.selectedTime"
+                [value]="this.selectedTime" (ionChange)="changeTime($event)">
+                <ion-select-option *ngFor="let time of weatherModel.time" [value]="time">{{time}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
         </div>
-        <div class="w-full flex justify-center">
-          <ion-button color="primary" routerLink="/noticias">
-            Ver más
+        <div class="grid sm:grid-cols-2 grid-cols-1 lg:grid-cols-3">
+          <div class="flex mb-2">
+            <div class="flex items-center">
+              <ion-icon class="pr-2" color="primary" name="sunny-outline"></ion-icon>
+              Condición del cielo:
+            </div>
+            <div class="flex pl-2 items-center">
+              {{weatherCondition}}
+            </div>
+          </div>
+          <div class="flex mb-2">
+            <div class="flex items-center">
+              <ion-icon class="pr-2" color="primary" name="thermometer-outline"></ion-icon>
+              Temperatura:
+            </div>
+            <div class="pl-2 flex items-center">
+              {{weatherModel.apparent_temperature[weatherIndex]}} {{weatherUnits.apparent_temperature}}
+            </div>
+          </div>
+          <div class="flex mb-2">
+            <div class="flex items-center">
+              <ion-icon class="pr-2" color="primary" name="rainy-outline"></ion-icon>
+              Lluvia:
+            </div>
+            <div class="pl-2 flex items-center">
+              {{weatherModel.rain[weatherIndex]}} {{weatherUnits.rain}}
+            </div>
+          </div>
+          <div class="flex mb-2">
+            <div class="flex items-center">
+              <ion-icon class="pr-2" color="primary" name="water-outline"></ion-icon>
+              Humedad:
+            </div>
+            <div class="pl-2 flex items-center">
+              {{weatherModel.relativehumidity_2m[weatherIndex]}} {{weatherUnits.relativehumidity_2m}}
+            </div>
+          </div>
+          <div class="flex mb-2">
+            <div class="flex items-center">
+              <ion-icon class="pr-2" color="primary" name="cloud-outline"></ion-icon>
+              Nubosidad:
+            </div>
+            <div class="pl-2 flex items-center">
+              {{weatherModel.cloudcover[weatherIndex]}} {{weatherUnits.cloudcover}}
+            </div>
+          </div>
+          <div class="flex mb-2">
+            <div class="flex items-center">
+              <ion-icon class="pr-2" color="primary" name="compass-outline"></ion-icon>
+              Direccion del viento:
+            </div>
+            <div class="pl-2 flex items-center">
+              {{weatherModel.winddirection_10m[weatherIndex]}} {{weatherUnits.winddirection_10m}} ({{windDirection}})
+            </div>
+          </div>
+          <div class="flex mb-2">
+            <div class="flex items-center">
+              <ion-icon class="pr-2" color="primary" name="speedometer-outline"></ion-icon>
+              Velocidad del viento:
+            </div>
+            <div class="pl-2 flex items-center">
+              {{weatherModel.windspeed_10m[weatherIndex]}} {{weatherUnits.windspeed_10m}}
+            </div>
+          </div>
+          <div class="flex mb-2">
+            <div class="flex items-center">
+              <ion-icon class="pr-2" color="primary" name="rocket-outline"></ion-icon>
+              Rachas de viento:
+            </div>
+            <div class="pl-2 flex items-center">
+              {{weatherModel.windgusts_10m[weatherIndex]}} {{weatherUnits.windgusts_10m}}
+            </div>
+          </div>
+        </div>
+        <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-weather" fgsPosition="top-center"
+          fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
+        </ngx-ui-loader>
+      </div>
+      <div class="mb-8 relative rounded-3xl p-4 md:pl-5 border border-solid border-white dark:border-nightblue-80">
+        <div class="w-full flex px-2 pb-4 items-center justify-between">
+          <h3 class="flex items-center">
+            Nuestras últimas noticias
+          </h3>          
+          <ion-button color="primary" class="h-7 lg:pr-2 xl:pr-3" routerLink="/noticias">
+              Ver todas
           </ion-button>
         </div>
+        
 
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+          <div *ngFor="let news of newsArray" class="px-2 pb-4 w-full">
+            <app-news-card [id]="news.id" [imgSrc]="news.image" [title]="news.title" [description]="news.content"
+              [date]="news.date"></app-news-card>
+          </div>
+        </div>
+        <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-landing" fgsPosition="top-center"
+          fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
+        </ngx-ui-loader>
       </div>
     </div>
     <app-footer></app-footer>
