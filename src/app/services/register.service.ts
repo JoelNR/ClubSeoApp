@@ -9,6 +9,10 @@ export class RegisterService extends Api {
         return this.get<any>('/sanctum/csrf-cookie')
     }
 
+    public getUser(){
+        return this.get<any>('/user')
+    }
+
     public registrate(email: string, password: string, firstName: string, lastName: string) {
         return this.post<any>('/register', {
             firstName,

@@ -13,7 +13,7 @@ import { RegisterService } from 'src/app/services/register.service';
 export class HeaderComponent extends CapacitorBase implements OnInit {
   headerOptions = [
     { label: 'Sobre Nosotros',icon: 'reader-outline' , link: '/nosotros' },
-    { label: 'Iniciación',icon: 'megaphone-outline', link: '/construccion' },
+    { label: 'Iniciación',icon: 'megaphone-outline', link: '/iniciacion' },
     { label: 'Competiciones',icon: 'trophy-outline', link: '/construccion' },
     { label: 'Arqueros',icon: 'body-outline', link: '/construccion' },
     { label: 'Plusmarcas',icon: 'sparkles-outline', link: '/construccion' },
@@ -45,6 +45,10 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
     if(localStorage.getItem('seo-token')){
       this.userLogged = true
     }
+    this.registerService.getUser().subscribe(res=>{
+      console.log(res);
+      
+    })
   }
 
   isActive(link: string) {
