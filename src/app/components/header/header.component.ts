@@ -14,8 +14,8 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
   headerOptions = [
     { label: 'Sobre Nosotros',icon: 'reader-outline' , link: '/nosotros' },
     { label: 'Iniciación',icon: 'megaphone-outline', link: '/iniciacion' },
-    { label: 'Competiciones',icon: 'trophy-outline', link: '/construccion' },
-    { label: 'Arqueros',icon: 'body-outline', link: '/construccion' },
+    { label: 'Competiciones',icon: 'trophy-outline', link: '/competicion' },
+    { label: 'Arqueros',icon: 'body-outline', link: '/arqueros' },
     { label: 'Plusmarcas',icon: 'sparkles-outline', link: '/construccion' },
   ]
   profileOptions = [
@@ -45,10 +45,6 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
     if(localStorage.getItem('seo-token')){
       this.userLogged = true
     }
-    this.registerService.getUser().subscribe(res=>{
-      console.log(res);
-      
-    })
   }
 
   isActive(link: string) {

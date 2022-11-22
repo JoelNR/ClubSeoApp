@@ -16,3 +16,11 @@ export interface GetProfileApiResponse{
         success: boolean
     }
 }
+
+export interface GetAllProfileApiResponse{
+    data: {
+        message: string
+        profiles: ProfileModel[]    
+        success: boolean
+    }
+}

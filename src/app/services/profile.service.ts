@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GetProfileApiResponse } from '../models/profile';
+import { GetAllProfileApiResponse, GetProfileApiResponse } from '../models/profile';
 import { Api } from './api.service';
 
 @Injectable({
@@ -26,5 +26,8 @@ export class ProfileService extends Api {
       })
     }
 
+    public getAllMembers(){
+      return this.get<GetAllProfileApiResponse>('/profiles')
+    }
 }
 

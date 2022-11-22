@@ -1,0 +1,34 @@
+<ion-content>
+  <div class="flex flex-col h-full">
+    <app-header></app-header>
+    <div class="flex flex-col grow w-full lg:max-w-290 px-5 sm:px-8 justify-center mx-auto">
+      <h1 class="pt-12 text-center uppercase">
+        NMuestros arqueros
+      </h1>
+      <div *ngIf="profileModels" class="flex relative flex-col lg:flex-row w-full">
+        <div *ngFor="let profileModel of profileModels;"
+          class="flex flex-col sm:flex-row lg:flex-col h-fit mb-4 items-center justify-between lg:justify-center w-full lg:w-1/3 p-4 lg:mr-4 bg-clear-bg  dark:bg-nightblue-60 rounded-2xl border border-solid border-white">
+          <div class="relative">
+            <img
+              class="rounded-full w-40 h-40 mr-4 lg:mr-0 object-cover border-2 border-solid border-nightblue-90  dark:border-clear"
+              [src]="profileModel.image || '/assets/img/default-avatar.png'" alt="avatar">
+          </div>
+          <div class="py-4 lg:block text-center">
+            <div class="flex lg:flex-col">
+              <h3 class="mr-2 lg:mr-0">
+                {{profileModel.first_name}}
+              </h3>
+              <h3>
+                {{profileModel.last_name}}
+              </h3>
+            </div>
+            <div>Arquero {{profileModel.category}}</div>
+          </div>
+          <div class="w-20">
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </div>
+</ion-content>
