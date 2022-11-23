@@ -9,18 +9,18 @@ export interface CompetitionModel{
     image: string
 }
 
-export interface GetNewsApiResponse{
+export interface GetCompetitionApiResponse{
     data: {
         message: string
         success: boolean
-        news: CompetitionModel[]
+        competitions: CompetitionModel[]
     }
 }
 
-export interface GetNewsByIdApiResponse{
+export interface GetCompetitionByIdApiResponse{
     data: {
         message: string
         success: boolean
-        news: CompetitionModel
+        competitions: CompetitionModel
     }
 }

@@ -7,14 +7,12 @@ import { CapacitorBase } from 'src/app/lib/CapacitorBase';
   styleUrls: ['./competition-card.component.scss'],
 })
 export class CompetitionCardComponent extends CapacitorBase implements OnInit {
-
-  @Input() name: string
+  @Input() id: string
+  @Input() title: string
   @Input() date: string 
-  @Input() position: number
-  @Input() points: number 
-  @Input() category: string 
-  @Input() distance: number
-  @Input() type: string
+  @Input() description: string
+  @Input() modality: string 
+  @Input() image: string
 
   constructor() { 
     super()

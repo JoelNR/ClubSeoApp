@@ -1,11 +1,17 @@
 <ion-content>
   <div class="flex flex-col h-full">
     <app-header></app-header>
-    <div class="flex flex-col grow w-full lg:max-w-290 px-5 sm:px-8 justify-center mx-auto">
-      <h1 class="pt-12 text-center uppercase">
-        En construcción     
+    <div class="flex flex-col grow w-full lg:max-w-290 px-5 sm:px-8 mx-auto">
+      <h1 class="pt-12 pb-6 text-center uppercase">
+        Competiciones  
       </h1>
+      <div *ngIf="competitionArray" class="relative grid grid-cols-1 lg:grid-cols-3 gap-4 w-full mb-8 rounded-3xl border border-solid border-white p-4">
+        <div *ngFor="let competition of competitionArray">
+          <app-competition-card [date]="competition.date" [description]="competition.description" 
+          [id]="competition.id" [modality]="competition.modality" [title]="competition.title" [image]="competition.image || '/assets/img/flechas.jpeg'"></app-competition-card>
+        </div>
       </div>
-      <app-footer></app-footer>
+    </div>
+    <app-footer></app-footer>
   </div>
 </ion-content>
