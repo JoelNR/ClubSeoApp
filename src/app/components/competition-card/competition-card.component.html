@@ -1,6 +1,6 @@
-<div class="flex flex-col text-left rounded-xl shadow-none w-full sm:max-w-xs max-h-fit  border border-solid border-nightblue-80 bg-blue-50">
+<div class="flex flex-col text-left rounded-xl shadow-none w-full max-h-fit  border border-solid border-nightblue-80 bg-blue-50">
   <div>
-    <img [src]="image" alt="" class="h-48 w-full rounded-xl rounded-b-none object-cover">
+    <img [src]="image || '/assets/img/flechas.jpeg'" alt="" class="h-48 w-full rounded-xl rounded-b-none object-cover">
   </div>
   <div class="p-2">
     <div class="text-lg text-nightblue-100 mb-2 line-clamp-1">
@@ -13,7 +13,7 @@
     <p class=" text-xs text-nightblue-100 mb-2 line-clamp-2 sm:h-8">
       {{description}}
     </p>  
-    <ion-button class="h-5 w-full" color="primary" [routerLink]="'/competicion/detalles/' + id" size="small">
+    <ion-button class="h-6 w-full" color="primary" [routerLink]="'/competicion/detalles/' + id" size="small">
       Ver más
     </ion-button>
   </div>

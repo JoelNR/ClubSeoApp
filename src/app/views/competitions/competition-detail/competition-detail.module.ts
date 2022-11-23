@@ -10,6 +10,7 @@ import { CompetitionDetailPage } from './competition-detail.page';
 import { HeaderModule } from 'src/app/components/header/header.module';
 import { FooterModule } from 'src/app/components/footer/footer.module';
 import { BackButtonModule } from 'src/app/components/back-button/back-button.module';
+import { CompetitionCardModule } from 'src/app/components/competition-card/competition-card.module';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { BackButtonModule } from 'src/app/components/back-button/back-button.mod
     CompetitionDetailPageRoutingModule,
     HeaderModule,
     FooterModule,
-    BackButtonModule
+    BackButtonModule,
+    CompetitionCardModule
   ],
   declarations: [CompetitionDetailPage]
 })

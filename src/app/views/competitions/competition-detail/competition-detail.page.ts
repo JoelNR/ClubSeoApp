@@ -12,6 +12,7 @@ import { CompetitionService } from 'src/app/services/competition.service';
 })
 export class CompetitionDetailPage extends CapacitorBase implements OnInit {
   competitionModel: CompetitionModel
+  tableCompetitionData: any
 
   constructor(private competitionService: CompetitionService,
     private route: ActivatedRoute,
@@ -24,6 +25,11 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
     this.route.paramMap.subscribe(param => {
       this.competitionService.getCompetitionById(param.get('id')).subscribe(res =>{
         this.competitionModel = res.data.competitions
+        this.tableCompetitionData = [{label: 'Nombre', content: this.competitionModel.title},
+        {label: 'Descripción', content: this.competitionModel.description},
+        {label: 'Lugar', content: this.competitionModel.place},
+        {label: 'Modalidad', content: this.competitionModel.modality},
+        {label: 'Fecha', content: this.competitionModel.date},]
       })
       this.ngxService.stopLoader('loader-competition-details')
     })
