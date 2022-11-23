@@ -26,23 +26,26 @@
         Elige una fecha (depende plazas) <br>
         Quizás no hay fechas
         <div class="flex">
-          <div>
-            <div (click)="addUser()" class="rounded-xl bg-blue-50 border py-1 px-3 w-fit h-fit cursor-pointer border-solid text-nightblue border-nightblue-100 my-4 dark:border-clear-bg">
-              Fechas disponibles para noviembre
+          <div *ngFor="let calendarYear of calendarYearArray;let i=index;">
+            <div *ngFor="let calendarMonth of calendarMonthArray[i];let j=index;">
+
+            <div  class="rounded-xl bg-blue-50 border py-1 px-3 w-fit h-fit cursor-pointer border-solid text-nightblue border-nightblue-100 my-4 dark:border-clear-bg">
+              Fechas disponibles para {{calendarMonth}}
             </div>
-              <ion-datetime
+              <ion-datetime 
               presentation="date"
               locale="es-ES"
-              month-values="11"
-              dayValues="7,14,21,28"
-              yearValues="2022"
-              min="2022-11"
-              max="2022-11"
+              [monthValues]="calendarMonth"
+              [dayValues]="calendarDatesArray[i][j]"
+              [yearValues]="calendarYear"
+              [min]="calendarYear + '-' + calendarMonth"
+              [max]="calendarYear + '-' + calendarMonth"
               first-day-of-week="1"
               mode="ios"
               class="rounded-xl border border-solid border-nightblue-100 my-4 text-black dark:border-clear-bg bg-orange-60">
               <span slot="title">Selecciona una fecha de las disponibles</span>
               </ion-datetime>
+          </div>
           </div>
 
           <div class="rounded-xl bg-blue-50 border py-1 px-3 w-fit h-fit cursor-pointer border-solid text-nightblue border-nightblue-100 my-4 dark:border-clear-bg">
