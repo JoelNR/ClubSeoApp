@@ -5,11 +5,13 @@
       <h1 class="pt-28 pb-6 text-center uppercase">
         Competiciones  
       </h1>
-      <div *ngIf="competitionArray" class="relative grid grid-cols-1 lg:grid-cols-3 gap-4 w-full mb-8 rounded-3xl border border-solid border-white p-4">
+      <div class="relative grid grid-cols-1 lg:grid-cols-3 gap-4 w-full mb-8 rounded-3xl border border-solid border-white p-4">
         <div *ngFor="let competition of competitionArray">
           <app-competition-card [date]="competition.date" [description]="competition.description" 
           [id]="competition.id" [modality]="competition.modality" [title]="competition.title" [image]="competition.image"></app-competition-card>
         </div>
+        <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-competition" fgsPosition="top-center" fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
+        </ngx-ui-loader>
       </div>
     </div>
     <app-footer></app-footer>

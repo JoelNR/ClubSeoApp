@@ -61,7 +61,7 @@ export class ProfilePage extends CapacitorBase implements OnInit {
 
   profileApiEndpoint(id: string){
     this.profileService.profile(id).subscribe(res => {
-      this.profileModel = res.data.profile[0]
+      this.profileModel = res.data.profile
       this.email = res.data.email
       this.telephone = res.data.telephone
       if (localStorage.getItem('user_id') == this.profileModel.user_id){

@@ -9,6 +9,7 @@ import { ArchersPageRoutingModule } from './archers-routing.module';
 import { ArchersPage } from './archers.page';
 import { HeaderModule } from 'src/app/components/header/header.module';
 import { FooterModule } from 'src/app/components/footer/footer.module';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { FooterModule } from 'src/app/components/footer/footer.module';
     IonicModule,
     ArchersPageRoutingModule,
     HeaderModule,
-    FooterModule
+    FooterModule,
+    NgxUiLoaderModule
   ],
   declarations: [ArchersPage]
 })
