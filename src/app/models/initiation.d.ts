@@ -1,6 +1,6 @@
 export interface InitiationModel{
     id: string
-    capacity: string
+    capacity: number
     date: string
 }
 

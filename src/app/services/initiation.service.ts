@@ -10,8 +10,8 @@ export class InitiationService extends Api {
       return this.get<GetInitiationApiResponse>('/initiation')
     }
 
-    public addUserToInitiation(id: string, telephone: number){
-        return this.put<GetInitiationByIdApiResponse>('/initiation/' + id, {telephone, user_id: localStorage.getItem('user_id')})
+    public addUserToInitiation(id: string, attendees?: number){
+        return this.put<GetInitiationByIdApiResponse>('/initiation/' + id, {user_id: localStorage.getItem('user_id'), attendees})
       }
 
 }
