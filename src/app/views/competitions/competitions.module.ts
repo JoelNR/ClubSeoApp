@@ -10,6 +10,7 @@ import { CompetitionsPage } from './competitions.page';
 import { HeaderModule } from 'src/app/components/header/header.module';
 import { FooterModule } from 'src/app/components/footer/footer.module';
 import { CompetitionCardModule } from 'src/app/components/competition-card/competition-card.module';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { CompetitionCardModule } from 'src/app/components/competition-card/compe
     CompetitionsPageRoutingModule,
     HeaderModule,
     FooterModule,
-    CompetitionCardModule
+    CompetitionCardModule,
+    NgxUiLoaderModule
   ],
   declarations: [CompetitionsPage]
 })

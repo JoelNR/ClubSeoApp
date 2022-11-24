@@ -14,7 +14,10 @@ export class InitiationPage extends CapacitorBase implements OnInit {
   initiationDates: InitiationModel[]
   calendarYearArray: string [] = []
   calendarMonthArray: string [][] = []
+  calendarBooleanArray: boolean [][] = []
   calendarDatesArray: string[][][] = []
+
+  map = new Map<string, string>()
 
   constructor(private initiationService: InitiationService) {
     super()
@@ -24,7 +27,6 @@ export class InitiationPage extends CapacitorBase implements OnInit {
     this.initiationService.getInitiation().subscribe(res =>{
       this.generateCalendarArray(res.data.initiationDates)
     })
-    
   }
 
   generateCalendarArray(array: InitiationModel[]){
@@ -32,6 +34,7 @@ export class InitiationPage extends CapacitorBase implements OnInit {
     const month = dayjs(this.initiationDates[0].date).format('MM')
     const year = dayjs(this.initiationDates[0].date).format('YYYY')
     this.calendarMonthArray.push([month])
+    this.calendarBooleanArray.push([false])
     this.calendarYearArray.push(year)
     this.calendarDatesArray.push([[this.initiationDates[0].date]])
 
@@ -46,11 +49,13 @@ export class InitiationPage extends CapacitorBase implements OnInit {
           
         } else {
           this.calendarMonthArray[this.calendarYearArray.length-1].push(month)
+          this.calendarBooleanArray[this.calendarYearArray.length-1].push(false)
           this.calendarDatesArray[this.calendarYearArray.length-1].push([element.date])
         }
       } else {
         this.calendarYearArray.push(year)
         this.calendarMonthArray.push([month])
+        this.calendarBooleanArray.push([false])
         this.calendarDatesArray.push([[element.date]])
       }
     }
@@ -65,5 +70,13 @@ export class InitiationPage extends CapacitorBase implements OnInit {
   }
 
   addUser(){
+  }
+
+  parseMonth(monthNumber: string){
+    return dayjs(monthNumber).format('MMMM')
+  }
+
+  showCalendar(i: number, j: number){
+    this.calendarBooleanArray[i][j] = !this.calendarBooleanArray[i][j]
   }
 }
