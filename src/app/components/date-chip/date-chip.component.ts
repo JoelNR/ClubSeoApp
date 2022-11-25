@@ -20,7 +20,7 @@ export class DateChipComponent implements OnInit {
 
   getTimeElapsed(date: string){
     if(this.showTimeElapsed){
-      return 'Hace' + dayjs(dayjs(date).format('DD/MM/YYYY')).fromNow(true)
+      return 'Hace ' + dayjs(dayjs(date).format('DD/MM/YYYY')).fromNow(true)
     } else {
       return this.date
     }

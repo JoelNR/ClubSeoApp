@@ -45,19 +45,30 @@ export class ProfilePage extends CapacitorBase implements OnInit {
   }
 
   ngOnInit() {
-    this.ngxService.startLoader('loader-profile')
-    this.formGroup = this.formBuilder.group({
-      image:null
-    })
-    this.route.paramMap.subscribe(param => {
-      if(param.get('id')== 'self'){
-        this.profileApiEndpoint(localStorage.getItem('user_id'))
-      } else {
-        this.profileApiEndpoint(param.get('id'))
-      }
-    })
+    this.getProfileData();
     
   }
+
+  private getProfileData() {
+    this.ngxService.startLoader('loader-profile');
+    this.formGroup = this.formBuilder.group({
+      image: null
+    });
+    this.route.paramMap.subscribe(param => {
+      if (param.get('id') == 'self') {
+        this.profileApiEndpoint(localStorage.getItem('user_id'));
+      } else {
+        this.profileApiEndpoint(param.get('id'));
+      }
+    });
+  }
+
+  handleRefresh(event) {
+    setTimeout(() => {
+      this.getProfileData()
+      event.target.complete();
+    }, 2000);
+  };
 
   profileApiEndpoint(id: string){
     this.profileService.profile(id).subscribe(res => {

@@ -21,12 +21,16 @@ export class NewsPage extends CapacitorBase implements OnInit {
   }
 
   ngOnInit() {
+    this.getNews();
+  }
+
+  private getNews() {
     this.ngxService.startLoader("loader-news");
-    this.newsService.news().subscribe(res =>{
-      this.newsArray = res.data.news
-      this.results = this.newsArray
+    this.newsService.news().subscribe(res => {
+      this.newsArray = res.data.news;
+      this.results = this.newsArray;
       this.ngxService.stopLoader("loader-news");
-    })
+    });
   }
 
   search(){
@@ -37,4 +41,11 @@ export class NewsPage extends CapacitorBase implements OnInit {
 
     this.results = this.newsArray.filter(result => result.title.toLowerCase().includes(this.searchKeyword.toLowerCase()))
   }
+
+  handleRefresh(event) {
+    setTimeout(() => {
+      this.getNews()
+      event.target.complete();
+    }, 2000);
+  };
 }

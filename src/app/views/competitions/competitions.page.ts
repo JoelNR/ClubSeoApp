@@ -18,11 +18,21 @@ export class CompetitionsPage extends CapacitorBase implements OnInit {
   }
 
   ngOnInit() {
-    this.ngxService.startLoader("loader-competition");
-    this.competitionService.competition().subscribe(res=>{
-      this.competitionArray = res.data.competitions
-      this.ngxService.stopLoader('loader-competition')
-    })
+    this.getCompetitionData();
   }
 
+  private getCompetitionData() {
+    this.ngxService.startLoader("loader-competition");
+    this.competitionService.competition().subscribe(res => {
+      this.competitionArray = res.data.competitions;
+      this.ngxService.stopLoader('loader-competition');
+    });
+  }
+
+  handleRefresh(event) {
+    setTimeout(() => {
+      this.getCompetitionData()
+      event.target.complete();
+    }, 2000);
+  };
 }

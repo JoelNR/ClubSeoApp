@@ -19,10 +19,20 @@ export class ArchersPage extends CapacitorBase implements OnInit {
    }
 
   ngOnInit() {
-    this.ngxService.startLoader('loader-archers')
-    this.profileService.getAllMembers().subscribe(res => {
-      this.profileModels = res.data.profiles
-      this.ngxService.stopLoader('loader-archers')
-    })
+    this.getArchersData();
   }
+  private getArchersData() {
+    this.ngxService.startLoader('loader-archers');
+    this.profileService.getAllMembers().subscribe(res => {
+      this.profileModels = res.data.profiles;
+      this.ngxService.stopLoader('loader-archers');
+    });
+  }
+
+  handleRefresh(event) {
+    setTimeout(() => {
+      this.getArchersData()
+      event.target.complete();
+    }, 2000);
+  };
 }

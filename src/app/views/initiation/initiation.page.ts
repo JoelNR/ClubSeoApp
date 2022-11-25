@@ -34,20 +34,31 @@ export class InitiationPage extends CapacitorBase implements OnInit {
    }
 
   ngOnInit() {
-    this.ngxService.startLoader('loader-initiation')
-    this.userId = localStorage.getItem('user_id')
-    this.initiationService.getInitiation().subscribe(res =>{
-      if (res.data.userDate == null ){
-        this.generateCalendarArray(res.data.initiationDates)
-      } else {
-        this.userHasDate = true
-        this.dateId = res.data.userDate.id
-        this.dateValue = res.data.userDate.date
-      }
-      this.ngxService.stopLoader('loader-initiation')
-    })
+    this.getInitationData();
 
   }
+
+  private getInitationData() {
+    this.ngxService.startLoader('loader-initiation');
+    this.userId = localStorage.getItem('user_id');
+    this.initiationService.getInitiation().subscribe(res => {
+      if (res.data.userDate == null) {
+        this.generateCalendarArray(res.data.initiationDates);
+      } else {
+        this.userHasDate = true;
+        this.dateId = res.data.userDate.id;
+        this.dateValue = res.data.userDate.date;
+      }
+      this.ngxService.stopLoader('loader-initiation');
+    });
+  }
+
+  handleRefresh(event) {
+    setTimeout(() => {
+      this.getInitationData()
+      event.target.complete();
+    }, 2000);
+  };
 
   generateCalendarArray(array: InitiationModel[]){
     this.initiationDates = array
