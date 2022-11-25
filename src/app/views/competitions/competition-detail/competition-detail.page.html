@@ -7,7 +7,7 @@
       </h1>
       <app-back-button [locationBack]="true"></app-back-button>
       <div class="w-full flex relative flex-col mt-4 sm:flex-row">
-        <div *ngIf="competitionModel" class="w-full sm:w-1/3 mr-4 flex justify-center">
+        <div *ngIf="competitionModel" class="w-full sm:w-1/3 sm:mr-4 mb-4 sm:mb-0 flex justify-center">
           <app-competition-card [date]="competitionModel.date" [description]="competitionModel.description" 
           [id]="competitionModel.id" [modality]="competitionModel.modality" [title]="competitionModel.title" [image]="competitionModel.image"></app-competition-card>
         </div>
