@@ -62,6 +62,10 @@ export class InitiationPage extends CapacitorBase implements OnInit {
 
   generateCalendarArray(array: InitiationModel[]){
     this.initiationDates = array
+    this.calendarYearArray = []
+    this.calendarMonthArray = []
+    this.calendarBooleanArray = []
+    this.calendarDatesArray = []
     let startIndex: number
     if(this.initiationDates == null){
       return
