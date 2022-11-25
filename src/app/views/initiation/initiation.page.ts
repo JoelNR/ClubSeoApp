@@ -35,7 +35,6 @@ export class InitiationPage extends CapacitorBase implements OnInit {
 
   ngOnInit() {
     this.getInitationData();
-
   }
 
   private getInitationData() {
