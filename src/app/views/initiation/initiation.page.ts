@@ -106,7 +106,7 @@ export class InitiationPage extends CapacitorBase implements OnInit {
 
   addUser(){
     this.initiationService.addUserToInitiation(this.dateId, this.attendees).subscribe(res => {
-      this.router.navigateByUrl(this.router.url)
+      this.userHasDate = true
     })
   }
 
