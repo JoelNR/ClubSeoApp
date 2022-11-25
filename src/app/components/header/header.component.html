@@ -4,7 +4,7 @@
       <img src="/assets/img/logo.gif" routerLink="/" alt="logo" class="h-10 cursor-pointer">
     </div>
     <div class=" text-base hidden lg:flex text-center justify-center items-center">
-      <a *ngFor="let option of headerOptions" [routerLink]="option.link" class="px-5 items-center inline-flex">
+      <a *ngFor="let option of headerOptions" [routerLink]="option.link" replaceUrl="true" class="px-5 items-center inline-flex">
         <ion-icon color="primary" [name]="option.icon"></ion-icon>
         <span class="pl-2" [ngClass]="{'text-orange-100': isActive(option.link)}">{{ option.label }}</span>
       </a>
@@ -62,7 +62,7 @@
                 Perfil
               </div>
               <div class="absolute right-2">
-                <img class="rounded-full w-10 h-10 object-cover" [src]="profileImage" alt="avatar">
+                <img class="rounded-full w-10 h-10 object-cover" [src]="profileImage || '/assets/img/default-avatar.png'" alt="avatar">
               </div>
             </ion-item>
             <ion-item *ngIf="!userLogged" routerLink="/login" class="cursor-pointer flex items-center px-5" [ngClass]="{'text-orange-100': isActive('/login')}">
@@ -112,7 +112,7 @@
             </svg>
           </div>
           <div class="justify-end">
-            <img class="rounded-full h-5 w-5 object-cover" [src]="profileImage" alt="avatar">
+            <img class="rounded-full h-5 w-5 object-cover" [src]="profileImage || '/assets/img/default-avatar.png'" alt="avatar">
           </div>
         </div>
       </ion-button>

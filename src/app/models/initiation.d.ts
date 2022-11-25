@@ -9,6 +9,7 @@ export interface GetInitiationApiResponse{
         message: string
         success: boolean
         initiationDates: InitiationModel[]
+        userDate?: InitiationModel
     }
 }
 
@@ -17,5 +18,14 @@ export interface GetInitiationByIdApiResponse{
         message: string
         success: boolean
         initiationDates: InitiationModel
+    }
+}
+
+export interface SetInitiationByIdApiResponse{
+    data: {
+        message: string
+        success: boolean
+        initiationDates: InitiationModel
+        user: any
     }
 }

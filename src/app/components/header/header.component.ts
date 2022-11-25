@@ -84,7 +84,7 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
         if(res.data.success){
           this.registerService.logout()
           this.userLogged = false
-          this.router.navigate[this.router.url]
+          this.router.navigate([this.router.url, {replaceUrl: true}])
         }
       })
       ,this.modalService.dismiss()}},

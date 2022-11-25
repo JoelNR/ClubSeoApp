@@ -4,6 +4,7 @@ import { InitiationModel } from 'src/app/models/initiation';
 import { InitiationService } from 'src/app/services/initiation.service';
 import * as dayjs from 'dayjs';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,10 +25,11 @@ export class InitiationPage extends CapacitorBase implements OnInit {
   capacity: number
   dateId: string
   morePersons: boolean = false
-  attendees: number
+  attendees: number = null
+  userHasDate: boolean = false
 
   constructor(private initiationService: InitiationService,
-    private ngxService: NgxUiLoaderService) {
+    private ngxService: NgxUiLoaderService, private router: Router) {
     super()
    }
 
@@ -35,7 +37,13 @@ export class InitiationPage extends CapacitorBase implements OnInit {
     this.ngxService.startLoader('loader-initiation')
     this.userId = localStorage.getItem('user_id')
     this.initiationService.getInitiation().subscribe(res =>{
-      this.generateCalendarArray(res.data.initiationDates)
+      if (res.data.userDate == null ){
+        this.generateCalendarArray(res.data.initiationDates)
+      } else {
+        this.userHasDate = true
+        this.dateId = res.data.userDate.id
+        this.dateValue = res.data.userDate.date
+      }
       this.ngxService.stopLoader('loader-initiation')
     })
 
@@ -43,35 +51,47 @@ export class InitiationPage extends CapacitorBase implements OnInit {
 
   generateCalendarArray(array: InitiationModel[]){
     this.initiationDates = array
+    let startIndex: number
     if(this.initiationDates == null){
       return
     }
-    const month = dayjs(this.initiationDates[0].date).format('MM')
-    const year = dayjs(this.initiationDates[0].date).format('YYYY')
-    this.calendarMonthArray.push([month])
-    this.calendarBooleanArray.push([false])
-    this.calendarYearArray.push(year)
-    this.calendarDatesArray.push([[this.initiationDates[0].date]])
-
-    for (let index = 1; index < this.initiationDates.length; index++) {
-      const element = this.initiationDates[index];
-      const month = dayjs(element.date).format('MM')
-      const year = dayjs(element.date).format('YYYY')
-      if(this.calendarYearArray[this.calendarYearArray.length-1].includes(year)){
-
-        if(this.calendarMonthArray[this.calendarYearArray.length-1][this.calendarMonthArray[this.calendarYearArray.length-1].length-1].includes(month)){
-          this.calendarDatesArray[this.calendarYearArray.length-1][this.calendarMonthArray[this.calendarYearArray.length-1].length-1].push(element.date)  
-          
-        } else {
-          this.calendarMonthArray[this.calendarYearArray.length-1].push(month)
-          this.calendarBooleanArray[this.calendarYearArray.length-1].push(false)
-          this.calendarDatesArray[this.calendarYearArray.length-1].push([element.date])
+    for (let index = 0; index < this.initiationDates.length; index++) {
+      if(dayjs().isBefore(dayjs(this.initiationDates[index].date))){
+        if(this.initiationDates[index].capacity > 0){
+          const month = dayjs(this.initiationDates[index].date).format('MM')
+          const year = dayjs(this.initiationDates[index].date).format('YYYY')
+          this.calendarMonthArray.push([month])
+          this.calendarBooleanArray.push([false])
+          this.calendarYearArray.push(year)
+          this.calendarDatesArray.push([[this.initiationDates[index].date]])
+          startIndex = index + 1   
+          index = this.initiationDates.length    
         }
-      } else {
-        this.calendarYearArray.push(year)
-        this.calendarMonthArray.push([month])
-        this.calendarBooleanArray.push([false])
-        this.calendarDatesArray.push([[element.date]])
+      }
+    }
+    
+
+    for (let index = startIndex; index < this.initiationDates.length; index++) {
+      if(this.initiationDates[index].capacity > 0){
+        const element = this.initiationDates[index];
+        const month = dayjs(element.date).format('MM')
+        const year = dayjs(element.date).format('YYYY')
+        if(this.calendarYearArray[this.calendarYearArray.length-1].includes(year)){
+
+          if(this.calendarMonthArray[this.calendarYearArray.length-1][this.calendarMonthArray[this.calendarYearArray.length-1].length-1].includes(month)){
+            this.calendarDatesArray[this.calendarYearArray.length-1][this.calendarMonthArray[this.calendarYearArray.length-1].length-1].push(element.date)  
+            
+          } else {
+            this.calendarMonthArray[this.calendarYearArray.length-1].push(month)
+            this.calendarBooleanArray[this.calendarYearArray.length-1].push(false)
+            this.calendarDatesArray[this.calendarYearArray.length-1].push([element.date])
+          }
+        } else {
+          this.calendarYearArray.push(year)
+          this.calendarMonthArray.push([month])
+          this.calendarBooleanArray.push([false])
+          this.calendarDatesArray.push([[element.date]])
+        }        
       }
     }
 
@@ -86,7 +106,7 @@ export class InitiationPage extends CapacitorBase implements OnInit {
 
   addUser(){
     this.initiationService.addUserToInitiation(this.dateId, this.attendees).subscribe(res => {
-      console.log(res);
+      this.router.navigateByUrl(this.router.url)
     })
   }
 
@@ -96,19 +116,6 @@ export class InitiationPage extends CapacitorBase implements OnInit {
 
   showCalendar(i: number, j: number){
     this.calendarBooleanArray[i][j] = !this.calendarBooleanArray[i][j]
-  }
-
-  checkDateInsideMonth(date:string, max: string, min: string){
-    if (this.dateValue == '' || this.dateValue == null){
-      return false
-    }
-    if(dayjs(date).isAfter(max,'month')){
-      return false
-    } else if(dayjs(date).isBefore(min,'month')) {
-      return false
-    }
-
-    return true
   }
 
   getDate(date: any){

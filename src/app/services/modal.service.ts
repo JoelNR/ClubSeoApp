@@ -26,7 +26,7 @@ export class ModalService extends CapacitorBase {
                     title,
                     titleClass,
                     texts,
-                    buttons,
+                    buttons
                 },
                 cssClass: ['sheet-modal'],
                 initialBreakpoint: 1,
