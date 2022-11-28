@@ -9,6 +9,7 @@ import * as relativeTime from 'dayjs/plugin/relativeTime';
 })
 export class DateChipComponent implements OnInit {
   @Input() date: string
+  @Input() showTimeElapsed: boolean = false
   showDate: boolean = false 
   constructor() { }
 
@@ -18,6 +19,10 @@ export class DateChipComponent implements OnInit {
   }
 
   getTimeElapsed(date: string){
-    return dayjs(dayjs(date).format('DD/MM/YYYY')).fromNow(true)
+    if(this.showTimeElapsed){
+      return 'Hace ' + dayjs(dayjs(date).format('DD/MM/YYYY')).fromNow(true)
+    } else {
+      return this.date
+    }
   }
 }

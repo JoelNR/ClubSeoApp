@@ -1,0 +1,19 @@
+ion-item {
+    --background-hover: none;
+    --background-hover-opacity: 0;
+    --border-style: solid;
+    --ripple-color: transparent;
+    --background: var(--clear-ocean);
+}
+
+ion-item::part(native) {
+    --border-style: none;
+}
+
+ion-select {
+    color: var(--nightblue-100);
+    --placeholder-color: var(--nightblue-100);
+    opacity: 1;
+    --placeholder-opacity: 1;
+    width: 100%;
+}

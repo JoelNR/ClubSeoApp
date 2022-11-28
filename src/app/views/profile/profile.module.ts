@@ -10,11 +10,11 @@ import { ProfilePage } from './profile.page';
 import { HeaderModule } from 'src/app/components/header/header.module';
 import { FooterModule } from 'src/app/components/footer/footer.module';
 import { BackButtonModule } from 'src/app/components/back-button/back-button.module';
-import { CompetitionCardModule } from 'src/app/components/competition-card/competition-card.module';
 import { RecordCardModule } from 'src/app/components/record-card/record-card.module';
 import { InputModule } from 'src/app/components/input/input.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { CompetitionResultsCardModule } from 'src/app/components/competition-results-card/competition-results-card.module';
 
 @NgModule({
   imports: [
@@ -25,7 +25,7 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     HeaderModule,
     FooterModule,
     BackButtonModule,
-    CompetitionCardModule,
+    CompetitionResultsCardModule,
     RecordCardModule,
     InputModule,
     ReactiveFormsModule,

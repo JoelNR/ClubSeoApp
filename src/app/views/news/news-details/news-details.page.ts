@@ -21,18 +21,27 @@ export class NewsDetailsPage extends CapacitorBase implements OnInit {
   }
 
   ngOnInit() {
-    this.ngxService.startLoader('loader-news-details')
+    this.getNewsData();
+
+  }
+
+
+
+  private getNewsData() {
+    this.ngxService.startLoader('loader-news-details');
     this.route.paramMap.subscribe(param => {
-      this.newsService.getNewsById(param.get('id')).subscribe(res =>{
-        this.newsModel = res.data.news
-      })
-      this.ngxService.stopLoader('loader-news-details')
-    })
-
+      this.newsService.getNewsById(param.get('id')).subscribe(res => {
+        this.newsModel = res.data.news;
+      });
+      this.ngxService.stopLoader('loader-news-details');
+    });
   }
 
-  search(){
-
-  }
+  handleRefresh(event) {
+    setTimeout(() => {
+      this.getNewsData()
+      event.target.complete();
+    }, 2000);
+  };
 
 }

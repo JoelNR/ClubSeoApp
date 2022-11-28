@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { CompetitionCardComponent } from './competition-card.component';
+import { DateChipModule } from '../date-chip/date-chip.module';
 
 
 
@@ -12,6 +13,7 @@ import { CompetitionCardComponent } from './competition-card.component';
     CommonModule,
     IonicModule,
     RouterModule,
+    DateChipModule
   ],
   exports:[CompetitionCardComponent]
 })

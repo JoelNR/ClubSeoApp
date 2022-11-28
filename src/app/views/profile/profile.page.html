@@ -1,8 +1,11 @@
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="flex flex-col h-full">
     <app-header></app-header>
-    <div class="flex flex-col grow w-full lg:max-w-290 py-5 lg:py-8 px-5 sm:px-8 mx-auto">
-      <h1 class="pb-5 w-full text-center">
+    <div class="flex flex-col grow w-full lg:max-w-290 pb-5 lg:pb-8 px-5 sm:px-8 mx-auto">
+      <h1 class="pb-6 pt-28 w-full text-center uppercase">
           Perfil
       </h1>
       <div *ngIf="profileModel" class="flex relative flex-col lg:flex-row w-full">
@@ -95,9 +98,9 @@
             </h2>
             <div class="w-full grid grid-cols-1 sm:grid-cols-2">
               <div *ngFor="let competition of competitionArray; let i=index" class="pb-4 sm:px-2">
-                <app-competition-card *ngIf="i < 6" [name]="competition.name" [date]="competition.date" [position]="competition.position"
+                <app-competition-results-card *ngIf="i < 6" [name]="competition.name" [date]="competition.date" [position]="competition.position"
                 [points]="competition.points" [category]="competition.category" [distance]="competition.distance" 
-                [type]="competition.type"></app-competition-card>
+                [type]="competition.type"></app-competition-results-card>
               </div>        
             </div>
             <div class="w-full flex justify-center">

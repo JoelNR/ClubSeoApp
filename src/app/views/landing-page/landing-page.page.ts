@@ -38,12 +38,7 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
     this.ngxService.startLoader("loader-landing");
 
     this.newsService.news().subscribe(res => {
-      res.data.news.forEach(newNews => {
-        this.newsArray.push(newNews);
-      });
-      res.data.news.forEach(newNews => {
-        this.newsArray.push(newNews);
-      });
+      this.newsArray = res.data.news
       this.ngxService.stopLoader("loader-landing");
     });
   }
@@ -141,8 +136,6 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
 
     weatherCode.forEach(element => {
       if (element.code === apiCode){
-        console.log(element.code);
-        console.log(element.description);
         this.weatherCondition = element.description
         return
       }
@@ -154,13 +147,5 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
     'Sur','Sursudoeste','Sudoeste','Oestesudoeste','Oeste','Oestenoroeste','Noroeste','Nornoroeste','Norte']
 
     this.windDirection =directionCode[Math.round(grades/22.5)] 
-    // 0 north
-    // 45 noreste
-    // este 90
-    // 135 sureste
-    // south 180
-    // 225 suroeste
-    // west 270
-    // 315 noroeste
   }
 }
