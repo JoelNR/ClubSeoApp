@@ -13,6 +13,7 @@ export class SheetModalComponent implements OnInit {
   @Input() title: string = 'sheet-modal-title';
   @Input() texts: string[] = ["Sheet-modal text"];
   @Input() buttons: Button[];
+  link: string = '/inicio'
 
   public oneButton: boolean = false;
 

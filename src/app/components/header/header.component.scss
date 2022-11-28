@@ -58,5 +58,6 @@ header{
     border-color: black;
     @media (prefers-color-scheme: dark) {
         border-color: white;
+        background-color: var(--clear);
     }
 }

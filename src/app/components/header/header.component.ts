@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 import { ModalService } from 'src/app/services/modal.service';
+import { ProfileService } from 'src/app/services/profile.service';
 import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
@@ -13,9 +14,9 @@ import { RegisterService } from 'src/app/services/register.service';
 export class HeaderComponent extends CapacitorBase implements OnInit {
   headerOptions = [
     { label: 'Sobre Nosotros',icon: 'reader-outline' , link: '/nosotros' },
-    { label: 'Iniciación',icon: 'megaphone-outline', link: '/construccion' },
-    { label: 'Competiciones',icon: 'trophy-outline', link: '/construccion' },
-    { label: 'Arqueros',icon: 'body-outline', link: '/construccion' },
+    { label: 'Iniciación',icon: 'megaphone-outline', link: '/iniciacion' },
+    { label: 'Competiciones',icon: 'trophy-outline', link: '/competicion' },
+    { label: 'Arqueros',icon: 'body-outline', link: '/arqueros' },
     { label: 'Plusmarcas',icon: 'sparkles-outline', link: '/construccion' },
   ]
   profileOptions = [
@@ -29,6 +30,7 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
   trigger: string
   openProfileMenu: boolean = false
   userLogged: boolean = false
+  profileImage: string = '/assets/img/default-avatar.png'
 
   @Input() headerLabel: string
   @Input() cancelHeaderMobile: boolean = false
@@ -36,7 +38,8 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
   constructor(private router: Router,
     private menu: MenuController,
     private modalService: ModalService,
-    private registerService: RegisterService) {
+    private registerService: RegisterService,
+    private profileService: ProfileService) {
     super()
   }
 
@@ -44,6 +47,9 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
     this.trigger = this.router.url
     if(localStorage.getItem('seo-token')){
       this.userLogged = true
+      this.profileService.profile(localStorage.getItem('user_id')).subscribe(res => {
+        this.profileImage = res.data.profile.image
+      })
     }
   }
 
@@ -78,7 +84,7 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
         if(res.data.success){
           this.registerService.logout()
           this.userLogged = false
-          this.router.navigate[this.router.url]
+          this.router.navigate(['/inicio', {replaceUrl: true}])
         }
       })
       ,this.modalService.dismiss()}},

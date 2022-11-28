@@ -1,15 +1,18 @@
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="flex flex-col h-full">
     <app-header></app-header>
-    <div class="flex flex-col grow w-full lg:max-w-290 py-5 lg:py-8 px-5 sm:px-8 mx-auto">
-      <h1 class="pb-5 w-full text-center">
+    <div class="flex flex-col grow w-full lg:max-w-290 pb-5 lg:pb-8 px-5 sm:px-8 mx-auto">
+      <h1 class="pb-6 pt-28 w-full text-center uppercase">
           Perfil
       </h1>
-      <div *ngIf="profileModel" class="flex flex-col lg:flex-row w-full">
+      <div *ngIf="profileModel" class="flex relative flex-col lg:flex-row w-full">
         <div class="flex flex-col sm:flex-row lg:flex-col h-fit mb-4 items-center justify-between lg:justify-center w-full lg:w-1/3 p-4 lg:mr-4 bg-clear-bg  dark:bg-nightblue-60 rounded-2xl border border-solid border-white">
           <div class="relative">
             <img class="rounded-full w-40 h-40 mr-4 lg:mr-0 object-cover border-2 border-solid border-nightblue-90  dark:border-clear" [src]="profileModel.image || '/assets/img/default-avatar.png'" alt="avatar">
-            <form [formGroup]="formGroup" *ngIf="editableProfile" class="absolute -right-1 bottom-14 cursor-pointer w-10 h-10 rounded-full bg-skyblue-100 items-center justify-center flex">
+            <form [formGroup]="formGroup" *ngIf="editableProfile" class="absolute -right-1 lg:-right-4 bottom-14 cursor-pointer w-10 h-10 rounded-full bg-skyblue-100 items-center justify-center flex">
               <svg (click)="changePhoto()" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect width="24" height="24" transform="translate(0.795898 0.302734)"
                       fill="#DEF0F4" />
@@ -18,7 +21,9 @@
                       fill="#00768C" />
               </svg>
               <input #selectPhotoInput type="file" accept="image/*" class="sr-only" tabindex="-1" (change)="updateProfilePicture($event)">
-            </form>            
+            </form>  
+            <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-profile-img" fgsPosition="top-center" fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
+            </ngx-ui-loader>          
           </div>
 
           
@@ -33,7 +38,7 @@
             </div>
             <div>Arquero {{profileModel.category}}</div>
           </div>
-          <div *ngIf="editProfileActive" class="py-4 w-full">
+          <div *ngIf="editProfileActive" class="py-4 pl-4 w-full">
             <div class="pb-4 sm:px-2">
               <div class="pb-1 text-orange-100 text-xs">Nombre*</div>
               <app-input placeholder="Nombre" type="text" [(value)]="profileModel.first_name" [validate]="validateText"></app-input>
@@ -93,9 +98,9 @@
             </h2>
             <div class="w-full grid grid-cols-1 sm:grid-cols-2">
               <div *ngFor="let competition of competitionArray; let i=index" class="pb-4 sm:px-2">
-                <app-competition-card *ngIf="i < 6" [name]="competition.name" [date]="competition.date" [position]="competition.position"
+                <app-competition-results-card *ngIf="i < 6" [name]="competition.name" [date]="competition.date" [position]="competition.position"
                 [points]="competition.points" [category]="competition.category" [distance]="competition.distance" 
-                [type]="competition.type"></app-competition-card>
+                [type]="competition.type"></app-competition-results-card>
               </div>        
             </div>
             <div class="w-full flex justify-center">
@@ -121,6 +126,8 @@
             </div>
           </div>
         </div>
+        <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-profile" fgsPosition="top-center" fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
+        </ngx-ui-loader>         
       </div>
     </div>
     <app-footer></app-footer>

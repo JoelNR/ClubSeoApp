@@ -19,7 +19,7 @@
           <p>{{text}}</p>
         </div>
       </ion-text>
-      <ion-button *ngFor="let button of buttons; index as i" expand="block" [ngClass]="button.classes"
+      <ion-button *ngFor="let button of buttons; index as i" [href]="link" expand="block" [ngClass]="button.classes"
         [color]="button.color" (click)="button.onClick()">
         {{button.text}}
       </ion-button>
