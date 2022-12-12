@@ -34,7 +34,9 @@
           Participantes
         </h3>
         <div>
-
+          <ion-button *ngIf="competitionModel" class="h-6 w-full" color="primary" [routerLink]="'/competicion/puntuar/' + competitionModel.id" size="small">
+            Puntuar
+          </ion-button>
         </div>
       </div>
     </div>
