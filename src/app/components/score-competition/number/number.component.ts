@@ -6,11 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./number.component.scss'],
 })
 export class NumberComponent implements OnInit {
-  @Input() number: number = 0
-  @Input() color: string = 'white'
-
+  @Input() number: any
+  
   constructor() { }
 
   ngOnInit() {}
-
 }

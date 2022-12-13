@@ -6,9 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./see-round.component.scss'],
 })
 export class SeeRoundComponent implements OnInit {
+  roundArray: any[] = []
 
   constructor() { }
 
   ngOnInit() {}
 
+  addSet(event: any){
+    this.roundArray.push(event)
+  }
 }
