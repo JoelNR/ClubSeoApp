@@ -8,12 +8,21 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class SeeSetComponent implements OnInit {
   @Input() arrowSet: any[] = []
   showSelectPoints: boolean = false
-  finishedSet: boolean = false
+  finishedSet: boolean
+
+  lastWrite: any
   writeIndex: number = 0
+
+  
+  editActivated: boolean = false
+  editIndex: number
+
   @Output() emitSet: EventEmitter<number[]> = new EventEmitter()
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.finishedSet = !this.arrowSet.some(arrow => arrow == '-')
+  }
 
   addNumber(event: any){
     if(event == 'X'){
@@ -25,11 +34,8 @@ export class SeeSetComponent implements OnInit {
       if(event !='M'){
         this.writeIndex++
       }
-      if(!this.arrowSet.some(arrow => arrow == 'M')){ 
-        this.arrowSet.sort((a, b) => b-a)
-      } else {
-        this.mSort()
-      }
+      this.lastWrite = event
+      this.setSort();
     }
 
     
@@ -44,6 +50,14 @@ export class SeeSetComponent implements OnInit {
     
   }
 
+  private setSort() {
+    if (!this.arrowSet.some(arrow => arrow == 'M')) {
+      this.arrowSet.sort((a, b) => b - a);
+    } else {
+      this.mSort();
+    }
+  }
+
   mSort(){
     this.arrowSet.splice(this.arrowSet.findIndex(arrow => arrow == 'M'),1)
     if(this.arrowSet.some(arrow => arrow == 'M')){
@@ -51,22 +65,35 @@ export class SeeSetComponent implements OnInit {
     }
     this.arrowSet.sort((a, b) => b-a)
     this.arrowSet.push('M')
-    this.clearSort
   }
 
-  clearSort(){
-    this.arrowSet.splice(this.arrowSet.findIndex(arrow => arrow == '-'),1)
-    if(this.arrowSet.some(arrow => arrow == '-')){
-      this.clearSort()
-    }
-    this.arrowSet.sort((a, b) => b-a)
-    this.arrowSet.push('-')
-  }
-
-  editSet(){
+  resetSet(){
     this.showSelectPoints = true
     this.arrowSet = ['-','-','-','-','-','-']
     this.finishedSet = false
     this.writeIndex = 0
+  }
+
+  editNumber(index: number){
+    if(this.finishedSet && !this.showSelectPoints){
+      this.editActivated = true
+      this.editIndex = index      
+    }
+  }
+
+  updateNumber(event: any,){
+    this.arrowSet[this.editIndex] = event
+    this.editActivated = false
+    this.editIndex = null
+    this.setSort()
+  }
+
+  undoArrow(){
+    if(this.lastWrite != 'M'){
+      this.writeIndex--
+    }
+    this.arrowSet.splice(this.arrowSet.findIndex(arrow => arrow == this.lastWrite),1)
+    this.arrowSet.push('-')
+    this.setSort()
   }
 }

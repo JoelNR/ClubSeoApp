@@ -1,12 +1,22 @@
 <div class="mb-4">
     <div *ngFor="let arrow of arrowSet; let j=index;" class="">
-        <app-number [number]="arrow"></app-number>
+        <app-number [number]="arrow" (emitEdit)="editNumber(j)"></app-number>
+        
     </div>            
 </div>
-<ion-button *ngIf="!showSelectPoints && !finishedSet" class="h-6 w-full" color="primary" (click)="this.showSelectPoints = true" size="small">
+
+<ion-button *ngIf="!showSelectPoints && !finishedSet" class="h-6 w-full mb-2" color="primary" (click)="this.showSelectPoints = true" size="small">
     Puntuar
 </ion-button>
-<ion-button *ngIf="!showSelectPoints && finishedSet" class="h-6 w-full" color="primary" (click)="editSet()" size="small">
-    Editar
+
+<ion-button *ngIf="!showSelectPoints && finishedSet" class="h-6 w-full mb-2" color="primary" (click)="resetSet()" size="small">
+    Reiniciar
 </ion-button>
+
 <app-select-point *ngIf="showSelectPoints" (emitNumber)="addNumber($event)"></app-select-point>
+<app-select-point *ngIf="editActivated" (emitNumber)="updateNumber($event)"></app-select-point>
+
+<ion-button *ngIf="showSelectPoints && !finishedSet && (writeIndex != 0 || arrowSet[5]== 'M')" 
+            class="h-6 w-full mt-2" color="primary" (click)="undoArrow()" size="small">
+    Deshacer
+</ion-button>
