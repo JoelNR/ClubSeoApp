@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-number',
@@ -7,8 +7,13 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NumberComponent implements OnInit {
   @Input() number: any
-  
+  @Output() emitEdit: EventEmitter<any> = new EventEmitter()
   constructor() { }
 
   ngOnInit() {}
+
+  emit(){
+    this.emitEdit.emit()
+  }
+
 }

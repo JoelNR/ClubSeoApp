@@ -1,4 +1,4 @@
-<div class="w-full h-full p-2 border cursor-pointer border-solid border-nightblue-100 dark:border-clear-bg text-center text-lg" 
+<div (click)="emit()" class="w-full h-full p-2 border cursor-pointer border-solid border-nightblue-100 dark:border-clear-bg text-center text-lg" 
 [ngClass]="{'bg-white text-black' : number == 'M' || number == 1 || number == 2,
 'bg-black text-white' : number == 3 || number == 4,
 'bg-blue-500' : number == 5 || number == 6,'bg-red-500' : number == 7 || number == 8,
