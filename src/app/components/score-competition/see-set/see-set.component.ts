@@ -72,20 +72,28 @@ export class SeeSetComponent implements OnInit {
     this.arrowSet = ['-','-','-','-','-','-']
     this.finishedSet = false
     this.writeIndex = 0
+    this.emitSet.emit(this.arrowSet)
   }
 
   editNumber(index: number){
     if(this.finishedSet && !this.showSelectPoints){
       this.editActivated = true
-      this.editIndex = index      
+      this.editIndex = index   
+      this.emitSet.emit(this.arrowSet)   
     }
   }
 
   updateNumber(event: any,){
-    this.arrowSet[this.editIndex] = event
+    if(event == 'X'){
+      this.arrowSet.splice(this.editIndex,1)
+      this.arrowSet.unshift('X')
+    } else {
+      this.arrowSet[this.editIndex] = event
+    }
     this.editActivated = false
     this.editIndex = null
     this.setSort()
+    this.emitSet.emit(this.arrowSet)
   }
 
   undoArrow(){
