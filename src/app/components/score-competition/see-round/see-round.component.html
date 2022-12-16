@@ -1,11 +1,11 @@
+<h3 class="text-center py-4">
+    Puntuación total: {{total}}
+</h3>
 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
     <div *ngFor="let set of roundArray; let i=index;" class="">
-        <div>
+        <h4 class="pb-2">
             Tanda {{i+1}}/6 con {{roundSum[i]}}
-        </div>
-        <div *ngFor="let arrow of set; let j=index;" class="">
-            <app-number [number]="arrow"></app-number>
-        </div>
+        </h4>
         <app-see-set [arrowSet]="set" (emitSet)="addSet($event,i)"></app-see-set>
     </div>
 </div>

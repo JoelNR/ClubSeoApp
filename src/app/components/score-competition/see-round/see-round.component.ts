@@ -10,6 +10,7 @@ export class SeeRoundComponent implements OnInit {
   ['-','-','-','-','-','-'],['-','-','-','-','-','-'],
   ['-','-','-','-','-','-'],['-','-','-','-','-','-'],['-','-','-','-','-','-']]
   roundSum: number[] = [0,0,0,0,0,0]
+  total: number = 0
 
   constructor() { }
 
@@ -17,6 +18,8 @@ export class SeeRoundComponent implements OnInit {
 
   addSet(event: any, index: number){
     this.roundArray[index] = event
+    this.total -= this.roundSum[index] 
+    this.roundSum[index] = 0
     this.roundArray[index].forEach(arrow => {
       if(arrow == 'X'){
         this.roundSum[index] += 10
@@ -24,5 +27,6 @@ export class SeeRoundComponent implements OnInit {
         this.roundSum[index] += arrow
       }
     });
+    this.total += this.roundSum[index] 
   }
 }

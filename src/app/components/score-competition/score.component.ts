@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./score.component.scss'],
 })
 export class ScoreComponent implements OnInit {
-
+  roundsArray: any[] = [[],[]]
   constructor() { }
 
   ngOnInit() {}

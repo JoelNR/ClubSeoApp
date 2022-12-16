@@ -1,1 +1,12 @@
-<app-select-point *ngIf="!finishedSet" (emitNumber)="addNumber($event)"></app-select-point>
+<div class="mb-4">
+    <div *ngFor="let arrow of arrowSet; let j=index;" class="">
+        <app-number [number]="arrow"></app-number>
+    </div>            
+</div>
+<ion-button *ngIf="!showSelectPoints && !finishedSet" class="h-6 w-full" color="primary" (click)="this.showSelectPoints = true" size="small">
+    Puntuar
+</ion-button>
+<ion-button *ngIf="!showSelectPoints && finishedSet" class="h-6 w-full" color="primary" (click)="editSet()" size="small">
+    Editar
+</ion-button>
+<app-select-point *ngIf="showSelectPoints" (emitNumber)="addNumber($event)"></app-select-point>

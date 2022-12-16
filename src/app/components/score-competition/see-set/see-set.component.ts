@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class SeeSetComponent implements OnInit {
   @Input() arrowSet: any[] = []
+  showSelectPoints: boolean = false
   finishedSet: boolean = false
   writeIndex: number = 0
   @Output() emitSet: EventEmitter<number[]> = new EventEmitter()
@@ -35,6 +36,7 @@ export class SeeSetComponent implements OnInit {
 
     if(this.writeIndex == 6 || !this.arrowSet.some(arrow => arrow == '-')){
       this.finishedSet = true
+      this.showSelectPoints = false
       this.emitSet.emit(this.arrowSet)
       return
     }
@@ -59,5 +61,12 @@ export class SeeSetComponent implements OnInit {
     }
     this.arrowSet.sort((a, b) => b-a)
     this.arrowSet.push('-')
+  }
+
+  editSet(){
+    this.showSelectPoints = true
+    this.arrowSet = ['-','-','-','-','-','-']
+    this.finishedSet = false
+    this.writeIndex = 0
   }
 }
