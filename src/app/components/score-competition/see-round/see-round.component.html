@@ -1,7 +1,12 @@
-<div class="grid grid-cols-6 gap-1">
-    <div *ngFor="let arrow of roundArray" class="">
-        {{arrow}}
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+    <div *ngFor="let set of roundArray; let i=index;" class="">
+        <div>
+            Tanda {{i+1}}/6 con {{roundSum[i]}}
+        </div>
+        <div *ngFor="let arrow of set; let j=index;" class="">
+            <app-number [number]="arrow"></app-number>
+        </div>
+        <app-see-set [arrowSet]="set" (emitSet)="addSet($event,i)"></app-see-set>
     </div>
 </div>
 
-<app-see-set (emitSet)="addSet($event)"></app-see-set>

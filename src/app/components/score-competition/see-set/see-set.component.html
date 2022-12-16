@@ -1,7 +1,1 @@
-<div class="grid grid-cols-6 gap-1">
-    <div *ngFor="let arrow of arrowSet" class="">
-        {{arrow}}
-    </div>
-</div>
-
 <app-select-point *ngIf="!finishedSet" (emitNumber)="addNumber($event)"></app-select-point>
