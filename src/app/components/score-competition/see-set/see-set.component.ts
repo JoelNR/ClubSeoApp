@@ -100,7 +100,10 @@ export class SeeSetComponent implements OnInit {
     if(this.lastWrite != 'M'){
       this.writeIndex--
     }
-    this.arrowSet.splice(this.arrowSet.findIndex(arrow => arrow == this.lastWrite),1)
+    let lastWritenIndex = this.arrowSet.findIndex(arrow => arrow == this.lastWrite)
+    this.arrowSet.splice(lastWritenIndex,1)
+    let newLastWritenIndex =  this.arrowSet.findIndex(arrow => arrow == '-')
+    this.lastWrite = newLastWritenIndex  != 0 ? this.arrowSet[newLastWritenIndex-1] : this.arrowSet[newLastWritenIndex]
     this.arrowSet.push('-')
     this.setSort()
   }
