@@ -1,7 +1,6 @@
-<div class="mb-4">
-    <div *ngFor="let arrow of arrowSet; let j=index;" class="">
+<div class="mb-4 grid grid-cols-3">
+    <div *ngFor="let arrow of arrowSet; let j=index;">
         <app-number [number]="arrow" (emitEdit)="editNumber(j)"></app-number>
-        
     </div>            
 </div>
 
@@ -16,7 +15,12 @@
 <app-select-point *ngIf="showSelectPoints" (emitNumber)="addNumber($event)"></app-select-point>
 <app-select-point *ngIf="editActivated" (emitNumber)="updateNumber($event)"></app-select-point>
 
-<ion-button *ngIf="showSelectPoints && !finishedSet && (writeIndex != 0 || arrowSet[5]== 'M')" 
+<ion-button *ngIf="showSelectPoints && !finishedSet && (writeIndex != 0 || arrowSet[5] == 'M')" 
             class="h-6 w-full mt-2" color="primary" (click)="undoArrow()" size="small">
     Deshacer
+</ion-button>
+
+<ion-button *ngIf="showSelectPoints && !finishedSet && writeIndex == 0 && arrowSet[5] != 'M'" 
+            class="h-6 w-full mt-2" color="primary" (click)="showSelectPoints = false" size="small">
+    Ocultar
 </ion-button>

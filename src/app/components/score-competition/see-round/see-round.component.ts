@@ -29,4 +29,17 @@ export class SeeRoundComponent implements OnInit {
     });
     this.total += this.roundSum[index] 
   }
+
+  parcialSum(arrows: any[]){
+    let sum = 0
+    arrows.forEach(arrow => {
+      if(arrow == 'X'){
+        sum += 10
+      } else if (arrow != '-' && arrow != 'M'){
+        sum += arrow
+      }
+    });
+
+    return sum
+  }
 }

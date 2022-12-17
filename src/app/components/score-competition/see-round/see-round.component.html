@@ -1,12 +1,29 @@
 <h3 class="text-center py-4">
     Puntuación total: {{total}}
 </h3>
-<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
     <div *ngFor="let set of roundArray; let i=index;" class="">
-        <h4 class="pb-2">
-            Tanda {{i+1}}/6 con {{roundSum[i]}}
-        </h4>
-        <app-see-set [arrowSet]="set" (emitSet)="addSet($event,i)"></app-see-set>
+        <div class="pb-2 flex justify-between">
+            <h4>
+                Tanda {{i+1}}/6    
+            </h4>
+            <h4>
+                Total
+            </h4>
+        </div>
+        <div class="flex w-full">
+            <app-see-set [arrowSet]="set" class="w-3/5" (emitSet)="addSet($event,i)"></app-see-set>
+            <div class="flex w-2/5">
+                <div class="flex flex-col w-1/2">
+                    <app-number [number]="parcialSum([set[0],set[1],set[2]])" [disableColor]="true"></app-number>
+                    <app-number [number]="parcialSum([set[3],set[4],set[5]])" [disableColor]="true"></app-number>                    
+                </div>
+                <div class="flex flex-col w-1/2">
+                    <app-number [number]="roundSum[i]" [disableColor]="true"></app-number>                    
+                </div>
+            </div>    
+        </div>
+        
     </div>
 </div>
 
