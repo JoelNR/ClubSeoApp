@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-see-round',
@@ -12,6 +12,9 @@ export class SeeRoundComponent implements OnInit {
   roundSum: number[] = [0,0,0,0,0,0]
   total: number = 0
 
+
+  @Output() emitRound: EventEmitter<number> = new EventEmitter()
+
   constructor() { }
 
   ngOnInit() {}
@@ -19,6 +22,7 @@ export class SeeRoundComponent implements OnInit {
   addSet(event: any, index: number){
     this.roundArray[index] = event
     this.total -= this.roundSum[index] 
+    this.emitRound.emit(-this.roundSum[index])
     this.roundSum[index] = 0
     this.roundArray[index].forEach(arrow => {
       if(arrow == 'X'){
@@ -28,6 +32,7 @@ export class SeeRoundComponent implements OnInit {
       }
     });
     this.total += this.roundSum[index] 
+    this.emitRound.emit(this.roundSum[index])
   }
 
   parcialSum(arrows: any[]){

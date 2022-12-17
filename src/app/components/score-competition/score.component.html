@@ -3,6 +3,6 @@
         <h3 class="pt-2 text-center">
             {{i+1}}ª Ronda
         </h3>
-        <app-see-round></app-see-round>
+        <app-see-round (emitRound)="emitTotal($event)"></app-see-round>
     </div>
 </div>
