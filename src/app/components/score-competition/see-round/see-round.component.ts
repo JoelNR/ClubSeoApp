@@ -47,4 +47,15 @@ export class SeeRoundComponent implements OnInit {
 
     return sum
   }
+
+  roundParcialSum(index: number){
+    let sum = 0
+
+    for (let i = 0; i <= index; i++) {
+      sum += this.roundSum[i];
+      
+    }
+
+    return sum
+  }
 }
