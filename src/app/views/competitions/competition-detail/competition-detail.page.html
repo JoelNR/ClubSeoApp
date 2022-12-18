@@ -8,36 +8,70 @@
       <app-back-button [locationBack]="true"></app-back-button>
       <div class="w-full flex relative flex-col mt-4 sm:flex-row">
         <div *ngIf="competitionModel" class="w-full sm:w-1/3 sm:mr-4 mb-4 sm:mb-0 flex justify-center">
-          <app-competition-card [date]="competitionModel.date" [description]="competitionModel.description" 
-          [id]="competitionModel.id" [modality]="competitionModel.modality" [title]="competitionModel.title" [image]="competitionModel.image"></app-competition-card>
+          <app-competition-card [date]="competitionModel.date" [description]="competitionModel.description"
+            [id]="competitionModel.id" [modality]="competitionModel.modality" [title]="competitionModel.title"
+            [image]="competitionModel.image"></app-competition-card>
         </div>
-        <div *ngIf="competitionModel" class="w-full sm:w-2/3 flex flex-col rounded-3xl p-4 border border-solid border-nightblue dark:border-clear">
+        <div *ngIf="competitionModel"
+          class="w-full sm:w-2/3 flex flex-col rounded-3xl p-4 border border-solid border-nightblue dark:border-clear">
           <h3 class="bg-orange-100 p-5 rounded-t-xl text-nightblue-100">
             Datos de la competición
           </h3>
           <div *ngFor="let data of tableCompetitionData; let i=index"
-           class="flex justify-between text-justify px-6 py-4 items-center border-t border-solid border-orange bg-white" 
-           [ngClass]="{'rounded-b-xl': i === tableCompetitionData.length-1}">
-            <h6 class="text-nightblue-100 w-1/3">
-                {{data.label}}
+            class="flex flex-col sm:flex-row sm:justify-between text-justify px-6 py-4 sm:items-center border-t border-solid border-orange bg-white"
+            [ngClass]="{'rounded-b-xl': i === tableCompetitionData.length-1}">
+            <h6 class="text-nightblue-100 pb-4 sm:pb-0 sm:w-1/3">
+              {{data.label}}
             </h6>
-            <p class="text-nightblue-90 w-2/3 flex justify-end">
-                {{data.content}}
+            <p class="text-nightblue-90 sm:w-2/3 flex sm:justify-end">
+              {{data.content}}
             </p>
           </div>
         </div>
-        <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-competition-details" fgsPosition="top-center" fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
+        <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-competition-details"
+          fgsPosition="top-center" fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
         </ngx-ui-loader>
       </div>
-      <div class="pt-4 pb-8">
-        <h3>
+      <div class="pt-8 pb-8">
+        <h3 class="px-4 pb-4 sm:pb-0 text-center sm:text-left">
           Participantes
         </h3>
-        <div>
-          <ion-button *ngIf="competitionModel" class="h-6 w-full" color="primary" [routerLink]="'/competicion/puntuar/' + competitionModel.id" size="small">
+        <div class="hidden sm:flex flex-col sm:flex-row sm:justify-between p-4">
+          <p class="sm:w-1/4">Nombre</p>
+          <p class="sm:w-1/4 sm:justify-end flex">Categoría</p>
+          <p class="sm:w-1/4 sm:justify-end flex">Diana</p>
+          <p class="sm:w-1/4 sm:justify-end flex">Puntos</p>
+        </div>
+        <div *ngIf="participantsArray" class="px-4 py-2 border border-solid border-nightblue dark:border-clear rounded-3xl">
+          <div *ngFor="let participant of participantsArray; let i=index;"
+            class="flex flex-col sm:flex-row sm:justify-between py-2" [ngClass]="{'border-solid border-b' : i != participantsArray.length-1}">
+            <div class="flex sm:w-1/4" [routerLink]="'/perfil/' + participant.user_id">
+              <img [src]="participant.image || '/assets/img/default-avatar.png'" alt="" class="h-7 w-7 object-cover">
+              <p class="pl-3 cursor-pointer flex items-center">
+                {{participant.first_name + ' ' + participant.last_name}}
+              </p>
+            </div>
+            <p class="py-2 sm:p-0 sm:w-1/4 sm:justify-end flex items-center">
+              Arco {{participant.category}}
+            </p>
+            <div class="flex pb-2 sm:p-0 sm:w-1/4 sm:justify-end items-center">
+              1A
+            </div>
+            <div class="flex sm:w-1/4 sm:justify-end items-center">
+              0
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!participantsArray" class="px-4 py-2 border border-solid border-nightblue dark:border-clear rounded-3xl flex w-full justify-center items-center">
+          Actualmente no hay participantes
+        </div>        
+        <div class="flex justify-center items-center w-full pt-6 px-2">
+          <ion-button *ngIf="competitionModel" class="h-6 w-full max-w-xs" color="primary"
+            [routerLink]="'/competicion/puntuar/' + competitionModel.id">
             Puntuar
           </ion-button>
         </div>
+
       </div>
     </div>
     <app-footer></app-footer>

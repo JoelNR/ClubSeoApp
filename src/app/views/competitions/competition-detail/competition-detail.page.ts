@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 import { CompetitionModel } from 'src/app/models/competition';
+import { ProfileModel } from 'src/app/models/profile';
 import { CompetitionService } from 'src/app/services/competition.service';
 
 @Component({
@@ -12,6 +13,8 @@ import { CompetitionService } from 'src/app/services/competition.service';
 })
 export class CompetitionDetailPage extends CapacitorBase implements OnInit {
   competitionModel: CompetitionModel
+  participantsArray: ProfileModel[]
+
   tableCompetitionData: any
 
   constructor(private competitionService: CompetitionService,
@@ -33,6 +36,13 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
       })
       this.ngxService.stopLoader('loader-competition-details')
     })
+
+    this.participantsArray = [{first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Olímpico',user_id: '1',image: '/assets/img/default-avatar.png'},
+    {first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Olímpico',user_id: '1',image: '/assets/img/default-avatar.png'},
+    {first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Desnudo',user_id: '1',image: '/assets/img/default-avatar.png'},
+    {first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Compuesto',user_id: '1',image: '/assets/img/default-avatar.png'},
+    {first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Olímpico',user_id: '1',image: '/assets/img/default-avatar.png'},
+    {first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Olímpico',user_id: '1',image: '/assets/img/default-avatar.png'},]
   }
 
 }
