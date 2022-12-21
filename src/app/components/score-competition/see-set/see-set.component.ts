@@ -15,6 +15,7 @@ export class SeeSetComponent implements OnInit {
 
   
   editActivated: boolean = false
+  editActivatedColor: boolean[] = [false,false,false,false,false,false]
   editIndex: number
 
   @Output() emitSet: EventEmitter<number[]> = new EventEmitter()
@@ -79,9 +80,11 @@ export class SeeSetComponent implements OnInit {
     if (this.editIndex == index){
       this.editActivated = false 
       this.editIndex = null
+      this.editActivatedColor[index] = false
     } else if(this.finishedSet && !this.showSelectPoints){
       this.editActivated = true
       this.editIndex = index
+      this.editActivatedColor[index] = true
     } 
   }
 
@@ -92,6 +95,7 @@ export class SeeSetComponent implements OnInit {
     } else {
       this.arrowSet[this.editIndex] = event
     }
+    this.editActivatedColor[this.editIndex] = false
     this.editActivated = false
     this.editIndex = null
     this.setSort()

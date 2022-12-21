@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-see-round',
@@ -11,7 +11,11 @@ export class SeeRoundComponent implements OnInit {
   ['-','-','-','-','-','-'],['-','-','-','-','-','-'],['-','-','-','-','-','-']]
   roundSum: number[] = [0,0,0,0,0,0]
   total: number = 0
+  meanScore: number[] = [0,0,0,0,0,0]
+  numberOfTens: number[] = [0,0,0,0,0,0]
+  numberOfXs: number[] = [0,0,0,0,0,0]
 
+  @Input() numberOfArrows: number = 6
 
   @Output() emitRound: EventEmitter<number> = new EventEmitter()
 
@@ -23,15 +27,27 @@ export class SeeRoundComponent implements OnInit {
     this.roundArray[index] = event
     this.total -= this.roundSum[index] 
     this.emitRound.emit(-this.roundSum[index])
+
     this.roundSum[index] = 0
+    this.meanScore[index] = 0
+    this.numberOfTens[index] = 0
+    this.numberOfXs[index] = 0
+
     this.roundArray[index].forEach(arrow => {
       if(arrow == 'X'){
         this.roundSum[index] += 10
+        this.numberOfXs[index]++
+
       } else if (arrow != '-' && arrow != 'M'){
+        if(arrow == 10){
+          this.numberOfTens[index]++
+        }
         this.roundSum[index] += arrow
       }
-    });
+    })
+
     this.total += this.roundSum[index] 
+    this.meanScore[index] = (this.roundSum[index] / this.numberOfArrows)
     this.emitRound.emit(this.roundSum[index])
   }
 
@@ -57,5 +73,26 @@ export class SeeRoundComponent implements OnInit {
     }
 
     return sum
+  }
+
+  parseNumberOf(roundArray: number[]){
+    let sum = 0
+    roundArray.forEach(set => {
+      sum += set
+    });
+
+    return sum
+  }
+
+  parseMeanOf(){
+    let mean = 0
+    let dividen = 0
+    this.meanScore.forEach(setMeanScore => {
+      mean += setMeanScore
+    });
+
+    dividen = this.roundArray.findIndex(set => set.some(arrow => arrow == '-'))
+    dividen = dividen == -1 ? 6 : (dividen == 0 ? 1: dividen)
+    return (mean / dividen).toFixed(2)
   }
 }
