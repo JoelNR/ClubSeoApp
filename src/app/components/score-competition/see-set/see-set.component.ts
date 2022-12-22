@@ -7,11 +7,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class SeeSetComponent implements OnInit {
   @Input() arrowSet: any[] = []
+  @Input() disabledSet: boolean = false
+
   showSelectPoints: boolean = false
   finishedSet: boolean
 
   lastWrite: any
   writeIndex: number = 0
+
 
   
   editActivated: boolean = false
@@ -76,13 +79,19 @@ export class SeeSetComponent implements OnInit {
     this.emitSet.emit(this.arrowSet)
   }
 
-  editNumber(index: number){
-    if (this.editIndex == index){
+  numberClicked(index: number){
+    if(this.disabledSet){
+      return
+    }
+    if (!this.finishedSet){
+      this.showSelectPoints = !this.showSelectPoints
+    } else if (this.editIndex == index){
       this.editActivated = false 
       this.editIndex = null
       this.editActivatedColor[index] = false
     } else if(this.finishedSet && !this.showSelectPoints){
       this.editActivated = true
+      this.editActivatedColor[this.editIndex] = false
       this.editIndex = index
       this.editActivatedColor[index] = true
     } 
