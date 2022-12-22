@@ -13,7 +13,7 @@ import { CompetitionService } from 'src/app/services/competition.service';
 })
 export class CompetitionDetailPage extends CapacitorBase implements OnInit {
   competitionModel: CompetitionModel
-  participantsArray: ProfileModel[]
+  participantsArray: any[]
 
   tableCompetitionData: any
 
@@ -37,12 +37,12 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
       this.ngxService.stopLoader('loader-competition-details')
     })
 
-    this.participantsArray = [{first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Olímpico',user_id: '1',image: '/assets/img/default-avatar.png'},
-    {first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Olímpico',user_id: '1',image: '/assets/img/default-avatar.png'},
-    {first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Desnudo',user_id: '1',image: '/assets/img/default-avatar.png'},
-    {first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Compuesto',user_id: '1',image: '/assets/img/default-avatar.png'},
-    {first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Olímpico',user_id: '1',image: '/assets/img/default-avatar.png'},
-    {first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Olímpico',user_id: '1',image: '/assets/img/default-avatar.png'},]
+    this.participantsArray = [{first_name: 'Jose Antonio',last_name: 'Rodríguez',category: 'Olímpico',user_id: '1', target: '1A',image: '/assets/img/default-avatar.png'},
+    {first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Olímpico',user_id: '2', target: '1B',image: '/assets/img/default-avatar.png'},
+    {first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Desnudo',user_id: '3', target: '2A',image: '/assets/img/default-avatar.png'},
+    {first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Compuesto',user_id: '4', target: '2B',image: '/assets/img/default-avatar.png'},
+    {first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Olímpico',user_id: '5', target: '3A',image: '/assets/img/default-avatar.png'},
+    {first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Olímpico',user_id: '6', target: '3B',image: '/assets/img/default-avatar.png'},]
   }
 
 }

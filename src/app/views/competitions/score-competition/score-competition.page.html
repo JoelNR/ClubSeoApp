@@ -10,18 +10,33 @@
           <h2>
             Torneo: {{title}}
           </h2>
+         
+          <div class="flex items-center"> 
+            <ion-icon color="primary" class="pr-3" name="arrow-back-circle-outline"></ion-icon>
+            <p class="pr-3">
+              Arquero:
+            </p>
+            <ion-list  class="p-0 rounded-xl mr-3">
+              <ion-item
+                class="bg-blue-50 text-nightblue rounded-xl border border-solid dark:border-clear border-nightblue-100">
+                <ion-select [interface]="mobile ? '' : 'popover'" [placeholder]="archers[index]"
+                  [value]="archers[index]" (ionChange)="changeArcher($event)">
+                  <ion-select-option *ngFor="let archer of archers" [value]="archer">{{archer}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>            
+            <ion-icon color="primary" name="arrow-forward-circle-outline"></ion-icon>
+          </div>
+          
           <p>
-            Arquero: {{archer}}
+            Diana: {{target[index]}}
           </p>
           <p>
-            Diana: {{target}}
-          </p>
-          <p>
-            Puntuación total: {{total}}
+            Puntuación total: {{total[index]}}
           </p>
         </div>
         <div class="w-full">
-          <app-score (emitPoints)="total=$event"></app-score>
+          <app-score (emitPoints)="total[index]=$event"></app-score>
         </div>
       </div>
     </div>
