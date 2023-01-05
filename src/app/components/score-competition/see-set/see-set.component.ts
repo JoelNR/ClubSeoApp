@@ -30,8 +30,14 @@ export class SeeSetComponent implements OnInit {
 
   addNumber(event: any){
     if(event == 'X'){
+      let spliceIndex = this.arrowSet.findIndex(arrow => arrow == 'M')
+      if(spliceIndex == -1){
+        spliceIndex = this.arrowSet.length-1
+      } else {
+        spliceIndex--
+      }
+      this.arrowSet.splice(spliceIndex,1)
       this.arrowSet.unshift(event)
-      this.arrowSet.splice(this.arrowSet.length-1,1)
       this.writeIndex++
     } else {
       this.arrowSet[this.writeIndex] = event
@@ -69,14 +75,6 @@ export class SeeSetComponent implements OnInit {
     }
     this.arrowSet.sort((a, b) => b-a)
     this.arrowSet.push('M')
-  }
-
-  resetSet(){
-    this.showSelectPoints = true
-    this.arrowSet = ['-','-','-','-','-','-']
-    this.finishedSet = false
-    this.writeIndex = 0
-    this.emitSet.emit(this.arrowSet)
   }
 
   numberClicked(index: number){
