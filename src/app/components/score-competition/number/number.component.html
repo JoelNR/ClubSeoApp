@@ -1,8 +1,9 @@
 <div (click)="emit()" class="w-full h-full p-2 border cursor-pointer border-solid border-nightblue-100 dark:border-clear-bg text-center text-lg" 
-[ngClass]="{'bg-green-800' : !disableColor && (number == 'M'),
-'bg-white text-black' : !disableColor && (number == 1 || number == 2),
-'bg-black text-white' : !disableColor && (number == 3 || number == 4),
-'bg-blue-500' : !disableColor && (number == 5 || number == 6),'bg-red-500' : !disableColor && (number == 7 || number == 8),
-'bg-yellow-500' : !disableColor && (number == 9 || number == 10 || number == 'X')}">
+[ngClass]="{'bg-green-800' : !markAsEdit && !disableColor && (number == 'M'),
+'bg-white text-black' : !markAsEdit && !disableColor && (number == 1 || number == 2),
+'bg-black text-white' : !markAsEdit && !disableColor && (number == 3 || number == 4),
+'bg-blue-500' : !markAsEdit && !disableColor && (number == 5 || number == 6),'bg-red-500' : !markAsEdit && !disableColor && (number == 7 || number == 8),
+'bg-yellow-500' : !markAsEdit && !disableColor && (number == 9 || number == 10 || number == 'X'),
+'bg-orange-100' : markAsEdit && !disableColor}">
   {{number}}
 </div>
