@@ -2,7 +2,7 @@
   <div class="flex flex-col h-full">
     <app-header></app-header>
     <div class="flex flex-col grow text-justify w-full lg:max-w-290 px-5 sm:px-8 justify-center mx-auto">
-      <h1 class="pt-28 pb-6 text-center uppercase">
+      <h1 id='start' class="pt-28 pb-6 text-center uppercase">
         Puntuar la competición      
       </h1>
       <div class="w-full flex flex-col pb-12">
@@ -12,28 +12,30 @@
           </h2>
          
           <div class="flex items-center"> 
-            <ion-icon color="primary" class="pr-3" name="arrow-back-circle-outline"></ion-icon>
+            
             <p class="pr-3">
               Arquero:
             </p>
             <ion-list  class="p-0 rounded-xl mr-3">
               <ion-item
                 class="bg-blue-50 text-nightblue rounded-xl border border-solid dark:border-clear border-nightblue-100">
-                <ion-select [interface]="mobile ? '' : 'popover'" [placeholder]="archers[index]"
-                  [value]="archers[index]" (ionChange)="changeArcher($event)">
+                <ion-select [interface]="mobile ? '' : 'popover'" [placeholder]="selectedArcher"
+                  [value]="selectedArcher" (ionChange)="changeArcher($event)">
                   <ion-select-option *ngFor="let archer of archers" [value]="archer">{{archer}}</ion-select-option>
                 </ion-select>
               </ion-item>
             </ion-list>            
-            <ion-icon color="primary" name="arrow-forward-circle-outline"></ion-icon>
           </div>
-          
           <p>
             Diana: {{target[index]}}
           </p>
           <p>
             Puntuación total: {{total[index]}}
-          </p>
+          </p>          
+          <div class="flex w-full py-4 justify-between">
+            <ion-icon color="primary" class="mr-3" name="arrow-back-circle-outline" (click)="changeIndexLeft()"></ion-icon>
+            <ion-icon color="primary" name="arrow-forward-circle-outline" (click)="changeIndexRight()"></ion-icon>            
+          </div>
         </div>
         <div class="w-full">
           <app-score (emitPoints)="total[index]=$event"></app-score>
@@ -42,4 +44,9 @@
     </div>
     <app-footer></app-footer>
   </div>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button href="/competicion/puntuar/4#start">
+      <ion-icon name="chevron-up-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
