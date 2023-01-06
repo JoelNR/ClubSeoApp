@@ -22,6 +22,7 @@ export class SeeSetComponent implements OnInit {
   editIndex: number
 
   @Output() emitSet: EventEmitter<number[]> = new EventEmitter()
+
   constructor() { }
 
   ngOnInit() {

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ScoreService } from 'src/app/services/score.service';
 
 @Component({
   selector: 'app-see-round',
@@ -19,7 +20,7 @@ export class SeeRoundComponent implements OnInit {
 
   @Output() emitRound: EventEmitter<number> = new EventEmitter()
 
-  constructor() { }
+  constructor(private scoreService: ScoreService) { }
 
   ngOnInit() {}
 
@@ -48,6 +49,7 @@ export class SeeRoundComponent implements OnInit {
 
     this.total += this.roundSum[index] 
     this.meanScore[index] = (this.roundSum[index] / this.numberOfArrows)
+    this.scoreService.storeSet('3',this.roundArray[index],this.roundSum[index],'1')
     this.emitRound.emit(this.roundSum[index])
   }
 
