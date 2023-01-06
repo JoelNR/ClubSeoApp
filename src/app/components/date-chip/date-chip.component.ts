@@ -10,19 +10,18 @@ import * as relativeTime from 'dayjs/plugin/relativeTime';
 export class DateChipComponent implements OnInit {
   @Input() date: string
   @Input() showTimeElapsed: boolean = false
-  showDate: boolean = false 
   constructor() { }
 
   ngOnInit() {
     dayjs.extend(relativeTime);
-    this.date = dayjs(this.date).format('DD/MM/YYYY')
+    this.date = dayjs(this.date).format('MM/DD/YYYY')
   }
 
   getTimeElapsed(date: string){
     if(this.showTimeElapsed){
-      return 'Hace ' + dayjs(dayjs(date).format('DD/MM/YYYY')).fromNow(true)
+      return dayjs(date).fromNow()
     } else {
-      return this.date
+      return dayjs(date).format('DD/MM/YYYY')
     }
   }
 }

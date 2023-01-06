@@ -11,6 +11,10 @@ export class NewsService extends Api {
       return this.get<GetNewsApiResponse>('/news')
     }
 
+    public firstNews(){
+      return this.get<GetNewsApiResponse>('/firstnews')
+    }
+
     public getNewsById(id: string){
         return this.get<GetNewsByIdApiResponse>('/news/' + id)
       }

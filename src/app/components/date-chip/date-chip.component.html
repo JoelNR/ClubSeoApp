@@ -1,4 +1,3 @@
-<div (click)="showDate=!showDate" class="rounded-xl cursor-pointer px-3 text-xs py-0.5 text-nightblue  bg-yellow-500">
-  <span *ngIf="!showDate">{{getTimeElapsed(date)}}</span>
-  <span *ngIf="showDate">{{date}}</span>
+<div (click)="showTimeElapsed=!showTimeElapsed" class="rounded-xl cursor-pointer px-3 text-xs py-0.5 text-nightblue  bg-yellow-500">
+  <span>{{getTimeElapsed(date)}}</span>
 </div>
