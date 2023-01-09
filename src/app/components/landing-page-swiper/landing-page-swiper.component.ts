@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom } from 'swiper';
+import SwiperCore, { Autoplay, Pagination } from 'swiper';
 
-SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom]);
+SwiperCore.use([Autoplay, Pagination]);
 
 @Component({
   selector: 'app-landing-page-swiper',
@@ -12,6 +12,7 @@ export class LandingPageSwiperComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 }

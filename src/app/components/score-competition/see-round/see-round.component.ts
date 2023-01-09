@@ -15,6 +15,7 @@ export class SeeRoundComponent implements OnInit {
   meanScore: number[] = [0,0,0,0,0,0]
   numberOfTens: number[] = [0,0,0,0,0,0]
   numberOfXs: number[] = [0,0,0,0,0,0]
+  setId: string[] = ['-1','-1','-1','-1','-1','-1']
 
   @Input() numberOfArrows: number = 6
 
@@ -49,7 +50,14 @@ export class SeeRoundComponent implements OnInit {
 
     this.total += this.roundSum[index] 
     this.meanScore[index] = (this.roundSum[index] / this.numberOfArrows)
-    this.scoreService.storeSet('3',this.roundArray[index],this.roundSum[index],'1')
+    if (this.setId[index] == '-1'){
+      this.scoreService.storeSet('3',this.roundArray[index],this.roundSum[index],'1').subscribe(res => {
+        this.setId[index] = res.data.set.id
+      })      
+    } else {
+      this.scoreService.updateSet(this.setId[index],this.roundArray[index],this.roundSum[index]).subscribe(res => {})
+    }
+
     this.emitRound.emit(this.roundSum[index])
   }
 
