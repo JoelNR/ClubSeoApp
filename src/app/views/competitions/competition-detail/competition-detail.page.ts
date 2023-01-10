@@ -21,6 +21,7 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
   tableCompetitionData: any
 
   userSignedUp: boolean = false
+  userNotRegisted: boolean = true
 
   constructor(private competitionService: CompetitionService,
     private profileService: ProfileService,
@@ -56,7 +57,8 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
       this.profileService.profile(localStorage.getItem('user_id')).subscribe(res => {
         this.userCategory = res.data.profile.category
         this.userSignedUp = this.competitionArchers.some(archer => archer.archer.user_id == localStorage.getItem('user_id'))
-      })      
+      }) 
+      this.userNotRegisted = false     
     }
   }
 

@@ -79,8 +79,8 @@
           <h3>
             Formulario de inscripción
           </h3>
-          <div class="pb-3 text-orange-100 text-xs">Categoría</div>
-          <div class="flex flex-col sm:flex-row w-full pb-4 items-center justify-center">
+          <div *ngIf="!userNotRegisted" class="pb-3 text-orange-100 text-xs">Categoría</div>
+          <div *ngIf="!userNotRegisted" class="flex flex-col sm:flex-row w-full pb-4 items-center justify-center">
             <div class="w-full pb-6 sm:pb-0 sm:pr-6">
               <ion-list class="p-0 rounded-2xl">
                 <ion-item class="bg-blue-50 text-nightblue border-0">
@@ -97,6 +97,12 @@
               Inscribirse
             </ion-button>
           </div>
+          <p *ngIf="userNotRegisted" class="mb-2">
+            Para poder inscribirte a una clase de iniciación, deberás primero
+            <span routerLink="/registro" class="underline text-orange cursor-pointer">registrarte</span> o
+            <span routerLink="/login" class="underline text-orange cursor-pointer">iniciar sesión</span> si ya tienes
+            cuenta.
+          </p> 
         </div>
 
       </div>
