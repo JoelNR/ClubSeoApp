@@ -36,44 +36,46 @@
         <h3 class="px-4 pb-4 sm:pb-0 text-center sm:text-left">
           Participantes
         </h3>
-        <div class="hidden sm:flex flex-col sm:flex-row sm:justify-between p-4">
+        <div *ngIf="competitionArchers && competitionArchers.length > 0" class="hidden sm:flex flex-col sm:flex-row sm:justify-between p-4">
           <p class="sm:w-1/4">Nombre</p>
           <p class="sm:w-1/4 sm:justify-end flex">Categoría</p>
           <p class="sm:w-1/4 sm:justify-end flex">Diana</p>
           <p class="sm:w-1/4 sm:justify-end flex">Puntos</p>
         </div>
-        <div *ngIf="participantsArray" class="px-4 py-2 border border-solid border-nightblue dark:border-clear rounded-3xl">
-          <div *ngFor="let participant of participantsArray; let i=index;"
-            class="flex flex-col sm:flex-row sm:justify-between py-2" [ngClass]="{'border-solid border-b' : i != participantsArray.length-1}">
-            <div class="flex sm:w-1/4" [routerLink]="'/perfil/' + participant.user_id">
-              <img [src]="participant.image || '/assets/img/default-avatar.png'" alt="" class="h-7 w-7 object-cover">
+        <div *ngIf="competitionArchers && competitionArchers.length > 0"
+          class="px-4 py-2 border border-solid border-nightblue dark:border-clear rounded-3xl">
+          <div *ngFor="let participant of competitionArchers; let i=index;"
+            class="flex flex-col sm:flex-row sm:justify-between py-2"
+            [ngClass]="{'border-solid border-b' : i != competitionArchers.length-1}">
+            <div class="flex sm:w-1/4" [routerLink]="'/perfil/' + participant.archer.user_id">
+              <img [src]="participant.archer.image || '/assets/img/default-avatar.png'" alt="" class="h-7 w-7 object-cover">
               <p class="pl-3 cursor-pointer flex items-center">
-                {{participant.first_name + ' ' + participant.last_name}}
+                {{participant.archer.first_name + ' ' + participant.archer.last_name}}
               </p>
             </div>
             <p class="py-2 sm:p-0 sm:w-1/4 sm:justify-end flex items-center">
               Arco {{participant.category}}
             </p>
             <div class="flex pb-2 sm:p-0 sm:w-1/4 sm:justify-end items-center">
-              {{participant.target}}
+              Sin Asignar
             </div>
             <div class="flex sm:w-1/4 sm:justify-end items-center">
               0
             </div>
           </div>
         </div>
-        <div *ngIf="!participantsArray" class="px-4 py-2 border border-solid border-nightblue dark:border-clear rounded-3xl flex w-full justify-center items-center">
+        <div *ngIf="competitionArchers && competitionArchers.length == 0"
+          class="px-4 py-2 border border-solid border-nightblue dark:border-clear rounded-3xl flex w-full justify-center items-center">
           Actualmente no hay participantes
-        </div>        
+        </div>
         <div class="flex justify-center items-center w-full pt-6 px-2">
-          <ion-button *ngIf="competitionModel" class="h-6 w-full max-w-xs" color="primary"
+          <ion-button *ngIf="competitionModel && userSignedUp" class="h-6 w-full max-w-xs" color="primary"
             [routerLink]="'/competicion/puntuar/' + competitionModel.id">
             Puntuar
           </ion-button>
-
         </div>
 
-        <div class="pt-6">
+        <div class="pt-6" *ngIf="!userSignedUp">
           <h3>
             Formulario de inscripción
           </h3>
@@ -82,8 +84,10 @@
             <div class="w-full pb-6 sm:pb-0 sm:pr-6">
               <ion-list class="p-0 rounded-2xl">
                 <ion-item class="bg-blue-50 text-nightblue border-0">
-                  <ion-select [placeholder]="userCategory || 'Selecciona categoría'" [value]="userCategory" (ionChange)="changeCategory($event)">
-                    <ion-select-option *ngFor="let category of categoryOptions" [value]="category">{{category}}</ion-select-option>
+                  <ion-select [placeholder]="userCategory || 'Selecciona categoría'" [value]="userCategory"
+                    (ionChange)="changeCategory($event)">
+                    <ion-select-option *ngFor="let category of categoryOptions"
+                      [value]="category">{{category}}</ion-select-option>
                   </ion-select>
                 </ion-item>
               </ion-list>

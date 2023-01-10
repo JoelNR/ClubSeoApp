@@ -1,3 +1,5 @@
+import { ProfileModel } from "./profile"
+
 export interface CompetitionModel{
     id: string
     description: string
@@ -8,6 +10,12 @@ export interface CompetitionModel{
     price: number
     image: string
 }
+
+export interface CompetitionArcherModel{
+    archer: ProfileModel
+    category: string
+}
+
 
 export interface GetCompetitionApiResponse{
     data: {
@@ -22,5 +30,7 @@ export interface GetCompetitionByIdApiResponse{
         message: string
         success: boolean
         competitions: CompetitionModel
+        usersArray?: CompetitionArcherModel[]
     }
 }
+
