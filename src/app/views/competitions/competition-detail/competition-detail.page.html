@@ -70,6 +70,29 @@
             [routerLink]="'/competicion/puntuar/' + competitionModel.id">
             Puntuar
           </ion-button>
+
+        </div>
+
+        <div class="pt-6">
+          <h3>
+            Formulario de inscripción
+          </h3>
+          <div class="pb-3 text-orange-100 text-xs">Categoría</div>
+          <div class="flex flex-col sm:flex-row w-full pb-4 items-center justify-center">
+            <div class="w-full pb-6 sm:pb-0 sm:pr-6">
+              <ion-list class="p-0 rounded-2xl">
+                <ion-item class="bg-blue-50 text-nightblue border-0">
+                  <ion-select [placeholder]="userCategory || 'Selecciona categoría'" [value]="userCategory" (ionChange)="changeCategory($event)">
+                    <ion-select-option *ngFor="let category of categoryOptions" [value]="category">{{category}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+            </div>
+            <ion-button class="h-6 w-full max-w-xs" [disabled]="!userCategory" color="primary" expand="block"
+              (click)="submitInscription()">
+              Inscribirse
+            </ion-button>
+          </div>
         </div>
 
       </div>

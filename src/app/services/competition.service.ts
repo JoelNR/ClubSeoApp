@@ -12,6 +12,10 @@ export class CompetitionService extends Api {
 
     public getCompetitionById(id: string){
         return this.get<GetCompetitionByIdApiResponse>('/competition/' + id)
-      }
+    }
+
+    public submitInscription(id: string, category: string){
+      return this.put<GetCompetitionByIdApiResponse>('/competition/' + id,{user_id: localStorage.getItem('user_id'), category})
+  }
 
 }

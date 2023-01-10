@@ -5,6 +5,7 @@ import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 import { CompetitionModel } from 'src/app/models/competition';
 import { ProfileModel } from 'src/app/models/profile';
 import { CompetitionService } from 'src/app/services/competition.service';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-competition-detail',
@@ -13,11 +14,16 @@ import { CompetitionService } from 'src/app/services/competition.service';
 })
 export class CompetitionDetailPage extends CapacitorBase implements OnInit {
   competitionModel: CompetitionModel
+  userCategory: string
+  categoryOptions: string[] = ['Olímpico', 'Poleas', 'Desnudo','Tradicional', 'Longbow']
   participantsArray: any[]
 
   tableCompetitionData: any
 
+  inscriptionForm: boolean = false
+
   constructor(private competitionService: CompetitionService,
+    private profileService: ProfileService,
     private route: ActivatedRoute,
     private ngxService: NgxUiLoaderService) { 
     super()
@@ -43,6 +49,24 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
     {first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Compuesto',user_id: '4', target: '2B',image: '/assets/img/default-avatar.png'},
     {first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Olímpico',user_id: '5', target: '3A',image: '/assets/img/default-avatar.png'},
     {first_name: 'Joel',last_name: 'Navarro Rivero',category: 'Olímpico',user_id: '6', target: '3B',image: '/assets/img/default-avatar.png'},]
+
+    this.getProfileData()
+  }
+
+  private getProfileData() {
+    if(localStorage.getItem('user_id')){
+      this.profileService.profile(localStorage.getItem('user_id')).subscribe(res => {
+        this.userCategory = res.data.profile.category
+      })      
+    }
+  }
+
+  changeCategory(event){
+    this.userCategory = event.detail.value
+  }
+
+  submitInscription(){
+    this.competitionService.submitInscription(this.competitionModel.id,this.userCategory).subscribe(res=>{})
   }
 
 }

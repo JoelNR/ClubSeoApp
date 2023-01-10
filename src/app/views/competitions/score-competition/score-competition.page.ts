@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
+import { CompetitionService } from 'src/app/services/competition.service';
+import { ScoreService } from 'src/app/services/score.service';
 
 @Component({
   selector: 'app-score-competition',
@@ -14,13 +18,32 @@ export class ScoreCompetitionPage extends CapacitorBase implements OnInit {
   index: number = 0
   selectedArcher: string
 
-  constructor() {
+  constructor(private route: ActivatedRoute,    
+    private ngxService: NgxUiLoaderService,
+    private scoreService: ScoreService) {
     super()
-   }
+  }
 
   ngOnInit() {
     this.selectedArcher = this.archers[0]
   }
+
+ private getscoreData() {
+   this.ngxService.startLoader('loader-score-details');
+   this.route.paramMap.subscribe(param => {
+     this.scoreService
+     this.ngxService.stopLoader('loader-score-details');
+   });
+ }
+
+ handleRefresh(event) {
+   setTimeout(() => {
+     this.getscoreData()
+     event.target.complete();
+   }, 2000);
+ };
+
+
 
   changeArcher(event: any){
     this.index = this.archers.findIndex(archer => archer == event.target.value)

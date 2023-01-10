@@ -12,6 +12,7 @@ import { FooterModule } from 'src/app/components/footer/footer.module';
 import { BackButtonModule } from 'src/app/components/back-button/back-button.module';
 import { CompetitionCardModule } from 'src/app/components/competition-card/competition-card.module';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { InputModule } from 'src/app/components/input/input.module';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     FooterModule,
     BackButtonModule,
     CompetitionCardModule,
-    NgxUiLoaderModule
+    NgxUiLoaderModule,
+    InputModule
   ],
   declarations: [CompetitionDetailPage]
 })
