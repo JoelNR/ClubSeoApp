@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GetSetApiResponse, GetSetByIdApiResponse } from '../models/score';
+import { GetRoundApiResponse, GetScoreApiResponse, GetSetApiResponse, GetSetByIdApiResponse } from '../models/score';
 import { Api } from './api.service';
 
 @Injectable({
@@ -15,11 +15,19 @@ export class ScoreService extends Api {
     }
 
     public updateSet(id: string, arrows: string[],points:number){
-        return this.put<GetSetApiResponse>('/set/update/' + id, {user_id: localStorage.getItem('user_id'), arrows, points})
+      return this.put<GetSetApiResponse>('/set/update/' + id, {user_id: localStorage.getItem('user_id'), arrows, points})
     }
 
     public storeSet(userId: string, arrows: string[],points:number, round_id: string){
-        return this.post<GetSetApiResponse>('/set/create/' + userId, {arrows, points, round_id})
+      return this.post<GetSetApiResponse>('/set/create/' + userId, {arrows, points, round_id})
+    }
+
+    public storeRound(userId: string, score_id: string){
+      return this.post<GetRoundApiResponse>('/round/create/' + userId, {score_id})
+    }
+
+    public storeScore(userId: string, competition_id: string){
+      return this.post<GetScoreApiResponse>('/score/create/' + userId, {competition_id})
     }
 
 }

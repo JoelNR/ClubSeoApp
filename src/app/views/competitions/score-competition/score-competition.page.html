@@ -8,7 +8,7 @@
       <div class="w-full flex flex-col pb-12">
         <div>
           <h2>
-            Torneo: {{title}}
+            Torneo: {{competitionModel.title}}
           </h2>
          
           <div class="flex items-center"> 
@@ -37,8 +37,9 @@
             <ion-icon color="primary" class="w-8 h-8" name="arrow-forward-circle-outline" (click)="changeIndexRight()"></ion-icon>            
           </div>
         </div>
-        <div class="w-full">
-          <app-score (emitPoints)="total[index]=$event"></app-score>
+        <div *ngFor="let archer of archers; let i=index;" class="w-full">
+          <app-score [ngClass]="{'hidden': archer.archer.user_id == selectedArcher.archer.user_id}" 
+          [competitionId]="competitionModel.id" [archerId]="archer.archer.user_id" [modality]="competitionModel.modality" (emitPoints)="total[index]=$event"></app-score>
         </div>
       </div>
     </div>

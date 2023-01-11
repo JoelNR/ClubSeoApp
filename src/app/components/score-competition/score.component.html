@@ -1,8 +1,8 @@
-<div class="grid grid-cols-1 gap-4">
+<div *ngIf="roundsArray" class="grid grid-cols-1 gap-4">
     <div *ngFor="let round of roundsArray; let i=index;">
         <h3 class="pt-2 text-center">
             {{i+1}}ª Ronda
         </h3>
-        <app-see-round (emitRound)="emitTotal($event)"></app-see-round>
+        <app-see-round [archerId]="archerId" [roundModel]="round" [modality]="modality" (emitRound)="emitTotal($event)"></app-see-round>
     </div>
 </div>

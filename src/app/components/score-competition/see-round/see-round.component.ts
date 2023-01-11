@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { RoundModel } from 'src/app/models/score';
 import { ScoreService } from 'src/app/services/score.service';
 
 @Component({
@@ -7,25 +8,51 @@ import { ScoreService } from 'src/app/services/score.service';
   styleUrls: ['./see-round.component.scss'],
 })
 export class SeeRoundComponent implements OnInit {
-  roundArray: any[] = [['-','-','-','-','-','-'],
-  ['-','-','-','-','-','-'],['-','-','-','-','-','-'],
-  ['-','-','-','-','-','-'],['-','-','-','-','-','-'],['-','-','-','-','-','-']]
-  roundSum: number[] = [0,0,0,0,0,0]
+  roundArray: any[] = []
+  roundSum: number[] = []
   total: number = 0
-  meanScore: number[] = [0,0,0,0,0,0]
-  numberOfTens: number[] = [0,0,0,0,0,0]
-  numberOfXs: number[] = [0,0,0,0,0,0]
-  setId: string[] = ['-1','-1','-1','-1','-1','-1']
+  meanScore: number[] = []
+  numberOfTens: number[] = []
+  numberOfXs: number[] = []
+  setId: string[] = []
+  showRound: boolean = false
 
-  @Input() numberOfArrows: number = 6
+  numberOfArrows: number = 6
+  numberOfSets: number = 6
+
+  @Input() modality: string
+  @Input() roundModel: RoundModel
+  @Input() archerId: string
 
   @Output() emitRound: EventEmitter<number> = new EventEmitter()
 
   constructor(private scoreService: ScoreService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.numberOfArrows = this.modality == 'Sala' ? 3 : 6
+    this.numberOfSets = this.modality == 'Sala' ? 10 : 6
+    this.setArrays()
+  }
+
+  setArrays(){
+    for (let i = 0; i < this.numberOfSets; i++) {
+      this.roundArray.push([])
+      for (let index = 0; index < this.numberOfArrows; index++) {
+        this.roundArray[i].push('-')
+      }
+      this.roundSum.push(0)
+      this.meanScore.push(0)
+      this.numberOfTens.push(0)
+      this.numberOfXs.push(0)
+      this.setId.push('-1')
+    }
+
+    this.showRound = true
+  }
 
   addSet(event: any, index: number){
+    console.log(index);
+    
     this.roundArray[index] = event
     this.total -= this.roundSum[index] 
     this.emitRound.emit(-this.roundSum[index])
@@ -51,7 +78,7 @@ export class SeeRoundComponent implements OnInit {
     this.total += this.roundSum[index] 
     this.meanScore[index] = (this.roundSum[index] / this.numberOfArrows)
     if (this.setId[index] == '-1'){
-      this.scoreService.storeSet('3',this.roundArray[index],this.roundSum[index],'1').subscribe(res => {
+      this.scoreService.storeSet(this.archerId,this.roundArray[index],this.roundSum[index],this.roundModel.id).subscribe(res => {
         this.setId[index] = res.data.set.id
       })      
     } else {
@@ -102,7 +129,7 @@ export class SeeRoundComponent implements OnInit {
     });
 
     dividen = this.roundArray.findIndex(set => set.some(arrow => arrow == '-'))
-    dividen = dividen == -1 ? 6 : (dividen == 0 ? 1: dividen)
+    dividen = dividen == -1 ? this.numberOfArrows : (dividen == 0 ? 1: dividen)
     return (mean / dividen).toFixed(2)
   }
 }

@@ -14,7 +14,6 @@ import { ScoreService } from 'src/app/services/score.service';
 export class ScoreCompetitionPage extends CapacitorBase implements OnInit {
   archers: CompetitionArcherModel[]
   competitionModel: CompetitionModel
-  title: string = 'Trofeo caramelo'
   total: number[] = [0,0,0,0]
   index: number = 0
   selectedArcher: CompetitionArcherModel

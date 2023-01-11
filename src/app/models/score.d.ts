@@ -21,7 +21,6 @@ export interface RoundModel{
 export interface ScoreModel{
     id: string
     points: string
-    rounds: string[]
     user_id: string
     competition_id: string
 }
@@ -41,5 +40,21 @@ export interface GetSetByIdApiResponse{
         success: boolean
         set: SetModel
         arrows: ArrowModel[]
+    }
+}
+
+export interface GetRoundApiResponse{
+    data: {
+        message: string
+        success: boolean
+        rounds: RoundModel[]
+    }
+}
+
+export interface GetScoreApiResponse{
+    data: {
+        message: string
+        success: boolean
+        score: ScoreModel
     }
 }
