@@ -17,7 +17,8 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
   competitionArchers: CompetitionArcherModel[] = null
   userCategory: string
   categoryOptions: string[] = ['Olímpico', 'Poleas', 'Desnudo','Tradicional', 'Longbow']
-
+  userDistance: string
+  distanceOptions: string[]
   tableCompetitionData: any
 
   userSignedUp: boolean = false
@@ -45,6 +46,7 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
         { label: 'Modalidad', content: this.competitionModel.modality },
         { label: 'Fecha', content: this.competitionModel.date },];
         this.competitionArchers = res.data.usersArray;
+        this.setDistancesOptions()
         this.getProfileData();
         this.ngxService.stopLoader('loader-competition-details');
       });
@@ -64,14 +66,53 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
 
   changeCategory(event){
     this.userCategory = event.detail.value
+    this.setDistancesOptions()
+  }
+
+  changeDistance(event){
+    this.userDistance = event.detail.value
   }
 
   submitInscription(){
-    this.competitionService.submitInscription(this.competitionModel.id,this.userCategory).subscribe(res=>{
+    this.competitionService.submitInscription(this.competitionModel.id,this.userCategory, parseInt(this.userDistance.split(' ')[0])).subscribe(res=>{
       if (res.data.success){
         this.getCompetitionData()
       }
     })
   }
 
+  setDistancesOptions(){
+    if (this.competitionModel.modality == 'Sala'){
+      this.distanceOptions = ['18 metros','14 metros']
+    } else {
+      switch (this.userCategory){
+        case 'Olímpico': {
+          this.distanceOptions = ['70 metros', '60 metros', '50 metros', '40 metros', '30 metros', '24 metros', '18 metros']
+          break;
+        }
+        case 'Poleas': {
+          this.distanceOptions = ['50 metros', '40 metros', '30 metros', '24 metros', '18 metros']
+          break;
+        }
+        case 'Desnudo': {
+          this.distanceOptions = ['50 metros', '40 metros', '30 metros', '24 metros', '18 metros']
+          break;
+        }
+        case 'Tradicional': {
+          this.distanceOptions = ['30 metros', '24 metros', '18 metros']
+          break;
+        }
+        case 'Longbow': {
+          this.distanceOptions = ['30 metros', '24 metros', '18 metros']
+          break;
+        }
+      }      
+    }
+  }
+
+  parseDistanceText(index: number){
+    if(this.competitionArchers){
+      return this.competitionArchers[index].target_number ? this.competitionArchers[index].target_number +  this.competitionArchers[index].target_letter : 'Sin Asignar'
+    }
+  }
 }

@@ -14,6 +14,9 @@ export interface CompetitionModel{
 export interface CompetitionArcherModel{
     archer: ProfileModel
     category: string
+    distance: number
+    target_number?: number
+    target_letter?: string
 }
 
 
@@ -34,3 +37,11 @@ export interface GetCompetitionByIdApiResponse{
     }
 }
 
+export interface GetCompetitionTargetByIdApiResponse{
+    data: {
+        message: string
+        success: boolean
+        competitions: CompetitionModel
+        archers?: CompetitionArcherModel[]
+    }
+}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
+import { CompetitionArcherModel, CompetitionModel } from 'src/app/models/competition';
 import { CompetitionService } from 'src/app/services/competition.service';
 import { ScoreService } from 'src/app/services/score.service';
 
@@ -11,21 +12,34 @@ import { ScoreService } from 'src/app/services/score.service';
   styleUrls: ['./score-competition.page.scss'],
 })
 export class ScoreCompetitionPage extends CapacitorBase implements OnInit {
-  archers: string[] = ['Jose Antonio Rodríguez', 'Joel Navarro','Joele Navarro','Joely Navarro']
-  target: string[] = ['1A','1B','1C','1D']
+  archers: CompetitionArcherModel[]
+  competitionModel: CompetitionModel
   title: string = 'Trofeo caramelo'
   total: number[] = [0,0,0,0]
   index: number = 0
-  selectedArcher: string
+  selectedArcher: CompetitionArcherModel
 
   constructor(private route: ActivatedRoute,    
     private ngxService: NgxUiLoaderService,
-    private scoreService: ScoreService) {
+    private scoreService: ScoreService,
+    private competitionService: CompetitionService) {
     super()
   }
 
+
+
   ngOnInit() {
-    this.selectedArcher = this.archers[0]
+    this.getCompetitionData()
+  }
+
+  private getCompetitionData() {
+    this.route.paramMap.subscribe(param => {
+      this.competitionService.getCompetitionTargetById(param.get('id')).subscribe(res => {
+        this.competitionModel = res.data.competitions;
+        this.archers = res.data.archers
+        this.selectedArcher = this.archers[this.index]
+      });
+    });
   }
 
  private getscoreData() {
@@ -46,7 +60,7 @@ export class ScoreCompetitionPage extends CapacitorBase implements OnInit {
 
 
   changeArcher(event: any){
-    this.index = this.archers.findIndex(archer => archer == event.target.value)
+    this.index = this.archers.findIndex(archer => archer.archer.user_id == event.target.value)
     this.selectedArcher =  this.archers[this.index]
   }
 
@@ -56,7 +70,7 @@ export class ScoreCompetitionPage extends CapacitorBase implements OnInit {
     } else {
       this.index++
     }
-    this.selectedArcher =  this.archers[this.index]
+    this.selectedArcher = this.archers[this.index]
   }
 
   changeIndexLeft(){

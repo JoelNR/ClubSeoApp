@@ -57,7 +57,7 @@
               Arco {{participant.category}}
             </p>
             <div class="flex pb-2 sm:p-0 sm:w-1/4 sm:justify-end items-center">
-              Sin Asignar
+              {{parseDistanceText(i)}}
             </div>
             <div class="flex sm:w-1/4 sm:justify-end items-center">
               0
@@ -79,7 +79,7 @@
           <h3>
             Formulario de inscripción
           </h3>
-          <div *ngIf="!userNotRegisted" class="pb-3 text-orange-100 text-xs">Categoría</div>
+          <div *ngIf="!userNotRegisted" class="py-3 text-orange-100 text-xs">Categoría</div>
           <div *ngIf="!userNotRegisted" class="flex flex-col sm:flex-row w-full pb-4 items-center justify-center">
             <div class="w-full pb-6 sm:pb-0 sm:pr-6">
               <ion-list class="p-0 rounded-2xl">
@@ -91,8 +91,18 @@
                   </ion-select>
                 </ion-item>
               </ion-list>
+              <div *ngIf="!userNotRegisted" class="pt-3 text-orange-100 text-xs">Distancia</div>
+              <ion-list class="mt-4 p-0 rounded-2xl">
+                <ion-item class="bg-blue-50 text-nightblue border-0">
+                  <ion-select [disabled]="!userCategory" [placeholder]="userCategory ? 'Selecciona una distancia' : 'Seleccione una categoría primero'" [value]="userDistance"
+                    (ionChange)="changeDistance($event)">
+                    <ion-select-option *ngFor="let distance of distanceOptions"
+                      [value]="distance">{{distance}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
             </div>
-            <ion-button class="h-6 w-full max-w-xs" [disabled]="!userCategory" color="primary" expand="block"
+            <ion-button class="h-6 w-full max-w-xs" [disabled]="!userCategory || !userDistance" color="primary" expand="block"
               (click)="submitInscription()">
               Inscribirse
             </ion-button>
