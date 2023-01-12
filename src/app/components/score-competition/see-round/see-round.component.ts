@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { RoundModel } from 'src/app/models/score';
+import { RoundModel, SetModel } from 'src/app/models/score';
 import { ScoreService } from 'src/app/services/score.service';
 
 @Component({
@@ -31,7 +31,14 @@ export class SeeRoundComponent implements OnInit {
   ngOnInit() {
     this.numberOfArrows = this.modality == 'Sala' ? 3 : 6
     this.numberOfSets = this.modality == 'Sala' ? 10 : 6
+
     this.setArrays()
+
+    this.scoreService.getRoundSets(this.roundModel.id).subscribe(res => {
+      for (let index = 0; index < res.data.sets.length; index++) {
+        this.addSet(res.data.sets[index].arrows, index, res.data.sets[index].set,true)
+      }
+    })
   }
 
   setArrays(){
@@ -50,17 +57,19 @@ export class SeeRoundComponent implements OnInit {
     this.showRound = true
   }
 
-  addSet(event: any, index: number){
+  addSet(event: any, index: number,set?: SetModel, doNotSave?: boolean){
     console.log(index);
     
     this.roundArray[index] = event
-    this.total -= this.roundSum[index] 
-    this.emitRound.emit(-this.roundSum[index])
+    if (!doNotSave){
+      this.total -= this.roundSum[index] 
+      this.emitRound.emit(-this.roundSum[index])
 
-    this.roundSum[index] = 0
-    this.meanScore[index] = 0
-    this.numberOfTens[index] = 0
-    this.numberOfXs[index] = 0
+      this.roundSum[index] = 0
+      this.meanScore[index] = 0
+      this.numberOfTens[index] = 0
+      this.numberOfXs[index] = 0      
+    }
 
     this.roundArray[index].forEach(arrow => {
       if(arrow == 'X'){
@@ -71,13 +80,15 @@ export class SeeRoundComponent implements OnInit {
         if(arrow == 10){
           this.numberOfTens[index]++
         }
-        this.roundSum[index] += arrow
+        this.roundSum[index] += Number(arrow)
       }
     })
 
     this.total += this.roundSum[index] 
     this.meanScore[index] = (this.roundSum[index] / this.numberOfArrows)
-    if (this.setId[index] == '-1'){
+    if(doNotSave){
+      this.setId[index] = set.id
+    } else if (this.setId[index] == '-1'){
       this.scoreService.storeSet(this.archerId,this.roundArray[index],this.roundSum[index],this.roundModel.id).subscribe(res => {
         this.setId[index] = res.data.set.id
       })      
@@ -94,7 +105,7 @@ export class SeeRoundComponent implements OnInit {
       if(arrow == 'X'){
         sum += 10
       } else if (arrow != '-' && arrow != 'M'){
-        sum += arrow
+        sum += Number(arrow)
       }
     });
 

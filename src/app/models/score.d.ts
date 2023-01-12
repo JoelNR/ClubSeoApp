@@ -51,6 +51,15 @@ export interface GetRoundApiResponse{
     }
 }
 
+export interface GetRoundSetsApiResponse{
+    data: {
+        message: string
+        success: boolean
+        sets: [{set: SetModel,
+        arrows: ArrowModel[]}]
+    }
+}
+
 export interface GetScoreApiResponse{
     data: {
         message: string
