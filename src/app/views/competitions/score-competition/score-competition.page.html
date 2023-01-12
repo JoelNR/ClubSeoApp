@@ -45,8 +45,8 @@
     </div>
     <app-footer></app-footer>
   </div>
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button href="/competicion/puntuar/4#start">
+  <ion-fab *ngIf="competitionModel" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button [href]="'/competicion/puntuar/'+ competitionModel.id + '#start'">
       <ion-icon name="chevron-up-circle"></ion-icon>
     </ion-fab-button>
   </ion-fab>
