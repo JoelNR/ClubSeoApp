@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { RoundModel, ScoreModel } from 'src/app/models/score';
 import { ScoreService } from 'src/app/services/score.service';
 
@@ -9,7 +10,6 @@ import { ScoreService } from 'src/app/services/score.service';
 })
 export class ScoreComponent implements OnInit {
   roundsArray: RoundModel[]
-  total: number = 0
   scoreModel: ScoreModel
   
   @Input() modality: string
@@ -17,19 +17,25 @@ export class ScoreComponent implements OnInit {
   @Input() archerId: string
   @Output() emitPoints: EventEmitter<number> = new EventEmitter()
 
-  constructor(private scoreService: ScoreService) { }
+  constructor(private scoreService: ScoreService,
+    private ngxService: NgxUiLoaderService) { }
   
   ngOnInit() {
+    this.ngxService.startLoader("loader-score-component"+  this.archerId);
+    
     this.scoreService.storeScore(this.archerId, this.competitionId).subscribe(res => {
       this.scoreModel = res.data.score
+      this.emitPoints.emit(this.scoreModel.points)
       this.scoreService.storeRound(this.archerId, this.scoreModel.id).subscribe(res => {
         this.roundsArray = res.data.rounds
+        this.ngxService.stopLoader('loader-score-component' +  this.archerId);
       })
     })
   }
 
   emitTotal(event: any){
-    this.total += event
-    this.emitPoints.emit(this.total)
+    this.scoreModel.points += event
+    this.scoreService.updateScore(this.scoreModel.id, this.scoreModel.points).subscribe(res=>{})
+    this.emitPoints.emit(this.scoreModel.points)
   }
 }

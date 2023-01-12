@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class SeeSetComponent implements OnInit {
   @Input() arrowSet: any[] = []
   @Input() disabledSet: boolean = false
+  @Input() modality: string
 
   showSelectPoints: boolean = false
   finishedSet: boolean

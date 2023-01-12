@@ -6,21 +6,21 @@ export interface ArrowModel{
 }
 export interface SetModel{
     id: string
-    points: string
+    points: number
     user_id: string
     round_id: string
 }
 
 export interface RoundModel{
     id: string
-    points: string
+    points: number
     user_id: string
     score_id: string
 }
 
 export interface ScoreModel{
     id: string
-    points: string
+    points: number
     user_id: string
     competition_id: string
 }

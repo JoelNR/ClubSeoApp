@@ -39,7 +39,7 @@
         </div>
         <div *ngFor="let archer of archers; let i=index;" class="w-full">
           <app-score [ngClass]="{'hidden': archer.archer.user_id == selectedArcher.archer.user_id}" 
-          [competitionId]="competitionModel.id" [archerId]="archer.archer.user_id" [modality]="competitionModel.modality" (emitPoints)="total[index]=$event"></app-score>
+          [competitionId]="competitionModel.id" [archerId]="archer.archer.user_id" [modality]="competitionModel.modality" (emitPoints)="setTotal($event, archer.archer.user_id)"></app-score>
         </div>
       </div>
     </div>

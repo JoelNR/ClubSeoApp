@@ -17,6 +17,7 @@ export interface CompetitionArcherModel{
     distance: number
     target_number?: number
     target_letter?: string
+    points?: number
 }
 
 

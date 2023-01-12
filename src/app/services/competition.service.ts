@@ -18,6 +18,10 @@ export class CompetitionService extends Api {
     return this.put<GetCompetitionByIdApiResponse>('/competition/' + id,{user_id: localStorage.getItem('user_id'), category, distance})
   }
 
+  public submitPoints(id: string, points: number){
+    return this.put<GetCompetitionByIdApiResponse>('/competition/' + id,{user_id: localStorage.getItem('user_id'), points})
+  }
+
   public getCompetitionTargetById(id: string){
     return this.get<GetCompetitionTargetByIdApiResponse>('/target/' + id, {user_id: localStorage.getItem('user_id')})
   } 

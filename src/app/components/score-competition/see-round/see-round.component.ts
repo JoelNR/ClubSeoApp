@@ -57,9 +57,7 @@ export class SeeRoundComponent implements OnInit {
     this.showRound = true
   }
 
-  addSet(event: any, index: number,set?: SetModel, doNotSave?: boolean){
-    console.log(index);
-    
+  addSet(event: any, index: number,set?: SetModel, doNotSave?: boolean){  
     this.roundArray[index] = event
     if (!doNotSave){
       this.total -= this.roundSum[index] 
@@ -85,6 +83,7 @@ export class SeeRoundComponent implements OnInit {
     })
 
     this.total += this.roundSum[index] 
+
     this.meanScore[index] = (this.roundSum[index] / this.numberOfArrows)
     if(doNotSave){
       this.setId[index] = set.id
@@ -95,8 +94,10 @@ export class SeeRoundComponent implements OnInit {
     } else {
       this.scoreService.updateSet(this.setId[index],this.roundArray[index],this.roundSum[index]).subscribe(res => {})
     }
-
-    this.emitRound.emit(this.roundSum[index])
+    if(!doNotSave){
+      this.scoreService.updateRound(this.roundModel.id, this.total).subscribe(res=>{})
+      this.emitRound.emit(this.roundSum[index])
+    }
   }
 
   parcialSum(arrows: any[]){

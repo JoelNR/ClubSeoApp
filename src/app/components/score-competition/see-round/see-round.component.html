@@ -26,7 +26,7 @@
             </h4>
         </div>
         <div class="flex w-full">
-            <app-see-set [arrowSet]="set" class="w-3/5" [disabledSet]="i == 0 ? false : roundSum[i-1] == 0" (emitSet)="addSet($event,i)"></app-see-set>
+            <app-see-set [modality]="modality" [arrowSet]="set" class="w-3/5" [disabledSet]="i == 0 ? false : roundSum[i-1] == 0" (emitSet)="addSet($event,i)"></app-see-set>
             <div class="flex w-2/5">
                 <div class="flex flex-col w-1/2">
                     <app-number [number]="parcialSum([set[0],set[1],set[2]])" [disableColor]="true"></app-number>

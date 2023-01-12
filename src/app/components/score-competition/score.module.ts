@@ -8,6 +8,7 @@ import { SeeRoundComponent } from './see-round/see-round.component';
 import { SeeSetComponent } from './see-set/see-set.component';
 import { SelectPointComponent } from './select-point/select-point.component';
 import { ScoreComponent } from './score.component';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 
 
@@ -17,7 +18,8 @@ import { ScoreComponent } from './score.component';
     CommonModule,
     IonicModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    NgxUiLoaderModule
   ],
   exports:[ScoreComponent]
 })

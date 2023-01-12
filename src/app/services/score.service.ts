@@ -26,9 +26,16 @@ export class ScoreService extends Api {
       return this.get<GetRoundSetsApiResponse>('/round/' + round_id)
     }
 
-
     public storeRound(userId: string, score_id: string){
       return this.post<GetRoundApiResponse>('/round/create/' + userId, {score_id})
+    }
+
+    public updateRound(id: string, points:number){
+      return this.put<GetSetApiResponse>('/round/' + id, {points})
+    }
+
+    public updateScore(id: string, points:number){
+      return this.put<GetSetApiResponse>('/score/' + id, {points})
     }
 
     public storeScore(userId: string, competition_id: string){

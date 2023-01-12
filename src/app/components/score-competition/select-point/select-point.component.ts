@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-select-point',
@@ -7,12 +7,18 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class SelectPointComponent implements OnInit {
   pointArray = ['X',10,9,8,7,6,5,4,3,2,1,'M']
-  
+
+  @Input() modality: string
   @Output() emitNumber: EventEmitter<any> = new EventEmitter()
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if(this.modality== 'Sala'){
+      this.pointArray.splice(6,5)
+      this.pointArray.splice(0,1)
+    }
+  }
 
 
   emit(number: any){

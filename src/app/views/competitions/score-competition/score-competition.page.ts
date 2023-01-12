@@ -81,4 +81,7 @@ export class ScoreCompetitionPage extends CapacitorBase implements OnInit {
     this.selectedArcher =  this.archers[this.index]
   }
 
+  setTotal(event: any, id: string){
+    this.total[this.archers.findIndex(archer => archer.archer.user_id == id)] = event
+  }
 }
