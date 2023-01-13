@@ -15,12 +15,14 @@ export class ScoreComponent implements OnInit {
   @Input() modality: string
   @Input() competitionId: string
   @Input() archerId: string
+  doNotEmit: boolean = true
   @Output() emitPoints: EventEmitter<number> = new EventEmitter()
 
   constructor(private scoreService: ScoreService,
     private ngxService: NgxUiLoaderService) { }
   
   ngOnInit() {
+
     this.ngxService.startLoader("loader-score-component"+  this.archerId);
     
     this.scoreService.storeScore(this.archerId, this.competitionId).subscribe(res => {
