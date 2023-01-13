@@ -46,6 +46,7 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
         { label: 'Modalidad', content: this.competitionModel.modality },
         { label: 'Fecha', content: this.competitionModel.date },];
         this.competitionArchers = res.data.usersArray;
+        this.competitionArchers.sort((a,b) => a.target_number-b.target_number)
         this.setDistancesOptions()
         this.getProfileData();
         this.ngxService.stopLoader('loader-competition-details');

@@ -36,6 +36,7 @@ export class ScoreCompetitionPage extends CapacitorBase implements OnInit {
       this.competitionService.getCompetitionTargetById(param.get('id')).subscribe(res => {
         this.competitionModel = res.data.competitions;
         this.archers = res.data.archers
+        this.archers.sort((a,b) => a.target_letter.localeCompare(b.target_letter))
         this.selectedArcher = this.archers[this.index]
       });
     });
