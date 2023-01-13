@@ -9,7 +9,7 @@
         <ion-icon color="primary" class="mr-3 w-8 h-8" name="arrow-back-circle-outline" (click)="changeIndexLeft()"></ion-icon>
         <ion-icon color="primary" class="mr-3 w-8 h-8" name="arrow-forward-circle-outline" (click)="changeIndexRight()"></ion-icon>  
         <p>
-          Arquero: {{selectedArcher.archer.first_name + ' ' + selectedArcher.archer.last_name}}
+          {{selectedArcher.archer.first_name + ' ' + selectedArcher.target_number + selectedArcher.target_letter}}
         </p>          
       </div>
       <div class="w-full flex flex-col pb-12">
