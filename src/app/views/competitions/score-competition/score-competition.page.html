@@ -5,6 +5,13 @@
       <h1 id='start' class="pt-28 pb-6 text-center uppercase">
         Puntuar la competición      
       </h1>
+      <div class="fixed z-10 p-1 bottom-4 left-4 flex items-center px-5 bg-clear dark:bg-nightblue border border-solid dark:border-clear border-nightblue-100 rounded-3xl">
+        <ion-icon color="primary" class="mr-3 w-8 h-8" name="arrow-back-circle-outline" (click)="changeIndexLeft()"></ion-icon>
+        <ion-icon color="primary" class="mr-3 w-8 h-8" name="arrow-forward-circle-outline" (click)="changeIndexRight()"></ion-icon>  
+        <p>
+          Arquero: {{selectedArcher.archer.first_name + ' ' + selectedArcher.archer.last_name}}
+        </p>          
+      </div>
       <div class="w-full flex flex-col pb-12">
         <div>
           <h2>
@@ -30,12 +37,8 @@
             Diana: {{selectedArcher.target_number}}{{selectedArcher.target_letter}}
           </p>
           <p>
-            Puntuación total: {{total[index]}}
+            Puntuación total: {{selectedArcher.points}}
           </p>          
-          <div class="flex w-full py-4 justify-between">
-            <ion-icon color="primary" class="mr-3 w-8 h-8" name="arrow-back-circle-outline" (click)="changeIndexLeft()"></ion-icon>
-            <ion-icon color="primary" class="w-8 h-8" name="arrow-forward-circle-outline" (click)="changeIndexRight()"></ion-icon>            
-          </div>
         </div>
         <div *ngFor="let archer of archers; let i=index;" class="w-full">
           <app-score [ngClass]="{'hidden': archer.archer.user_id == selectedArcher.archer.user_id}" 
