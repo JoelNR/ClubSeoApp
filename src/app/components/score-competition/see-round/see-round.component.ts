@@ -26,6 +26,7 @@ export class SeeRoundComponent implements OnInit {
   @Input() category: string
 
   @Output() emitRound: EventEmitter<number> = new EventEmitter()
+  @Output() emitFinish: EventEmitter<boolean> = new EventEmitter()
 
   constructor(private scoreService: ScoreService) { }
 
@@ -100,6 +101,8 @@ export class SeeRoundComponent implements OnInit {
 
     if(this.roundArray.length != this.numberOfSets){
       this.addNewEmptySet();
+    } else {
+      this.emitFinish.emit(true)
     }
   }
 

@@ -18,6 +18,7 @@ export class ScoreComponent implements OnInit {
   @Input() category: string
   doNotEmit: boolean = true
   @Output() emitPoints: EventEmitter<number> = new EventEmitter()
+  showSecondRound: boolean = false
 
   constructor(private scoreService: ScoreService,
     private ngxService: NgxUiLoaderService) { }
@@ -40,5 +41,9 @@ export class ScoreComponent implements OnInit {
     this.scoreModel.points += event
     this.scoreService.updateScore(this.scoreModel.id, this.scoreModel.points).subscribe(res=>{})
     this.emitPoints.emit(this.scoreModel.points)
+  }
+
+  showNewRound(){
+    this.showSecondRound = true
   }
 }
