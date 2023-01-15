@@ -10,7 +10,7 @@
         <div *ngIf="competitionModel" class="w-full sm:w-1/3 sm:mr-4 mb-4 sm:mb-0 flex justify-center">
           <app-competition-card [date]="competitionModel.date" [description]="competitionModel.description"
             [id]="competitionModel.id" [modality]="competitionModel.modality" [title]="competitionModel.title"
-            [image]="competitionModel.image"></app-competition-card>
+            [image]="competitionModel.image" [disableButton]="true"></app-competition-card>
         </div>
         <div *ngIf="competitionModel"
           class="w-full sm:w-2/3 flex flex-col rounded-3xl p-4 border border-solid border-nightblue dark:border-clear">

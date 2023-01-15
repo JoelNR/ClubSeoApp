@@ -13,6 +13,7 @@ export class CompetitionCardComponent extends CapacitorBase implements OnInit {
   @Input() description: string
   @Input() modality: string 
   @Input() image: string
+  @Input() disableButton: boolean = false
 
   constructor() { 
     super()
