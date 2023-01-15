@@ -37,7 +37,7 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
   private getNews() {
     this.ngxService.startLoader("loader-landing");
 
-    this.newsService.news().subscribe(res => {
+    this.newsService.firstNews().subscribe(res => {
       this.newsArray = res.data.news
       this.ngxService.stopLoader("loader-landing");
     });
