@@ -141,7 +141,7 @@ export class SeeRoundComponent implements OnInit {
     });
 
     dividen = this.roundArray.findIndex(set => set.some(arrow => arrow == '-'))
-    dividen = dividen == -1 ? this.numberOfArrows : (dividen == 0 ? 1: dividen)
+    dividen = dividen == -1 ? this.numberOfSets : (dividen == 0 ? 1: dividen)
     return (mean / dividen).toFixed(2)
   }
 }
