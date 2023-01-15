@@ -9,6 +9,7 @@ export class SeeSetComponent implements OnInit {
   @Input() arrowSet: any[] = []
   @Input() disabledSet: boolean = false
   @Input() modality: string
+  @Input() category: string
 
   showSelectPoints: boolean = false
   finishedSet: boolean

@@ -18,7 +18,6 @@ import { BackButtonModule } from 'src/app/components/back-button/back-button.mod
     FormsModule,
     IonicModule,
     ScoreCompetitionPageRoutingModule,
-    FooterModule,
     HeaderModule,
     ScoreModule,
     BackButtonModule

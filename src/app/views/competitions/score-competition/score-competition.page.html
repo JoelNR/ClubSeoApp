@@ -13,7 +13,7 @@
           {{selectedArcher.archer.first_name + ' ' + selectedArcher.target_number + selectedArcher.target_letter}}
         </p>          
       </div>
-      <div class="w-full flex pt-4 flex-col pb-12">
+      <div class="w-full flex pt-4 flex-col pb-20">
         <div>
           <h2>
             Torneo: {{competitionModel.title}}
@@ -43,11 +43,10 @@
         </div>
         <div *ngFor="let archer of archers; let i=index;" class="w-full">
           <app-score [ngClass]="{'hidden': archer.archer.user_id != selectedArcher.archer.user_id}" 
-          [competitionId]="competitionModel.id" [archerId]="archer.archer.user_id" [modality]="competitionModel.modality" (emitPoints)="setTotal($event, archer.archer.user_id)"></app-score>
+          [competitionId]="competitionModel.id" [archerId]="archer.archer.user_id" [modality]="competitionModel.modality" [category]="archer.category" (emitPoints)="setTotal($event, archer.archer.user_id)"></app-score>
         </div>
       </div>
     </div>
-    <app-footer></app-footer>
   </div>
   <ion-fab *ngIf="competitionModel" slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button [href]="'/competicion/puntuar/'+ competitionModel.id + '#start'">

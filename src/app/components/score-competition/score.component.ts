@@ -15,6 +15,7 @@ export class ScoreComponent implements OnInit {
   @Input() modality: string
   @Input() competitionId: string
   @Input() archerId: string
+  @Input() category: string
   doNotEmit: boolean = true
   @Output() emitPoints: EventEmitter<number> = new EventEmitter()
 

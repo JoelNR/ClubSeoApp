@@ -23,6 +23,7 @@ export class SeeRoundComponent implements OnInit {
   @Input() modality: string
   @Input() roundModel: RoundModel
   @Input() archerId: string
+  @Input() category: string
 
   @Output() emitRound: EventEmitter<number> = new EventEmitter()
 
@@ -37,24 +38,22 @@ export class SeeRoundComponent implements OnInit {
     this.scoreService.getRoundSets(this.roundModel.id).subscribe(res => {
       for (let index = 0; index < res.data.sets.length; index++) {
         this.addSet(res.data.sets[index].arrows, index, res.data.sets[index].set,true)
+        this.showRound = true
+      }
+      if(res.data.sets.length <= 0){
+        this.addNewEmptySet()
       }
     })
   }
 
   setArrays(){
     for (let i = 0; i < this.numberOfSets; i++) {
-      this.roundArray.push([])
-      for (let index = 0; index < this.numberOfArrows; index++) {
-        this.roundArray[i].push('-')
-      }
       this.roundSum.push(0)
       this.meanScore.push(0)
       this.numberOfTens.push(0)
       this.numberOfXs.push(0)
       this.setId.push('-1')
     }
-
-    this.showRound = true
   }
 
   addSet(event: any, index: number,set?: SetModel, doNotSave?: boolean){  
@@ -97,6 +96,17 @@ export class SeeRoundComponent implements OnInit {
     if(!doNotSave){
       this.scoreService.updateRound(this.roundModel.id, this.total).subscribe(res=>{})
       this.emitRound.emit(this.roundSum[index])
+    }
+
+    if(this.roundArray.length != this.numberOfSets){
+      this.addNewEmptySet();
+    }
+  }
+
+  private addNewEmptySet() {
+    this.roundArray.push([]);
+    for (let index = 0; index < this.numberOfArrows; index++) {
+      this.roundArray[this.roundArray.length - 1].push('-');
     }
   }
 

@@ -9,13 +9,17 @@ export class SelectPointComponent implements OnInit {
   pointArray = ['X',10,9,8,7,6,5,4,3,2,1,'M']
 
   @Input() modality: string
+  @Input() category: string
   @Output() emitNumber: EventEmitter<any> = new EventEmitter()
 
   constructor() { }
 
   ngOnInit() {
     if(this.modality== 'Sala'){
-      this.pointArray.splice(6,5)
+      if(this.category != 'Desnudo'){
+        this.pointArray.splice(6,5)
+      }
+      
       this.pointArray.splice(0,1)
     }
   }
