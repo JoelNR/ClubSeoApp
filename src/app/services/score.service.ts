@@ -14,8 +14,8 @@ export class ScoreService extends Api {
       return this.get<GetSetByIdApiResponse>('/set/' + id)
     }
 
-    public updateSet(id: string, arrows: string[],points:number){
-      return this.put<GetSetApiResponse>('/set/update/' + id, {user_id: localStorage.getItem('user_id'), arrows, points})
+    public updateSet(id: string,user_id: string, arrows: string[],points:number){
+      return this.put<GetSetApiResponse>('/set/update/' + id, {user_id, arrows, points})
     }
 
     public storeSet(userId: string, arrows: string[],points:number, round_id: string){

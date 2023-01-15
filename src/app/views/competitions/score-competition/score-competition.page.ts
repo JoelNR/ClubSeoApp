@@ -86,6 +86,5 @@ export class ScoreCompetitionPage extends CapacitorBase implements OnInit {
     if(id == this.selectedArcher.archer.user_id){
       this.selectedArcher.points = event
     }
-    this.competitionService.submitPoints(this.competitionModel.id,id, event).subscribe(res=>{})
   }
 }

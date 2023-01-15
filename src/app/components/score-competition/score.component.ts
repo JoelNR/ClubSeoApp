@@ -39,7 +39,6 @@ export class ScoreComponent implements OnInit {
 
   emitTotal(event: any){
     this.scoreModel.points += event
-    this.scoreService.updateScore(this.scoreModel.id, this.scoreModel.points).subscribe(res=>{})
     this.emitPoints.emit(this.scoreModel.points)
   }
 

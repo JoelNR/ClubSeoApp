@@ -92,10 +92,9 @@ export class SeeRoundComponent implements OnInit {
         this.setId[index] = res.data.set.id
       })      
     } else {
-      this.scoreService.updateSet(this.setId[index],this.roundArray[index],this.roundSum[index]).subscribe(res => {})
+      this.scoreService.updateSet(this.setId[index],this.archerId,this.roundArray[index],this.roundSum[index]).subscribe(res => {})
     }
     if(!doNotSave){
-      this.scoreService.updateRound(this.roundModel.id, this.total).subscribe(res=>{})
       this.emitRound.emit(this.roundSum[index])
     }
 
