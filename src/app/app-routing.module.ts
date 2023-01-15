@@ -53,7 +53,11 @@ const routes: Routes = [
   {
     path: 'competicion',
     loadChildren: () => import('./views/competitions/competitions.module').then( m => m.CompetitionsPageModule)
+  },  {
+    path: 'timer',
+    loadChildren: () => import('./views/timer/timer.module').then( m => m.TimerPageModule)
   },
+
 
 
 

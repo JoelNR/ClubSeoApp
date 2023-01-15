@@ -24,7 +24,7 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
     { label: 'Entrenamiento',icon: 'analytics-outline', link: '/construccion' },
     { label: 'Regulación',icon: 'construct-outline', link: '/construccion' },
     { label: 'Ejercicios',icon: 'fitness-outline', link: '/construccion' },
-    { label: 'Timer',icon: 'alarm-outline', link: '/construccion' },
+    { label: 'Timer',icon: 'alarm-outline', link: '/timer' },
   ]
 
   trigger: string
