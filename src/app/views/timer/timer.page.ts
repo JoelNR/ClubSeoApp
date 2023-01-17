@@ -11,7 +11,7 @@ export class TimerPage implements OnInit {
 
   timerCounter: Subscription
   goToLineCountDownSetting: number = 10
-  shootCountDownSetting: number = 12
+  shootCountDownSetting: number =5
   countDown: number = 10
   userInput: string = '12'
 
@@ -28,13 +28,17 @@ export class TimerPage implements OnInit {
   {name: 'Pelota de futbol', file: '/assets/audio/hitting-soccer-ball.wav'},
   ]
 
+  audioFinishOptions: any[] = [{name: 'España', file: '/assets/audio/Himno-Espana-Track.mp3'},
+  ]
+
   selectedAudioOption: any
+  selectedFinishAudioOption: any
 
   constructor() { }
 
   ngOnInit() {
     this.selectedAudioOption = this.audioOptions[0]
-    this.countDown.toString
+    this.selectedFinishAudioOption = this.audioFinishOptions[0]
   }
 
 
@@ -47,11 +51,13 @@ export class TimerPage implements OnInit {
       this.timerCounter = timer(0,1010).subscribe(res=>{
         this.countDown--
         if(this.countDown == 0){
-          this.reproduce(this.selectedAudioOption)
+          
           if(!this.shootCountDownStarted){
+            this.reproduce(this.selectedAudioOption)
             this.shootCountDownStarted = true
             this.countDown = this.shootCountDownSetting
           } else {
+            this.reproduce(this.selectedFinishAudioOption)
             this.countDown = this.goToLineCountDownSetting
             this.timerCounter.unsubscribe() 
             this.countDownStarted = false
