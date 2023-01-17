@@ -1,7 +1,7 @@
 <ion-content>
   <div class="flex flex-col h-full">
     <app-header></app-header>
-    <ion-icon id="click-trigger" class="z-10 fixed right-10 md:right-20 top-20 text-5xl cursor-pointer" name="ellipsis-vertical"></ion-icon>
+    <ion-icon id="click-trigger" class="fixed right-10 md:right-20 top-20 text-5xl cursor-pointer" name="ellipsis-vertical"></ion-icon>
     <div class="flex flex-col text-center grow w-full justify-center mx-auto">
       <div (click)="startClock()" class=" text-9xl text-center flex items-center justify-center h-full w-full cursor-pointer"
       [ngClass]="{'bg-red-700': !shootCountDownStarted,
