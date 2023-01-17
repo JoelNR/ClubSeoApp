@@ -13,25 +13,38 @@ export class TimerPage implements OnInit {
   goToLineCountDownSetting: number = 10
   shootCountDownSetting: number = 12
   countDown: number = 10
+
   countDownStarted: boolean = false
   shootCountDownStarted: boolean = false
+  countDownStopped: boolean = false
+  dobleTurn: boolean = false
+
+  audioOptions: any[] = [{name: 'Silbato', file: '/assets/audio/blowing-whistle.mp3'},
+  {name: 'Zumbador', file: '/assets/audio/buzzer-bell.wav'},
+  {name: 'Censura', file: '/assets/audio/censorship-beep.wav'},
+  {name: 'Campanilla', file: '/assets/audio/chime.wav'},
+  {name: 'Sonido digital', file: '/assets/audio/digital-quick-tone.wav'},
+  {name: 'Pelota de futbol', file: '/assets/audio/hitting-soccer-ball.wav'},
+  ]
+
+  selectedAudioOption: any
 
   constructor() { }
 
   ngOnInit() {
-    
+    this.selectedAudioOption = this.audioOptions[0]
   }
 
 
   startClock(){
     if(!this.countDownStarted){
-      this.reproduce()
+      this.reproduce(this.selectedAudioOption)
       this.countDown++
       this.countDownStarted = true
       this.timerCounter = timer(0,1010).subscribe(res=>{
         this.countDown--
         if(this.countDown == 0){
-          this.reproduce()
+          this.reproduce(this.selectedAudioOption)
           if(!this.shootCountDownStarted){
             this.shootCountDownStarted = true
             this.countDown = this.shootCountDownSetting
@@ -39,14 +52,19 @@ export class TimerPage implements OnInit {
             this.countDown = this.goToLineCountDownSetting
             this.timerCounter.unsubscribe() 
             this.countDownStarted = false
+            this.shootCountDownStarted = false
           }
           
         }
       })      
+    } else {
+      this.timerCounter.unsubscribe()
+      this.countDownStopped = true
+      this.countDownStarted = false
     }
   }
-  reproduce() {
-    const audio = new Audio('/assets/audio/buzzer-bell.wav')
+  reproduce(audioOption: any) {
+    const audio = new Audio(audioOption.file)
     audio.play()
   }
 }
