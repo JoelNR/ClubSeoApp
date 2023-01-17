@@ -1,6 +1,7 @@
 <ion-content>
   <div class="flex flex-col h-full">
     <app-header></app-header>
+    <ion-icon id="click-trigger" class="z-10 fixed right-10 md:right-20 top-20 text-5xl cursor-pointer" name="ellipsis-vertical"></ion-icon>
     <div class="flex flex-col text-center grow w-full justify-center mx-auto">
       <div (click)="startClock()" class=" text-9xl text-center flex items-center justify-center h-full w-full cursor-pointer"
       [ngClass]="{'bg-red-700': !shootCountDownStarted,
@@ -9,5 +10,26 @@
         {{countDown}}
       </div>
     </div>
+
+    <ion-popover trigger="click-trigger" triggerAction="click" side="left" alignment="start">
+      <ng-template>
+        <ion-content class="ion-padding">
+          <div class="py-2 w-full">
+            <p>Tiempo</p>
+            <app-input placeholder="Tiempo" type="number" [(value)]="userInput" (valueChange)="changeTime()" [disableValidator]="true"></app-input>
+          </div>
+
+          <ion-list class="p-0 mt-2 rounded-2xl">
+            <ion-item class="bg-blue-50 text-nightblue border-0">
+              <ion-select [placeholder]="selectedAudioOption.name || 'Selecciona categoría'" [value]="selectedAudioOption"
+                (ionChange)="changeAudio($event)">
+                <ion-select-option *ngFor="let audio of audioOptions"
+                  [value]="audio">{{audio.name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
   </div>
 </ion-content>

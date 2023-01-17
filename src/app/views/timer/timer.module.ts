@@ -8,6 +8,7 @@ import { TimerPageRoutingModule } from './timer-routing.module';
 
 import { TimerPage } from './timer.page';
 import { HeaderModule } from 'src/app/components/header/header.module';
+import { InputModule } from 'src/app/components/input/input.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { HeaderModule } from 'src/app/components/header/header.module';
     FormsModule,
     IonicModule,
     TimerPageRoutingModule,
-    HeaderModule
+    HeaderModule,
+    InputModule
   ],
   declarations: [TimerPage]
 })

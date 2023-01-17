@@ -13,6 +13,7 @@ export class TimerPage implements OnInit {
   goToLineCountDownSetting: number = 10
   shootCountDownSetting: number = 12
   countDown: number = 10
+  userInput: string = '12'
 
   countDownStarted: boolean = false
   shootCountDownStarted: boolean = false
@@ -33,12 +34,14 @@ export class TimerPage implements OnInit {
 
   ngOnInit() {
     this.selectedAudioOption = this.audioOptions[0]
+    this.countDown.toString
   }
 
 
   startClock(){
     if(!this.countDownStarted){
       this.reproduce(this.selectedAudioOption)
+      this.countDownStopped = false
       this.countDown++
       this.countDownStarted = true
       this.timerCounter = timer(0,1010).subscribe(res=>{
@@ -66,5 +69,19 @@ export class TimerPage implements OnInit {
   reproduce(audioOption: any) {
     const audio = new Audio(audioOption.file)
     audio.play()
+  }
+  changeAudio($event: any){
+    this.selectedAudioOption = $event.detail.value
+  }
+
+  changeTime(){
+    this.shootCountDownSetting = Number(this.userInput)
+    if(this.countDownStarted){
+      this.timerCounter.unsubscribe()    
+      this.countDownStarted = false
+      this.shootCountDownStarted = false 
+      this.countDownStopped = false
+      this.countDown = this.goToLineCountDownSetting
+    }
   }
 }
