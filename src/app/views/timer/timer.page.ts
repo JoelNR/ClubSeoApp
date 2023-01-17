@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { timer } from 'rxjs';
 import { Subscription } from 'rxjs/internal/Subscription';
 
@@ -7,7 +8,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
   templateUrl: './timer.page.html',
   styleUrls: ['./timer.page.scss'],
 })
-export class TimerPage implements OnInit {
+export class TimerPage implements OnInit, OnDestroy {
 
   timerCounter: Subscription
   goToLineCountDownSetting: number = 10
@@ -37,8 +38,19 @@ export class TimerPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
     this.selectedAudioOption = this.audioOptions[0]
-    this.selectedFinishAudioOption = this.audioFinishOptions[0]
+    this.selectedFinishAudioOption = this.audioOptions[0]
+  }
+
+  ngOnDestroy(): void {
+    if(this.countDownStarted){
+      this.timerCounter.unsubscribe()  
+      this.countDownStarted = false
+      this.shootCountDownStarted = false 
+      this.countDownStopped = false
+      this.countDown = this.goToLineCountDownSetting  
+    }
   }
 
 

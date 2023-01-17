@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 import { ModalService } from 'src/app/services/modal.service';
@@ -28,6 +28,7 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
   ]
 
   trigger: string
+  triggerOption: number = 0
   openProfileMenu: boolean = false
   userLogged: boolean = false
   profileImage: string = '/assets/img/default-avatar.png'
@@ -39,18 +40,22 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
     private menu: MenuController,
     private modalService: ModalService,
     private registerService: RegisterService,
-    private profileService: ProfileService) {
+    private profileService: ProfileService,
+    private route: ActivatedRoute) {
     super()
   }
 
   ngOnInit() {
-    this.trigger = this.router.url
-    if(localStorage.getItem('seo-token')){
-      this.userLogged = true
-      this.profileService.profile(localStorage.getItem('user_id')).subscribe(res => {
-        this.profileImage = res.data.profile.image
-      })
-    }
+    this.route.url.subscribe(res => {
+       this.trigger = this.router.url + this.triggerOption
+       this.triggerOption++
+      if(localStorage.getItem('seo-token')){
+        this.userLogged = true
+        this.profileService.profile(localStorage.getItem('user_id')).subscribe(res => {
+          this.profileImage = res.data.profile.image
+        })
+      }      
+    })
   }
 
   isActive(link: string) {
@@ -84,7 +89,7 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
         if(res.data.success){
           this.registerService.logout()
           this.userLogged = false
-          this.router.navigate(['/inicio', {replaceUrl: true}])
+          this.router.navigate(['/inicio'])
         }
       })
       ,this.modalService.dismiss()}},

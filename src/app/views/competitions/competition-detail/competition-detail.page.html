@@ -48,7 +48,7 @@
             class="flex flex-col sm:flex-row sm:justify-between py-2"
             [ngClass]="{'border-solid border-b' : i != competitionArchers.length-1}">
             <div class="flex sm:w-1/4" [routerLink]="'/perfil/' + participant.archer.user_id">
-              <img [src]="participant.archer.image || '/assets/img/default-avatar.png'" alt="" class="h-7 w-7 object-cover">
+              <img [src]="participant.archer.image || '/assets/img/default-avatar.png'" alt="" class="rounded-full h-7 w-7 object-cover">
               <p class="pl-3 cursor-pointer flex items-center">
                 {{participant.archer.first_name + ' ' + participant.archer.last_name}}
               </p>
