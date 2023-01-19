@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GetAllProfileApiResponse, GetProfileApiResponse } from '../models/profile';
+import { GetAllProfileApiResponse, GetProfileApiResponse, GetProfileCompetitionApiResponse } from '../models/profile';
 import { Api } from './api.service';
 
 @Injectable({
@@ -8,6 +8,10 @@ import { Api } from './api.service';
 export class ProfileService extends Api {
     public profile(userId: string){
       return this.get<GetProfileApiResponse>('/profile/' + userId)
+    }
+
+    public getProfileCompetition(userId: string){
+      return this.get<GetProfileCompetitionApiResponse>('/profile/competition/' + userId)
     }
 
     public editProfile(first_name:string, last_name:string, category: string, email: string, telephone?: string){

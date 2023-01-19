@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
-import { ProfileModel } from 'src/app/models/profile';
+import { ProfileCompetitions, ProfileModel } from 'src/app/models/profile';
 import { ProfileService } from 'src/app/services/profile.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 
@@ -15,18 +15,11 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 export class ProfilePage extends CapacitorBase implements OnInit {
   @ViewChild('selectPhotoInput') selectPhotoInput: ElementRef<HTMLInputElement>;
   profileModel: ProfileModel = null
+  profileCompetitionsModel: ProfileCompetitions[]
   imageFile: File
   email: string
   telephone: string
   categoryOptions: string[] = ['Olímpico', 'Poleas', 'Desnudo','Tradicional', 'Longbow']
-  
-  competitionArray = [{name: 'IV Tirada de la Liga Atirca',date: '01/02/2022', position: 1, points: 120 , category: 'Arco olímpico', distance: 70 , type: 'Aire Libre'},
-  {name: 'Campeonato de Canarias',date: '01/02/2022', position: 2, points: 220 , category: 'Arco olímpico', distance: 70 , type: 'Aire Libre'},
-  {name: 'Campeonato el arcoiris',date: '01/02/2022', position: 3, points: 320 , category: 'Arco olímpico', distance: 70 , type: 'Aire Libre'},
-  {name: 'Competición 4',date: '01/02/2022', position: 4, points: 420 , category: 'Arco olímpico', distance: 70 , type: 'Aire Libre'},
-  {name: 'Competición 5',date: '01/02/2022', position: 5, points: 520 , category: 'Arco olímpico', distance: 70 , type: 'Aire Libre'},
-  {name: 'Competición 6',date: '01/02/2022', position: 6 , points: 620 , category: 'Arco olímpico', distance: 70 , type: 'Aire Libre'},
-  {name: 'Competición 4',date: '01/02/2022', position: 7, points: 420 , category: 'Arco olímpico', distance: 70 , type: 'Aire Libre'},]
 
   recordsArray = [{recordName : 'Recurvo senior', distance: 70 , type: 'Aire Libre', points : 600, date: '01/01/2022'},
   {recordName : 'Recurvo senior', distance: 18 , type: 'Sala', points : 600, date: '01/01/2022'},
@@ -56,9 +49,11 @@ export class ProfilePage extends CapacitorBase implements OnInit {
     });
     this.route.paramMap.subscribe(param => {
       if (param.get('id') == 'self') {
-        this.profileApiEndpoint(localStorage.getItem('user_id'));
+        this.profileApiEndpoint(localStorage.getItem('user_id'))
+        this.getProfileCompetitionEndpoint(localStorage.getItem('user_id'))
       } else {
-        this.profileApiEndpoint(param.get('id'));
+        this.profileApiEndpoint(param.get('id'))
+        this.getProfileCompetitionEndpoint(param.get('id'))
       }
     });
   }
@@ -79,6 +74,12 @@ export class ProfilePage extends CapacitorBase implements OnInit {
         this.editableProfile = true
       }
       this.ngxService.stopLoader('loader-profile')
+    })
+  }
+
+  getProfileCompetitionEndpoint(id: string){
+    this.profileService.getProfileCompetition(id).subscribe(res =>{
+      this.profileCompetitionsModel = res.data.competitions
     })
   }
 

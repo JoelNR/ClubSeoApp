@@ -1,3 +1,4 @@
+import { CompetitionModel } from "./competition"
 
 export interface ProfileModel {
     first_name: string
@@ -13,6 +14,22 @@ export interface GetProfileApiResponse{
         email: string  
         message: string
         profile: ProfileModel      
+        success: boolean
+    }
+}
+
+export interface ProfileCompetitions{
+    competition: CompetitionModel
+    category: string
+    distance: number
+    points: number
+    place: number
+}
+
+export interface GetProfileCompetitionApiResponse{
+    data: {
+        competitions: ProfileCompetitions[]
+        message: string
         success: boolean
     }
 }

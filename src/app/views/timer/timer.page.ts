@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { timer } from 'rxjs';
 import { Subscription } from 'rxjs/internal/Subscription';
 
@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 export class TimerPage implements OnInit, OnDestroy {
 
   timerCounter: Subscription
+  routerEvent: Subscription
   goToLineCountDownSetting: number = 10
   shootCountDownSetting: number =5
   countDown: number = 10
@@ -35,10 +36,20 @@ export class TimerPage implements OnInit, OnDestroy {
   selectedAudioOption: any
   selectedFinishAudioOption: any
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+    private router: Router) { 
+    }
 
   ngOnInit() {
-
+    this.route.url.subscribe(res=>{
+      if(this.countDownStarted){
+        this.timerCounter.unsubscribe()  
+        this.countDownStarted = false
+        this.shootCountDownStarted = false 
+        this.countDownStopped = false
+        this.countDown = this.goToLineCountDownSetting  
+      }
+    })
     this.selectedAudioOption = this.audioOptions[0]
     this.selectedFinishAudioOption = this.audioOptions[0]
   }

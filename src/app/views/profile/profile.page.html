@@ -97,17 +97,18 @@
               Competiciones
             </h2>
             <div class="w-full grid grid-cols-1 sm:grid-cols-2">
-              <div *ngFor="let competition of competitionArray; let i=index" class="pb-4 sm:px-2">
-                <app-competition-results-card *ngIf="i < 6" [name]="competition.name" [date]="competition.date" [position]="competition.position"
-                [points]="competition.points" [category]="competition.category" [distance]="competition.distance" 
-                [type]="competition.type"></app-competition-results-card>
+              <div *ngFor="let model of profileCompetitionsModel; let i=index" class="pb-4 sm:px-2">
+                <app-competition-results-card [profileCompetition]="model"></app-competition-results-card>
               </div>        
             </div>
             <div class="w-full flex justify-center">
-              <ion-button *ngIf="competitionArray.length > 6" color="primary" size="small" routerLink="">
+              <ion-button *ngIf="profileCompetitionsModel.length == 6" color="primary" size="small" routerLink="">
                 Ver más
               </ion-button>
             </div>
+            <p *ngIf="profileCompetitionsModel.length == 0">
+              Parece que este usuario no ha competido aún en nuestro club.
+            </p>
           </div>
           <div class="mt-4 p-4 rounded-2xl border border-solid border-nightblue-60 dark:border-clear">
             <h2 class="pb-4">
@@ -115,15 +116,18 @@
             </h2>
             <div class="w-full">
               <div *ngFor="let record of recordsArray; let i=index" class="pb-4 w-full">
-                <app-record-card *ngIf="i < 6" [recordName]="record.recordName" [distance]="record.distance" [type]="record.type" 
+                <app-record-card [recordName]="record.recordName" [distance]="record.distance" [type]="record.type" 
                 [date]="record.date" [points]="record.points"></app-record-card>
               </div>        
             </div>
             <div class="w-full flex justify-center">
-              <ion-button *ngIf="recordsArray.length > 6" color="primary" size="small" routerLink="">
+              <ion-button *ngIf="recordsArray.length == 6" color="primary" size="small" routerLink="">
                 Ver más
               </ion-button>
             </div>
+            <p *ngIf="recordsArray.length == 0">
+              Parece que este usuario no ha competido aún en nuestro club.
+            </p>
           </div>
         </div>
         <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-profile" fgsPosition="top-center" fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
