@@ -92,7 +92,7 @@
               </ion-button>
             </div>
           </div>
-          <div class="p-4 rounded-2xl border border-solid border-nightblue-60 dark:border-clear">
+          <div *ngIf="profileCompetitionsModel" class="p-4 rounded-2xl border border-solid border-nightblue-60 dark:border-clear">
             <h2 class="pb-4 sm:px-2">
               Competiciones
             </h2>
@@ -110,22 +110,21 @@
               Parece que este usuario no ha competido aún en nuestro club.
             </p>
           </div>
-          <div class="mt-4 p-4 rounded-2xl border border-solid border-nightblue-60 dark:border-clear">
+          <div *ngIf="profileRecordsModel" class="mt-4 p-4 rounded-2xl border border-solid border-nightblue-60 dark:border-clear">
             <h2 class="pb-4">
               Plusmarcas
             </h2>
             <div class="w-full">
-              <div *ngFor="let record of recordsArray; let i=index" class="pb-4 w-full">
-                <app-record-card [recordName]="record.recordName" [distance]="record.distance" [type]="record.type" 
-                [date]="record.date" [points]="record.points"></app-record-card>
+              <div *ngFor="let record of profileRecordsModel" class="pb-4 w-full">
+                <app-record-card [recordModel]="record"></app-record-card>
               </div>        
             </div>
             <div class="w-full flex justify-center">
-              <ion-button *ngIf="recordsArray.length == 6" color="primary" size="small" routerLink="">
+              <ion-button *ngIf="profileRecordsModel.length == 6" color="primary" size="small" routerLink="">
                 Ver más
               </ion-button>
             </div>
-            <p *ngIf="recordsArray.length == 0">
+            <p *ngIf="profileRecordsModel.length == 0">
               Parece que este usuario no ha competido aún en nuestro club.
             </p>
           </div>

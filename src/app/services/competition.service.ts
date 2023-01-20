@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GetCompetitionApiResponse, GetCompetitionByIdApiResponse, GetCompetitionTargetByIdApiResponse } from '../models/competition';
+import { GetCompetitionApiResponse, GetCompetitionByIdApiResponse, GetCompetitionTargetByIdApiResponse, GetRecordsApiResponse } from '../models/competition';
 import { Api } from './api.service';
 
 @Injectable({
@@ -25,5 +25,9 @@ export class CompetitionService extends Api {
   public getCompetitionTargetById(id: string){
     return this.get<GetCompetitionTargetByIdApiResponse>('/target/' + id, {user_id: localStorage.getItem('user_id')})
   } 
+
+  public getClubRecords(){
+    return this.get<GetRecordsApiResponse>('/records')
+  }
 
 }

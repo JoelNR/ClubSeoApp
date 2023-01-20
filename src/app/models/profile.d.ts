@@ -26,9 +26,24 @@ export interface ProfileCompetitions{
     place: number
 }
 
+export interface ProfileRecords {
+    competition: CompetitionModel
+    record: {category: string
+            distance: number
+            points: number
+            modality: string}
+}
+
 export interface GetProfileCompetitionApiResponse{
     data: {
         competitions: ProfileCompetitions[]
+        message: string
+        success: boolean
+    }
+}
+export interface GetProfileRecordsApiResponse{
+    data: {
+        records: ProfileRecords[]
         message: string
         success: boolean
     }

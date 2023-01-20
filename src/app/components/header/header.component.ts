@@ -17,7 +17,7 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
     { label: 'Iniciación',icon: 'megaphone-outline', link: '/iniciacion' },
     { label: 'Competiciones',icon: 'trophy-outline', link: '/competicion' },
     { label: 'Arqueros',icon: 'body-outline', link: '/arqueros' },
-    { label: 'Plusmarcas',icon: 'sparkles-outline', link: '/construccion' },
+    { label: 'Plusmarcas',icon: 'sparkles-outline', link: '/plusmarcas' },
   ]
   profileOptions = [
     { label: 'Perfil',icon: 'finger-print-outline', link: '/perfil/self' },
