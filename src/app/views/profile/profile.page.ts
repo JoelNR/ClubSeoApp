@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
-import { ProfileCompetitions, ProfileModel, ProfileRecords } from 'src/app/models/profile';
+import { GetProfileStatsApiResponse, ProfileCompetitions, ProfileModel, ProfileRecords } from 'src/app/models/profile';
 import { ProfileService } from 'src/app/services/profile.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 
@@ -17,6 +17,7 @@ export class ProfilePage extends CapacitorBase implements OnInit {
   profileModel: ProfileModel = null
   profileCompetitionsModel: ProfileCompetitions[]
   profileRecordsModel: ProfileRecords[]
+  profileStats: GetProfileStatsApiResponse
   imageFile: File
   email: string
   telephone: string
@@ -53,10 +54,12 @@ export class ProfilePage extends CapacitorBase implements OnInit {
         this.profileApiEndpoint(localStorage.getItem('user_id'))
         this.getProfileCompetitionEndpoint(localStorage.getItem('user_id'))
         this.getProfileRecordsEndpoint(localStorage.getItem('user_id'))
+        this.getProfileStatsEndpoint(localStorage.getItem('user_id'))
       } else {
         this.profileApiEndpoint(param.get('id'))
         this.getProfileCompetitionEndpoint(param.get('id'))
         this.getProfileRecordsEndpoint(param.get('id'))
+        this.getProfileStatsEndpoint(param.get('id'))
       }
     });
   }
@@ -89,6 +92,12 @@ export class ProfilePage extends CapacitorBase implements OnInit {
   getProfileRecordsEndpoint(id: string){
     this.profileService.getProfileRecords(id).subscribe(res =>{
       this.profileRecordsModel = res.data.records
+    })
+  }
+
+  getProfileStatsEndpoint(id: string){
+    this.profileService.getProfileStats(id).subscribe(res =>{
+      this.profileStats = res
     })
   }
 

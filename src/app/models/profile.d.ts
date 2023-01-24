@@ -41,6 +41,19 @@ export interface GetProfileCompetitionApiResponse{
         success: boolean
     }
 }
+
+export interface GetProfileStatsApiResponse{
+    data: {
+        competitions: number,
+        tens: number,
+        x: number,
+        avarage: number,
+        podiums: number,
+        nines: number,
+        message: string
+        success: boolean
+    }
+}
 export interface GetProfileRecordsApiResponse{
     data: {
         records: ProfileRecords[]
