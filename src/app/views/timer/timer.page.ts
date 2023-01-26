@@ -42,11 +42,26 @@ export class TimerPage implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    if (localStorage.getItem('seo-audio-start')){
+        this.selectedAudioOption = this.audioOptions.find(audio => audio.name == localStorage.getItem('seo-audio-start'))
+    } else {
+      this.selectedAudioOption = this.audioOptions[0]
+    }
+
+    if (localStorage.getItem('seo-audio-end')){
+      this.selectedFinishAudioOption = this.audioOptions.find(audio => audio.name == localStorage.getItem('seo-audio-end'))
+    } else {
+      this.selectedFinishAudioOption = this.audioOptions[0]
+    }
+
+    if (localStorage.getItem('seo-audio-time')){
+      this.userInput = localStorage.getItem('seo-audio-time')
+      this.shootCountDownSetting = Number(localStorage.getItem('seo-audio-time'))
+    }
+
     this.route.url.subscribe(res=>{
       this.resetTimer()
     })
-    this.selectedAudioOption = this.audioOptions[0]
-    this.selectedFinishAudioOption = this.audioOptions[0]
   }
 
   public resetTimer() {
@@ -114,14 +129,17 @@ export class TimerPage implements OnInit, OnDestroy {
 
   changeStartAudio($event: any){
     this.selectedAudioOption = $event.detail.value
+    localStorage.setItem('seo-audio-start', this.selectedAudioOption.name)
   }
 
   changeEndAudio($event: any){
     this.selectedFinishAudioOption = $event.detail.value
+    localStorage.setItem('seo-audio-end', this.selectedFinishAudioOption.name)
   }
 
   changeTime(){
     this.shootCountDownSetting = Number(this.userInput)
+    localStorage.setItem('seo-audio-time', this.userInput)
     if(this.countDownStarted){
       this.timerCounter.unsubscribe()    
       this.countDownStarted = false
