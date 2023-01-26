@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { MenuController, PopoverController } from '@ionic/angular';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 import { ModalService } from 'src/app/services/modal.service';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -46,10 +46,10 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
   }
 
   ngOnInit() {
+    this.trigger = this.router.url
     this.route.url.subscribe(res => {
-       this.trigger = this.router.url + this.triggerOption
-       this.triggerOption++
       if(localStorage.getItem('seo-token')){
+        this.trigger += localStorage.getItem('user_id')
         this.userLogged = true
         this.profileService.profile(localStorage.getItem('user_id')).subscribe(res => {
           this.profileImage = res.data.profile.image
@@ -70,6 +70,15 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
 
   closeMenu() {
     this.menu.close('end' + this.trigger);
+  }
+
+  @ViewChild('popover') popover
+
+  isOpen = false
+
+  presentPopover(e: Event) {
+    this.popover.event = e
+    this.isOpen = true
   }
 
   navigate(link: string) {
