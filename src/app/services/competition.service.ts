@@ -26,6 +26,10 @@ export class CompetitionService extends Api {
     return this.get<GetCompetitionTargetByIdApiResponse>('/target/' + id, {user_id: localStorage.getItem('user_id')})
   } 
 
+  public getCompetitionTargetDataById(competition_id: string, user_id: string){
+    return this.get<GetCompetitionTargetByIdApiResponse>('/target/' + competition_id, {user_id})
+  } 
+
   public getClubRecords(){
     return this.get<GetRecordsApiResponse>('/records')
   }

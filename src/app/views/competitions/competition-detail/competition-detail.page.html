@@ -40,7 +40,8 @@
           <p class="sm:w-1/4">Nombre</p>
           <p class="sm:w-1/4 sm:justify-end flex">Categoría</p>
           <p class="sm:w-1/4 sm:justify-end flex">Diana</p>
-          <p class="sm:w-1/4 sm:justify-end flex">Puntos</p>
+          <p class="sm:w-1/4 sm:justify-end flex">Puntos
+          </p>
         </div>
         <div *ngIf="competitionArchers && competitionArchers.length > 0"
           class="px-4 py-2 border border-solid border-nightblue dark:border-clear rounded-3xl">
@@ -59,9 +60,13 @@
             <div class="flex pb-2 sm:p-0 sm:w-1/4 sm:justify-end items-center">
               {{parseDistanceText(i)}}
             </div>
-            <div class="flex sm:w-1/4 sm:justify-end items-center">
+            <div  class="flex justify-between sm:w-1/4 sm:justify-end items-center">
               {{participant.points}}
+              <ion-button *ngIf="participant.points > 0" class="h-6 w-fit ml-3" fill="outline" size="small" color="primary" [routerLink]="'/competiciones/'+ competitionModel.id + '/puntuacion/' + participant.archer.user_id">
+                Ver detalles
+              </ion-button>
             </div>
+            
           </div>
         </div>
         <div *ngIf="competitionArchers && competitionArchers.length == 0"

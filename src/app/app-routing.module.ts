@@ -62,6 +62,11 @@ const routes: Routes = [
     path: 'plusmarcas',
     loadChildren: () => import('./views/records/records.module').then( m => m.RecordsPageModule)
   },
+  {
+    path: 'competiciones/:id/puntuacion/:user',
+    loadChildren: () => import('./views/see-score/see-score.module').then( m => m.SeeScorePageModule)
+  },
+
 
 
 

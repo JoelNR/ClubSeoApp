@@ -24,6 +24,7 @@ export class SeeRoundComponent implements OnInit {
   @Input() roundModel: RoundModel
   @Input() archerId: string
   @Input() category: string
+  @Input() disableScoreFunction: boolean
 
   @Output() emitRound: EventEmitter<number> = new EventEmitter()
   @Output() emitFinish: EventEmitter<boolean> = new EventEmitter()

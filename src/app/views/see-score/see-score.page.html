@@ -1,0 +1,40 @@
+<ion-content>
+  <div class="flex flex-col h-full">
+    <app-header></app-header>
+    <div *ngIf="archer" class="flex flex-col grow text-justify w-full lg:max-w-290 px-5 sm:px-8 mx-auto">
+      <h1 id='start' class="pt-28 pb-6 text-center uppercase">
+        Puntuación de la competición      
+      </h1>
+      <app-back-button [locationBack]="true"></app-back-button>
+      <div class="w-full flex pt-4 flex-col pb-20">
+        <div>
+          <h2>
+            Torneo: {{competitionModel.title}}
+          </h2>
+         
+          <div class="flex pt-4 items-center"> 
+            
+            <p class="pr-3">
+              Arquero: {{archer.archer.first_name}} {{archer.archer.last_name}}
+            </p>          
+          </div>
+          <p>
+            Diana: {{archer.target_number}}{{archer.target_letter}}
+          </p>
+          <p>
+            Puntuación total: {{archer.points}}
+          </p>          
+        </div>
+        <div class="w-full">
+          <app-score 
+          [competitionId]="competitionModel.id" [archerId]="archer.archer.user_id" [modality]="competitionModel.modality" [category]="archer.category" [disableScoreFunction]="true"></app-score>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ion-fab *ngIf="competitionModel" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button [href]="'/competicion/puntuar/'+ competitionModel.id + '#start'">
+      <ion-icon name="chevron-up-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
