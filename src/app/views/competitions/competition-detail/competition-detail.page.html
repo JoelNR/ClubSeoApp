@@ -87,7 +87,7 @@
           <div *ngIf="!userNotRegisted" class="py-3 text-orange-100 text-xs">Categoría</div>
           <div *ngIf="!userNotRegisted" class="flex flex-col sm:flex-row w-full pb-4 items-center justify-center">
             <div class="w-full pb-6 sm:pb-0 sm:pr-6">
-              <ion-list class="p-0 rounded-2xl">
+              <ion-list class="p-0 rounded-2xl border border-solid border-nightblue-100">
                 <ion-item class="bg-blue-50 text-nightblue border-0">
                   <ion-select [placeholder]="userCategory || 'Selecciona categoría'" [value]="userCategory"
                     (ionChange)="changeCategory($event)">
@@ -97,7 +97,7 @@
                 </ion-item>
               </ion-list>
               <div *ngIf="!userNotRegisted" class="pt-3 text-orange-100 text-xs">Distancia</div>
-              <ion-list class="mt-4 p-0 rounded-2xl">
+              <ion-list class="mt-4 p-0 rounded-2xl border border-solid border-nightblue-100">
                 <ion-item class="bg-blue-50 text-nightblue border-0">
                   <ion-select [disabled]="!userCategory" [placeholder]="userCategory ? 'Selecciona una distancia' : 'Seleccione una categoría primero'" [value]="userDistance"
                     (ionChange)="changeDistance($event)">

@@ -1,12 +1,12 @@
 <ion-content>
   <div class="flex flex-col h-full">
     <app-header></app-header>
-    <ion-icon id="click-trigger" class="fixed right-10 md:right-20 top-20 text-5xl cursor-pointer" name="ellipsis-vertical"></ion-icon>
-    <p class="fixed left-10 md:left-20 top-20 text-5xl" *ngIf="showActiveTurn">
+    <ion-icon id="click-trigger" class="fixed right-10 md:right-20 top-20 text-5xl cursor-pointer text-white" name="ellipsis-vertical"></ion-icon>
+    <p class="fixed text-white left-10 md:left-20 top-20 text-5xl" *ngIf="showActiveTurn">
       {{activeTurn}}
     </p>
     <div class="flex flex-col text-center grow w-full justify-center mx-auto">
-      <div (click)="startClock()" class=" text-9xl text-center flex items-center justify-center h-full w-full cursor-pointer"
+      <div (click)="startClock()" class="text-white text-9xl text-center flex items-center justify-center h-full w-full cursor-pointer"
       [ngClass]="{'bg-red-700': !shootCountDownStarted,
                   'bg-green-600': (countDownStarted || countDownStopped) && shootCountDownStarted && countDown >= 30,
                   'bg-yellow-600': (countDownStarted || countDownStopped) && shootCountDownStarted && countDown < 30}">
@@ -26,7 +26,7 @@
             <p class="pl-2">Doble turno</p>
           </div>
           <p class="pt-2">Tono inicio</p>
-          <ion-list class="p-0 mt-2 rounded-2xl">
+          <ion-list class="p-0 mt-2 rounded-2xl border border-solid border-nightblue-100">
             <ion-item class="bg-blue-50 text-nightblue border-0">
               <ion-select [placeholder]="selectedAudioOption.name || 'Selecciona categoría'" [value]="selectedAudioOption"
                 (ionChange)="changeStartAudio($event)">
@@ -36,7 +36,7 @@
             </ion-item>
           </ion-list>
           <p class="pt-4">Tono final</p>
-          <ion-list class="p-0 mt-2 rounded-2xl">
+          <ion-list class="p-0 mt-2 rounded-2xl border border-solid border-nightblue-100">
             <ion-item class="bg-blue-50 text-nightblue border-0">
               <ion-select [placeholder]="selectedFinishAudioOption.name || 'Selecciona categoría'" [value]="selectedFinishAudioOption"
                 (ionChange)="changeEndAudio($event)">
