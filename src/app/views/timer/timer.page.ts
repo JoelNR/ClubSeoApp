@@ -66,12 +66,14 @@ export class TimerPage implements OnInit, OnDestroy {
 
   public resetTimer() {
     if (this.countDownStarted) {
-      this.timerCounter.unsubscribe();
-      this.countDownStarted = false;
-      this.shootCountDownStarted = false;
-      this.countDownStopped = false;
-      this.countDown = this.goToLineCountDownSetting;
-    }
+      this.timerCounter.unsubscribe()
+
+    }      
+    this.countDownStarted = false
+    this.shootCountDownStarted = false
+    this.countDownStopped = false
+    this.countDown = this.goToLineCountDownSetting
+    this.activeTurn = 'AB'
   }
 
   ngOnDestroy(): void {
@@ -87,7 +89,7 @@ export class TimerPage implements OnInit, OnDestroy {
       this.countDownStarted = true
       this.timerCounter = timer(0,1010).subscribe(res=>{
         this.countDown--
-        if(this.countDown == 0){
+        if(this.countDown <= 0){
           
           if(!this.shootCountDownStarted){
             this.reproduce(this.selectedAudioOption)
@@ -152,5 +154,9 @@ export class TimerPage implements OnInit, OnDestroy {
   checkboxTurn(){
     this.doubleTurn = !this.doubleTurn
     this.showActiveTurn = this.doubleTurn
+  }
+
+  next(){
+    this.countDown = 0
   }
 }

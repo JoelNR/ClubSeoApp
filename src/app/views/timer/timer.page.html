@@ -1,10 +1,24 @@
 <ion-content>
   <div class="flex flex-col h-full">
     <app-header></app-header>
-    <ion-icon id="click-trigger" class="fixed right-10 md:right-20 top-20 text-5xl cursor-pointer text-white" name="ellipsis-vertical"></ion-icon>
-    <p class="fixed text-white left-10 md:left-20 top-20 text-5xl" *ngIf="showActiveTurn">
-      {{activeTurn}}
-    </p>
+    <div class="fixed top-20 px-4 w-full flex justify-between">
+      <p class="text-white text-5xl flex w-fit" [ngClass]="{'invisible' : !showActiveTurn}">
+        {{activeTurn}}
+      </p>
+      <div  class="flex w-fit justify-center mx-9 p-2 text-center items-center rounded-2xl border-2 border-solid border-clear">
+        <div (click)="next()" class="text-white w-fit text-3xl"  *ngIf="secondTurnActivated || !showActiveTurn">
+          Terminar
+        </div>
+        <div (click)="next()" class="text-white w-fit text-3xl" *ngIf="!secondTurnActivated && showActiveTurn">
+          Siguiente turno
+        </div>
+        
+      </div>      
+      <div class="flex w-fit justify-end">
+        <ion-icon id="click-trigger" class="cursor-pointer text-white text-5xl" name="ellipsis-vertical"></ion-icon>
+      </div>
+    </div>
+
     <div class="flex flex-col text-center grow w-full justify-center mx-auto">
       <div (click)="startClock()" class="text-white text-9xl text-center flex items-center justify-center h-full w-full cursor-pointer"
       [ngClass]="{'bg-red-700': !shootCountDownStarted,
@@ -22,7 +36,7 @@
             <app-input placeholder="Tiempo" type="number" [(value)]="userInput" (valueChange)="changeTime()" [disableValidator]="true"></app-input>
           </div>
           <div class="py-2 flex">
-            <ion-checkbox color="primary" slot="start" (ionChange)="checkboxTurn()" [value]="doubleTurn"></ion-checkbox>
+            <ion-checkbox color="primary" slot="start" (ionChange)="checkboxTurn()" [checked]="doubleTurn"></ion-checkbox>
             <p class="pl-2">Doble turno</p>
           </div>
           <p class="pt-2">Tono inicio</p>
