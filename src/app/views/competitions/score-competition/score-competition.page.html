@@ -6,7 +6,7 @@
         Puntuar la competición      
       </h1>
       <app-back-button [link]="'/competicion/detalles/' + competitionModel.id"></app-back-button>
-      <div class="fixed z-10 p-1 bottom-4 left-4 flex items-center px-5 bg-clear dark:bg-nightblue border border-solid dark:border-clear border-nightblue-100 rounded-3xl">
+      <div *ngIf="archers.length > 1" class="fixed z-10 p-1 bottom-4 left-4 flex items-center px-5 bg-clear dark:bg-nightblue border border-solid dark:border-clear border-nightblue-100 rounded-3xl">
         <ion-icon color="primary" class="mr-3 w-8 h-8" name="arrow-back-circle-outline" (click)="changeIndexLeft()"></ion-icon>
         <ion-icon color="primary" class="mr-3 w-8 h-8" name="arrow-forward-circle-outline" (click)="changeIndexRight()"></ion-icon>  
         <p>
