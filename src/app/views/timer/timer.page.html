@@ -5,7 +5,7 @@
       <p class="text-white text-5xl flex w-fit" [ngClass]="{'invisible' : !showActiveTurn}">
         {{activeTurn}}
       </p>
-      <div  class="flex w-fit justify-center mx-9 p-2 text-center items-center rounded-2xl border-2 border-solid border-clear">
+      <div *ngIf="shootCountDownStarted" class="flex w-fit justify-center mx-9 p-2 text-center items-center rounded-2xl border-2 border-solid border-clear">
         <div (click)="next()" class="text-white w-fit text-3xl"  *ngIf="secondTurnActivated || !showActiveTurn">
           Terminar
         </div>
