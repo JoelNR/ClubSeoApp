@@ -21,7 +21,7 @@
     <div class="text-nightblue-100 ">
         {{parseDateFormat(recordModel.competition.date)}}
     </div>
-    <ion-button [routerLink]="'/competicion/detalles/' + recordModel.competition.id" class="m-0 h-5" color="primary" size="small" fill="outline">
+    <ion-button [routerLink]="'/competiciones/' + recordModel.competition.id + '/puntuacion/' + userId" class="m-0 h-5" color="primary" size="small" fill="outline">
       Más info
     </ion-button>    
   </div>   

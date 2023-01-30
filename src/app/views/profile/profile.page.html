@@ -10,7 +10,7 @@
       </h1>
       <div *ngIf="profileModel" class="flex relative flex-col lg:flex-row w-full">
         <div
-          class="flex flex-col sm:flex-row lg:flex-col h-fit mb-4 items-center justify-between lg:justify-center w-full lg:w-1/3 p-4 lg:mr-4 bg-clear-bg  dark:bg-nightblue-60 rounded-2xl border border-solid border-white">
+          class="flex flex-col sm:flex-row lg:flex-col h-fit mb-4 items-center justify-between lg:justify-center w-full lg:w-1/3 p-4 lg:mr-4 bg-clear-bg  dark:bg-nightblue-60 rounded-2xl border border-solid border-nightblue-100">
           <div class="relative">
             <img
               class="rounded-full w-40 h-40 mr-4 lg:mr-0 object-cover border-2 border-solid border-nightblue-90  dark:border-clear"
@@ -117,7 +117,7 @@
               </div>
             </div>
             <div class="w-full flex justify-center">
-              <ion-button color="primary" size="small" routerLink="competiciones">
+              <ion-button *ngIf="profileCompetitionsModel.length == 6" color="primary" size="small" routerLink="competiciones">
                 Ver más
               </ion-button>
             </div>
@@ -125,14 +125,14 @@
               Parece que este usuario no ha competido aún en nuestro club.
             </p>
           </div>
-          <div *ngIf="profileRecordsModel"
+          <div *ngIf="profileRecordsModel && profileModel"
             class="mt-4 p-4 rounded-2xl border border-solid border-nightblue-60 dark:border-clear">
             <h2 class="pb-4">
               Plusmarcas
             </h2>
             <div class="w-full">
               <div *ngFor="let record of profileRecordsModel" class="pb-4 w-full">
-                <app-record-card [recordModel]="record"></app-record-card>
+                <app-record-card [userId]="profileModel.user_id" [recordModel]="record"></app-record-card>
               </div>
             </div>
             <div class="w-full flex justify-center">

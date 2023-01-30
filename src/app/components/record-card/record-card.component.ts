@@ -10,6 +10,7 @@ import { ProfileRecords } from 'src/app/models/profile';
 })
 export class RecordCardComponent extends CapacitorBase implements OnInit {
   @Input() recordModel: ProfileRecords
+  @Input() userId: string
 
   constructor() {
     super()
