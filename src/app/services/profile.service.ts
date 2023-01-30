@@ -14,6 +14,10 @@ export class ProfileService extends Api {
       return this.get<GetProfileCompetitionApiResponse>('/profile/competition/' + userId)
     }
 
+    public getAllProfileCompetition(userId: string){
+      return this.get<GetProfileCompetitionApiResponse>('/profile/competition/all/' + userId)
+    }
+
     public getProfileRecords(userId: string){
       return this.get<GetProfileRecordsApiResponse>('/records/' + userId)
     }

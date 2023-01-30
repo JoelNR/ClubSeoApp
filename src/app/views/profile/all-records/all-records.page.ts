@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
-import { ProfileCompetitions } from 'src/app/models/profile';
+import { ProfileRecords } from 'src/app/models/profile';
 import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
-  selector: 'app-all-competitions',
-  templateUrl: './all-competitions.page.html',
-  styleUrls: ['./all-competitions.page.scss'],
+  selector: 'app-all-records',
+  templateUrl: './all-records.page.html',
+  styleUrls: ['./all-records.page.scss'],
 })
-export class AllCompetitionsPage extends CapacitorBase implements OnInit {
+export class AllRecordsPage extends CapacitorBase implements OnInit {
 
-  competitionArray: ProfileCompetitions[] = []
+  recordsArray: ProfileRecords[] = []
   searchKeyword: string = ""
   results: any
   userId: string
@@ -36,20 +36,20 @@ export class AllCompetitionsPage extends CapacitorBase implements OnInit {
 
   private getCompetitions(id: string) {
     this.ngxService.startLoader("loader-news");
-    this.profileService.getAllProfileCompetition(id).subscribe(res => {
-      this.competitionArray = res.data.competitions;
-      this.results = this.competitionArray;
+    this.profileService.getProfileRecords(id).subscribe(res => {
+      this.recordsArray = res.data.records;
+      this.results = this.recordsArray;
       this.ngxService.stopLoader("loader-news");
     });
   }
 
   search(){
     if (this.searchKeyword === "") {
-      this.results = [...this.competitionArray]
+      this.results = [...this.recordsArray]
       return
     }
 
-    this.results = this.competitionArray.filter(result => result.competition.title.toLowerCase().includes(this.searchKeyword.toLowerCase()))
+    this.results = this.recordsArray.filter(result => result.record.category.toLowerCase().includes(this.searchKeyword.toLowerCase()))
   }
 
   handleRefresh(event) {
