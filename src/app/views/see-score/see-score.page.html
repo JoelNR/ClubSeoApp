@@ -33,7 +33,7 @@
     </div>
   </div>
   <ion-fab *ngIf="competitionModel" slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button [href]="'/competicion/puntuar/'+ competitionModel.id + '#start'">
+    <ion-fab-button [href]="'/competiciones/'+ competitionModel.id + '/puntuacion/'+ archer.archer.user_id + '#start'">
       <ion-icon name="chevron-up-circle"></ion-icon>
     </ion-fab-button>
   </ion-fab>
