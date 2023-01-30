@@ -24,7 +24,7 @@
             <p class="pr-3">
               Arquero:
             </p>
-            <ion-list  class="p-0 rounded-xl mr-3">
+            <ion-list *ngIf="selectedArcher"  class="p-0 rounded-xl mr-3">
               <ion-item
                 class="bg-blue-50 text-nightblue rounded-xl border border-solid dark:border-clear border-nightblue-100">
                 <ion-select [interface]="mobile ? '' : 'popover'" [placeholder]="selectedArcher.archer.first_name + selectedArcher.archer.last_name"
