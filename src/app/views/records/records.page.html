@@ -8,7 +8,7 @@
       <h1 class="pt-28 pb-6 text-center uppercase">
         Nuestros records
       </h1>
-      <div class="relative w-full mb-8 rounded-xl border border-solid dark:border-clear border-nightblue-100 p-4">
+      <div class="relative w-full mb-8 rounded-3xl border border-solid dark:border-clear border-nightblue-100 p-4">
         <div *ngIf="outdoorRecords">
           <h2 (click)="openOutdoor = !openOutdoor" [ngClass]="{'pb-6': openOutdoor}" class="w-full flex justify-between items-center">
             Records de aire libre
@@ -29,7 +29,7 @@
             <ion-icon  class="transition duration-300 text-2xl" color="primary" [ngClass]="{'transform rotate-180': openIndoor}" name="chevron-down-circle-outline"></ion-icon>
           </h2>
           <div *ngIf="openIndoor" class="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div *ngFor="let record of indoorRecords; let i = index;"  class="p-3 h-fit rounded-3xl border border-solid dark:border-clear border-nightblue-100 w-full">
+            <div *ngFor="let record of indoorRecords; let i = index;"  class="p-3 h-fit rounded-xl border border-solid dark:border-clear border-nightblue-100 w-full">
               <app-club-records-card [record]="record"></app-club-records-card>
             </div>            
           </div>

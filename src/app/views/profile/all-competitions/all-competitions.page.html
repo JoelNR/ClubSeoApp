@@ -1,0 +1,42 @@
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="flex flex-col h-full">
+    <app-header></app-header>
+    <div class="flex flex-col text-center grow w-full lg:max-w-290 px-5 sm:px-8 justify-center mx-auto">
+      <h1 class="pt-28 pb-6 ">
+        Todas las competiticiones del perfil
+      </h1>
+      <div class="w-full flex justify-start mb-5 sm:mb-8">
+        <app-back-button [locationBack]="true"></app-back-button>
+      </div>
+      <div class="mb-5 sm:mb-8">
+        <ion-searchbar search-icon="search-outline" [(ngModel)]="searchKeyword" (ionChange)="search()" name="searchKeyword" placeholder="Buscar una noticia">
+        </ion-searchbar>
+      </div>
+      <div class="mb-8 relative rounded-3xl p-2 sm:py-5 md:pl-5  border border-solid border-white dark:border-nightblue-80">
+        <h3 class="pb-4" *ngIf="searchKeyword == ''">
+          Todas las competiticiones
+        </h3>
+        <div *ngIf="searchKeyword != ''" class="flex flex-col sm:flex-row sm:justify-between mb-4 sm:pb-0">
+          <h3 class="pb-4 sm:pb-0">
+            Competiticiones para la busqueda de {{searchKeyword}}
+          </h3>
+          <ion-button color="primary" class="h-7 lg:pr-2 xl:pr-3" (click)="searchKeyword = '';">
+            Reiniciar busqueda
+        </ion-button>          
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+          <div *ngFor="let competition of results" class="px-2 pb-4 w-full">
+            <app-competition-results-card [profileCompetition]="competition"></app-competition-results-card>
+          </div>        
+        </div>
+        <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-news" fgsPosition="top-center" fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
+        </ngx-ui-loader>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </div>
+</ion-content>

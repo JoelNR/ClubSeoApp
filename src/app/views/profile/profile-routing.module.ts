@@ -7,7 +7,12 @@ const routes: Routes = [
   {
     path: '',
     component: ProfilePage
+  },
+  {
+    path: 'competiciones',
+    loadChildren: () => import('./all-competitions/all-competitions.module').then( m => m.AllCompetitionsPageModule)
   }
+
 ];
 
 @NgModule({

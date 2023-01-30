@@ -1,0 +1,19 @@
+ion-searchbar {
+    --color: @apply text-nightblue-100;
+    --border-radius: 30px;
+    --icon-color: @apply text-nightblue-100;
+    --placeholder-color: @apply text-nightblue-100;
+    --box-shadow: none;
+    --placeholder-font-weight: 500;
+    --placeholder-opacity: 0.75;
+    padding: 0px;
+    @apply rounded-3xl  text-left w-full;
+     ::ng-deep {
+        .searchbar-input-container {
+            @apply rounded-3xl;
+        }
+    }
+    input {
+        @apply py-3;
+    }
+}
