@@ -84,6 +84,7 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
     this.competitionService.submitInscription(this.competitionModel.id,this.userCategory, parseInt(this.userDistance.split(' ')[0])).subscribe(res=>{
       if (res.data.success){
         this.getCompetitionData()
+        this.getProfileData();
       }
     })
   }
