@@ -21,7 +21,7 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
   ]
   profileOptions = [
     { label: 'Perfil',icon: 'finger-print-outline', link: '/perfil/self' },
-    { label: 'Entrenamiento',icon: 'analytics-outline', link: '/construccion' },
+    { label: 'Entrenamiento',icon: 'analytics-outline', link: '/entrenamientos' },
     { label: 'Regulación',icon: 'construct-outline', link: '/construccion' },
     { label: 'Ejercicios',icon: 'fitness-outline', link: '/construccion' },
     { label: 'Timer',icon: 'alarm-outline', link: '/timer' },

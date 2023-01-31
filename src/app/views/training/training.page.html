@@ -1,9 +1,112 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Training</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="flex flex-col h-full">
+    <app-header></app-header>
+    <div class="flex flex-col text-center grow w-full lg:max-w-290 px-5 sm:px-8 mx-auto">
+      <h1 class="pt-28 pb-6 ">
+        Entrenamientos
+      </h1>
+      <div class="w-full flex justify-between mb-5 sm:mb-8">
+        <app-back-button [locationBack]="true"></app-back-button>
+        <ion-button color="primary" (click)="createInterface = true">
+          <div class="text-white">
+            Nuevo entrenamiento
+          </div>
+        </ion-button>
+      </div>
+      <div class="py-6" *ngIf="createInterface">
+        <h3>
+          Creación de un nuevo entrenamiento
+        </h3>
+        
+        <div class="flex flex-col sm:flex-row w-full pb-4 items-center justify-center">
+          <div class="w-full pb-6 sm:pb-0 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <div class="py-3 text-start text-orange-100 text-xs">Modalidad</div>
+              <ion-list class="p-0 rounded-2xl border border-solid border-nightblue-100">
+                <ion-item class="bg-blue-50 text-nightblue border-0">
+                  <ion-select [placeholder]="userModality || 'Selecciona categoría'" [value]="userModality"
+                    (ionChange)="changeModality($event)">
+                    <ion-select-option *ngFor="let modality of modalityOptions"
+                      [value]="modality">{{modality}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>              
+            </div>
+            <div>
+              <div class="py-3 text-start text-orange-100 text-xs">Categoría</div>
+              <ion-list class="p-0 rounded-2xl border border-solid border-nightblue-100">
+                <ion-item class="bg-blue-50 text-nightblue border-0">
+                  <ion-select [placeholder]="userCategory || 'Selecciona categoría'" [value]="userCategory"
+                    (ionChange)="changeCategory($event)">
+                    <ion-select-option *ngFor="let category of categoryOptions"
+                      [value]="category">{{category}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>              
+            </div>
+            <div>
+              <div class="pt-3 text-start text-orange-100 text-xs">Distancia</div>
+              <ion-list class="mt-4 p-0 rounded-2xl border border-solid border-nightblue-100">
+                <ion-item class="bg-blue-50 text-nightblue border-0">
+                  <ion-select [disabled]="!userCategory"
+                    [placeholder]="userCategory ? 'Selecciona una distancia' : 'Seleccione una categoría primero'"
+                    [value]="userDistance" (ionChange)="changeDistance($event)">
+                    <ion-select-option *ngFor="let distance of distanceOptions"
+                      [value]="distance">{{distance}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>              
+            </div>
+            <div class="">
+              <div class="pt-3 pb-2 text-start text-orange-100 text-xs">Nombre</div>
+              <app-input class="h-12" placeholder="Nombre" type="text" [(value)]="userTitle" [disableValidator]="true"></app-input>              
+            </div>
+          </div>
+        </div>
+        <div class="flex w-full justify-between">
+          <ion-button class="h-6 w-full max-w-xs" [disabled]="!userCategory || !userDistance || !userTitle" color="primary"
+          expand="block" (click)="create()">
+          Crear
+        </ion-button>
+          <ion-button class="h-6 w-fit" color="primary" size="small" expand="block"
+            (click)="createInterface = false">
+            Ocultar
+          </ion-button>
+        </div>
 
+      </div>
+      <div class="mb-5 sm:mb-8">
+        <ion-searchbar search-icon="search-outline" [(ngModel)]="searchKeyword" (ionChange)="search()"
+          name="searchKeyword" placeholder="Buscar un entrenamiento">
+        </ion-searchbar>
+      </div>
+      <div
+        class="mb-8 relative rounded-3xl p-2 sm:py-5 md:pl-5  border border-solid border-white dark:border-nightblue-80">
+        <h3 class="pb-4" *ngIf="searchKeyword == ''">
+          Todos los entrenamientos
+        </h3>
+        <div *ngIf="searchKeyword != ''" class="flex flex-col sm:flex-row sm:justify-between mb-4 sm:pb-0">
+          <h3 class="pb-4 sm:pb-0">
+            Entrenamientos para la busqueda de {{searchKeyword}}
+          </h3>
+          <ion-button color="primary" class="h-7 lg:pr-2 xl:pr-3" (click)="searchKeyword = '';">
+            Reiniciar busqueda
+          </ion-button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+          <div *ngFor="let competition of results" class="px-2 pb-4 w-full">
+            <app-competition-results-card [profileCompetition]="competition"></app-competition-results-card>
+          </div>
+        </div>
+        <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-all-competitions"
+          fgsPosition="top-center" fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
+        </ngx-ui-loader>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </div>
 </ion-content>
