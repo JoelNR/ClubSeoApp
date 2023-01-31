@@ -65,7 +65,11 @@ const routes: Routes = [
   {
     path: 'competiciones/:id/puntuacion/:user',
     loadChildren: () => import('./views/see-score/see-score.module').then( m => m.SeeScorePageModule)
+  },  {
+    path: 'training',
+    loadChildren: () => import('./views/training/training.module').then( m => m.TrainingPageModule)
   },
+
 
 
 

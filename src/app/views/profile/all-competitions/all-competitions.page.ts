@@ -35,11 +35,11 @@ export class AllCompetitionsPage extends CapacitorBase implements OnInit {
   }
 
   private getCompetitions(id: string) {
-    this.ngxService.startLoader("loader-news");
+    this.ngxService.startLoader("loader-all-competitions");
     this.profileService.getAllProfileCompetition(id).subscribe(res => {
       this.competitionArray = res.data.competitions;
       this.results = this.competitionArray;
-      this.ngxService.stopLoader("loader-news");
+      this.ngxService.stopLoader("loader-all-competitions");
     });
   }
 

@@ -56,7 +56,7 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
       'Accept': 'application/json',
     }
 
-    this.http.get<GetWeatherApiResponse>('https://api.open-meteo.com/v1/forecast?latitude=28.0714&longitude=-15.4459&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,rain,weathercode,cloudcover,windspeed_10m,winddirection_10m,windgusts_10m&start_date='
+    this.http.get<GetWeatherApiResponse>('https://api.open-meteo.com/v1/forecast?latitude=28.0714&longitude=-15.4459&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,weathercode,cloudcover,windspeed_10m,winddirection_10m,windgusts_10m&start_date='
     + date + 
     '&end_date=' + date
     , {
@@ -74,7 +74,7 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
 
   private treatWeatherData() {
     this.weatherModel.apparent_temperature = this.weatherModel.apparent_temperature.slice(16, 22);
-    this.weatherModel.rain = this.weatherModel.rain.slice(16, 22);
+    this.weatherModel.precipitation = this.weatherModel.precipitation.slice(16, 22);
     this.weatherModel.relativehumidity_2m = this.weatherModel.relativehumidity_2m.slice(16, 22);
     this.weatherModel.weathercode = this.weatherModel.weathercode.slice(16, 22);
     this.weatherModel.temperature_2m = this.weatherModel.temperature_2m.slice(16, 22);

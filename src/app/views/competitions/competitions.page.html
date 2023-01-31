@@ -8,13 +8,38 @@
       <h1 class="pt-28 pb-6 text-center uppercase">
         Competiciones  
       </h1>
-      <div class="relative grid grid-cols-1 lg:grid-cols-3 gap-4 w-full mb-8 rounded-3xl border border-solid border-white p-4">
-        <div *ngFor="let competition of competitionArray">
-          <app-competition-card [date]="competition.date" [description]="competition.description" 
-          [id]="competition.id" [modality]="competition.modality" [title]="competition.title" [image]="competition.image"></app-competition-card>
+      <div class="mb-5 sm:mb-8">
+        <ion-searchbar search-icon="search-outline" [(ngModel)]="searchKeyword" (ionChange)="search()" name="searchKeyword" placeholder="Buscar una competición">
+        </ion-searchbar>
+      </div>
+      <div class="relative w-full mb-8 rounded-3xl border border-solid border-white p-4">
+        <h3 class="pb-4" *ngIf="searchKeyword == ''">
+          Todas las competiticiones
+        </h3>
+        <div *ngIf="searchKeyword != ''" class="flex flex-col sm:flex-row sm:justify-between mb-4 sm:pb-0">
+          <h3 class="pb-4 sm:pb-0">
+            Competiticiones para la busqueda de {{searchKeyword}}
+          </h3>
+          <ion-button color="primary" class="h-7 lg:pr-2 xl:pr-3" (click)="searchKeyword = '';">
+            Reiniciar busqueda
+        </ion-button>          
         </div>
-        <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-competition" fgsPosition="top-center" fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
-        </ngx-ui-loader>
+        <h3 *ngIf="results.length > 0" class="pt-4">Competiciones futuras</h3>  
+        <div class="pt-4 grid grid-cols-1 lg:grid-cols-3 gap-4 ">
+          <div *ngFor="let competition of results">
+            <app-competition-card [date]="competition.date" [description]="competition.description" 
+            [id]="competition.id" [modality]="competition.modality" [title]="competition.title" [image]="competition.image"></app-competition-card>
+          </div>
+        </div> 
+        <h3 *ngIf="pastResults.length > 0" class="pt-4">Competiciones pasadas</h3>  
+        <div class="pt-4 grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div *ngFor="let competition of pastResults">
+            <app-competition-card [date]="competition.date" [description]="competition.description" 
+            [id]="competition.id" [modality]="competition.modality" [title]="competition.title" [image]="competition.image"></app-competition-card>
+          </div>
+        </div>           
+         <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-competition" fgsPosition="top-center" fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
+        </ngx-ui-loader>   
       </div>
     </div>
     <app-footer></app-footer>

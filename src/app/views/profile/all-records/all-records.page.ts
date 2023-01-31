@@ -35,11 +35,11 @@ export class AllRecordsPage extends CapacitorBase implements OnInit {
   }
 
   private getCompetitions(id: string) {
-    this.ngxService.startLoader("loader-news");
+    this.ngxService.startLoader("loader-all-records");
     this.profileService.getProfileRecords(id).subscribe(res => {
       this.recordsArray = res.data.records;
       this.results = this.recordsArray;
-      this.ngxService.stopLoader("loader-news");
+      this.ngxService.stopLoader("loader-all-records");
     });
   }
 
