@@ -10,6 +10,7 @@ export class SeeSetComponent implements OnInit {
   @Input() disabledSet: boolean = false
   @Input() modality: string
   @Input() category: string
+  @Input() disableScoreFunction: boolean
 
   showSelectPoints: boolean = false
   finishedSet: boolean

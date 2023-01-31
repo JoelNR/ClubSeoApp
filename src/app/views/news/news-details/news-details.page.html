@@ -24,7 +24,7 @@
           <div class="pb-4 w-full flex justify-end">
             <app-date-chip [date]="newsModel.date"></app-date-chip>
           </div>
-          <ion-textarea class="text-justify w-full h-full">
+          <ion-textarea readonly="true" class="cursor-none text-justify cursor- w-full h-full">
             {{newsModel.content}}
           </ion-textarea>
         </div>

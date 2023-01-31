@@ -46,3 +46,22 @@ export interface GetCompetitionTargetByIdApiResponse{
         archers?: CompetitionArcherModel[]
     }
 }
+
+
+export interface Records {
+    competition: CompetitionModel
+    record: {category: string
+            distance: number
+            points: number
+            modality: string}
+    profile: ProfileModel
+}
+
+export interface GetRecordsApiResponse{
+    data: {
+        outdoor_records: Records[]
+        indoor_records: Records[]
+        message: string
+        success: boolean
+    }
+}

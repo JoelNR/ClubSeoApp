@@ -9,6 +9,7 @@ export class NumberComponent implements OnInit {
   @Input() number: any
   @Input() disableColor: boolean = false
   @Input() markAsEdit: boolean = false
+  @Input() disableScoreFunction: boolean
   @Output() emitEdit: EventEmitter<any> = new EventEmitter()
   
   constructor() { }
@@ -16,7 +17,8 @@ export class NumberComponent implements OnInit {
   ngOnInit() {}
 
   emit(){
-    this.emitEdit.emit()
+    if(!this.disableScoreFunction){
+      this.emitEdit.emit()
+    }
   }
-
 }

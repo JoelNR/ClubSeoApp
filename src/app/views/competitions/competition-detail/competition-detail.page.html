@@ -40,7 +40,8 @@
           <p class="sm:w-1/4">Nombre</p>
           <p class="sm:w-1/4 sm:justify-end flex">Categoría</p>
           <p class="sm:w-1/4 sm:justify-end flex">Diana</p>
-          <p class="sm:w-1/4 sm:justify-end flex">Puntos</p>
+          <p class="sm:w-1/4 sm:justify-end flex">Puntos
+          </p>
         </div>
         <div *ngIf="competitionArchers && competitionArchers.length > 0"
           class="px-4 py-2 border border-solid border-nightblue dark:border-clear rounded-3xl">
@@ -48,7 +49,7 @@
             class="flex flex-col sm:flex-row sm:justify-between py-2"
             [ngClass]="{'border-solid border-b' : i != competitionArchers.length-1}">
             <div class="flex sm:w-1/4" [routerLink]="'/perfil/' + participant.archer.user_id">
-              <img [src]="participant.archer.image || '/assets/img/default-avatar.png'" alt="" class="h-7 w-7 object-cover">
+              <img [src]="participant.archer.image || '/assets/img/default-avatar.png'" alt="" class="rounded-full h-7 w-7 object-cover">
               <p class="pl-3 cursor-pointer flex items-center">
                 {{participant.archer.first_name + ' ' + participant.archer.last_name}}
               </p>
@@ -59,9 +60,13 @@
             <div class="flex pb-2 sm:p-0 sm:w-1/4 sm:justify-end items-center">
               {{parseDistanceText(i)}}
             </div>
-            <div class="flex sm:w-1/4 sm:justify-end items-center">
+            <div  class="flex justify-between sm:w-1/4 sm:justify-end items-center">
               {{participant.points}}
+              <ion-button *ngIf="participant.points > 0" class="h-6 w-fit ml-3" fill="outline" size="small" color="primary" [routerLink]="'/competiciones/'+ competitionModel.id + '/puntuacion/' + participant.archer.user_id">
+                Ver detalles
+              </ion-button>
             </div>
+            
           </div>
         </div>
         <div *ngIf="competitionArchers && competitionArchers.length == 0"
@@ -82,7 +87,7 @@
           <div *ngIf="!userNotRegisted" class="py-3 text-orange-100 text-xs">Categoría</div>
           <div *ngIf="!userNotRegisted" class="flex flex-col sm:flex-row w-full pb-4 items-center justify-center">
             <div class="w-full pb-6 sm:pb-0 sm:pr-6">
-              <ion-list class="p-0 rounded-2xl">
+              <ion-list class="p-0 rounded-2xl border border-solid border-nightblue-100">
                 <ion-item class="bg-blue-50 text-nightblue border-0">
                   <ion-select [placeholder]="userCategory || 'Selecciona categoría'" [value]="userCategory"
                     (ionChange)="changeCategory($event)">
@@ -92,7 +97,7 @@
                 </ion-item>
               </ion-list>
               <div *ngIf="!userNotRegisted" class="pt-3 text-orange-100 text-xs">Distancia</div>
-              <ion-list class="mt-4 p-0 rounded-2xl">
+              <ion-list class="mt-4 p-0 rounded-2xl border border-solid border-nightblue-100">
                 <ion-item class="bg-blue-50 text-nightblue border-0">
                   <ion-select [disabled]="!userCategory" [placeholder]="userCategory ? 'Selecciona una distancia' : 'Seleccione una categoría primero'" [value]="userDistance"
                     (ionChange)="changeDistance($event)">
@@ -108,7 +113,7 @@
             </ion-button>
           </div>
           <p *ngIf="userNotRegisted" class="mb-2">
-            Para poder inscribirte a una clase de iniciación, deberás primero
+            Para poder inscribirte a una competición, deberás primero
             <span routerLink="/registro" class="underline text-orange cursor-pointer">registrarte</span> o
             <span routerLink="/login" class="underline text-orange cursor-pointer">iniciar sesión</span> si ya tienes
             cuenta.

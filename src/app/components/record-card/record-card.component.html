@@ -2,26 +2,26 @@
 <div class="flex flex-col text-left rounded-xl shadow-none w-full max-h-fit p-3 border border-solid border-nightblue-80 bg-blue-50">
   <div class="flex justify-between pb-2 border-b border-solid border-clear">
     <div class="text-nightblue-100 ">
-      {{recordName}}
+      Arco {{recordModel.record.category}}
     </div>  
 
     <div class="text-nightblue-100 ">
-      {{points}} puntos
+      {{recordModel.record.points}} puntos
     </div>
   </div>
   <div class="flex justify-between py-2 border-b border-solid border-clear">
     <div class=" text-nightblue-100 ">
-      {{type}}
+      {{recordModel.record.modality}}
     </div>    
     <div class="text-nightblue-100 ">
-      {{distance}} metros
+      {{recordModel.record.distance}} metros
     </div> 
   </div> 
   <div class="flex pt-2 justify-between">
     <div class="text-nightblue-100 ">
-        {{date}}
+        {{parseDateFormat(recordModel.competition.date)}}
     </div>
-    <ion-button routerLink="/construccion" class="m-0 h-5" color="primary" size="small" fill="outline">
+    <ion-button [routerLink]="'/competiciones/' + recordModel.competition.id + '/puntuacion/' + userId" class="m-0 h-5" color="primary" size="small" fill="outline">
       Más info
     </ion-button>    
   </div>   

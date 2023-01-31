@@ -3,7 +3,7 @@
         <h3 *ngIf="i == 1 ? showSecondRound : true" class="pt-2 text-center">
             {{i+1}}ª Ronda
         </h3>
-        <app-see-round *ngIf="i == 1 ? showSecondRound : true" [archerId]="archerId" [roundModel]="round" [modality]="modality" [category]="category" (emitFinish)="showNewRound()" (emitRound)="emitTotal($event)"></app-see-round>
+        <app-see-round *ngIf="i == 1 ? showSecondRound : true" [disableScoreFunction]="disableScoreFunction" [archerId]="archerId" [roundModel]="round" [modality]="modality" [category]="category" (emitFinish)="showNewRound()" (emitRound)="emitTotal($event)"></app-see-round>
     </div>
     <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" [loaderId]="'loader-score-component'+ archerId" fgsPosition="top-center" fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
     </ngx-ui-loader>

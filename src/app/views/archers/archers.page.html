@@ -10,7 +10,7 @@
       </h1>
       <div *ngIf="profileModels" class="relative grid grid-cols-1 lg:grid-cols-3 gap-4 w-full mb-8 rounded-3xl border border-solid dark:border-clear border-nightblue-100 p-4">
         <div *ngFor="let profileModel of profileModels;" routerLink="/perfil/{{profileModel.user_id}}"
-          class="flex flex-col sm:flex-row lg:flex-col h-fit items-center cursor-pointer justify-between lg:justify-center w-full p-4 bg-clear-bg dark:bg-nightblue-60 rounded-2xl border border-solid border-white">
+          class="flex flex-col sm:flex-row lg:flex-col h-fit items-center cursor-pointer justify-between lg:justify-center w-full p-4 bg-clear-bg dark:bg-nightblue-60 rounded-2xl border border-solid border-nightblue-100">
           <div class="relative">
             <img
               class="rounded-full w-40 h-40 mr-4 lg:mr-0 object-cover border-2 border-solid border-nightblue-90  dark:border-clear"

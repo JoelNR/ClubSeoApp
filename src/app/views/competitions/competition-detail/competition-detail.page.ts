@@ -32,7 +32,11 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
   }
 
   ngOnInit() {
-    this.getCompetitionData();
+
+    this.getCompetitionData();        
+    this.route.url.subscribe(res=>{
+          this.getProfileData();
+    })
   }
 
   private getCompetitionData() {
@@ -48,7 +52,6 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
         this.competitionArchers = res.data.usersArray;
         this.competitionArchers.sort((a,b) => a.target_number-b.target_number)
         this.setDistancesOptions()
-        this.getProfileData();
         this.ngxService.stopLoader('loader-competition-details');
       });
 
@@ -62,6 +65,9 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
         this.userSignedUp = this.competitionArchers.some(archer => archer.archer.user_id == localStorage.getItem('user_id'))
       }) 
       this.userNotRegisted = false     
+    } else {
+      this.userNotRegisted = true 
+      this.userSignedUp = false
     }
   }
 
@@ -78,6 +84,7 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
     this.competitionService.submitInscription(this.competitionModel.id,this.userCategory, parseInt(this.userDistance.split(' ')[0])).subscribe(res=>{
       if (res.data.success){
         this.getCompetitionData()
+        this.getProfileData();
       }
     })
   }

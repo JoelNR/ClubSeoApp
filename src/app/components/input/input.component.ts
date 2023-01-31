@@ -9,12 +9,12 @@ interface ValidationFunction { (text: string): string | null }
 })
 export class InputComponent extends CapacitorBase implements OnInit {
 
-  @Input() type: string = 'text'; //email, password
+  @Input() type: string = 'text' //email, password
   @Input() placeholder: string
-  @Input() value: string = '';
+  @Input() value: string = ''
   @Input() validate: ValidationFunction
-  @Input() matchingValue: string;
-
+  @Input() matchingValue: string
+  @Input() disableValidator: boolean = false
   @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
 
   isShown: boolean = true;
@@ -39,7 +39,7 @@ export class InputComponent extends CapacitorBase implements OnInit {
       if (this.value === '') {
         this.value = undefined
       }
-    } else {
+    } else if(!this.disableValidator){
       this.errorMessage = this.validate(this.value);
       this.isShown = true
       if (this.value === '') {

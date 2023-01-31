@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import * as dayjs from 'dayjs';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
+import { ProfileCompetitions } from 'src/app/models/profile';
 
 @Component({
   selector: 'app-competition-results-card',
@@ -7,19 +9,16 @@ import { CapacitorBase } from 'src/app/lib/CapacitorBase';
   styleUrls: ['./competition-results-card.component.scss'],
 })
 export class CompetitionResultsCardComponent extends CapacitorBase implements OnInit {
-
-  @Input() name: string
-  @Input() date: string 
-  @Input() position: number
-  @Input() points: number 
-  @Input() category: string 
-  @Input() distance: number
-  @Input() type: string
+  @Input() profileCompetition: ProfileCompetitions
 
   constructor() { 
     super()
   }
 
   ngOnInit() {}
+
+  parseDateFormat(date: string){
+    return dayjs(date).format('DD/MM/YYYY')
+  }
 
 }
