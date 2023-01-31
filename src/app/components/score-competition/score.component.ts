@@ -16,6 +16,7 @@ export class ScoreComponent implements OnInit {
   @Input() competitionId: string
   @Input() archerId: string
   @Input() category: string
+  @Input() disableScoreFunction: boolean = false
   doNotEmit: boolean = true
   @Output() emitPoints: EventEmitter<number> = new EventEmitter()
   showSecondRound: boolean = false
@@ -30,10 +31,8 @@ export class ScoreComponent implements OnInit {
     this.scoreService.storeScore(this.archerId, this.competitionId).subscribe(res => {
       this.scoreModel = res.data.score
       this.emitPoints.emit(this.scoreModel.points)
-      this.scoreService.storeRound(this.archerId, this.scoreModel.id).subscribe(res => {
-        this.roundsArray = res.data.rounds
-        this.ngxService.stopLoader('loader-score-component' +  this.archerId);
-      })
+      this.roundsArray = res.data.rounds
+      this.ngxService.stopLoader('loader-score-component' +  this.archerId);
     })
   }
 

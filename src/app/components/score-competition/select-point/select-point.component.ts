@@ -16,11 +16,17 @@ export class SelectPointComponent implements OnInit {
 
   ngOnInit() {
     if(this.modality== 'Sala'){
-      if(this.category != 'Desnudo'){
-        this.pointArray.splice(6,5)
-      }
-      
       this.pointArray.splice(0,1)
+      if(this.category != 'Desnudo'){
+        this.pointArray.splice(6,4)
+        if(this.category == 'Olímpico' || this.category == 'Poleas'){
+          this.pointArray.splice(5,1)
+        }
+      }
+    } else {
+      if(this.category == 'Poleas'){
+        this.pointArray.splice(7,4)
+      }
     }
   }
 

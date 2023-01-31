@@ -54,6 +54,20 @@ const routes: Routes = [
     path: 'competicion',
     loadChildren: () => import('./views/competitions/competitions.module').then( m => m.CompetitionsPageModule)
   },
+  {
+    path: 'timer',
+    loadChildren: () => import('./views/timer/timer.module').then( m => m.TimerPageModule)
+  },
+  {
+    path: 'plusmarcas',
+    loadChildren: () => import('./views/records/records.module').then( m => m.RecordsPageModule)
+  },
+  {
+    path: 'competiciones/:id/puntuacion/:user',
+    loadChildren: () => import('./views/see-score/see-score.module').then( m => m.SeeScorePageModule)
+  },
+
+
 
 
 

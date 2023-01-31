@@ -65,5 +65,6 @@ export interface GetScoreApiResponse{
         message: string
         success: boolean
         score: ScoreModel
+        rounds: RoundModel[]
     }
 }

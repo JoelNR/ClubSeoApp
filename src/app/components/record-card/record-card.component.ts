@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import * as dayjs from 'dayjs';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
+import { ProfileRecords } from 'src/app/models/profile';
 
 @Component({
   selector: 'app-record-card',
@@ -7,12 +9,8 @@ import { CapacitorBase } from 'src/app/lib/CapacitorBase';
   styleUrls: ['./record-card.component.scss'],
 })
 export class RecordCardComponent extends CapacitorBase implements OnInit {
-
-  @Input() recordName : string
-  @Input() distance: number
-  @Input() type: string 
-  @Input() date: string  
-  @Input() points: number
+  @Input() recordModel: ProfileRecords
+  @Input() userId: string
 
   constructor() {
     super()
@@ -20,4 +18,7 @@ export class RecordCardComponent extends CapacitorBase implements OnInit {
 
   ngOnInit() {}
 
+  parseDateFormat(date: string){
+    return dayjs(date).format('DD/MM/YYYY')
+  }
 }

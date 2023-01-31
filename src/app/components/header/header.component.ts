@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MenuController, PopoverController } from '@ionic/angular';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 import { ModalService } from 'src/app/services/modal.service';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -17,17 +17,18 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
     { label: 'Iniciación',icon: 'megaphone-outline', link: '/iniciacion' },
     { label: 'Competiciones',icon: 'trophy-outline', link: '/competicion' },
     { label: 'Arqueros',icon: 'body-outline', link: '/arqueros' },
-    { label: 'Plusmarcas',icon: 'sparkles-outline', link: '/construccion' },
+    { label: 'Plusmarcas',icon: 'sparkles-outline', link: '/plusmarcas' },
   ]
   profileOptions = [
     { label: 'Perfil',icon: 'finger-print-outline', link: '/perfil/self' },
     { label: 'Entrenamiento',icon: 'analytics-outline', link: '/construccion' },
     { label: 'Regulación',icon: 'construct-outline', link: '/construccion' },
     { label: 'Ejercicios',icon: 'fitness-outline', link: '/construccion' },
-    { label: 'Timer',icon: 'alarm-outline', link: '/construccion' },
+    { label: 'Timer',icon: 'alarm-outline', link: '/timer' },
   ]
 
   trigger: string
+  triggerOption: number = 0
   openProfileMenu: boolean = false
   userLogged: boolean = false
   profileImage: string = '/assets/img/default-avatar.png'
@@ -39,18 +40,22 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
     private menu: MenuController,
     private modalService: ModalService,
     private registerService: RegisterService,
-    private profileService: ProfileService) {
+    private profileService: ProfileService,
+    private route: ActivatedRoute) {
     super()
   }
 
   ngOnInit() {
     this.trigger = this.router.url
-    if(localStorage.getItem('seo-token')){
-      this.userLogged = true
-      this.profileService.profile(localStorage.getItem('user_id')).subscribe(res => {
-        this.profileImage = res.data.profile.image
-      })
-    }
+    this.route.url.subscribe(res => {
+      if(localStorage.getItem('seo-token')){
+        this.trigger += localStorage.getItem('user_id')
+        this.userLogged = true
+        this.profileService.profile(localStorage.getItem('user_id')).subscribe(res => {
+          this.profileImage = res.data.profile.image
+        })
+      }      
+    })
   }
 
   isActive(link: string) {
@@ -65,6 +70,15 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
 
   closeMenu() {
     this.menu.close('end' + this.trigger);
+  }
+
+  @ViewChild('popover') popover
+
+  isOpen = false
+
+  presentPopover(e: Event) {
+    this.popover.event = e
+    this.isOpen = true
   }
 
   navigate(link: string) {
@@ -84,7 +98,7 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
         if(res.data.success){
           this.registerService.logout()
           this.userLogged = false
-          this.router.navigate(['/inicio', {replaceUrl: true}])
+          this.router.navigate(['/inicio'])
         }
       })
       ,this.modalService.dismiss()}},

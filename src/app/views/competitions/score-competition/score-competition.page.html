@@ -1,12 +1,12 @@
 <ion-content>
   <div class="flex flex-col h-full">
     <app-header></app-header>
-    <div *ngIf="archers" class="flex flex-col grow text-justify w-full lg:max-w-290 px-5 sm:px-8 justify-center mx-auto">
+    <div *ngIf="archers" class="flex flex-col grow text-justify w-full lg:max-w-290 px-5 sm:px-8 mx-auto">
       <h1 id='start' class="pt-28 pb-6 text-center uppercase">
         Puntuar la competición      
       </h1>
       <app-back-button [link]="'/competicion/detalles/' + competitionModel.id"></app-back-button>
-      <div class="fixed z-10 p-1 bottom-4 left-4 flex items-center px-5 bg-clear dark:bg-nightblue border border-solid dark:border-clear border-nightblue-100 rounded-3xl">
+      <div *ngIf="archers.length > 1" class="fixed z-10 p-1 bottom-4 left-4 flex items-center px-5 bg-clear dark:bg-nightblue border border-solid dark:border-clear border-nightblue-100 rounded-3xl">
         <ion-icon color="primary" class="mr-3 w-8 h-8" name="arrow-back-circle-outline" (click)="changeIndexLeft()"></ion-icon>
         <ion-icon color="primary" class="mr-3 w-8 h-8" name="arrow-forward-circle-outline" (click)="changeIndexRight()"></ion-icon>  
         <p>
@@ -24,7 +24,7 @@
             <p class="pr-3">
               Arquero:
             </p>
-            <ion-list  class="p-0 rounded-xl mr-3">
+            <ion-list *ngIf="selectedArcher"  class="p-0 rounded-xl mr-3">
               <ion-item
                 class="bg-blue-50 text-nightblue rounded-xl border border-solid dark:border-clear border-nightblue-100">
                 <ion-select [interface]="mobile ? '' : 'popover'" [placeholder]="selectedArcher.archer.first_name + selectedArcher.archer.last_name"

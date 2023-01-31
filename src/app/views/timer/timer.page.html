@@ -1,0 +1,71 @@
+<ion-content>
+  <div class="flex flex-col h-full">
+    <app-header></app-header>
+    <div class="fixed top-20 px-4 w-full flex justify-between">
+      <p class="text-white text-5xl flex w-fit" [ngClass]="{'invisible' : !showActiveTurn}">
+        {{activeTurn}}
+      </p>
+      <div *ngIf="shootCountDownStarted" class="flex w-fit justify-center mx-9 p-2 text-center items-center rounded-2xl border-2 border-solid border-clear">
+        <div (click)="next()" class="text-white w-fit text-3xl"  *ngIf="secondTurnActivated || !showActiveTurn">
+          Terminar
+        </div>
+        <div (click)="next()" class="text-white w-fit text-3xl" *ngIf="!secondTurnActivated && showActiveTurn">
+          Siguiente turno
+        </div>
+        
+      </div>      
+      <div class="flex w-fit justify-end">
+        <ion-icon id="click-trigger" class="cursor-pointer text-white text-5xl" name="ellipsis-vertical"></ion-icon>
+      </div>
+    </div>
+
+    <div class="flex flex-col text-center grow w-full justify-center mx-auto">
+      <div (click)="startClock()" class="text-white text-9xl text-center flex items-center justify-center h-full w-full cursor-pointer"
+      [ngClass]="{'bg-red-700': !shootCountDownStarted,
+                  'bg-green-600': (countDownStarted || countDownStopped) && shootCountDownStarted && countDown >= 30,
+                  'bg-yellow-600': (countDownStarted || countDownStopped) && shootCountDownStarted && countDown < 30}">
+        {{countDown}}
+      </div>
+    </div>
+
+    <ion-popover trigger="click-trigger" triggerAction="click" side="bottom" alignment="end">
+      <ng-template>
+        <ion-content class="ion-padding">
+          <div class="pb-2 w-full">
+            <p>Tiempo</p>
+            <app-input placeholder="Tiempo" type="number" [(value)]="userInput" (valueChange)="changeTime()" [disableValidator]="true"></app-input>
+          </div>
+          <div class="py-2 flex">
+            <ion-checkbox color="primary" slot="start" (ionChange)="checkboxTurn()" [checked]="doubleTurn"></ion-checkbox>
+            <p class="pl-2">Doble turno</p>
+          </div>
+          <p class="pt-2">Tono inicio</p>
+          <ion-list class="p-0 mt-2 rounded-2xl border border-solid border-nightblue-100">
+            <ion-item class="bg-blue-50 text-nightblue border-0">
+              <ion-select [placeholder]="selectedAudioOption.name || 'Selecciona categoría'" [value]="selectedAudioOption"
+                (ionChange)="changeStartAudio($event)">
+                <ion-select-option *ngFor="let audio of audioOptions"
+                  [value]="audio">{{audio.name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <p class="pt-4">Tono final</p>
+          <ion-list class="p-0 mt-2 rounded-2xl border border-solid border-nightblue-100">
+            <ion-item class="bg-blue-50 text-nightblue border-0">
+              <ion-select [placeholder]="selectedFinishAudioOption.name || 'Selecciona categoría'" [value]="selectedFinishAudioOption"
+                (ionChange)="changeEndAudio($event)">
+                <ion-select-option *ngFor="let audio of audioOptions"
+                  [value]="audio">{{audio.name}}</ion-select-option>
+                <ion-select-option *ngFor="let audio of audioFinishOptions"
+                  [value]="audio">{{audio.name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <p (click)="resetTimer()" class="mt-4 bg-orange-100 w-fit rounded-2xl p-2">
+            Reiniciar
+          </p>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
+  </div>
+</ion-content>

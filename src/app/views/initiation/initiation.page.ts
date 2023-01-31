@@ -4,7 +4,7 @@ import { InitiationModel } from 'src/app/models/initiation';
 import { InitiationService } from 'src/app/services/initiation.service';
 import * as dayjs from 'dayjs';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -29,12 +29,17 @@ export class InitiationPage extends CapacitorBase implements OnInit {
   userHasDate: boolean = false
 
   constructor(private initiationService: InitiationService,
-    private ngxService: NgxUiLoaderService, private router: Router) {
+    private ngxService: NgxUiLoaderService, private router: Router,
+    private route: ActivatedRoute) {
     super()
    }
 
   ngOnInit() {
     this.getInitationData();
+
+    this.route.url.subscribe(res=>{
+      this.userId = localStorage.getItem('user_id')
+    })
   }
 
   private getInitationData() {
