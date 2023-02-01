@@ -11,7 +11,7 @@ export class TrainingService extends Api {
     }
 
     public getTrainingById(training_id: string) {
-        return this.get<StoreTrainingApiResponse>('/training/' + localStorage.getItem('user_id'), {training_id})
+        return this.get<StoreTrainingApiResponse>('/training/points/' + training_id)
     }
 
     public storeTraining(modality: string, category: string, distance: number, title: string) {

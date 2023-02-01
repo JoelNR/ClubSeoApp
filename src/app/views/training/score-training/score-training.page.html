@@ -24,9 +24,9 @@
             Modalidad: {{trainingModel.modality}}
           </p>
         </div>
-        <!-- <div class="w-full">
-          <app-score [trainingId]="trainingModel.id" [archerId]="trainingModel.user_id" [modality]="trainingModel.modality" [category]="trainingModel.category" (emitPoints)="setTotal($event, archer.archer.user_id)"></app-score>
-        </div> -->
+        <div class="w-full">
+          <app-score [trainingId]="trainingModel.id" [archerId]="trainingModel.user_id" [modality]="trainingModel.modality" [category]="trainingModel.category" (emitPoints)="setTotal($event)"></app-score>
+        </div>
       </div>
     </div>
   </div>

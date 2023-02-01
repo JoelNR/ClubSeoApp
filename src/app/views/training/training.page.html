@@ -103,6 +103,9 @@
             <app-training-card [training]="training" (emit)="getTrainings()"></app-training-card>
           </div>
         </div>
+        <div *ngIf="trainingsArray.length == 0">
+          Parece que aún no dispones de ningún entramiento. Prueba a crear uno en el botón de arriba.
+        </div>
         <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-trainings" fgsPosition="top-center"
           fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
         </ngx-ui-loader>
