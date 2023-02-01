@@ -99,9 +99,9 @@ export class SeeRoundComponent implements OnInit {
       this.emitRound.emit(this.roundSum[index])
     }
 
-    if(this.roundArray.length != this.numberOfSets){
+    if(this.roundArray.length != this.numberOfSets && index == this.roundArray.length-1){
       this.addNewEmptySet();
-    } else {
+    } else if(this.roundArray.length == this.numberOfSets){
       this.emitFinish.emit(true)
     }
   }

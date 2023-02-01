@@ -17,6 +17,7 @@ export class ScoreComponent implements OnInit {
   @Input() archerId: string
   @Input() category: string
   @Input() disableScoreFunction: boolean = false
+  @Input() trainingId: string
   doNotEmit: boolean = true
   @Output() emitPoints: EventEmitter<number> = new EventEmitter()
   showSecondRound: boolean = false
@@ -27,13 +28,22 @@ export class ScoreComponent implements OnInit {
   ngOnInit() {
 
     this.ngxService.startLoader("loader-score-component"+  this.archerId);
-    
-    this.scoreService.storeScore(this.archerId, this.competitionId).subscribe(res => {
-      this.scoreModel = res.data.score
-      this.emitPoints.emit(this.scoreModel.points)
-      this.roundsArray = res.data.rounds
-      this.ngxService.stopLoader('loader-score-component' +  this.archerId);
-    })
+    if(this.competitionId){
+      this.scoreService.storeScore(this.archerId, this.competitionId).subscribe(res => {
+        this.scoreModel = res.data.score
+        this.emitPoints.emit(this.scoreModel.points)
+        this.roundsArray = res.data.rounds
+        this.ngxService.stopLoader('loader-score-component' +  this.archerId);
+      })      
+    } else if(this.trainingId) {
+      this.scoreService.storeScore(this.archerId, null,this.trainingId).subscribe(res => {
+        this.scoreModel = res.data.score
+        this.emitPoints.emit(this.scoreModel.points)
+        this.roundsArray = res.data.rounds
+        this.ngxService.stopLoader('loader-score-component' +  this.archerId);
+      })  
+    }
+
   }
 
   emitTotal(event: any){
