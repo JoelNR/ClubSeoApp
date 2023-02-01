@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: TrainingPage
+  },
+  {
+    path: 'puntuar/:id',
+    loadChildren: () => import('./score-training/score-training.module').then( m => m.ScoreTrainingPageModule)
   }
 ];
 

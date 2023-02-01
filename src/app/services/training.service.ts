@@ -10,6 +10,10 @@ export class TrainingService extends Api {
         return this.get<GetTrainingApiResponse>('/training/' + localStorage.getItem('user_id'))
     }
 
+    public getTrainingById(training_id: string) {
+        return this.get<StoreTrainingApiResponse>('/training/' + localStorage.getItem('user_id'), {training_id})
+    }
+
     public storeTraining(modality: string, category: string, distance: number, title: string) {
         return this.post<StoreTrainingApiResponse>('/training/create/' + localStorage.getItem('user_id'), { modality, category, distance, title })
     }

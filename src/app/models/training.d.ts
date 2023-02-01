@@ -5,7 +5,8 @@ export interface TrainingModel{
     category: string
     date: string
     distance: number
-    points: number
+    points?: number
+    user_id: string
 }
 
 
