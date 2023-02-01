@@ -3,14 +3,18 @@ import { GetTrainingApiResponse, StoreTrainingApiResponse } from '../models/trai
 import { Api } from './api.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class TrainingService extends Api {
-    public getTrainings(){
-      return this.get<GetTrainingApiResponse>('/training/' + localStorage.getItem('user_id'))
+    public getTrainings() {
+        return this.get<GetTrainingApiResponse>('/training/' + localStorage.getItem('user_id'))
     }
 
-    public storeTraining(modality: string, category: string, distance: number, title: string){
-      return this.post<StoreTrainingApiResponse>('/training/create/' + localStorage.getItem('user_id'), {modality, category, distance, title})
+    public storeTraining(modality: string, category: string, distance: number, title: string) {
+        return this.post<StoreTrainingApiResponse>('/training/create/' + localStorage.getItem('user_id'), { modality, category, distance, title })
+    }
+
+    public deleteTraining(trainingId: string) {
+        return this.delete<any>('/training/destroy/' + trainingId)
     }
 }

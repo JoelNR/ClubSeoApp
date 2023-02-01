@@ -24,14 +24,18 @@
   <div *ngIf="!training.points" class="flex py-2 justify-between border-b border-solid border-clear">
     <div class=" text-nightblue-100">
       Pendiente de rellenar
-    </div>
-  </div>
-  <div class="flex pt-2 justify-between ">
+    </div>    
     <div class="text-nightblue-100">
       {{parseDateFormat(training.date)}}
     </div>
+  </div>
+  <div class="flex pt-2 justify-between ">
+
     <ion-button [routerLink]="'/entrenamiento/' + training.id" class="m-0 h-5" color="primary" size="small" fill="outline">
-      Más info
+      Rellenar
+    </ion-button>
+    <ion-button (click)="showModal()" class="m-0 h-5" color="primary" size="small" fill="outline">
+      Eliminar
     </ion-button>
   </div>
 </div>

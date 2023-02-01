@@ -33,7 +33,7 @@ export class TrainingPage extends CapacitorBase implements OnInit {
     this.getTrainings()
   }
 
-  private getTrainings() {
+  public getTrainings() {
     this.ngxService.startLoader("loader-trainings");
     this.trainingService.getTrainings().subscribe(res => {
       this.trainingsArray = res.data.training;
