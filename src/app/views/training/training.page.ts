@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
-import { ProfileCompetitions } from 'src/app/models/profile';
-import { ProfileService } from 'src/app/services/profile.service';
+import { TrainingModel } from 'src/app/models/training';
+import { TrainingService } from 'src/app/services/training.service';
 
 @Component({
   selector: 'app-training',
@@ -12,10 +11,9 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class TrainingPage extends CapacitorBase implements OnInit {
 
-  competitionArray: ProfileCompetitions[] = []
+  trainingsArray: TrainingModel[] = []
   searchKeyword: string = ""
   results: any
-  userId: string
   createInterface: boolean = false
 
   userModality: string = 'Aire libre'
@@ -26,35 +24,39 @@ export class TrainingPage extends CapacitorBase implements OnInit {
   distanceOptions: string[]
   userTitle: string
 
-  constructor(private profileService: ProfileService,
+  constructor(private trainingService: TrainingService,
     private ngxService: NgxUiLoaderService) { 
     super()
   }
 
   ngOnInit() {
-    this.getCompetitions(localStorage.getItem('user_id'))
+    this.getTrainings()
   }
 
-  private getCompetitions(id: string) {
-    this.ngxService.startLoader("loader-all-competitions");
-    this.profileService.getAllProfileCompetition(id).subscribe(res => {
-      this.competitionArray = res.data.competitions;
-      this.results = this.competitionArray;
-      this.ngxService.stopLoader("loader-all-competitions");
+  private getTrainings() {
+    this.ngxService.startLoader("loader-trainings");
+    this.trainingService.getTrainings().subscribe(res => {
+      this.trainingsArray = res.data.training;
+      this.results = this.trainingsArray;
+      this.ngxService.stopLoader("loader-trainings");
     });
   }
 
   search(){
     if (this.searchKeyword === "") {
-      this.results = [...this.competitionArray]
+      this.results = [...this.trainingsArray]
       return
     }
 
-    this.results = this.competitionArray.filter(result => result.competition.title.toLowerCase().includes(this.searchKeyword.toLowerCase()))
+    this.results = this.trainingsArray.filter(result => result.title.toLowerCase().includes(this.searchKeyword.toLowerCase()))
   }
 
   create(){
-
+    this.ngxService.startLoader("loader-trainings");
+    this.trainingService.storeTraining(this.userModality, this.userCategory,Number(this.userDistance),this.userTitle).subscribe(res =>{
+      this.trainingsArray.unshift(res.data.training)
+      this.ngxService.stopLoader("loader-trainings")
+    })
   }
 
   changeCategory(event){
@@ -73,27 +75,27 @@ export class TrainingPage extends CapacitorBase implements OnInit {
 
   setDistancesOptions(){
     if (this.userModality == 'Sala'){
-      this.distanceOptions = ['18 metros','14 metros']
+      this.distanceOptions = ['18','14']
     } else {
       switch (this.userCategory){
         case 'Olímpico': {
-          this.distanceOptions = ['70 metros', '60 metros', '50 metros', '40 metros', '30 metros', '24 metros', '18 metros']
+          this.distanceOptions = ['70', '60', '50', '40', '30', '24', '18']
           break;
         }
         case 'Poleas': {
-          this.distanceOptions = ['50 metros', '40 metros', '30 metros', '24 metros', '18 metros']
+          this.distanceOptions = ['50', '40', '30', '24', '18']
           break;
         }
         case 'Desnudo': {
-          this.distanceOptions = ['50 metros', '40 metros', '30 metros', '24 metros', '18 metros']
+          this.distanceOptions = ['50', '40', '30', '24', '18']
           break;
         }
         case 'Tradicional': {
-          this.distanceOptions = ['30 metros', '24 metros', '18 metros']
+          this.distanceOptions = ['30', '24', '18']
           break;
         }
         case 'Longbow': {
-          this.distanceOptions = ['30 metros', '24 metros', '18 metros']
+          this.distanceOptions = ['30', '24', '18']
           break;
         }
       }      
@@ -102,7 +104,7 @@ export class TrainingPage extends CapacitorBase implements OnInit {
 
   handleRefresh(event) {
     setTimeout(() => {
-      this.getCompetitions(this.userId)
+      this.getTrainings()
       event.target.complete();
     }, 2000);
   };

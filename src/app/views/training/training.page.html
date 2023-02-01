@@ -55,7 +55,7 @@
                     [placeholder]="userCategory ? 'Selecciona una distancia' : 'Seleccione una categoría primero'"
                     [value]="userDistance" (ionChange)="changeDistance($event)">
                     <ion-select-option *ngFor="let distance of distanceOptions"
-                      [value]="distance">{{distance}}</ion-select-option>
+                      [value]="distance">{{distance}} metros</ion-select-option>
                   </ion-select>
                 </ion-item>
               </ion-list>              
@@ -98,11 +98,11 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-          <div *ngFor="let competition of results" class="px-2 pb-4 w-full">
-            <app-competition-results-card [profileCompetition]="competition"></app-competition-results-card>
+          <div *ngFor="let training of results" class="px-2 pb-4 w-full">
+            <app-training-card [training]="training"></app-training-card>
           </div>
         </div>
-        <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-all-competitions"
+        <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-trainings"
           fgsPosition="top-center" fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
         </ngx-ui-loader>
       </div>
