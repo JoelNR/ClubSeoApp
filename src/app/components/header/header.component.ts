@@ -102,7 +102,8 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
         }
       })
       ,this.modalService.dismiss()}},
-      {text:'Cancelar', color:'primary', fill:'outline',onClick: ()=> { this.modalService.dismiss()}}]
+      {text:'Cancelar', color:'primary', fill:'outline',onClick: ()=> { this.modalService.dismiss()}}],
+      '/link'
     )
   }
 }

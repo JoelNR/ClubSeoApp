@@ -35,11 +35,9 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
   }
 
   private getNews() {
-    this.ngxService.startLoader("loader-landing");
 
     this.newsService.firstNews().subscribe(res => {
       this.newsArray = res.data.news
-      this.ngxService.stopLoader("loader-landing");
     });
   }
 
@@ -51,7 +49,6 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
   };
 
   getWeather(date: string){
-    this.ngxService.startLoader("loader-weather");
     const headers = {
       'Accept': 'application/json',
     }
@@ -69,7 +66,6 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
         this.treatWeatherData();
         
       })
-      this.ngxService.stopLoader("loader-weather");
   }
 
   private treatWeatherData() {

@@ -27,6 +27,7 @@ export class InitiationPage extends CapacitorBase implements OnInit {
   morePersons: boolean = false
   attendees: number = null
   userHasDate: boolean = false
+  disableReservation: boolean = false
 
   constructor(private initiationService: InitiationService,
     private ngxService: NgxUiLoaderService, private router: Router,
@@ -124,6 +125,7 @@ export class InitiationPage extends CapacitorBase implements OnInit {
   }
 
   addUser(){
+    this.disableReservation = true
     this.initiationService.addUserToInitiation(this.dateId, this.attendees).subscribe(res => {
       this.userHasDate = true
     })

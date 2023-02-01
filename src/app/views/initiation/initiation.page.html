@@ -110,7 +110,7 @@
               </ion-item>
             </ion-list>
             <div class="w-full flex justify-center pt-4 pb-4">
-              <ion-button class="m-0 h-5 w-fit" color="primary" [disabled]="(morePersons && attendees == null)" (click)="addUser()">
+              <ion-button class="m-0 h-5 w-fit" color="primary" [disabled]="(morePersons && attendees == null || disableReservation)" (click)="addUser()">
                 Reservar
               </ion-button>            
             </div>

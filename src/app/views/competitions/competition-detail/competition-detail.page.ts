@@ -23,6 +23,7 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
 
   userSignedUp: boolean = false
   userNotRegisted: boolean = true
+  disableInscription: boolean = false
 
   constructor(private competitionService: CompetitionService,
     private profileService: ProfileService,
@@ -40,7 +41,6 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
   }
 
   private getCompetitionData() {
-    this.ngxService.startLoader('loader-competition-details');
     this.route.paramMap.subscribe(param => {
       this.competitionService.getCompetitionById(param.get('id')).subscribe(res => {
         this.competitionModel = res.data.competitions;
@@ -52,7 +52,6 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
         this.competitionArchers = res.data.usersArray;
         this.competitionArchers.sort((a,b) => a.target_number-b.target_number)
         this.setDistancesOptions()
-        this.ngxService.stopLoader('loader-competition-details');
       });
 
     });
@@ -63,6 +62,7 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
       this.profileService.profile(localStorage.getItem('user_id')).subscribe(res => {
         this.userCategory = res.data.profile.category
         this.userSignedUp = this.competitionArchers.some(archer => archer.archer.user_id == localStorage.getItem('user_id'))
+        this.disableInscription = this.userSignedUp
       }) 
       this.userNotRegisted = false     
     } else {
@@ -81,6 +81,7 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
   }
 
   submitInscription(){
+    this.disableInscription = true
     this.competitionService.submitInscription(this.competitionModel.id,this.userCategory, parseInt(this.userDistance.split(' ')[0])).subscribe(res=>{
       if (res.data.success){
         this.getCompetitionData()

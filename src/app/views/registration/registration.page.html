@@ -9,7 +9,7 @@
         <app-back-button class="pb-5" [locationBack]="true"></app-back-button>      
         
         <form (ngSubmit)="submit()" (keyup.enter)="submit()"
-        class="flex flex-col w-full justify-center mb-14 sm:mb-0 items-center">
+        class="flex flex-col w-full justify-center items-center">
         <div class="pb-2 w-full">
           <app-input placeholder="Nombre" type="text" [(value)]="firstName" [validate]="validateText"></app-input>
         </div>
