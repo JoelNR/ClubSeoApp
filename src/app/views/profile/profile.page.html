@@ -5,7 +5,7 @@
   <div class="flex flex-col h-full">
     <app-header></app-header>
     <div class="flex flex-col grow w-full lg:max-w-290 pb-5 lg:pb-8 px-5 sm:px-8 mx-auto">
-      <h1 class="pb-6 pt-28 w-full text-center uppercase">
+      <h1 class="pb-6 w-full text-center uppercase" [ngClass]="{'pt-28' : !mobile, 'pt-8': mobile}">
         Perfil
       </h1>
       <div *ngIf="profileModel" class="flex relative flex-col lg:flex-row w-full">

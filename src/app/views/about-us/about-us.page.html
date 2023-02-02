@@ -1,8 +1,8 @@
 <ion-content>
   <div class="flex flex-col h-full">
     <app-header></app-header>
-    <div class="flex flex-col grow text-justify w-full lg:max-w-290 px-5 sm:px-8 mx-auto">
-      <h1 class="pt-28 pb-6 text-center uppercase">
+    <div class="flex flex-col grow text-justify w-full lg:max-w-290 px-5 sm:px-8 mx-auto" [ngClass]="{'pb-14' : mobile}">
+      <h1 class="pb-6 text-center uppercase" [ngClass]="{'pt-28' : !mobile, 'pt-8': mobile}">
         Sobre el SEO      
       </h1>
       <div class="w-full flex flex-col sm:flex-row pb-12">

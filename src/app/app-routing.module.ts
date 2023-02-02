@@ -70,6 +70,14 @@ const routes: Routes = [
     path: 'entrenamientos',
     loadChildren: () => import('./views/training/training.module').then( m => m.TrainingPageModule)
   },
+  {
+    path: 'menu',
+    loadChildren: () => import('./views/profile-menu/profile-menu.module').then( m => m.ProfileMenuPageModule)
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./views/tabs/tabs.module').then( m => m.TabsPageModule),
+  },
 
 
 

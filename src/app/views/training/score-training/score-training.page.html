@@ -2,7 +2,7 @@
   <div class="flex flex-col h-full">
     <app-header></app-header>
     <div *ngIf="trainingModel" class="flex flex-col grow text-justify w-full lg:max-w-290 px-5 sm:px-8 mx-auto">
-      <h1 id='start' class="pt-28 pb-6 text-center uppercase">
+      <h1 id='start' class="pb-6 text-center uppercase" [ngClass]="{'pt-28' : !mobile, 'pt-8': mobile}">
         Puntuar entrenamiento      
       </h1>
       <app-back-button [link]="'/entrenamientos'"></app-back-button>

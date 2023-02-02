@@ -4,20 +4,39 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
         path: 'inicio',
         loadChildren: () => import('../landing-page/landing-page.module').then( m => m.LandingPagePageModule)
       },
+      {
+        path: 'nosotros',
+        loadChildren: () => import('../about-us/about-us.module').then( m => m.AboutUsPageModule)
+      },
+      {
+        path: 'iniciacion',
+        loadChildren: () => import('../initiation/initiation.module').then( m => m.InitiationPageModule)
+      },
+      {
+        path: 'arqueros',
+        loadChildren: () => import('../archers/archers.module').then( m => m.ArchersPageModule)
+      },
+      {
+        path: 'competicion',
+        loadChildren: () => import('../competitions/competitions.module').then( m => m.CompetitionsPageModule)
+      },
+      {
+        path: 'plusmarcas',
+        loadChildren: () => import('../records/records.module').then( m => m.RecordsPageModule)
+      },
+      {
+        path: 'menu',
+        loadChildren: () => import('../profile-menu/profile-menu.module').then( m => m.ProfileMenuPageModule)
+      },
     ]
   },
-  {
-    path: '',
-    redirectTo: '/tabs/tab1',
-    pathMatch: 'full'
-  }
 ];
 
 @NgModule({

@@ -33,9 +33,6 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
   userLogged: boolean = false
   profileImage: string = '/assets/img/default-avatar.png'
 
-  @Input() headerLabel: string
-  @Input() cancelHeaderMobile: boolean = false
-
   constructor(private router: Router,
     private menu: MenuController,
     private modalService: ModalService,
