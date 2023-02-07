@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class TabsPage {
   headerOptions = [
-    { label: 'Inicio',icon: 'bonfire-outline' , link: 'inicio' },
+    { label: 'Inicio',icon: 'home-outline' , link: 'inicio' },
     { label: 'Competiciones',icon: 'trophy-outline', link: 'competicion' },
     { label: 'Arqueros',icon: 'body-outline', link: 'arqueros' },
     { label: 'Plusmarcas',icon: 'sparkles-outline', link: 'plusmarcas' },

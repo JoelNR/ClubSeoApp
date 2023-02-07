@@ -3,10 +3,23 @@
     <app-header></app-header>
     <div class="flex flex-col grow w-full lg:max-w-290 px-5 sm:px-8 mx-auto">
       <h1 class="pb-6 text-center uppercase" [ngClass]="{'pt-28' : !mobile, 'pt-8': mobile}">
-        En construcción     
+        Configuración 
       </h1>
       <app-back-button [locationBack]="true"></app-back-button>
+      <div>
+        <div>
+          Perfil privado
+        </div>
+        <div>
+          Estadisticas
+        </div>
+        <div>
+          Eliminar competición
+        </div>
+        <div>
+          Eliminar iniciación
+        </div>
+      </div>
     </div>
-    <app-footer></app-footer>
   </div>
 </ion-content>

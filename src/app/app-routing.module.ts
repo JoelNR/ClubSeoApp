@@ -77,17 +77,10 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./views/tabs/tabs.module').then( m => m.TabsPageModule),
+  },  {
+    path: 'config',
+    loadChildren: () => import('./views/config/config.module').then( m => m.ConfigPageModule)
   },
-
-
-
-
-
-
-
-
-
-
 
 ];
 @NgModule({

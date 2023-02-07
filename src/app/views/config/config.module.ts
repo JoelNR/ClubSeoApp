@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ConstructionpagePageRoutingModule } from './constructionpage-routing.module';
+import { ConfigPageRoutingModule } from './config-routing.module';
 
-import { ConstructionpagePage } from './constructionpage.page';
+import { ConfigPage } from './config.page';
 import { HeaderModule } from 'src/app/components/header/header.module';
 import { FooterModule } from 'src/app/components/footer/footer.module';
 import { BackButtonModule } from 'src/app/components/back-button/back-button.module';
@@ -16,11 +16,10 @@ import { BackButtonModule } from 'src/app/components/back-button/back-button.mod
     CommonModule,
     FormsModule,
     IonicModule,
-    ConstructionpagePageRoutingModule,
+    ConfigPageRoutingModule,
     HeaderModule,
-    FooterModule,
     BackButtonModule
   ],
-  declarations: [ConstructionpagePage]
+  declarations: [ConfigPage]
 })
-export class ConstructionpagePageModule {}
+export class ConfigPageModule {}

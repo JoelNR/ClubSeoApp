@@ -118,7 +118,7 @@
       </ion-button>
       <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false" animated="false" dismiss-on-select="true" mode="ios" arrow="true">
         <ng-template>
-          <ion-content class="rounded-2xl">
+          <ion-content class="border border-solid border-nightblue-100 dark:border-clear">
             <div class="flex flex-col">
               <div *ngFor="let option of profileOptions" [routerLink]="option.link" class="px-5 py-2 flex items-center cursor-pointer">
                 <ion-icon class="pr-2" color="primary" [name]="option.icon"></ion-icon>

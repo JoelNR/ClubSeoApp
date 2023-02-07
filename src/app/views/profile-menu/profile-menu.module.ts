@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ProfileMenuPageRoutingModule } from './profile-menu-routing.module';
 
 import { ProfileMenuPage } from './profile-menu.page';
+import { NavigateModule } from 'src/app/components/navigate/news-card.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProfileMenuPageRoutingModule
+    ProfileMenuPageRoutingModule,
+    NavigateModule
   ],
   declarations: [ProfileMenuPage]
 })

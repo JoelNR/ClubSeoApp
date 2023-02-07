@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 import { News } from 'src/app/models/news';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { NewsService } from 'src/app/services/news.service';
 import { HttpClient } from '@angular/common/http';
 import * as dayjs from 'dayjs';
 import { GetWeatherApiResponse, WeatherModel, WeatherModelUnits } from 'src/app/models/weather';
+import { ActivatedRoute } from '@angular/router';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -22,14 +23,31 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
   weatherCondition: string
   weatherIndex: number = 0
   windDirection: string
+  progress: number = 0
+  userLogged: boolean = false
+  isMember: boolean = false
 
   constructor(private newsService: NewsService,
-    private ngxService: NgxUiLoaderService,
-    private http: HttpClient) { 
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private profileService: ProfileService) { 
     super()
   }
 
   ngOnInit() {
+    setInterval(() => {
+      if(this.progress <= 0,9){
+         this.progress += 0.01;
+      }
+    }, 50)
+    this.route.url.subscribe(res => {
+      if(localStorage.getItem('seo-token')){
+        this.userLogged = true
+        this.profileService.profile(localStorage.getItem('user_id')).subscribe(res => {
+          this.isMember = res.data.profile.is_member
+        })
+      }      
+    })
     this.getNews()
     this.getWeather(dayjs().format('YYYY-MM-DD'))
   }
@@ -38,6 +56,7 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
 
     this.newsService.firstNews().subscribe(res => {
       this.newsArray = res.data.news
+      this.progress = 1
     });
   }
 

@@ -5,8 +5,17 @@
         Menú de usuario
       </h1>
       <div class="flex flex-col w-full max-w-xl mx-auto">
-        
-        
+        <div *ngIf="userLogged">
+          <div *ngFor="let option of profileOptions" class="my-3">
+            <app-navigate [label]="option.label" [icon]="option.icon" [url]="option.link"></app-navigate>
+          </div>
+          <app-navigate (click)="logout()" label="Cerrar sesión" icon="log-out-outline"></app-navigate>
+        </div>
+        <div *ngIf="!userLogged">
+          <div *ngFor="let option of accountOptions" class="my-3">
+            <app-navigate [label]="option.label" [icon]="option.icon" [url]="option.link"></app-navigate>
+          </div>
+        </div>
       </div>
     </div>
   </div>
