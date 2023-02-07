@@ -6,7 +6,8 @@ import { TabsGuard } from './guards/tabs.guard';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./views/landing-page/landing-page.module').then( m => m.LandingPagePageModule)
+    loadChildren: () => import('./views/landing-page/landing-page.module').then( m => m.LandingPagePageModule),
+    canActivate: [TabsGuard]
   },
   {
     path: 'login',
@@ -40,19 +41,23 @@ const routes: Routes = [
   },
   {
     path: 'nosotros',
-    loadChildren: () => import('./views/about-us/about-us.module').then( m => m.AboutUsPageModule)
+    loadChildren: () => import('./views/about-us/about-us.module').then( m => m.AboutUsPageModule),
+    canActivate: [TabsGuard]
   },
   {
     path: 'iniciacion',
-    loadChildren: () => import('./views/initiation/initiation.module').then( m => m.InitiationPageModule)
+    loadChildren: () => import('./views/initiation/initiation.module').then( m => m.InitiationPageModule),
+    canActivate: [TabsGuard]
   },
   {
     path: 'arqueros',
-    loadChildren: () => import('./views/archers/archers.module').then( m => m.ArchersPageModule)
+    loadChildren: () => import('./views/archers/archers.module').then( m => m.ArchersPageModule),
+    canActivate: [TabsGuard]
   },
   {
     path: 'competicion',
-    loadChildren: () => import('./views/competitions/competitions.module').then( m => m.CompetitionsPageModule)
+    loadChildren: () => import('./views/competitions/competitions.module').then( m => m.CompetitionsPageModule),
+    canActivate: [TabsGuard]
   },
   {
     path: 'timer',
@@ -60,7 +65,8 @@ const routes: Routes = [
   },
   {
     path: 'plusmarcas',
-    loadChildren: () => import('./views/records/records.module').then( m => m.RecordsPageModule)
+    loadChildren: () => import('./views/records/records.module').then( m => m.RecordsPageModule),
+    canActivate: [TabsGuard]
   },
   {
     path: 'competiciones/:id/puntuacion/:user',
@@ -72,12 +78,14 @@ const routes: Routes = [
   },
   {
     path: 'menu',
-    loadChildren: () => import('./views/profile-menu/profile-menu.module').then( m => m.ProfileMenuPageModule)
+    loadChildren: () => import('./views/profile-menu/profile-menu.module').then( m => m.ProfileMenuPageModule),
+    canActivate: [TabsGuard]
   },
   {
     path: 'tabs',
     loadChildren: () => import('./views/tabs/tabs.module').then( m => m.TabsPageModule),
-  },  {
+  },
+  {
     path: 'config',
     loadChildren: () => import('./views/config/config.module').then( m => m.ConfigPageModule)
   },

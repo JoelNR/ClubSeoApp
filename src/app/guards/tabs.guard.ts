@@ -15,7 +15,10 @@ export class TabsGuard extends CapacitorBase implements CanActivate {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree
     {
-      if (this.mobile && state.url.includes('tabs')) {
+      if(this.mobile && route.url.toString() == ''){
+        this.router.navigateByUrl('/tabs')
+        return true
+      } else if (this.mobile && state.url.includes('tabs')) {
         return true
       } else if (this.mobile) {
         this.router.navigateByUrl('/tabs/' + route.url.toString().replaceAll(',', '/'))

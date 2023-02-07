@@ -2,7 +2,7 @@ import { Capacitor } from '@capacitor/core';
 
 export class CapacitorBase {
   get mobile(): boolean {
-    return Capacitor.isNativePlatform();
+    return true// Capacitor.isNativePlatform();
   }
 
   get isIPhone(): boolean {

@@ -12,6 +12,10 @@ const routes: Routes = [
         loadChildren: () => import('../landing-page/landing-page.module').then( m => m.LandingPagePageModule)
       },
       {
+        path: '',
+        loadChildren: () => import('../landing-page/landing-page.module').then( m => m.LandingPagePageModule)
+      },
+      {
         path: 'nosotros',
         loadChildren: () => import('../about-us/about-us.module').then( m => m.AboutUsPageModule)
       },
