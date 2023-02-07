@@ -7,6 +7,7 @@ import * as dayjs from 'dayjs';
 import { GetWeatherApiResponse, WeatherModel, WeatherModelUnits } from 'src/app/models/weather';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from 'src/app/services/profile.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-landing-page',
@@ -30,7 +31,8 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
   constructor(private newsService: NewsService,
     private http: HttpClient,
     private route: ActivatedRoute,
-    private profileService: ProfileService) { 
+    private profileService: ProfileService,
+    private toastController: ToastController) { 
     super()
   }
 
@@ -50,6 +52,7 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
     })
     this.getNews()
     this.getWeather(dayjs().format('YYYY-MM-DD'))
+    this.cookiesInform()
   }
 
   private getNews() {
@@ -58,6 +61,24 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
       this.newsArray = res.data.news
       this.progress = 1
     });
+  }
+
+  async cookiesInform(){
+    if(localStorage.getItem('cookies-toast') != 'true'){
+      const toast = await this.toastController.create({
+        message: 'Utilizamos cookies únicamente funcionales, tú actividad no quedará registrada por nosotros.',
+        duration: 10000,
+        position: 'bottom',
+        buttons: [
+          {
+            text: 'Ocultar',
+            role: 'cancel',
+          }
+        ]
+      });
+      localStorage.setItem('cookies-toast','true')
+      await toast.present();      
+    }
   }
 
   handleRefresh(event) {
