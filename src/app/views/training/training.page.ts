@@ -19,7 +19,7 @@ export class TrainingPage extends CapacitorBase implements OnInit {
   userModality: string = 'Aire libre'
   modalityOptions: string[] = ['Sala', 'Aire libre']
   userCategory: string
-  categoryOptions: string[] = ['Olímpico', 'Poleas', 'Desnudo','Tradicional', 'Longbow']
+  categoryOptions: string[] = ['Olímpico', 'Compuesto', 'Desnudo','Tradicional', 'Longbow']
   userDistance: string
   distanceOptions: string[]
   userTitle: string
@@ -82,7 +82,7 @@ export class TrainingPage extends CapacitorBase implements OnInit {
           this.distanceOptions = ['70', '60', '50', '40', '30', '24', '18']
           break;
         }
-        case 'Poleas': {
+        case 'Compuesto': {
           this.distanceOptions = ['50', '40', '30', '24', '18']
           break;
         }

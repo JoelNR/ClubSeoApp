@@ -42,7 +42,7 @@
                 {{profileModel.last_name}}
               </h3>
             </div>
-            <div>Arquero {{profileModel.category}}</div>
+            <div *ngIf="profileModel.category">Arco {{profileModel.category}}</div>
           </div>
           <div *ngIf="editProfileActive" class="py-4 pl-4 w-full">
             <div class="pb-4 sm:px-2">

@@ -35,10 +35,10 @@ export class LoginPage extends CapacitorBase implements OnInit {
       }
     }, error => {
       this.modalService.showModal(`Parece que algo ha fallado`,
-    ['Vuelva a intentarlo y si no vuelve funcionar, contacte con el club.'],
-    [{text:'Cerrar', color:'primary', fill:'outline',onClick: ()=> { this.modalService.dismiss()}}]
-    )
-    this.disableLogin = false
+      ['Vuelva a intentarlo y si no vuelve funcionar, contacte con el club.'],
+      [{text:'Cerrar', color:'primary', fill:'outline',onClick: ()=> { this.modalService.dismiss()}}]
+      )
+      this.disableLogin = false
     })      
   }
 }

@@ -8,6 +8,10 @@
       <h1 class="pb-6 text-center uppercase" [ngClass]="{'pt-28' : !mobile, 'pt-8': mobile}">
         Nuestros arqueros
       </h1>
+      <div *ngIf="!alreadyArcher && profileModels" class="pb-4 w-full text-center">
+        Para aparecer en esta página, deberás primero
+        <span routerLink="/registro" class="underline text-orange cursor-pointer">registrarte</span>. Si ya tienes una cuenta y eres miembro de nuestro club, notificalo a un administrador para darte los permisos.
+      </div>
       <div *ngIf="profileModels" class="relative grid grid-cols-1 gap-4 w-full mb-8 rounded-3xl border border-solid dark:border-clear border-nightblue-100 p-4" [ngClass]="{'lg:grid-cols-3' : profileModels.length != 0}">
         <div *ngFor="let profileModel of profileModels;" routerLink="/perfil/{{profileModel.user_id}}"
           class="flex flex-col sm:flex-row lg:flex-col h-fit items-center cursor-pointer justify-between lg:justify-center w-full p-4 bg-clear-bg dark:bg-nightblue-60 rounded-2xl border border-solid border-nightblue-100">
@@ -25,17 +29,13 @@
                 {{profileModel.last_name}}
               </h3>
             </div>
-            <div>Arquero {{profileModel.category}}</div>
+            <div *ngIf="profileModel.category">Arco {{profileModel.category}}</div>
           </div>
           <div class="w-20">
           </div>
         </div>
         <div *ngIf="profileModels.length == 0" class="text-xl">
           Parece que aún no hay arqueros del club registrados.
-        </div>
-        <div>
-          Para aparecer en esta página, deberás primero
-          <span routerLink="/registro" class="underline text-orange cursor-pointer">registrarte</span>. Si ya tienes una cuenta y eres miembro de nuestro club, notificalo a un administrador para darte los permisos.
         </div>
         <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-archers" fgsPosition="top-center" fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
         </ngx-ui-loader>

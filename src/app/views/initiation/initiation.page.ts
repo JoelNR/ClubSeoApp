@@ -5,6 +5,7 @@ import { InitiationService } from 'src/app/services/initiation.service';
 import * as dayjs from 'dayjs';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalService } from 'src/app/services/modal.service';
 
 
 @Component({
@@ -30,16 +31,20 @@ export class InitiationPage extends CapacitorBase implements OnInit {
   disableReservation: boolean = false
 
   constructor(private initiationService: InitiationService,
-    private ngxService: NgxUiLoaderService, private router: Router,
-    private route: ActivatedRoute) {
+    private ngxService: NgxUiLoaderService,
+    private route: ActivatedRoute, private modalService: ModalService, private router: Router) {
     super()
    }
 
   ngOnInit() {
-    this.getInitationData();
+    
+    this.getInitationData()
 
     this.route.url.subscribe(res=>{
       this.userId = localStorage.getItem('user_id')
+      if (this.userId == null){
+        this.showModal()
+      }
     })
   }
 
@@ -168,5 +173,16 @@ export class InitiationPage extends CapacitorBase implements OnInit {
 
   addAttendee(event: any){
     this.attendees = event.target.value
+  }
+
+  showModal(){
+    if(localStorage.getItem('initiation-modal') != 'true'){
+      this.modalService.showModal(`Aviso`,
+      ['Para poder inscribirse a una clase de iniciación, primero hay que registrarse en la página.'],
+      [{text:'Registrarse', color:'primary',onClick: ()=> { this.router.navigateByUrl('/registro'); this.modalService.dismiss()}},
+      {text:'Cerrar', color:'primary', fill:'outline',onClick: ()=> { this.modalService.dismiss()}}]
+      )
+      localStorage.setItem('initiation-modal','true')
+    }
   }
 }

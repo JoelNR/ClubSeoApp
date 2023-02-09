@@ -16,7 +16,7 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
   competitionModel: CompetitionModel
   competitionArchers: CompetitionArcherModel[] = null
   userCategory: string
-  categoryOptions: string[] = ['Olímpico', 'Poleas', 'Desnudo','Tradicional', 'Longbow']
+  categoryOptions: string[] = ['Olímpico', 'Compuesto', 'Desnudo','Tradicional', 'Longbow']
   userDistance: string
   distanceOptions: string[]
   tableCompetitionData: any
@@ -99,7 +99,7 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
           this.distanceOptions = ['70 metros', '60 metros', '50 metros', '40 metros', '30 metros', '24 metros', '18 metros']
           break;
         }
-        case 'Poleas': {
+        case 'Compuesto': {
           this.distanceOptions = ['50 metros', '40 metros', '30 metros', '24 metros', '18 metros']
           break;
         }
@@ -119,9 +119,9 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
     }
   }
 
-  parseDistanceText(index: number){
+  parseTargetText(index: number){
     if(this.competitionArchers){
-      return this.competitionArchers[index].target_number ? this.competitionArchers[index].target_number +  this.competitionArchers[index].target_letter : 'Sin Asignar'
+      return this.competitionArchers[index].target_number ? this.competitionArchers[index].target_number +  this.competitionArchers[index].target_letter : 'Diana sin asignar'
     }
   }
 }
