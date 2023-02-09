@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 import { CompetitionArcherModel, CompetitionModel } from 'src/app/models/competition';
-import { ProfileModel } from 'src/app/models/profile';
 import { CompetitionService } from 'src/app/services/competition.service';
+import { ModalService } from 'src/app/services/modal.service';
 import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
@@ -28,7 +27,7 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
   constructor(private competitionService: CompetitionService,
     private profileService: ProfileService,
     private route: ActivatedRoute,
-    private ngxService: NgxUiLoaderService) { 
+    private modalService: ModalService) { 
     super()
   }
 
