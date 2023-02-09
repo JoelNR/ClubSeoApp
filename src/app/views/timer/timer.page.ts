@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { timer } from 'rxjs';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { KeepAwake } from '@capacitor-community/keep-awake';
 
 @Component({
   selector: 'app-timer',
@@ -68,9 +67,7 @@ export class TimerPage implements OnInit, OnDestroy {
   public resetTimer() {
     if (this.countDownStarted) {
       this.timerCounter.unsubscribe()
-      const allowSleep = async () => {
-        await KeepAwake.allowSleep();
-      };
+
     }      
     this.countDownStarted = false
     this.shootCountDownStarted = false
@@ -86,9 +83,6 @@ export class TimerPage implements OnInit, OnDestroy {
 
   startClock(){
     if(!this.countDownStarted){
-      const keepAwake = async () => {
-        await KeepAwake.keepAwake();
-      };
       this.reproduce(this.selectedAudioOption)
       this.countDownStopped = false
       this.countDown++
@@ -111,9 +105,6 @@ export class TimerPage implements OnInit, OnDestroy {
                 this.timerCounter.unsubscribe() 
                 this.countDownStarted = false
                 this.secondTurnActivated = false
-                const allowSleep = async () => {
-                  await KeepAwake.allowSleep();
-                };
               } else {
                 this.secondTurnActivated = true
                 this.activeTurn = this.activeTurn == 'AB' ? 'CD' : 'AB'
@@ -121,10 +112,7 @@ export class TimerPage implements OnInit, OnDestroy {
             } else {
               this.timerCounter.unsubscribe() 
               this.countDownStarted = false
-              this.shootCountDownStarted = false 
-              const allowSleep = async () => {
-                await KeepAwake.allowSleep();
-              }; 
+              this.shootCountDownStarted = false  
             }
           }  
         }
@@ -133,9 +121,6 @@ export class TimerPage implements OnInit, OnDestroy {
       this.timerCounter.unsubscribe()
       this.countDownStopped = true
       this.countDownStarted = false
-      const allowSleep = async () => {
-        await KeepAwake.allowSleep();
-      };
     }
   }
 
@@ -158,10 +143,7 @@ export class TimerPage implements OnInit, OnDestroy {
     this.shootCountDownSetting = Number(this.userInput)
     localStorage.setItem('seo-audio-time', this.userInput)
     if(this.countDownStarted){
-      this.timerCounter.unsubscribe() 
-      const allowSleep = async () => {
-        await KeepAwake.allowSleep();
-      };   
+      this.timerCounter.unsubscribe()    
       this.countDownStarted = false
       this.shootCountDownStarted = false 
       this.countDownStopped = false
