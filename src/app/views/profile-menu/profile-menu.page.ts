@@ -16,6 +16,7 @@ export class ProfileMenuPage extends CapacitorBase implements OnInit {
     { label: 'Entrenamiento',icon: 'analytics-outline', link: '/entrenamientos' },
     { label: 'Regulación',icon: 'construct-outline', link: '/construccion' },
     { label: 'Ejercicios',icon: 'fitness-outline', link: '/construccion' },
+    { label: 'Material',icon: 'cart-outline', link: '/construccion' },
     { label: 'Timer',icon: 'alarm-outline', link: '/timer' },
   ]
 
