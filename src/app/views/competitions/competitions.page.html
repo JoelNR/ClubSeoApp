@@ -24,6 +24,14 @@
             Reiniciar busqueda
         </ion-button>          
         </div>
+        <h3 *ngIf="todayResults.length > 0" class="pt-4">Competiciones hoy</h3>  
+        <div class="pt-4 grid grid-cols-1 lg:grid-cols-3 gap-4 ">
+          <div *ngFor="let competition of todayResults">
+            <app-competition-card [date]="competition.date" [description]="competition.description" 
+            [id]="competition.id" [modality]="competition.modality" [title]="competition.title" [image]="competition.image"></app-competition-card>
+          </div>
+        </div> 
+
         <h3 *ngIf="results.length > 0" class="pt-4">Competiciones futuras</h3>  
         <div class="pt-4 grid grid-cols-1 lg:grid-cols-3 gap-4 ">
           <div *ngFor="let competition of results">
