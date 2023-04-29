@@ -39,6 +39,10 @@ const routes: Routes = [
         path: 'menu',
         loadChildren: () => import('../profile-menu/profile-menu.module').then( m => m.ProfileMenuPageModule)
       },
+      {
+        path: 'perfil/:id',
+        loadChildren: () => import('../profile/profile.module').then( m => m.ProfilePageModule)
+      },
     ]
   },
 ];

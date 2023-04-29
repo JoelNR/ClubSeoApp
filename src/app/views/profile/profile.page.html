@@ -4,7 +4,7 @@
   </ion-refresher>
   <div class="flex flex-col h-full">
     <app-header></app-header>
-    <div class="flex flex-col grow w-full lg:max-w-290 pb-5 lg:pb-8 px-5 sm:px-8 mx-auto">
+    <div class="flex flex-col grow w-full lg:max-w-290 lg:pb-8 px-5 sm:px-8 mx-auto" [ngClass]="{'pb-14' : mobile, 'pb-5' : !mobile}">
       <h1 class="pb-6 w-full text-center uppercase" [ngClass]="{'pt-28' : !mobile, 'pt-8': mobile}">
         Perfil
       </h1>
@@ -68,6 +68,10 @@
                   </ion-select>
                 </ion-item>
               </ion-list>
+            </div>
+            <div class="pt-2 sm:px-2 flex justify-center">
+              <div class="flex pr-4 h-full text-lg">Perfil privado</div>
+              <ion-toggle  color="primary"></ion-toggle>
             </div>
           </div>
 
