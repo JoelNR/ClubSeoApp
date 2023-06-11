@@ -23,9 +23,13 @@
           <app-input placeholder="Contraseña" type="password" [(value)]="password"
             [validate]="validatePassword"></app-input>
         </div>
+        <div class="py-2 w-full flex justify-center items-center">
+          <ion-checkbox color="primary" slot="start" (ionChange)="checkbox()" [checked]="privacy"></ion-checkbox>
+          <p class="pl-2">Acepto la <a class="text-orange underline cursor-pointer ">pólitica de privacidad</a>  y las <a class="text-orange underline cursor-pointer">condiciones de uso</a>  del club.</p>
+        </div>
         <div class="w-full pt-4">
           <ion-button type="submit" color="primary" expand="block"
-            [disabled]="(firstName===undefined || validateText(firstName)!=='valid') || (lastName===undefined || validateText(lastName)!=='valid') ||(email===undefined || validateEmail(email)!=='valid') || (password===undefined || validatePassword(password)!=='valid')">Registrarse</ion-button>
+            [disabled]="(firstName===undefined || validateText(firstName)!=='valid') || !privacy || (lastName===undefined || validateText(lastName)!=='valid') ||(email===undefined || validateEmail(email)!=='valid') || (password===undefined || validatePassword(password)!=='valid')">Registrarse</ion-button>
           <p class="text-xs w-full flex justify-center pt-2"> ¿Ya tienes cuenta? <span
               class="text-orange pl-1 cursor-pointer" routerLink="/login">¡Inicia sesión aquí!</span></p>
         </div>

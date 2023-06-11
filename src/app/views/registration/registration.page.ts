@@ -16,6 +16,7 @@ export class RegistrationPage extends CapacitorBase implements OnInit {
   email: string
   password: string
   disableRegistration: boolean = false
+  privacy: boolean = false
 
   constructor(private registerService: RegisterService,
     private router: Router, private modalService: ModalService) {
@@ -39,5 +40,9 @@ export class RegistrationPage extends CapacitorBase implements OnInit {
     )
     this.disableRegistration = false
     })
+  }
+
+  checkbox(){
+    this.privacy = !this.privacy
   }
 }
