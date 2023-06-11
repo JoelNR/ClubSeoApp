@@ -12,7 +12,7 @@ import { RegisterService } from 'src/app/services/register.service';
 export class ProfileMenuPage extends CapacitorBase implements OnInit {
   profileOptions = [
     { label: 'Perfil',icon: 'finger-print-outline', link: '/perfil/self' },
-    { label: 'Configuración',icon: 'cog-outline', link: '/config' },
+   // { label: 'Configuración',icon: 'cog-outline', link: '/config' },
     { label: 'Entrenamiento',icon: 'analytics-outline', link: '/entrenamientos' },
     { label: 'Regulación',icon: 'construct-outline', link: '/construccion' },
     { label: 'Ejercicios',icon: 'fitness-outline', link: '/construccion' },
