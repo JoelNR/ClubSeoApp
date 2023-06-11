@@ -1,6 +1,6 @@
 export interface WeatherModel {
     apparent_temperature: number[]
-    rain: number[]
+    precipitation: number[]
     relativehumidity_2m: number[]
     temperature_2m: number[] 
     time: string[]
@@ -13,7 +13,7 @@ export interface WeatherModel {
 
 export interface WeatherModelUnits {
     apparent_temperature: String
-    rain: String
+    precipitation: String
     relativehumidity_2m: String
     temperature_2m: String 
     time: String 

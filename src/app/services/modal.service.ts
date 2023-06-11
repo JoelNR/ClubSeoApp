@@ -18,7 +18,7 @@ export class ModalService extends CapacitorBase {
     }
 
 
-    async showModal(title: string, texts: string[], buttons: Button[], titleClass?: string) {
+    async showModal(title: string, texts: string[], buttons: Button[], link?: string, titleClass?: string) {
         if (this.mobile) {
             const modal = await this.modalController.create({
                 component: SheetModalComponent,
@@ -26,7 +26,8 @@ export class ModalService extends CapacitorBase {
                     title,
                     titleClass,
                     texts,
-                    buttons
+                    buttons,
+                    link
                 },
                 cssClass: ['sheet-modal'],
                 initialBreakpoint: 1,
@@ -42,6 +43,7 @@ export class ModalService extends CapacitorBase {
                     titleClass,
                     texts,
                     buttons,
+                    link
                 },
                 cssClass: ['web-modal'],
             });

@@ -2,7 +2,7 @@
   <div class="flex flex-col h-full">
     <app-header></app-header>
     <div class="flex flex-col grow w-full lg:max-w-290 px-5 sm:px-8 mx-auto">
-      <h1 class="pt-28 pb-6 text-center uppercase">
+      <h1 class="pb-6 text-center uppercase" [ngClass]="{'pt-28' : !mobile, 'pt-8': mobile}">
         Detalles de la competitición
       </h1>
       <app-back-button [locationBack]="true"></app-back-button>
@@ -28,59 +28,9 @@
             </p>
           </div>
         </div>
-        <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-competition-details"
-          fgsPosition="top-center" fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
-        </ngx-ui-loader>
       </div>
       <div class="pt-8 pb-8">
-        <h3 class="px-4 pb-4 sm:pb-0 text-center sm:text-left">
-          Participantes
-        </h3>
-        <div *ngIf="competitionArchers && competitionArchers.length > 0" class="hidden sm:flex flex-col sm:flex-row sm:justify-between p-4">
-          <p class="sm:w-1/4">Nombre</p>
-          <p class="sm:w-1/4 sm:justify-end flex">Categoría</p>
-          <p class="sm:w-1/4 sm:justify-end flex">Diana</p>
-          <p class="sm:w-1/4 sm:justify-end flex">Puntos
-          </p>
-        </div>
-        <div *ngIf="competitionArchers && competitionArchers.length > 0"
-          class="px-4 py-2 border border-solid border-nightblue dark:border-clear rounded-3xl">
-          <div *ngFor="let participant of competitionArchers; let i=index;"
-            class="flex flex-col sm:flex-row sm:justify-between py-2"
-            [ngClass]="{'border-solid border-b' : i != competitionArchers.length-1}">
-            <div class="flex sm:w-1/4" [routerLink]="'/perfil/' + participant.archer.user_id">
-              <img [src]="participant.archer.image || '/assets/img/default-avatar.png'" alt="" class="rounded-full h-7 w-7 object-cover">
-              <p class="pl-3 cursor-pointer flex items-center">
-                {{participant.archer.first_name + ' ' + participant.archer.last_name}}
-              </p>
-            </div>
-            <p class="py-2 sm:p-0 sm:w-1/4 sm:justify-end flex items-center">
-              Arco {{participant.category}}
-            </p>
-            <div class="flex pb-2 sm:p-0 sm:w-1/4 sm:justify-end items-center">
-              {{parseDistanceText(i)}}
-            </div>
-            <div  class="flex justify-between sm:w-1/4 sm:justify-end items-center">
-              {{participant.points}}
-              <ion-button *ngIf="participant.points > 0" class="h-6 w-fit ml-3" fill="outline" size="small" color="primary" [routerLink]="'/competiciones/'+ competitionModel.id + '/puntuacion/' + participant.archer.user_id">
-                Ver detalles
-              </ion-button>
-            </div>
-            
-          </div>
-        </div>
-        <div *ngIf="competitionArchers && competitionArchers.length == 0"
-          class="px-4 py-2 border border-solid border-nightblue dark:border-clear rounded-3xl flex w-full justify-center items-center">
-          Actualmente no hay participantes
-        </div>
-        <div class="flex justify-center items-center w-full pt-6 px-2">
-          <ion-button *ngIf="competitionModel && userSignedUp" class="h-6 w-full max-w-xs" color="primary"
-            [routerLink]="'/competicion/puntuar/' + competitionModel.id">
-            Puntuar
-          </ion-button>
-        </div>
-
-        <div class="pt-6" *ngIf="!userSignedUp">
+        <div *ngIf="!userSignedUp">
           <h3>
             Formulario de inscripción
           </h3>
@@ -107,7 +57,7 @@
                 </ion-item>
               </ion-list>
             </div>
-            <ion-button class="h-6 w-full max-w-xs" [disabled]="!userCategory || !userDistance" color="primary" expand="block"
+            <ion-button class="h-6 w-full max-w-xs" [disabled]="!userCategory || !userDistance || disableInscription" color="primary" expand="block"
               (click)="submitInscription()">
               Inscribirse
             </ion-button>
@@ -119,7 +69,50 @@
             cuenta.
           </p> 
         </div>
-
+        <div *ngIf="competitionModel && userSignedUp" class="flex justify-center items-center w-full pt-6 px-2">
+          <ion-button  class="h-6 w-full max-w-xs" color="primary"
+            [routerLink]="'/competicion/puntuar/' + competitionModel.id">
+            Puntuar
+          </ion-button>
+        </div>
+        <h3 class="py-4 text-center sm:text-left">
+          Participantes
+        </h3>
+        <div *ngIf="competitionArchers && competitionArchers.length > 0" class="hidden sm:flex flex-col sm:flex-row sm:justify-between px-4 pb-4">
+          <p class="sm:w-1/4">Nombre</p>
+          <p class="sm:w-1/4 sm:justify-end flex">Categoría</p>
+          <p class="sm:w-1/4 sm:justify-end flex">Diana</p>
+          <p class="sm:w-1/4 sm:justify-end flex">Puntos</p>
+        </div>
+        <div *ngIf="competitionArchers && competitionArchers.length > 0"
+          class="px-4 py-2 border border-solid border-nightblue dark:border-clear rounded-3xl">
+          <div *ngFor="let participant of competitionArchers; let i=index;"
+            class="flex flex-col sm:flex-row sm:justify-between py-2"
+            [ngClass]="{'border-solid border-b' : i != competitionArchers.length-1}">
+            <div class="flex sm:w-1/4" [routerLink]="'/perfil/' + participant.archer.user_id">
+              <img [src]="participant.archer.image || '/assets/img/default-avatar.png'" alt="" class="rounded-full h-7 w-7 object-cover">
+              <p class="pl-3 cursor-pointer flex items-center">
+                {{participant.archer.first_name + ' ' + participant.archer.last_name}}
+              </p>
+            </div>
+            <p class="py-2 sm:p-0 sm:w-1/4 sm:justify-end flex items-center">
+              Arco {{participant.category}}
+            </p>
+            <div class="flex pb-2 sm:p-0 sm:w-1/4 sm:justify-end items-center">
+              {{parseTargetText(i)}}
+            </div>
+            <div  class="flex justify-between sm:w-1/4 sm:justify-end items-center">
+              {{participant.points}}
+              <ion-button *ngIf="participant.points > 0" class="h-6 w-fit ml-3" fill="outline" size="small" color="primary" [routerLink]="'/competiciones/'+ competitionModel.id + '/puntuacion/' + participant.archer.user_id">
+                Ver detalles
+              </ion-button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="competitionArchers && competitionArchers.length == 0"
+          class="px-4 py-2 border border-solid border-nightblue dark:border-clear rounded-3xl flex w-full justify-center items-center">
+          Actualmente no hay participantes
+        </div>
       </div>
     </div>
     <app-footer></app-footer>

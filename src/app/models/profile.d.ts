@@ -6,6 +6,7 @@ export interface ProfileModel {
     category: string
     user_id: string
     image: string
+    is_member?: boolean
 }
 
 export interface GetProfileApiResponse{

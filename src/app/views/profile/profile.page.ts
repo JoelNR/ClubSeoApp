@@ -21,7 +21,7 @@ export class ProfilePage extends CapacitorBase implements OnInit {
   imageFile: File
   email: string
   telephone: string
-  categoryOptions: string[] = ['Olímpico', 'Poleas', 'Desnudo','Tradicional', 'Longbow']
+  categoryOptions: string[] = ['Olímpico', 'Compuesto', 'Desnudo','Tradicional', 'Longbow']
 
   recordsArray = [{recordName : 'Recurvo senior', distance: 70 , type: 'Aire Libre', points : 600, date: '01/01/2022'},
   {recordName : 'Recurvo senior', distance: 18 , type: 'Sala', points : 600, date: '01/01/2022'},

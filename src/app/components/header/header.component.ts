@@ -21,9 +21,11 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
   ]
   profileOptions = [
     { label: 'Perfil',icon: 'finger-print-outline', link: '/perfil/self' },
-    { label: 'Entrenamiento',icon: 'analytics-outline', link: '/construccion' },
+    //{ label: 'Configuración',icon: 'cog-outline', link: '/config' },
+    { label: 'Entrenamiento',icon: 'analytics-outline', link: '/entrenamientos' },
     { label: 'Regulación',icon: 'construct-outline', link: '/construccion' },
     { label: 'Ejercicios',icon: 'fitness-outline', link: '/construccion' },
+    { label: 'Material',icon: 'cart-outline', link: '/construccion' },
     { label: 'Timer',icon: 'alarm-outline', link: '/timer' },
   ]
 
@@ -32,9 +34,6 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
   openProfileMenu: boolean = false
   userLogged: boolean = false
   profileImage: string = '/assets/img/default-avatar.png'
-
-  @Input() headerLabel: string
-  @Input() cancelHeaderMobile: boolean = false
 
   constructor(private router: Router,
     private menu: MenuController,
@@ -102,7 +101,8 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
         }
       })
       ,this.modalService.dismiss()}},
-      {text:'Cancelar', color:'primary', fill:'outline',onClick: ()=> { this.modalService.dismiss()}}]
+      {text:'Cancelar', color:'primary', fill:'outline',onClick: ()=> { this.modalService.dismiss()}}],
+      '/link'
     )
   }
 }

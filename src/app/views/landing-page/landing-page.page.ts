@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 import { News } from 'src/app/models/news';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { NewsService } from 'src/app/services/news.service';
 import { HttpClient } from '@angular/common/http';
 import * as dayjs from 'dayjs';
 import { GetWeatherApiResponse, WeatherModel, WeatherModelUnits } from 'src/app/models/weather';
+import { ActivatedRoute } from '@angular/router';
+import { ProfileService } from 'src/app/services/profile.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-landing-page',
@@ -22,25 +24,61 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
   weatherCondition: string
   weatherIndex: number = 0
   windDirection: string
+  progress: number = 0
+  userLogged: boolean = false
+  isMember: boolean = false
 
   constructor(private newsService: NewsService,
-    private ngxService: NgxUiLoaderService,
-    private http: HttpClient) { 
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private profileService: ProfileService,
+    private toastController: ToastController) { 
     super()
   }
 
   ngOnInit() {
+    setInterval(() => {
+      if(this.progress <= 0,9){
+         this.progress += 0.01;
+      }
+    }, 50)
+    this.route.url.subscribe(res => {
+      if(localStorage.getItem('seo-token')){
+        this.userLogged = true
+        this.profileService.profile(localStorage.getItem('user_id')).subscribe(res => {
+          this.isMember = res.data.profile.is_member
+        })
+      }      
+    })
     this.getNews()
     this.getWeather(dayjs().format('YYYY-MM-DD'))
+    this.cookiesInform()
   }
 
   private getNews() {
-    this.ngxService.startLoader("loader-landing");
 
     this.newsService.firstNews().subscribe(res => {
       this.newsArray = res.data.news
-      this.ngxService.stopLoader("loader-landing");
+      this.progress = 1
     });
+  }
+
+  async cookiesInform(){
+    if(localStorage.getItem('cookies-toast') != 'true'){
+      const toast = await this.toastController.create({
+        message: 'Utilizamos cookies únicamente funcionales, tú actividad no quedará registrada por nosotros.',
+        duration: 10000,
+        position: 'bottom',
+        buttons: [
+          {
+            text: 'Ocultar',
+            role: 'cancel',
+          }
+        ]
+      });
+      localStorage.setItem('cookies-toast','true')
+      await toast.present();      
+    }
   }
 
   handleRefresh(event) {
@@ -51,12 +89,11 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
   };
 
   getWeather(date: string){
-    this.ngxService.startLoader("loader-weather");
     const headers = {
       'Accept': 'application/json',
     }
 
-    this.http.get<GetWeatherApiResponse>('https://api.open-meteo.com/v1/forecast?latitude=28.0714&longitude=-15.4459&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,rain,weathercode,cloudcover,windspeed_10m,winddirection_10m,windgusts_10m&start_date='
+    this.http.get<GetWeatherApiResponse>('https://api.open-meteo.com/v1/forecast?latitude=28.0714&longitude=-15.4459&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,weathercode,cloudcover,windspeed_10m,winddirection_10m,windgusts_10m&start_date='
     + date + 
     '&end_date=' + date
     , {
@@ -69,12 +106,11 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
         this.treatWeatherData();
         
       })
-      this.ngxService.stopLoader("loader-weather");
   }
 
   private treatWeatherData() {
     this.weatherModel.apparent_temperature = this.weatherModel.apparent_temperature.slice(16, 22);
-    this.weatherModel.rain = this.weatherModel.rain.slice(16, 22);
+    this.weatherModel.precipitation = this.weatherModel.precipitation.slice(16, 22);
     this.weatherModel.relativehumidity_2m = this.weatherModel.relativehumidity_2m.slice(16, 22);
     this.weatherModel.weathercode = this.weatherModel.weathercode.slice(16, 22);
     this.weatherModel.temperature_2m = this.weatherModel.temperature_2m.slice(16, 22);
