@@ -38,8 +38,8 @@ export class ScoreService extends Api {
       return this.put<GetSetApiResponse>('/score/' + id, {points})
     }
 
-    public storeScore(userId: string, competition_id: string){
-      return this.post<GetScoreApiResponse>('/score/create/' + userId, {competition_id})
+    public storeScore(userId: string, competition_id?: string, training_id?: string){
+      return this.post<GetScoreApiResponse>('/score/create/' + userId, {competition_id,training_id})
     }
 
 }

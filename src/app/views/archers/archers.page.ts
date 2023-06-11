@@ -12,6 +12,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class ArchersPage extends CapacitorBase implements OnInit {
 
   profileModels: ProfileModel[]
+  alreadyArcher: boolean = false
 
   constructor(private profileService: ProfileService,
     private ngxService: NgxUiLoaderService) {
@@ -25,6 +26,7 @@ export class ArchersPage extends CapacitorBase implements OnInit {
     this.ngxService.startLoader('loader-archers');
     this.profileService.getAllMembers().subscribe(res => {
       this.profileModels = res.data.profiles;
+      this.alreadyArcher = this.profileModels.some(profile => profile.user_id == localStorage.getItem('user_id'))
       this.ngxService.stopLoader('loader-archers');
     });
   }

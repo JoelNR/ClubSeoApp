@@ -1,0 +1,38 @@
+<ion-content>
+  <div class="flex flex-col h-full">
+    <app-header></app-header>
+    <div *ngIf="trainingModel" class="flex flex-col grow text-justify w-full lg:max-w-290 px-5 sm:px-8 mx-auto">
+      <h1 id='start' class="pb-6 text-center uppercase" [ngClass]="{'pt-28' : !mobile, 'pt-8': mobile}">
+        Puntuar entrenamiento      
+      </h1>
+      <app-back-button [link]="'/entrenamientos'"></app-back-button>
+      <div class="w-full flex pt-4 flex-col pb-20">
+        <h2 class="pb-4">
+          Entramiento: {{trainingModel.title}}
+        </h2>
+        <div class="w-full grid grid-cols-2 gap-4">
+          <p>
+            Puntuación total: {{trainingModel.points}}
+          </p> 
+          <p>
+            Distancia: {{trainingModel.distance}}
+          </p>         
+          <p>
+            Categoria: {{trainingModel.category}}
+          </p>
+          <p>
+            Modalidad: {{trainingModel.modality}}
+          </p>
+        </div>
+        <div class="w-full">
+          <app-score [trainingId]="trainingModel.id" [archerId]="trainingModel.user_id" [modality]="trainingModel.modality" [category]="trainingModel.category" (emitPoints)="setTotal($event)"></app-score>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ion-fab *ngIf="trainingModel" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button [href]="'/entramientos/puntuar/'+ trainingModel.id + '#start'">
+      <ion-icon name="chevron-up-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

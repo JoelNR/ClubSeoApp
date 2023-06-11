@@ -13,7 +13,7 @@ export class WebModalComponent extends CapacitorBase implements OnInit {
   @Input() title: string = 'web-modal-title';
   @Input() texts: string[] = ["Web-modal text"];
   @Input() buttons: Button[];
-  link: string = '/inicio'
+  @Input() link: string
 
   public oneButton: boolean = false;
 

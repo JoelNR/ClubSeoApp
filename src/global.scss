@@ -93,7 +93,7 @@ ion-icon {
         --max-width: 335px;
         -webkit-transform: none !important;
         transform: none !important;
-        @apply relative flex items-center justify-center h-auto rounded-3xl pt-5 pb-10 px-5 m-0;
+        @apply relative flex items-center justify-center h-auto rounded-3xl pt-5 pb-10 px-5 m-2 border border-solid border-nightblue-100 dark:border-clear;
 
         @screen md {
             --max-width: 480px;

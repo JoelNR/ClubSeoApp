@@ -1,7 +1,7 @@
 <header *ngIf="!mobile" class="w-full flex fixed top-0 z-10 justify-center items-center border-b border-solid bg-clear ">
   <div class="justify-between flex w-full lg:max-w-290 xl:max-w-7xl">
     <div class="py-2 flex items-center pl-5" [ngClass]="{'w-40 xl:w-44' : !userLogged}">
-      <img src="/assets/img/logo.gif" routerLink="/" alt="logo" class="h-10 cursor-pointer">
+      <img src="/assets/img/logo.png" routerLink="/" alt="logo" class="h-10 cursor-pointer">
     </div>
     <div class=" text-base hidden lg:flex text-center justify-center items-center">
       <a *ngFor="let option of headerOptions" [routerLink]="option.link" class="px-5 items-center inline-flex">
@@ -118,7 +118,7 @@
       </ion-button>
       <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false" animated="false" dismiss-on-select="true" mode="ios" arrow="true">
         <ng-template>
-          <ion-content class="rounded-2xl">
+          <ion-content class="border border-solid border-nightblue-100 dark:border-clear">
             <div class="flex flex-col">
               <div *ngFor="let option of profileOptions" [routerLink]="option.link" class="px-5 py-2 flex items-center cursor-pointer">
                 <ion-icon class="pr-2" color="primary" [name]="option.icon"></ion-icon>
