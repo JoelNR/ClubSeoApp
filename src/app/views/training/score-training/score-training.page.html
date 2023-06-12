@@ -5,7 +5,7 @@
       <h1 id='start' class="pb-6 text-center uppercase" [ngClass]="{'pt-28' : !mobile, 'pt-8': mobile}">
         Puntuar entrenamiento      
       </h1>
-      <app-back-button [link]="'/entrenamientos'"></app-back-button>
+      <app-back-button [locationBack]="true"></app-back-button>
       <div class="w-full flex pt-4 flex-col pb-20">
         <h2 class="pb-4">
           Entramiento: {{trainingModel.title}}

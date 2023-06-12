@@ -8,7 +8,7 @@ import { shareReplay } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class Api {
-    protected host: string = 'https://e16d-83-59-218-172.ngrok-free.app/api'
+    protected host: string = 'https://3472-83-59-218-172.ngrok-free.app/api'
     private static token?: string = null;
 
     constructor(protected http: HttpClient) {
