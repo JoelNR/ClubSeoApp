@@ -35,9 +35,6 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
   ngOnInit() {
 
     this.getCompetitionData();        
-    this.route.url.subscribe(res=>{
-          this.getProfileData();
-    })
   }
 
   private getCompetitionData() {
@@ -52,6 +49,9 @@ export class CompetitionDetailPage extends CapacitorBase implements OnInit {
         this.competitionArchers = res.data.usersArray;
         this.competitionArchers.sort((a,b) => a.target_number-b.target_number)
         this.setDistancesOptions()
+        this.route.url.subscribe(res=>{
+          this.getProfileData();
+        })
       });
 
     });
