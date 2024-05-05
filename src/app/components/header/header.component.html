@@ -23,6 +23,37 @@
           Menú
         </div>
       </ion-button>
+      <ion-menu id="slide" side="end" [menuId]="'end' + trigger" type="overlay" contentId="main" [swipeGesture]="false">
+        <ion-header>
+          <ion-toolbar>
+            <div class="flex justify-end items-end place-content-end pr-4 h-full">
+              <ion-button (click)="closeMenu()" color="primary" size="small" class="button-menu">
+                <div class="flex items-center">
+                  <div class="justify-start pr-2">
+                    <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M0.292893 0.417893C0.683417 0.0273689 1.31658 0.0273689 1.70711 0.417893L7 5.71079L12.2929 0.417893C12.6834 0.0273689 13.3166 0.0273689 13.7071 0.417893C14.0976 0.808417 14.0976 1.44158 13.7071 1.83211L8.41421 7.125L13.7071 12.4179C14.0976 12.8084 14.0976 13.4416 13.7071 13.8321C13.3166 14.2226 12.6834 14.2226 12.2929 13.8321L7 8.53921L1.70711 13.8321C1.31658 14.2226 0.683417 14.2226 0.292893 13.8321C-0.0976311 13.4416 -0.0976311 12.8084 0.292893 12.4179L5.58579 7.125L0.292893 1.83211C-0.0976311 1.44158 -0.0976311 0.808417 0.292893 0.417893Z"
+                        fill="white" />
+                    </svg>
+                  </div>
+                  Menú
+                </div>
+              </ion-button>
+            </div>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <ion-list class="py-0 cursor-pointer">
+            <ion-item *ngFor="let option of headerOptions" class="px-5 flex items-center" (click)="navigate(option.link)">
+              <ion-icon color="primary" [name]="option.icon"></ion-icon>
+              <div class="pl-2" [ngClass]="{'text-orange-100': isActive(option.link)}">
+                {{option.label}}
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-menu>
+    </div>
 
     <div class="justify-end items-center pr-5 hidden lg:flex">
       <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false" animated="false" dismiss-on-select="true" mode="ios" arrow="true">
@@ -38,6 +69,5 @@
         </ng-template>
       </ion-popover>
     </div>
-  </div>
   </div>
 </header>

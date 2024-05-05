@@ -92,8 +92,7 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
     const headers = {
       'Accept': 'application/json',
     }
-
-    this.http.get<GetWeatherApiResponse>('https://api.open-meteo.com/v1/forecast?latitude=28.0714&longitude=-15.4459&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,weathercode,cloudcover,windspeed_10m,winddirection_10m,windgusts_10m&start_date='
+    this.http.get<GetWeatherApiResponse>('https://api.open-meteo.com/v1/forecast?latitude=28.0712&longitude=-15.4672&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,weathercode,cloudcover,windspeed_10m,winddirection_10m,windgusts_10m&start_date='
     + date + 
     '&end_date=' + date
     , {
@@ -109,16 +108,16 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
   }
 
   private treatWeatherData() {
-    this.weatherModel.apparent_temperature = this.weatherModel.apparent_temperature.slice(16, 22);
-    this.weatherModel.precipitation = this.weatherModel.precipitation.slice(16, 22);
-    this.weatherModel.relativehumidity_2m = this.weatherModel.relativehumidity_2m.slice(16, 22);
-    this.weatherModel.weathercode = this.weatherModel.weathercode.slice(16, 22);
-    this.weatherModel.temperature_2m = this.weatherModel.temperature_2m.slice(16, 22);
-    this.weatherModel.time = this.weatherModel.time.slice(16, 22);
-    this.weatherModel.cloudcover = this.weatherModel.cloudcover.slice(16, 22);
-    this.weatherModel.winddirection_10m = this.weatherModel.winddirection_10m.slice(16, 22);
-    this.weatherModel.windgusts_10m = this.weatherModel.windgusts_10m.slice(16, 22);
-    this.weatherModel.windspeed_10m = this.weatherModel.windspeed_10m.slice(16, 22);
+    this.weatherModel.apparent_temperature = this.weatherModel.apparent_temperature.slice(9, 22);
+    this.weatherModel.precipitation = this.weatherModel.precipitation.slice(9, 22);
+    this.weatherModel.relativehumidity_2m = this.weatherModel.relativehumidity_2m.slice(9, 22);
+    this.weatherModel.weathercode = this.weatherModel.weathercode.slice(9, 22);
+    this.weatherModel.temperature_2m = this.weatherModel.temperature_2m.slice(9, 22);
+    this.weatherModel.time = this.weatherModel.time.slice(9, 22);
+    this.weatherModel.cloudcover = this.weatherModel.cloudcover.slice(9, 22);
+    this.weatherModel.winddirection_10m = this.weatherModel.winddirection_10m.slice(9, 22);
+    this.weatherModel.windgusts_10m = this.weatherModel.windgusts_10m.slice(9, 22);
+    this.weatherModel.windspeed_10m = this.weatherModel.windspeed_10m.slice(9, 22);
 
     for (let index = 0; index < this.weatherModel.time.length; index++) {
       this.weatherModel.time[index] = this.weatherModel.time[index].split('T')[1];
