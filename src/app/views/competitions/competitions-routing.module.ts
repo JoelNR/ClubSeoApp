@@ -12,10 +12,6 @@ const routes: Routes = [
     path: 'detalles/:id',
     loadChildren: () => import('./competition-detail/competition-detail.module').then( m => m.CompetitionDetailPageModule)
   },
-  {
-    path: 'puntuar/:id',
-    loadChildren: () => import('./score-competition/score-competition.module').then( m => m.ScoreCompetitionPageModule)
-  }
 
 ];
 
