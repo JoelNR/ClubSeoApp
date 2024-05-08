@@ -1,35 +1,15 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
-import { TabsGuard } from './guards/tabs.guard';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./views/landing-page/landing-page.module').then( m => m.LandingPagePageModule),
-    canActivate: [TabsGuard]
-  },
-  {
-    path: 'login',
-    loadChildren: () => import('./views/login/login.module').then( m => m.LoginPageModule)
-  },
-  {
-    path: 'registro',
-    loadChildren: () => import('./views/registration/registration.module').then( m => m.RegistrationPageModule)
-  },
-  {
-    path: 'login/reset',
-    loadChildren: () => import('./views/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+    loadChildren: () => import('./views/landing-page/landing-page.module').then( m => m.LandingPagePageModule)
   },
   {
     path: 'inicio',
-    loadChildren: () => import('./views/landing-page/landing-page.module').then( m => m.LandingPagePageModule),
-    canActivate: [TabsGuard]
-  },
-  {
-    path: 'perfil/:id',
-    loadChildren: () => import('./views/profile/profile.module').then( m => m.ProfilePageModule),
-    canActivate: [AuthGuard, TabsGuard]
+    loadChildren: () => import('./views/landing-page/landing-page.module').then( m => m.LandingPagePageModule)
   },
   {
     path: 'noticias',
@@ -41,23 +21,15 @@ const routes: Routes = [
   },
   {
     path: 'nosotros',
-    loadChildren: () => import('./views/about-us/about-us.module').then( m => m.AboutUsPageModule),
-    canActivate: [TabsGuard]
+    loadChildren: () => import('./views/about-us/about-us.module').then( m => m.AboutUsPageModule)
   },
   {
     path: 'iniciacion',
-    loadChildren: () => import('./views/initiation/initiation.module').then( m => m.InitiationPageModule),
-    canActivate: [TabsGuard]
-  },
-  {
-    path: 'arqueros',
-    loadChildren: () => import('./views/archers/archers.module').then( m => m.ArchersPageModule),
-    canActivate: [TabsGuard]
+    loadChildren: () => import('./views/initiation/initiation.module').then( m => m.InitiationPageModule)
   },
   {
     path: 'competicion',
-    loadChildren: () => import('./views/competitions/competitions.module').then( m => m.CompetitionsPageModule),
-    canActivate: [TabsGuard]
+    loadChildren: () => import('./views/competitions/competitions.module').then( m => m.CompetitionsPageModule)
   },
   {
     path: 'timer',
@@ -65,31 +37,8 @@ const routes: Routes = [
   },
   {
     path: 'plusmarcas',
-    loadChildren: () => import('./views/records/records.module').then( m => m.RecordsPageModule),
-    canActivate: [TabsGuard]
+    loadChildren: () => import('./views/records/records.module').then( m => m.RecordsPageModule)
   },
-  {
-    path: 'competiciones/:id/puntuacion/:user',
-    loadChildren: () => import('./views/see-score/see-score.module').then( m => m.SeeScorePageModule)
-  },
-  {
-    path: 'entrenamientos',
-    loadChildren: () => import('./views/training/training.module').then( m => m.TrainingPageModule)
-  },
-  {
-    path: 'menu',
-    loadChildren: () => import('./views/profile-menu/profile-menu.module').then( m => m.ProfileMenuPageModule),
-    canActivate: [TabsGuard]
-  },
-  {
-    path: 'tabs',
-    loadChildren: () => import('./views/tabs/tabs.module').then( m => m.TabsPageModule),
-  },
-  //{
-  //  path: 'config',
-  //  loadChildren: () => import('./views/config/config.module').then( m => m.ConfigPageModule)
-  //},
-
 ];
 @NgModule({
   imports: [

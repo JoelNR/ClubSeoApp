@@ -1,7 +1,4 @@
 <ion-content>
-  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
   <div class="flex flex-col h-full">
     <app-header></app-header>
     <div class="flex flex-col grow w-full lg:max-w-290 px-5 sm:px-8 mx-auto" [ngClass]="{'pb-14' : mobile}">
@@ -45,9 +42,7 @@
             <app-competition-card [date]="competition.date" [description]="competition.description" 
             [id]="competition.id" [modality]="competition.modality" [title]="competition.title" [image]="competition.image"></app-competition-card>
           </div>
-        </div>           
-         <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-competition" fgsPosition="top-center" fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
-        </ngx-ui-loader>   
+        </div>            
       </div>
     </div>
     <app-footer></app-footer>

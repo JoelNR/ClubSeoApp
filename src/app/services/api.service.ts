@@ -8,7 +8,7 @@ import { shareReplay } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class Api {
-    protected host: string = 'https://42bc-83-138-209-99.ngrok-free.app/api'
+    protected host: string = 'https://club-seo-app-ptdk.vercel.app/assets/'
     private static token?: string = null;
 
     constructor(protected http: HttpClient) {

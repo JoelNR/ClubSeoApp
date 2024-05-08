@@ -16,19 +16,8 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
     { label: 'Sobre Nosotros',icon: 'reader-outline' , link: '/nosotros' },
     { label: 'Iniciación',icon: 'megaphone-outline', link: '/iniciacion' },
     { label: 'Competiciones',icon: 'trophy-outline', link: '/competicion' },
-    { label: 'Arqueros',icon: 'body-outline', link: '/arqueros' },
     { label: 'Plusmarcas',icon: 'sparkles-outline', link: '/plusmarcas' },
   ]
-  profileOptions = [
-    { label: 'Perfil',icon: 'finger-print-outline', link: '/perfil/self' },
-    //{ label: 'Configuración',icon: 'cog-outline', link: '/config' },
-    { label: 'Entrenamiento',icon: 'analytics-outline', link: '/entrenamientos' },
-    { label: 'Regulación',icon: 'construct-outline', link: '/construccion' },
-    { label: 'Ejercicios',icon: 'fitness-outline', link: '/construccion' },
-    { label: 'Material',icon: 'cart-outline', link: '/construccion' },
-    { label: 'Timer',icon: 'alarm-outline', link: '/timer' },
-  ]
-
   trigger: string
   triggerOption: number = 0
   openProfileMenu: boolean = false

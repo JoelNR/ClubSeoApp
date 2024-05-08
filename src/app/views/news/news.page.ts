@@ -27,7 +27,7 @@ export class NewsPage extends CapacitorBase implements OnInit {
   private getNews() {
     this.ngxService.startLoader("loader-news");
     this.newsService.news().subscribe(res => {
-      this.newsArray = res.data.news;
+      this.newsArray = res;
       this.results = this.newsArray;
       this.ngxService.stopLoader("loader-news");
     });
