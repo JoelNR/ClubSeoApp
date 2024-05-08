@@ -8,7 +8,7 @@ import { shareReplay } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class Api {
-    protected host: string = 'http://127.0.0.1:8000/api'
+    protected host: string = 'http://localhost:8100/assets/'
     private static token?: string = null;
 
     constructor(protected http: HttpClient) {

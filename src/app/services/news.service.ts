@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GetNewsApiResponse, GetNewsByIdApiResponse } from '../models/news';
+import { News, GetNewsApiResponse, GetNewsByIdApiResponse } from '../models/news';
 import { GetProfileApiResponse } from '../models/profile';
 import { Api } from './api.service';
 
@@ -8,7 +8,7 @@ import { Api } from './api.service';
 })
 export class NewsService extends Api {
     public news(){
-      return this.get<GetNewsApiResponse>('/news')
+      return this.get<News[]>('/news/news.json')
     }
 
     public firstNews(){
@@ -17,6 +17,6 @@ export class NewsService extends Api {
 
     public getNewsById(id: string){
         return this.get<GetNewsByIdApiResponse>('/news/' + id)
-      }
+    }
 
 }

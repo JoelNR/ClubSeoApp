@@ -42,14 +42,6 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
          this.progress += 0.01;
       }
     }, 50)
-    this.route.url.subscribe(res => {
-      if(localStorage.getItem('seo-token')){
-        this.userLogged = true
-        this.profileService.profile(localStorage.getItem('user_id')).subscribe(res => {
-          this.isMember = res.data.profile.is_member
-        })
-      }      
-    })
     this.getNews()
     this.getWeather(dayjs().format('YYYY-MM-DD'))
     this.cookiesInform()
@@ -57,9 +49,8 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
 
   private getNews() {
 
-    this.newsService.firstNews().subscribe(res => {
-      this.newsArray = res.data.news
-      this.progress = 1
+    this.newsService.news().subscribe(res => {
+      this.newsArray = res
     });
   }
 

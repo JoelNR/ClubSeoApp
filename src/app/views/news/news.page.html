@@ -1,7 +1,4 @@
 <ion-content>
-  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
   <div class="flex flex-col h-full">
     <app-header></app-header>
     <div class="flex flex-col text-center grow w-full lg:max-w-290 px-5 sm:px-8 mx-auto">
@@ -34,8 +31,6 @@
             <app-news-card [id]="news.id" [imgSrc]="news.image" [title]="news.title" [description]="news.content" [date]="news.date"></app-news-card>
           </div>        
         </div>
-        <ngx-ui-loader [bgsOpacity]="0" [hasProgressBar]="false" loaderId="loader-news" fgsPosition="top-center" fgsColor="#ed7a3b" fgsType="fading-circle" overlayColor="transparent">
-        </ngx-ui-loader>
       </div>
     </div>
     <app-footer></app-footer>
