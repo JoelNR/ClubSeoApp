@@ -30,8 +30,6 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
 
   constructor(private newsService: NewsService,
     private http: HttpClient,
-    private route: ActivatedRoute,
-    private profileService: ProfileService,
     private toastController: ToastController) { 
     super()
   }
