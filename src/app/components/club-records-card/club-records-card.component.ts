@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CapacitorBase } from 'src/app/lib/CapacitorBase';
 import { Records } from 'src/app/models/competition';
 
 @Component({
@@ -7,13 +6,11 @@ import { Records } from 'src/app/models/competition';
   templateUrl: './club-records-card.component.html',
   styleUrls: ['./club-records-card.component.scss'],
 })
-export class ClubRecordsCardComponent extends CapacitorBase implements OnInit {
+export class ClubRecordsCardComponent implements OnInit {
 
   @Input() record: Records
-  open: boolean = false
   
   constructor() { 
-    super()
   }
 
   ngOnInit() {}

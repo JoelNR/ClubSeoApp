@@ -1,0 +1,52 @@
+[
+  {
+    "category": "olímpico",
+    "distance": 70,
+    "points": 621,
+    "modality": "Aire Libre",
+    "archer": "Raúl Bethencourt Santana",
+    "competition": "Tirada del chupachup",
+    "date": "2022-07-10",
+    "canary": true
+  },
+  {
+    "category": "olímpico",
+    "distance": 60,
+    "points": 621,
+    "modality": "Aire Libre",
+    "archer": "Raúl Bethencourt Santana",
+    "competition": "Tirada del chupachup",
+    "date": "2022-07-10",
+    "canary": false
+  },
+  {
+    "category": "olímpico",
+    "distance": 50,
+    "points": 621,
+    "modality": "Aire Libre",
+    "archer": "Raúl Bethencourt Santana",
+    "competition": "Tirada del chupachup",
+    "date": "2022-07-10",
+    "canary": false
+  },
+  {
+    "category": "olímpico",
+    "distance": 40,
+    "points": 621,
+    "modality": "Aire Libre",
+    "archer": "Raúl Bethencourt Santana",
+    "competition": "Tirada del chupachup",
+    "date": "2022-07-10",
+    "canary": false
+  },
+  {
+    "category": "olímpico",
+    "distance": 18,
+    "points": 600,
+    "modality": "Sala",
+    "archer": "Raúl Bethencourt Santana",
+    "competition": "Tirada del chupachup",
+    "date": "2022-07-10",
+    "canary": false
+  }
+]

@@ -49,12 +49,12 @@ export interface GetCompetitionTargetByIdApiResponse{
 
 
 export interface Records {
-    competition: CompetitionModel
-    record: {category: string
-            distance: number
-            points: number
-            modality: string}
-    profile: ProfileModel
+    category: string
+    distance: number
+    points: number
+    modality: string
+    archer: string
+    canary: boolean
 }
 
 export interface GetRecordsApiResponse{

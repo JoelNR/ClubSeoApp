@@ -10,8 +10,8 @@ import { CompetitionService } from 'src/app/services/competition.service';
   styleUrls: ['./records.page.scss'],
 })
 export class RecordsPage extends CapacitorBase implements OnInit {
-  indoorRecords: Records[]
-  outdoorRecords: Records[]
+  outdoorRecords: Records[] =[]
+  indoorRecords: Records[] = []
   openIndoor: boolean = false
   openOutdoor: boolean = false
 
@@ -21,14 +21,14 @@ export class RecordsPage extends CapacitorBase implements OnInit {
 
   ngOnInit() {
     this.competitionService.getClubRecords().subscribe(res=>{
-      this.outdoorRecords = res.data.outdoor_records
-      this.indoorRecords = res.data.indoor_records
+      
+      res.forEach(element => {
+        if (element.modality== "Aire Libre"){
+          this.outdoorRecords.push(element)
+        } else {
+          this.indoorRecords.push(element)
+        }
+      });
     })
   }
-
-  handleRefresh(event) {
-    setTimeout(() => {
-      event.target.complete();
-    }, 2000);
-  };
 }
