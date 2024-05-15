@@ -1,7 +1,6 @@
 import { ProfileModel } from "./profile"
 
 export interface CompetitionModel{
-    id: string
     description: string
     title: string
     modality: string
@@ -9,6 +8,7 @@ export interface CompetitionModel{
     date: string
     price: number
     image: string
+    url: string
 }
 
 export interface CompetitionArcherModel{

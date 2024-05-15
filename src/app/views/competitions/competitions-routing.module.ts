@@ -8,10 +8,6 @@ const routes: Routes = [
     path: '',
     component: CompetitionsPage
   },
-  {
-    path: 'detalles/:id',
-    loadChildren: () => import('./competition-detail/competition-detail.module').then( m => m.CompetitionDetailPageModule)
-  },
 
 ];
 
