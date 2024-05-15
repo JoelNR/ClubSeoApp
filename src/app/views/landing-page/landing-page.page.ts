@@ -111,9 +111,9 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
     for (let index = 0; index < this.weatherModel.time.length; index++) {
       this.weatherModel.time[index] = this.weatherModel.time[index].split('T')[1];
     }
-    this.selectedTime = this.weatherModel.time[0];
-    this.parseWeatherCode(this.weatherModel.weathercode[0])
-    this.parseWindDirection(this.weatherModel.winddirection_10m[0])
+    this.selectedTime = this.weatherModel.time[8];
+    this.parseWeatherCode(this.weatherModel.weathercode[8])
+    this.parseWindDirection(this.weatherModel.winddirection_10m[8])
   }
 
   changeTime(event:any){
