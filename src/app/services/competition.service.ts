@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GetCompetitionApiResponse, GetCompetitionByIdApiResponse, GetCompetitionTargetByIdApiResponse, GetRecordsApiResponse, Records } from '../models/competition';
+import { CompetitionModel, GetCompetitionByIdApiResponse, GetCompetitionTargetByIdApiResponse, GetRecordsApiResponse, Records } from '../models/competition';
 import { Api } from './api.service';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { Api } from './api.service';
 })
 export class CompetitionService extends Api {
   public competition(){
-    return this.get<GetCompetitionApiResponse>('/competition')
+    return this.get<CompetitionModel>('/competitions/competitions.json')
   }
 
   public getCompetitionById(id: string){

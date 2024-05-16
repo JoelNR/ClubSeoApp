@@ -1,4 +1,9 @@
-<div class="w-full">
+<div [hidden]="!record.canary" class="w-full flex pb-2">
+  <ion-button  class="m-0 h-5 cursor-default" color="primary" size="small" fill="outline">
+    Record de canaria
+  </ion-button>
+</div>
+<div  class="p-3 h-fit rounded-xl border border-solid dark:border-clear border-nightblue-100 w-full">
   <div class="w-full flex justify-between">
       <p>
         Arco {{record.category}}
@@ -19,11 +24,6 @@
         {{record.competition}}
       </p>
       <app-date-chip [date]="record.date"></app-date-chip>
-    </div>
-    <div [hidden]="!record.canary" class="w-full flex justify-center pt-5 pb-2">
-      <ion-button  class="m-0 h-5" color="primary" size="small" fill="outline">
-        Record de canaria
-      </ion-button>
     </div>
   </div>
 </div>

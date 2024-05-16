@@ -5,13 +5,83 @@
       <h1 class="pb-6 text-center uppercase" [ngClass]="{'pt-28' : !mobile, 'pt-8': mobile}">
         Nuestros records
       </h1>
-      <div *ngIf="outdoorRecords" class="w-full mb-8 rounded-3xl border border-solid dark:border-clear border-nightblue-100 p-4">
+      <div [hidden]="filterInterface" class="w-full mb-5 sm:mb-8">
+        <ion-button color="primary h-5" (click)="filterInterface = true">
+          <div class="text-white">
+            Filtrar
+          </div>
+        </ion-button>
+      </div>
+      <div [hidden]="!filtered" class="w-full mb-5 sm:mb-8">
+        <ion-button color="primary h-5" (click)="reset()">
+          <div class="text-white">
+            Reiniciar filtro
+          </div>
+        </ion-button>
+      </div>
+      <div class="pb-4" *ngIf="filterInterface && !filtered">
+        <div class="flex flex-col sm:flex-row w-full items-center justify-center">
+          <div class="w-full pb-6 sm:pb-0 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <div class="py-3 text-start text-orange-100 text-xs">Modalidad</div>
+              <ion-list class="p-0 rounded-2xl border border-solid border-nightblue-100">
+                <ion-item class="bg-blue-50 text-nightblue border-0">
+                  <ion-select [placeholder]="userModality || 'Selecciona categoría'" [value]="userModality"
+                    (ionChange)="changeModality($event)">
+                    <ion-select-option *ngFor="let modality of modalityOptions"
+                      [value]="modality">{{modality}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+            </div>
+            <div>
+              <div class="py-3 text-start text-orange-100 text-xs">Categoría</div>
+              <ion-list class="p-0 rounded-2xl border border-solid border-nightblue-100">
+                <ion-item class="bg-blue-50 text-nightblue border-0">
+                  <ion-select [placeholder]="userCategory || 'Selecciona categoría'" [value]="userCategory"
+                    (ionChange)="changeCategory($event)">
+                    <ion-select-option *ngFor="let category of categoryOptions"
+                      [value]="category">Arco {{category}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+            </div>
+            <div>
+              <div class="pt-3 text-start text-orange-100 text-xs">Distancia</div>
+              <ion-list class="mt-4 p-0 rounded-2xl border border-solid border-nightblue-100">
+                <ion-item class="bg-blue-50 text-nightblue border-0">
+                  <ion-select [disabled]="!userCategory"
+                    [placeholder]="userCategory ? 'Selecciona una distancia' : 'Seleccione una categoría primero'"
+                    [value]="userDistance" (ionChange)="changeDistance($event)">
+                    <ion-select-option *ngFor="let distance of distanceOptions" [value]="distance">{{distance}}
+                      metros</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col sm:mt-4 sm:flex-row w-full sm:justify-between">
+          <ion-button class="h-7 w-full sm:max-w-xs" [disabled]="!userCategory || !userDistance"
+            color="primary" expand="block" (click)="filter()">
+            Filtrar
+          </ion-button>
+          <div class="mt-4 sm:m-0 w-full flex justify-end">
+            <ion-button class="h-7 w-fit" color="primary" size="small" expand="block" (click)="filterInterface = false">
+              Ocultar
+            </ion-button>
+          </div>
+        </div>
+
+      </div>
+
+      <div *ngIf="this.userModality == 'Aire libre' || !filtered" class="w-full mb-8 rounded-3xl border border-solid dark:border-clear border-nightblue-100 p-4">
         <h2 (click)="openOutdoor = !openOutdoor" [ngClass]="{'pb-6': openOutdoor}" class="w-full flex justify-between items-center">
           Records de aire libre
           <ion-icon  class="transition duration-300 text-2xl" color="primary" [ngClass]="{'transform rotate-180': openOutdoor}" name="chevron-down-circle-outline"></ion-icon>
         </h2>  
-        <div *ngIf="openOutdoor" class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div *ngFor="let record of outdoorRecords; let i = index;"  class="p-3 h-fit rounded-2xl border border-solid dark:border-clear border-nightblue-100 w-full">
+        <div *ngIf="openOutdoor" class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+          <div *ngFor="let record of outdoorRecords; let i = index;">
             <app-club-records-card [record]="record"></app-club-records-card>
           </div>            
         </div>
@@ -19,19 +89,34 @@
           Actualmente no existe ningún record de aire libre.
         </p>        
       </div>
-      <div class="pt-4" *ngIf="indoorRecords" class="w-full mb-8 rounded-3xl border border-solid dark:border-clear border-nightblue-100 p-4">
+      <div *ngIf="this.userModality == 'Sala' || !filtered" class="w-full mb-8 rounded-3xl border border-solid dark:border-clear border-nightblue-100 p-4">
         <h2 (click)="openIndoor = !openIndoor" [ngClass]="{'pb-6': openIndoor}" class="pb-6 w-full flex justify-between items-center">
           Records de sala
           <ion-icon  class="transition duration-300 text-2xl" color="primary" [ngClass]="{'transform rotate-180': openIndoor}" name="chevron-down-circle-outline"></ion-icon>
         </h2>
         <div *ngIf="openIndoor" class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div *ngFor="let record of indoorRecords; let i = index;"  class="p-3 h-fit rounded-xl border border-solid dark:border-clear border-nightblue-100 w-full">
+          <div *ngFor="let record of indoorRecords; let i = index;">
             <app-club-records-card [record]="record"></app-club-records-card>
           </div>            
         </div>
 
         <p *ngIf="indoorRecords.length == 0 && openIndoor">
           Actualmente no existe ningún record de sala.
+        </p>
+      </div>
+      <div *ngIf="this.userModality == 'Pase de nivel' || !filtered" class="w-full mb-8 rounded-3xl border border-solid dark:border-clear border-nightblue-100 p-4">
+        <h2 (click)="openLevelPass = !openLevelPass" [ngClass]="{'pb-6': openLevelPass}" class="pb-6 w-full flex justify-between items-center">
+          Records de pase de nivel
+          <ion-icon  class="transition duration-300 text-2xl" color="primary" [ngClass]="{'transform rotate-180': openLevelPass}" name="chevron-down-circle-outline"></ion-icon>
+        </h2>
+        <div *ngIf="openLevelPass" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div *ngFor="let record of levelPassRecords; let i = index;">
+            <app-club-records-card [record]="record"></app-club-records-card>
+          </div>            
+        </div>
+
+        <p *ngIf="levelPassRecords.length == 0 && openLevelPass">
+          Actualmente no existe ningún record de pase de nivel.
         </p>
       </div>
     </div>
