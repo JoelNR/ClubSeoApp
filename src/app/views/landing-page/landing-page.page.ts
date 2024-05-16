@@ -48,7 +48,7 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
   private getNews() {
 
     this.newsService.news().subscribe(res => {
-      this.newsArray = res
+      this.newsArray = res.slice(0,6)
     });
   }
 
