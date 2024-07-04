@@ -1,5 +1,26 @@
 [
   {
+    "id": 11,
+    "title": "Trofeo Atlántico Pilar Luque de Aire Libre 2024",
+    "content": "Ya queda poco para la celebración de la competición organizada por nuestro club. Pueden consultar el sorteo de dianas en el siguiente enlace: https://asociacionatirca.wixsite.com/atirca/post/sorteo-de-dianas-aire-libre-2024",
+    "date": "2024-07-01",
+    "image": "/assets/img/cartel-atlantico.jpeg"
+  },
+  {
+    "id": 10,
+    "title": "Campeonato de Canarias de Aire Libre 2024",
+    "content": "Nuestro arqueros han asistido el pasado fin de semana al Campeonato de Canarias de Aire Libre en Tenerife. Hemos conseguido llenar el podio de recurvo masculino absoluto y un segundo puesto en poleas masculino absoluto. ¡Felicidades a todos!",
+    "date": "2024-06-22",
+    "image": "/assets/img/cpt-can-24.jpeg"
+  },
+  {
+    "id": 9,
+    "title": "Campeonato de Canarias de Aire Libre 2024",
+    "content": "Nuestro arqueros han asistido el pasado fin de semana al Campeonato de Canarias de Aire Libre en Tenerife. Hemos conseguido llenar el podio de recurvo masculino absoluto y un segundo puesto en poleas masculino absoluto. ¡Felicidades a todos!",
+    "date": "2024-06-22",
+    "image": "/assets/img/cpt-can-24.jpeg"
+  },
+  {
     "id": 8,
     "title": "Torneo IFAA 3D tirada standard, animal y Hunter",
     "content": "Nuestro compañero Jaime se marcha este fin de semana a Portugal a competir en el torneo IFAA 3D tirada standard, animal y Hunter 🏹🐺 Suerte y a disfrutar Jaime!",
