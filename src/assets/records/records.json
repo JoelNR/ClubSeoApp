@@ -48,5 +48,15 @@
     "competition": "-",
     "date": "2018-03-17",
     "canary": false
+  },
+  {
+    "category": "olímpico",
+    "distance": 30,
+    "points": 565,
+    "modality": "Pase de nivel",
+    "archer": "Natalia Valdivielso Aguilar",
+    "competition": "Pase de nivel blanco",
+    "date": "2024-08-07",
+    "canary": false
   }
 ]
