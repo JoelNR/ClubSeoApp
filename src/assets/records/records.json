@@ -68,5 +68,25 @@
     "competition": "3ª Jornada Liga Nacional RFETA Iberdrola Junior",
     "date": "2024-06-22",
     "canary": false
-  }
+  },
+  {
+    "category": "poleas",
+    "distance": 18,
+    "points": 565,
+    "modality": "Pase de nivel",
+    "archer": "Miriam Quintana Rivero",
+    "competition": "Pase de nivel negro",
+    "date": "2020-12-23",
+    "canary": false
+  },
+  {
+    "category": "olímpico",
+    "distance": 40,
+    "points": 629,
+    "modality": "Aire libre",
+    "archer": "Itziar Bravo Ruíz",
+    "competition": "Campeonato de España de Aire Libre",
+    "date": "2021-07-22",
+    "canary": false
+  },
 ]
