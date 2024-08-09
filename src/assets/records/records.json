@@ -58,5 +58,15 @@
     "competition": "Pase de nivel blanco",
     "date": "2024-08-07",
     "canary": false
+  },
+  {
+    "category": "olímpico",
+    "distance": 60,
+    "points": 567,
+    "modality": "Aire libre",
+    "archer": "Itziar Bravo Ruíz",
+    "competition": "3ª Jornada Liga Nacional RFETA Iberdrola Junior",
+    "date": "2024-06-22",
+    "canary": false
   }
 ]
