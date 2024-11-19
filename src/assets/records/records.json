@@ -12,21 +12,21 @@
   {
     "category": "poleas",
     "distance": 50,
-    "points": 663,
+    "points": 665,
     "modality": "Aire libre",
-    "archer": "José Antonio Ruiz González",
-    "competition": "-",
-    "date": "2017-03-25",
+    "archer": "Jorge Jose López Bordón",
+    "competition": "Campeonato de Canarias de Aire Libre",
+    "date": "2023-06-04",
     "canary": false
   },
   {
     "category": "poleas",
     "distance": 18,
-    "points": 572,
+    "points": 577,
     "modality": "Sala",
-    "archer": "José Antonio Ruiz González",
-    "competition": "-",
-    "date": "2022-07-10",
+    "archer": "Jorge Jose López Bordón",
+    "competition": "III Ranking autonómico unificado de sala",
+    "date": "2023-11-13",
     "canary": false
   },
   {
@@ -87,6 +87,26 @@
     "archer": "Itziar Bravo Ruíz",
     "competition": "Campeonato de España de Aire Libre",
     "date": "2021-07-22",
+    "canary": false
+  },
+  {
+    "category": "poleas",
+    "distance": 50,
+    "points": 663,
+    "modality": "Aire libre superado",
+    "archer": "José Antonio Ruiz González",
+    "competition": "-",
+    "date": "2017-03-25",
+    "canary": false
+  },
+  {
+    "category": "poleas",
+    "distance": 18,
+    "points": 572,
+    "modality": "Sala superado",
+    "archer": "José Antonio Ruiz González",
+    "competition": "-",
+    "date": "2022-07-10",
     "canary": false
   }
 ]
