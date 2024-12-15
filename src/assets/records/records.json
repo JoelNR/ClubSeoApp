@@ -42,12 +42,12 @@
   {
     "category": "olímpico",
     "distance": 18,
-    "points": 558,
+    "points": 562,
     "modality": "Sala",
-    "archer": "Raúl Bethencourt Santana",
-    "competition": "-",
-    "date": "2018-03-17",
-    "canary": false
+    "archer": "Joel Navarro Rivero",
+    "competition": "Campeonato de Canarias de Sala",
+    "date": "2024-12-15",
+    "canary": true
   },
   {
     "category": "olímpico",
@@ -109,4 +109,14 @@
     "date": "2022-07-10",
     "canary": false
   }
+    {
+    "category": "olímpico",
+    "distance": 18,
+    "points": 558,
+    "modality": "Sala superado",
+    "archer": "Raúl Bethencourt Santana",
+    "competition": "-",
+    "date": "2018-03-17",
+    "canary": false
+  },
 ]
