@@ -1,6 +1,27 @@
 [
   {
+    "id": 13,
+    "title": "Campeonato de Canarias de sala temporada 24/25",
+    "content": "El club participa en el Campeonato de Canarias de Sala organizado por el club Arcogranc el 16 de diciembre. Feliciar a Jorge Bordón por su primer puesto en arco compuesto absoluto y a Carlos Alberto Ortiz por el primer y Joel Navarro por el segundo puesto en arco recurvo absoluto. Ahora a preparar la temporada de aire libre.",
+    "date": "2024-12-16",
+    "image": "/assets/img/cpt-can-24.jpg"
+  },
+  {
+    "id": 12,
+    "title": "Seminario de confección de cuerdas de arcos recurvo",
+    "content": "Charla y demostración de fabricación de cuerdas para Arcos, impartida el pasado 25 de Octubre por nuestro maestro de cuerdas Manolo 👏🏹🟠",
+    "date": "2024-10-25",
+    "image": "/assets/img/cuerda.jpg"
+  },
+  {
     "id": 11,
+    "title": "Comienza la temporada de Sala 2024",
+    "content": "Sala 2024! Comienza la temporada. Agradecemos al club @arcogranc la organización y colaboración para lograr, por primera vez en muchos años, disfrutar de la temporada de Sala bajo techo en Gran Canaria 💪🏼👏🏼 gran trabajo!",
+    "date": "2024-09-21",
+    "image": "/assets/img/temp-sala.jpg"
+  },
+  {
+    "id": 10,
     "title": "Trofeo Atlántico Pilar Luque de Aire Libre 2024",
     "content": "Ya queda poco para la celebración de la competición organizada por nuestro club. Pueden consultar el sorteo de dianas en el siguiente enlace: https://asociacionatirca.wixsite.com/atirca/post/sorteo-de-dianas-aire-libre-2024",
     "date": "2024-07-01",
