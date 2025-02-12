@@ -28,8 +28,13 @@ export class CompetitionsPage extends CapacitorBase implements OnInit {
     this.competitionService.competition().subscribe(res => {
       this.competitionArray = res
       let pastIndex = this.competitionArray.findIndex(competition =>  dayjs(competition.date).isBefore(dayjs()))  
-      this.results = this.competitionArray.slice(0,pastIndex)
-      this.pastCompetitionArray = this.competitionArray.slice(pastIndex)
+      if(pastIndex = -1){
+        this.results =this.competitionArray
+      } else {
+        this.results = this.competitionArray.slice(0,pastIndex)
+        this.pastCompetitionArray = this.competitionArray.slice(pastIndex)
+      } 
+           
       this.pastResults = this.pastCompetitionArray
     });
   }
