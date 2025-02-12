@@ -10,13 +10,11 @@ import { CompetitionService } from 'src/app/services/competition.service';
   styleUrls: ['./competitions.page.scss'],
 })
 export class CompetitionsPage extends CapacitorBase implements OnInit {
-  competitionArray: CompetitionModel[]
-  pastCompetitionArray: CompetitionModel[]
-  todayCompetitionArray: CompetitionModel[] = []
+  competitionArray: CompetitionModel[] = []
+  pastCompetitionArray: CompetitionModel[] = []
   searchKeyword: string = ""
   results: any = []
   pastResults: any = []
-  todayResults: any = []
 
   constructor(private competitionService: CompetitionService,) { 
     super()
@@ -27,20 +25,24 @@ export class CompetitionsPage extends CapacitorBase implements OnInit {
   }
 
   private getCompetitionData() {
-
+    this.competitionService.competition().subscribe(res => {
+      this.competitionArray = res
+      let pastIndex = this.competitionArray.findIndex(competition =>  dayjs(competition.date).isBefore(dayjs()))  
+      this.results = this.competitionArray.slice(0,pastIndex)
+      this.pastCompetitionArray = this.competitionArray.slice(pastIndex)
+      this.pastResults = this.pastCompetitionArray
+    });
   }
 
   search(){
     if (this.searchKeyword === "") {
       this.results = [...this.competitionArray]
       this.pastResults = [...this.pastCompetitionArray]
-      this.todayResults = [... this.todayCompetitionArray]
       return
     }
 
     this.results = this.competitionArray.filter(result => result.title.toLowerCase().includes(this.searchKeyword.toLowerCase()))
     this.pastResults = this.pastCompetitionArray.filter(result => result.title.toLowerCase().includes(this.searchKeyword.toLowerCase()))
-    this.todayResults = this.todayCompetitionArray.filter(result => result.title.toLowerCase().includes(this.searchKeyword.toLowerCase()))
   }
 
   handleRefresh(event) {

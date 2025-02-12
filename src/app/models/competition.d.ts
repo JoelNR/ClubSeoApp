@@ -4,11 +4,9 @@ export interface CompetitionModel{
     description: string
     title: string
     modality: string
-    place: string
     date: string
-    price: number
     image: string
-    url: string
+    link: string
 }
 
 export interface CompetitionArcherModel{

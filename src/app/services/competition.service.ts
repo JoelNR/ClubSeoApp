@@ -7,7 +7,7 @@ import { Api } from './api.service';
 })
 export class CompetitionService extends Api {
   public competition(){
-    return this.get<CompetitionModel>('/competitions/competitions.json')
+    return this.get<CompetitionModel[]>('/competitions/competitions.json')
   }
 
   public getCompetitionById(id: string){
