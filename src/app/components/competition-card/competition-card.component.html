@@ -3,14 +3,14 @@
     <img [src]="image || '/assets/img/flechas.jpeg'" alt="" class="h-48 w-full rounded-xl rounded-b-none object-cover">
   </div>
   <div class="p-2">
-    <div class="text-lg text-nightblue-100 mb-2 line-clamp-1">
+    <div class="text-lg text-nightblue-100 mb-2">
       {{title}}  
     </div>  
     <div class="flex justify-between pb-2 text-nightblue-100">
       <app-date-chip [date]="date"></app-date-chip>
       {{modality}}
     </div>
-    <p class=" text-xs text-nightblue-100 mb-2 line-clamp-2 sm:h-8">
+    <p class=" text-xs text-nightblue-100 mb-2">
       {{description}}
     </p>  
     <ion-button *ngIf="!disableButton" class="h-6 w-full" color="primary" [href]="link" size="small">
