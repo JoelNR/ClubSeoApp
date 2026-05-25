@@ -1,0 +1,5 @@
+{
+  "name": "protractor",
+  "version": "7.0.0",
+  "description": "Dummy package to replace deprecated Protractor"
+}

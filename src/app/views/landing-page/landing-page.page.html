@@ -11,104 +11,456 @@
       <div class="h-fit w-full">
         <app-landing-page-swiper [isMember]="isMember" [userLogged]="userLogged"></app-landing-page-swiper>
       </div>
+      <!-- Weather Card Container -->
       <div *ngIf="weatherModel"
-        class="my-8 relative rounded-3xl p-4 md:pl-5 border border-solid dark:border-clear border-nightblue-100">
-        <div class="flex flex-col sm:flex-row w-full mb-4 sm:px-2 justify-between">
-          <h3 class="text-center mb-2 sm:mb-0 flex items-center">
-            El tiempo de hoy en nuestro club
-          </h3>
-          <ion-list class="p-0 rounded-xl">
-            <ion-item
-              class="bg-blue-50 text-nightblue rounded-xl border border-solid dark:border-clear border-nightblue-100">
-              <ion-select [interface]="mobile ? '' : 'popover'" [placeholder]="this.selectedTime"
-                [value]="this.selectedTime" (ionChange)="changeTime($event)">
-                <ion-select-option *ngFor="let time of weatherModel.time" [value]="time">{{time}}</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
+        class="my-8 relative rounded-3xl p-6 md:p-8 bg-gradient-to-br from-white/95 via-sky-50/45 to-white/80 dark:from-nightblue-100/90 dark:via-nightblue-90/80 dark:to-nightblue-100/70 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 shadow-xl shadow-nightblue-100/5 dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] transition-all duration-500 overflow-hidden">
+
+        <!-- Glowing background decorations -->
+        <div
+          class="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-orange/10 dark:bg-orange/20 blur-3xl pointer-events-none">
         </div>
-        <div class="grid sm:grid-cols-2 grid-cols-1 lg:grid-cols-3">
-          <div class="flex mb-2">
-            <div class="flex items-center">
-              <ion-icon class="pr-2" color="primary" name="sunny-outline"></ion-icon>
-              Condición del cielo:
+        <div
+          class="absolute -bottom-24 -left-24 w-48 h-48 rounded-full bg-primary/10 dark:bg-primary/20 blur-3xl pointer-events-none">
+        </div>
+
+        <!-- Section Title: El tiempo de hoy en nuestro club -->
+        <h3
+          class="relative text-left text-sm font-black text-nightblue-80 dark:text-nightblue-20 uppercase tracking-widest mb-4 flex items-center gap-2 select-none">
+          <ion-icon name="partly-sunny-outline" class="text-orange text-base"></ion-icon>
+          El tiempo de hoy en nuestro club
+        </h3>
+
+        <!-- Header: Unified Metrics Grid Layout -->
+        <div
+          class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2 gap-4 items-stretch border-b border-solid border-nightblue-100/10 dark:border-white/10 pb-5 mb-5">
+
+          <!-- Card 1: Wind Speed, Gusts & Direction (Unified Wind Card - 2x2 Structure) -->
+          <div
+            class="group col-span-1 sm:col-span-2 lg:col-span-2 lg:row-span-2 bg-white/65 dark:bg-nightblue-90/50 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 rounded-3xl p-5 md:p-6 lg:py-4 lg:px-6 flex flex-row items-center gap-4 sm:gap-5 transition-all duration-300 hover:scale-[1.02] hover:bg-white/85 dark:hover:bg-nightblue-90/65 hover:shadow-lg">
+            <!-- Premium High-Tech Instrument Compass Dial -->
+            <div
+              class="relative flex items-center justify-center h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 rounded-full border border-solid border-nightblue-100/10 dark:border-white/10 bg-gradient-to-b from-white/80 to-clear/50 dark:from-nightblue-90/80 dark:to-nightblue-100/40 flex-shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_2px_8px_rgba(255,255,255,0.6)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3),inset_0_1px_4px_rgba(255,255,255,0.1)]">
+
+              <!-- Outer tick ring for degree intervals (archery instrument styling) -->
+              <svg viewBox="0 0 100 100"
+                class="absolute w-full h-full text-nightblue-100/10 dark:text-white/10 select-none pointer-events-none animate-[spin_60s_linear_infinite]"
+                aria-hidden="true">
+                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="0.5" stroke-dasharray="1.5 1.5"
+                  fill="none" />
+                <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="0.5" stroke-dasharray="3 6"
+                  fill="none" />
+                <!-- 12 Compass Dial Tick marks (every 30 degrees) -->
+                <line x1="50" y1="8" x2="50" y2="12" stroke="currentColor" stroke-width="0.8" />
+                <line x1="50" y1="88" x2="50" y2="92" stroke="currentColor" stroke-width="0.8" />
+                <line x1="8" y1="50" x2="12" y2="50" stroke="currentColor" stroke-width="0.8" />
+                <line x1="88" y1="50" x2="92" y2="50" stroke="currentColor" stroke-width="0.8" />
+
+                <line x1="29" y1="13.4" x2="31" y2="16.9" stroke="currentColor" stroke-width="0.5" />
+                <line x1="71" y1="13.4" x2="69" y2="16.9" stroke="currentColor" stroke-width="0.5" />
+                <line x1="29" y1="86.6" x2="31" y2="83.1" stroke="currentColor" stroke-width="0.5" />
+                <line x1="71" y1="86.6" x2="69" y2="83.1" stroke="currentColor" stroke-width="0.5" />
+
+                <line x1="13.4" y1="29" x2="16.9" y2="31" stroke="currentColor" stroke-width="0.5" />
+                <line x1="86.6" y1="29" x2="83.1" y2="31" stroke="currentColor" stroke-width="0.5" />
+                <line x1="13.4" y1="71" x2="16.9" y2="69" stroke="currentColor" stroke-width="0.5" />
+                <line x1="86.6" y1="71" x2="83.1" y2="69" stroke="currentColor" stroke-width="0.5" />
+              </svg>
+
+              <!-- Compass Cardinal Points -->
+              <span
+                class="absolute top-1.5 left-1/2 -translate-x-1/2 text-[9px] sm:text-[10px] md:text-[11px] font-black text-orange dark:text-orange-80 leading-none select-none tracking-tight">N</span>
+              <span
+                class="absolute bottom-1.5 left-1/2 -translate-x-1/2 text-[9px] sm:text-[10px] md:text-[11px] font-bold text-nightblue-50/70 dark:text-white/30 leading-none select-none">S</span>
+              <span
+                class="absolute left-2 top-1/2 -translate-y-1/2 text-[9px] sm:text-[10px] md:text-[11px] font-bold text-nightblue-50/70 dark:text-white/30 leading-none select-none">O</span>
+              <span
+                class="absolute right-2 top-1/2 -translate-y-1/2 text-[9px] sm:text-[10px] md:text-[11px] font-bold text-nightblue-50/70 dark:text-white/30 leading-none select-none">E</span>
+
+              <!-- Bespoke Dual-Tone Archery Arrow pointer with realistic drop shadow -->
+              <svg viewBox="0 0 24 24"
+                [style.transform]="'rotate(' + weatherModel.winddirection_10m[weatherIndex] + 'deg)'"
+                class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 transition-transform duration-700 ease-out text-amber-500 dark:text-amber-400 drop-shadow-[0_4px_6px_rgba(255,119,0,0.15)] dark:drop-shadow-[0_4px_8px_rgba(255,119,0,0.3)] select-none pointer-events-none"
+                aria-hidden="true">
+                <defs>
+                  <!-- High-tech linear gradients for arrow styling -->
+                  <linearGradient id="arrowShaft" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#ff7700" />
+                    <stop offset="50%" stop-color="#f9a45e" />
+                    <stop offset="100%" stop-color="#ff7700" />
+                  </linearGradient>
+                  <linearGradient id="arrowHead" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#ff7700" />
+                    <stop offset="100%" stop-color="#b5a964" />
+                  </linearGradient>
+                </defs>
+                <!-- Central arrow shaft -->
+                <line x1="12" y1="5.5" x2="12" y2="21" stroke="#ff7700" stroke-width="1.8" stroke-linecap="round" />
+                <!-- Broadhead arrowhead point (metallic gold/orange) -->
+                <polygon points="12,2 6,8.5 12,6.5 18,8.5" fill="url(#arrowHead)" stroke="none"
+                  stroke-linejoin="round" />
+                <!-- Slanted left fletching (feather) -->
+                <polygon points="12,14 8,16.5 8,19.5 12,18.5" fill="#ff7700" opacity="0.9" />
+                <!-- Slanted right fletching (feather) -->
+                <polygon points="12,14 16,16.5 16,19.5 12,18.5" fill="#ff7700" opacity="0.9" />
+                <!-- Custom archery arrow nock at the very tail -->
+                <polyline points="11,21 12,20 13,21" fill="none" stroke="#ff7700" stroke-width="1.5"
+                  stroke-linecap="round" />
+              </svg>
             </div>
-            <div class="flex pl-2 items-center">
-              {{weatherCondition}}
+            <div class="min-w-0 flex-1 w-full text-left">
+              <span
+                class="text-[10px] sm:text-xs font-bold text-nightblue-50 dark:text-nightblue-50/80 uppercase tracking-widest block">Viento</span>
+
+              <!-- Two-row stacked information for wind speed and gusts to prevent overflow -->
+              <div class="flex flex-col items-start gap-y-2.5 mt-2.5">
+                <!-- Wind Speed (Wind Icon) -->
+                <div class="flex items-center gap-2">
+                  <!-- Premium Custom Wind Icon SVG -->
+                  <svg viewBox="0 0 24 24" class="w-6 h-6 sm:w-8 sm:h-8 text-orange flex-shrink-0" fill="none"
+                    stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
+                    <path d="M9.59 4.59A2 2 0 1 1 11 8H2" />
+                    <path d="M12.59 19.59A2 2 0 1 1 14 16H2" />
+                    <path d="M15.59 9.59A2 2 0 1 1 17 12H2" />
+                  </svg>
+                  <div class="flex flex-col items-start leading-none">
+                    <div class="flex items-baseline gap-0.5">
+                      <span
+                        class="text-xl sm:text-2xl md:text-3xl font-black text-nightblue dark:text-white tracking-tight"
+                        style="font-variant-numeric: tabular-nums;">
+                        {{weatherModel.windspeed_10m[weatherIndex]}}
+                      </span>
+                      <span
+                        class="text-[10px] sm:text-xs font-bold text-nightblue-50 dark:text-nightblue-50/70 ml-0.5">km/h</span>
+                    </div>
+                    <span
+                      class="text-[9px] font-semibold text-nightblue-60 dark:text-nightblue-40/80 opacity-90 uppercase tracking-wider mt-0.5">Velocidad</span>
+                  </div>
+                </div>
+
+                <!-- Gusts (Wind Cone SVG) -->
+                <div class="flex items-center gap-2">
+                  <svg viewBox="0 0 24 24" class="w-6 h-6 sm:w-8 sm:h-8 text-red-500 dark:text-red-400 flex-shrink-0"
+                    fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
+                    <!-- Pole/Mast -->
+                    <line x1="5" y1="22" x2="5" y2="2" />
+                    <!-- Windsock bracket -->
+                    <path d="M5,4 L8,5 L8,11 L5,12 Z" fill="currentColor" fill-opacity="0.15" />
+                    <!-- Windsock body segments -->
+                    <path d="M8,5 L14,6.5 L14,9.5 L8,11 Z" fill="currentColor" fill-opacity="0.25" />
+                    <path d="M14,6.5 L19,7.5 L19,8.5 L14,9.5 Z" fill="currentColor" fill-opacity="0.5" />
+                    <path d="M19,7.5 L23,8 L23,8 L19,8.5 Z" fill="currentColor" />
+                  </svg>
+                  <div class="flex flex-col items-start leading-none">
+                    <div class="flex items-baseline gap-0.5">
+                      <span
+                        class="text-xl sm:text-2xl md:text-3xl font-black text-nightblue dark:text-white tracking-tight"
+                        style="font-variant-numeric: tabular-nums;">
+                        {{weatherModel.windgusts_10m[weatherIndex]}}
+                      </span>
+                      <span
+                        class="text-[10px] sm:text-xs font-bold text-nightblue-50 dark:text-nightblue-50/70 ml-0.5">km/h</span>
+                    </div>
+                    <span
+                      class="text-[9px] font-semibold text-nightblue-60 dark:text-nightblue-40/80 opacity-90 uppercase tracking-wider mt-0.5">Rachas</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Direction & Rumbo with dynamic compass indicator arrow -->
+              <div
+                class="flex flex-wrap items-center justify-start gap-2 mt-3.5 pt-2.5 border-t border-solid border-nightblue-100/10 dark:border-white/10">
+                <span class="text-[10px] sm:text-xs font-bold text-nightblue-60/90 dark:text-nightblue-50/90"
+                  style="font-variant-numeric: tabular-nums;">
+                  Rumbo: <span class="text-orange font-extrabold">{{windDirection}}</span>
+                  ({{weatherModel.winddirection_10m[weatherIndex]}}°)
+                </span>
+                <svg viewBox="0 0 24 24"
+                  [style.transform]="'rotate(' + weatherModel.winddirection_10m[weatherIndex] + 'deg)'"
+                  class="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-500 ease-out text-amber-500 dark:text-amber-400 inline-block drop-shadow-sm select-none pointer-events-none"
+                  aria-hidden="true">
+                  <line x1="12" y1="5" x2="12" y2="21" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" />
+                  <polygon points="12,2 8,7 12,5.5 16,7" fill="currentColor" stroke="currentColor" stroke-width="0.5"
+                    stroke-linejoin="round" />
+                  <polygon points="12,14 9,16.5 9,19 12,18" fill="currentColor" opacity="0.85" />
+                  <polygon points="12,14 15,16.5 15,19 12,18" fill="currentColor" opacity="0.85" />
+                </svg>
+              </div>
             </div>
           </div>
-          <div class="flex mb-2">
-            <div class="flex items-center">
-              <ion-icon class="pr-2" color="primary" name="thermometer-outline"></ion-icon>
-              Temperatura:
+
+          <!-- Card 0: Temperature (1x1 structure) -->
+          <div
+            class="group col-span-1 bg-white/65 dark:bg-nightblue-90/50 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 rounded-2xl p-4 sm:p-5 lg:py-4 lg:px-5 flex items-center gap-3.5 transition-all duration-300 hover:scale-[1.03] hover:bg-white/85 dark:hover:bg-nightblue-90/65 hover:shadow-md select-none">
+            <!-- Pulsing Weather Icon Status Badge -->
+            <div
+              class="relative flex items-center justify-center h-10 w-10 rounded-xl bg-orange/20 dark:bg-orange/30 text-orange shadow-sm border border-solid border-orange/20 flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+              <span
+                class="animate-ping absolute inline-flex h-full w-full rounded-xl bg-orange/15 opacity-75 pointer-events-none"></span>
+              <ion-icon class="text-lg font-bold" name="sunny-outline"
+                *ngIf="weatherModel.weathercode[weatherIndex] <= 3"></ion-icon>
+              <ion-icon class="text-lg font-bold" name="cloudy-outline"
+                *ngIf="weatherModel.weathercode[weatherIndex] > 3 && weatherModel.weathercode[weatherIndex] <= 48"></ion-icon>
+              <ion-icon class="text-lg font-bold" name="rainy-outline"
+                *ngIf="weatherModel.weathercode[weatherIndex] > 48"></ion-icon>
             </div>
-            <div class="pl-2 flex items-center">
-              {{weatherModel.apparent_temperature[weatherIndex]}} {{weatherUnits.apparent_temperature}}
-            </div>
-          </div>
-          <div class="flex mb-2">
-            <div class="flex items-center">
-              <ion-icon class="pr-2" color="primary" name="rainy-outline"></ion-icon>
-              Lluvia:
-            </div>
-            <div class="pl-2 flex items-center">
-              {{weatherModel.precipitation[weatherIndex]}} Litros / m^2
-            </div>
-          </div>
-          <div class="flex mb-2">
-            <div class="flex items-center">
-              <ion-icon class="pr-2" color="primary" name="water-outline"></ion-icon>
-              Humedad:
-            </div>
-            <div class="pl-2 flex items-center">
-              {{weatherModel.relativehumidity_2m[weatherIndex]}} {{weatherUnits.relativehumidity_2m}}
-            </div>
-          </div>
-          <div class="flex mb-2">
-            <div class="flex items-center">
-              <ion-icon class="pr-2" color="primary" name="cloud-outline"></ion-icon>
-              Nubosidad:
-            </div>
-            <div class="pl-2 flex items-center">
-              {{weatherModel.cloudcover[weatherIndex]}} {{weatherUnits.cloudcover}}
-            </div>
-          </div>
-          <div class="flex mb-2">
-            <div class="flex items-center">
-              <ion-icon class="pr-2" color="primary" name="compass-outline"></ion-icon>
-              Direccion del viento:
-            </div>
-            <div class="pl-2 flex items-center">
-              {{weatherModel.winddirection_10m[weatherIndex]}} {{weatherUnits.winddirection_10m}} ({{windDirection}})
+            <div class="min-w-0 flex-1">
+              <span
+                class="text-[10px] sm:text-xs font-black text-nightblue-80 dark:text-nightblue-20 uppercase tracking-widest block">Temperatura</span>
+              <div class="flex items-baseline gap-0.5 mt-0.5">
+                <span class="text-xl sm:text-2xl font-black text-nightblue dark:text-white tracking-tight"
+                  style="font-variant-numeric: tabular-nums;">
+                  {{weatherModel.temperature_2m[weatherIndex]}}
+                </span>
+                <span class="text-xs font-bold text-orange">{{weatherUnits.temperature_2m}}</span>
+              </div>
+              <div class="mt-1 flex flex-col gap-0.5 leading-none">
+                <span class="text-[9px] sm:text-[10px] font-extrabold text-orange uppercase tracking-wider block truncate">
+                  {{weatherCondition}}
+                </span>
+                <div
+                  class="text-[9px] sm:text-[10px] text-nightblue-60/80 dark:text-nightblue-50/80 font-semibold flex items-center gap-0.5 truncate">
+                  <ion-icon name="thermometer-outline" class="text-[10px] flex-shrink-0"></ion-icon>
+                  <span>Sensación: {{weatherModel.apparent_temperature[weatherIndex]}}°</span>
+                  <ion-icon name="arrow-up-outline" class="text-red-500 dark:text-red-400 font-bold text-[9px] flex-shrink-0"
+                    *ngIf="weatherModel.apparent_temperature[weatherIndex] > weatherModel.temperature_2m[weatherIndex]"></ion-icon>
+                  <ion-icon name="arrow-down-outline" class="text-blue-500 dark:text-blue-400 font-bold text-[9px] flex-shrink-0"
+                    *ngIf="weatherModel.apparent_temperature[weatherIndex] < weatherModel.temperature_2m[weatherIndex]"></ion-icon>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="flex mb-2">
-            <div class="flex items-center">
-              <ion-icon class="pr-2" color="primary" name="speedometer-outline"></ion-icon>
-              Velocidad del viento:
+
+          <!-- Card 2: Rain Chance (precipitation_probability) -->
+          <div
+            class="group col-span-1 bg-white/65 dark:bg-nightblue-90/50 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 rounded-2xl p-4 sm:p-5 lg:py-4 lg:px-5 flex items-center gap-3.5 transition-all duration-300 hover:scale-[1.03] hover:bg-white/85 dark:hover:bg-nightblue-90/65 hover:shadow-md">
+            <div
+              class="p-2 rounded-xl bg-blue-100/80 dark:bg-blue-900/30 text-blue-500 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+              <ion-icon name="rainy-outline" class="text-lg block"></ion-icon>
             </div>
-            <div class="pl-2 flex items-center">
-              {{weatherModel.windspeed_10m[weatherIndex]}} {{weatherUnits.windspeed_10m}}
+            <div class="min-w-0 flex-1">
+              <span
+                class="text-[10px] sm:text-xs font-black text-nightblue-80 dark:text-nightblue-20 uppercase tracking-widest block">Prob.
+                Lluvia</span>
+              <span class="text-xl sm:text-2xl font-black text-nightblue dark:text-white block leading-tight mt-0.5"
+                style="font-variant-numeric: tabular-nums;">
+                {{weatherModel.precipitation_probability[weatherIndex]}}%
+              </span>
+              <span
+                class="text-[10px] sm:text-xs font-bold text-nightblue-60/90 dark:text-nightblue-50/90 block mt-1">
+                Vol: {{weatherModel.precipitation[weatherIndex]}} L/m²
+              </span>
             </div>
           </div>
-          <div class="flex mb-2">
-            <div class="flex items-center">
-              <ion-icon class="pr-2" color="primary" name="rocket-outline"></ion-icon>
-              Rachas de viento:
+
+          <!-- Card 3: Relative Humidity -->
+          <div
+            class="group col-span-1 bg-white/65 dark:bg-nightblue-90/50 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 rounded-2xl p-4 sm:p-5 lg:py-4 lg:px-5 flex items-center gap-3.5 transition-all duration-300 hover:scale-[1.03] hover:bg-white/85 dark:hover:bg-nightblue-90/65 hover:shadow-md">
+            <div
+              class="p-2 rounded-xl bg-teal-100/80 dark:bg-teal-900/30 text-teal-500 dark:teal-400 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+              <ion-icon name="water-outline" class="text-lg block"></ion-icon>
             </div>
-            <div class="pl-2 flex items-center">
-              {{weatherModel.windgusts_10m[weatherIndex]}} {{weatherUnits.windgusts_10m}}
+            <div class="min-w-0 flex-1">
+              <span
+                class="text-[10px] sm:text-xs font-black text-nightblue-80 dark:text-nightblue-20 uppercase tracking-widest block">Humedad</span>
+              <span class="text-xl sm:text-2xl font-black text-nightblue dark:text-white block leading-tight mt-0.5"
+                style="font-variant-numeric: tabular-nums;">
+                {{weatherModel.relativehumidity_2m[weatherIndex]}}%
+              </span>
+              <span
+                class="text-[10px] sm:text-xs font-bold text-nightblue-60/90 dark:text-nightblue-50/90 block mt-1">
+                Relativa
+              </span>
+            </div>
+          </div>
+
+          <!-- Card 4: Cloud Cover -->
+          <div
+            class="group col-span-1 bg-white/65 dark:bg-nightblue-90/50 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 rounded-2xl p-4 sm:p-5 lg:py-4 lg:px-5 flex items-center gap-3.5 transition-all duration-300 hover:scale-[1.03] hover:bg-white/85 dark:hover:bg-nightblue-90/65 hover:shadow-md">
+            <div
+              class="p-2 rounded-xl bg-indigo-100/80 dark:bg-indigo-900/30 text-indigo-500 dark:text-indigo-400 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+              <ion-icon name="cloudy-outline" class="text-lg block"></ion-icon>
+            </div>
+            <div class="min-w-0 flex-1">
+              <span
+                class="text-[10px] sm:text-xs font-black text-nightblue-80 dark:text-nightblue-20 uppercase tracking-widest block">Nubosidad</span>
+              <span class="text-xl sm:text-2xl font-black text-nightblue dark:text-white block leading-tight mt-0.5"
+                style="font-variant-numeric: tabular-nums;">
+                {{weatherModel.cloudcover[weatherIndex]}}%
+              </span>
+              <span
+                class="text-[10px] sm:text-xs font-bold text-nightblue-60/90 dark:text-nightblue-50/90 block mt-1">
+                Cielo cubierto
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Unified Responsive Time Selector Control (Premium HTML Range Slider - Full Width Below) -->
+        <div class="relative w-full mb-6">
+          <div class="flex justify-between items-center mb-1.5 px-1">
+            <span
+              class="text-[10px] font-extrabold uppercase tracking-widest text-nightblue-80 dark:text-nightblue-20">Predicción
+              por horas</span>
+            <span
+              class="px-2.5 py-0.5 rounded-full bg-orange text-white text-[10px] font-black shadow-sm animate-pulse">
+              {{selectedTime}} h
+            </span>
+          </div>
+          <div
+            class="bg-white/60 dark:bg-nightblue-90/60 rounded-2xl p-4 border border-solid border-nightblue-100/10 dark:border-white/10 shadow-sm flex flex-col justify-center select-none">
+            <input type="range" min="0" [max]="weatherModel.time.length - 1" step="1" [value]="weatherIndex"
+              (input)="onSliderChange($event)" class="w-full accent-orange cursor-pointer">
+
+            <!-- HTML Step Tick Labels -->
+            <div
+              class="flex justify-between w-full px-1 mt-3 text-[10px] sm:text-xs font-bold text-nightblue-60 dark:text-nightblue-50">
+              <span *ngFor="let time of weatherModel.time; let idx = index" (click)="selectTimeIndex(idx)"
+                class="cursor-pointer transition-all duration-300 transform origin-center flex flex-col items-center gap-1"
+                [ngClass]="weatherIndex === idx ? 'text-orange font-black scale-110' : 'opacity-60 dark:opacity-40 hover:opacity-100 hover:text-nightblue dark:hover:text-white'">
+                <span>{{ time.split(':')[0] }}</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-current opacity-30 transition-all duration-300"
+                  [ngClass]="{'opacity-100 bg-orange': weatherIndex === idx}"></span>
+              </span>
             </div>
           </div>
         </div>
+
+        <!-- Interactive Toggle Button for Chart -->
+        <div class="col-span-1 lg:col-span-3 flex justify-center mt-4">
+          <button (click)="showChart = !showChart"
+            class="flex items-center gap-2 px-6 py-2.5 rounded-full border border-solid border-orange/40 hover:border-orange/70 dark:border-white/15 dark:hover:border-white/30 bg-orange-40/15 hover:bg-orange-40/30 dark:bg-white/5 dark:hover:bg-white/10 text-orange font-extrabold text-xs uppercase tracking-wider shadow-sm transition-all duration-300 hover:scale-[1.03] active:scale-95 focus:outline-none">
+            <ion-icon class="text-base" [name]="showChart ? 'chevron-up-outline' : 'stats-chart-outline'"></ion-icon>
+            {{ showChart ? 'Ocultar gráfica de hoy' : 'Ver gráfica de hoy' }}
+          </button>
+        </div>
+
+        <!-- Animated Hidden Chart Container -->
+        <div class="col-span-1 lg:col-span-3 transition-all duration-500 ease-in-out overflow-hidden"
+          [ngClass]="showChart ? 'max-h-[500px] opacity-100 mt-2 visible' : 'max-h-0 opacity-0 pointer-events-none invisible'">
+
+          <!-- Divider inside animated area -->
+          <div class="border-t border-solid border-nightblue-100/10 dark:border-white/10 my-4"></div>
+
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+            <div>
+              <h3 class="text-lg font-bold text-nightblue dark:text-white">Evolución Diaria</h3>
+              <p class="text-xs text-nightblue-60 dark:text-nightblue-50">Temperatura, velocidad y rachas de viento en
+                el transcurso del día</p>
+            </div>
+            <!-- Legends / Live Stats dashboard -->
+            <div class="flex flex-wrap gap-2.5 text-xs font-semibold">
+              <div
+                class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-orange/10 text-orange-100 dark:text-orange border border-solid border-orange/10">
+                <span class="w-1.5 h-1.5 rounded-full bg-orange block"></span>
+                <span>Temp: {{tempPoints[weatherIndex]?.value}}°C</span>
+              </div>
+              <div
+                class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-500 dark:text-blue-400 border border-solid border-blue-500/10">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 dark:bg-blue-500 block"></span>
+                <span>Viento: {{windSpeedPoints[weatherIndex]?.value}} km/h</span>
+              </div>
+              <div
+                class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-500/10 text-red-500 dark:text-red-400 border border-solid border-red-500/10">
+                <span class="w-1.5 h-1.5 rounded-full bg-red-400 dark:bg-red-500 block"></span>
+                <span>Rachas: {{windGustsPoints[weatherIndex]?.value}} km/h</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Interactive SVG Chart -->
+          <div
+            class="relative bg-white/30 dark:bg-nightblue-90/30 rounded-2xl p-4 border border-solid border-nightblue-100/5 dark:border-white/5 overflow-hidden">
+            <svg viewBox="0 0 600 240" class="w-full h-auto overflow-visible select-none">
+              <defs>
+                <!-- Gradients -->
+                <linearGradient id="tempGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#f9a45e" stop-opacity="0.25" />
+                  <stop offset="100%" stop-color="#f9a45e" stop-opacity="0.0" />
+                </linearGradient>
+                <linearGradient id="windGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.15" />
+                  <stop offset="100%" stop-color="#60a5fa" stop-opacity="0.0" />
+                </linearGradient>
+              </defs>
+
+              <!-- Grid lines (Horizontal) -->
+              <line x1="60" y1="40" x2="560" y2="40" stroke="currentColor"
+                class="text-nightblue-10/40 dark:text-white/5" stroke-width="1" />
+              <line x1="60" y1="88" x2="560" y2="88" stroke="currentColor"
+                class="text-nightblue-10/40 dark:text-white/5" stroke-width="1" />
+              <line x1="60" y1="136" x2="560" y2="136" stroke="currentColor"
+                class="text-nightblue-10/40 dark:text-white/5" stroke-width="1" />
+              <line x1="60" y1="184" x2="560" y2="184" stroke="currentColor"
+                class="text-nightblue-10/40 dark:text-white/5" stroke-width="1" />
+
+              <!-- Vertical Snap Grid Line for Selected Hour -->
+              <line *ngIf="tempPoints[weatherIndex]" [attr.x1]="tempPoints[weatherIndex].x" [attr.y1]="25"
+                [attr.x2]="tempPoints[weatherIndex].x" [attr.y2]="195" stroke="#ff7700" stroke-width="1.5"
+                stroke-dasharray="3 3" class="transition-all duration-300 ease-out opacity-80" />
+
+              <!-- Filled Areas -->
+              <path [attr.d]="tempAreaPath" fill="url(#tempGrad)" class="transition-all duration-300 ease-out" />
+              <path [attr.d]="windSpeedAreaPath" fill="url(#windGrad)" class="transition-all duration-300 ease-out" />
+
+              <!-- Draw Lines -->
+              <path [attr.d]="tempPath" fill="none" stroke="#f9a45e" stroke-width="3" stroke-linecap="round"
+                stroke-linejoin="round" class="transition-all duration-300 ease-out" />
+              <path [attr.d]="windSpeedPath" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="transition-all duration-300 ease-out" />
+              <path [attr.d]="windGustsPath" fill="none" stroke="#f87171" stroke-width="2" stroke-dasharray="4 4"
+                stroke-linecap="round" stroke-linejoin="round" class="transition-all duration-300 ease-out" />
+
+              <!-- interactive circle markers on the current weatherIndex -->
+              <g *ngIf="tempPoints[weatherIndex]" class="transition-all duration-300 ease-out">
+                <!-- Temp dot -->
+                <circle [attr.cx]="tempPoints[weatherIndex].x" [attr.cy]="tempPoints[weatherIndex].y" r="6"
+                  fill="#f9a45e" stroke="#fff" stroke-width="2" class="shadow-sm" />
+                <!-- Wind Speed dot -->
+                <circle [attr.cx]="windSpeedPoints[weatherIndex].x" [attr.cy]="windSpeedPoints[weatherIndex].y" r="5"
+                  fill="#60a5fa" stroke="#fff" stroke-width="1.5" />
+                <!-- Wind Gust dot -->
+                <circle [attr.cx]="windGustsPoints[weatherIndex].x" [attr.cy]="windGustsPoints[weatherIndex].y" r="5"
+                  fill="#f87171" stroke="#fff" stroke-width="1.5" />
+              </g>
+
+              <!-- Invisible hover zones overlay for interactive mouse hover -->
+              <g class="cursor-pointer">
+                <rect *ngFor="let pt of tempPoints; let idx = index"
+                  [attr.x]="pt.x - (500 / (tempPoints.length - 1)) / 2" [attr.y]="0"
+                  [attr.width]="500 / (tempPoints.length - 1)" [attr.height]="240" fill="transparent"
+                  (mouseenter)="selectTimeIndex(idx)" (mousemove)="selectTimeIndex(idx)">
+                </rect>
+              </g>
+
+              <!-- X Axis Labels (Hours) -->
+              <g class="text-[10px] font-bold text-nightblue-50 dark:text-nightblue-50/70">
+                <text *ngFor="let label of timeLabels" [attr.x]="label.x" y="210" text-anchor="middle">
+                  {{label.label}}
+                </text>
+              </g>
+
+              <!-- Y Axis Labels -->
+              <g class="text-[9px] font-semibold text-nightblue-50 dark:text-nightblue-50/60" text-anchor="end">
+                <text x="50" y="44">Máx</text>
+                <text x="50" y="116">Med</text>
+                <text x="50" y="188">Mín</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
       </div>
       <div class="mb-8 rounded-3xl p-4 md:pl-5 border border-solid dark:border-clear border-nightblue-100">
         <div class="w-full flex px-2 pb-4 items-center justify-between">
           <h3 class="flex items-center">
             Nuestras últimas noticias
-          </h3>          
+          </h3>
           <ion-button color="primary" class="h-7 lg:pr-2 xl:pr-3" routerLink="/noticias">
-              Ver todas
+            Ver todas
           </ion-button>
         </div>
         <ion-progress-bar *ngIf="newsArray.length == 0" class="rounded-xl px-4" [value]="progress"></ion-progress-bar>
