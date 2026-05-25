@@ -217,16 +217,19 @@
                 <span class="text-xs font-bold text-orange">{{weatherUnits.temperature_2m}}</span>
               </div>
               <div class="mt-1 flex flex-col gap-0.5 leading-none">
-                <span class="text-[9px] sm:text-[10px] font-extrabold text-orange uppercase tracking-wider block truncate">
+                <span
+                  class="text-[9px] sm:text-[10px] font-extrabold text-orange uppercase tracking-wider block truncate">
                   {{weatherCondition}}
                 </span>
                 <div
                   class="text-[9px] sm:text-[10px] text-nightblue-60/80 dark:text-nightblue-50/80 font-semibold flex items-center gap-0.5 truncate">
                   <ion-icon name="thermometer-outline" class="text-[10px] flex-shrink-0"></ion-icon>
                   <span>Sensación: {{weatherModel.apparent_temperature[weatherIndex]}}°</span>
-                  <ion-icon name="arrow-up-outline" class="text-red-500 dark:text-red-400 font-bold text-[9px] flex-shrink-0"
+                  <ion-icon name="arrow-up-outline"
+                    class="text-red-500 dark:text-red-400 font-bold text-[9px] flex-shrink-0"
                     *ngIf="weatherModel.apparent_temperature[weatherIndex] > weatherModel.temperature_2m[weatherIndex]"></ion-icon>
-                  <ion-icon name="arrow-down-outline" class="text-blue-500 dark:text-blue-400 font-bold text-[9px] flex-shrink-0"
+                  <ion-icon name="arrow-down-outline"
+                    class="text-blue-500 dark:text-blue-400 font-bold text-[9px] flex-shrink-0"
                     *ngIf="weatherModel.apparent_temperature[weatherIndex] < weatherModel.temperature_2m[weatherIndex]"></ion-icon>
                 </div>
               </div>
@@ -248,8 +251,7 @@
                 style="font-variant-numeric: tabular-nums;">
                 {{weatherModel.precipitation_probability[weatherIndex]}}%
               </span>
-              <span
-                class="text-[10px] sm:text-xs font-bold text-nightblue-60/90 dark:text-nightblue-50/90 block mt-1">
+              <span class="text-[10px] sm:text-xs font-bold text-nightblue-60/90 dark:text-nightblue-50/90 block mt-1">
                 Vol: {{weatherModel.precipitation[weatherIndex]}} L/m²
               </span>
             </div>
@@ -269,8 +271,7 @@
                 style="font-variant-numeric: tabular-nums;">
                 {{weatherModel.relativehumidity_2m[weatherIndex]}}%
               </span>
-              <span
-                class="text-[10px] sm:text-xs font-bold text-nightblue-60/90 dark:text-nightblue-50/90 block mt-1">
+              <span class="text-[10px] sm:text-xs font-bold text-nightblue-60/90 dark:text-nightblue-50/90 block mt-1">
                 Relativa
               </span>
             </div>
@@ -290,8 +291,7 @@
                 style="font-variant-numeric: tabular-nums;">
                 {{weatherModel.cloudcover[weatherIndex]}}%
               </span>
-              <span
-                class="text-[10px] sm:text-xs font-bold text-nightblue-60/90 dark:text-nightblue-50/90 block mt-1">
+              <span class="text-[10px] sm:text-xs font-bold text-nightblue-60/90 dark:text-nightblue-50/90 block mt-1">
                 Cielo cubierto
               </span>
             </div>
@@ -340,14 +340,14 @@
 
         <!-- Animated Hidden Chart Container -->
         <div class="col-span-1 lg:col-span-3 transition-all duration-500 ease-in-out overflow-hidden"
-          [ngClass]="showChart ? 'max-h-[500px] opacity-100 mt-2 visible' : 'max-h-0 opacity-0 pointer-events-none invisible'">
+          [ngClass]="showChart ? 'max-h-[800px] opacity-100 mt-2 visible' : 'max-h-0 opacity-0 pointer-events-none invisible'">
 
           <!-- Divider inside animated area -->
           <div class="border-t border-solid border-nightblue-100/10 dark:border-white/10 my-4"></div>
 
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
             <div>
-              <h3 class="text-lg font-bold text-nightblue dark:text-white">Evolución Diaria</h3>
+              <h3 class="text-lg font-bold text-nightblue dark:text-white">Evolución en el día</h3>
               <p class="text-xs text-nightblue-60 dark:text-nightblue-50">Temperatura, velocidad y rachas de viento en
                 el transcurso del día</p>
             </div>
@@ -373,7 +373,7 @@
 
           <!-- Dynamic Interactive SVG Chart -->
           <div
-            class="relative bg-white/30 dark:bg-nightblue-90/30 rounded-2xl p-4 border border-solid border-nightblue-100/5 dark:border-white/5 overflow-hidden">
+            class="relative bg-white/30 dark:bg-nightblue-90/30 rounded-2xl p-4 border border-solid border-nightblue-100/10 dark:border-white/10 overflow-hidden">
             <svg viewBox="0 0 600 240" class="w-full h-auto overflow-visible select-none">
               <defs>
                 <!-- Gradients -->
