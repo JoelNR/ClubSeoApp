@@ -32,57 +32,36 @@
 
         <!-- Header: Unified Metrics Grid Layout -->
         <div
-          class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2 gap-4 items-stretch border-b border-solid border-nightblue-100/10 dark:border-white/10 pb-5 mb-5">
+          class="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch border-b border-solid border-nightblue-100/10 dark:border-white/10 pb-5 mb-5">
 
-          <!-- Card 1: Wind Speed, Gusts & Direction (Unified Wind Card - 2x2 Structure) -->
+          <!-- Card 1: Wind Speed, Gusts & Direction (Unified Wind Card - High-Tech Compact Row) -->
           <div
-            class="group col-span-1 sm:col-span-2 lg:col-span-2 lg:row-span-2 bg-white/65 dark:bg-nightblue-90/50 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 rounded-3xl p-5 md:p-6 lg:py-4 lg:px-6 flex flex-row items-center gap-4 sm:gap-5 transition-all duration-300 hover:scale-[1.02] hover:bg-white/85 dark:hover:bg-nightblue-90/65 hover:shadow-lg">
-            <!-- Premium High-Tech Instrument Compass Dial -->
+            class="group col-span-1 md:col-span-2 lg:col-span-2 bg-white/65 dark:bg-nightblue-90/50 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 rounded-2xl p-4 sm:p-5 flex flex-row items-center gap-4 sm:gap-6 justify-between transition-all duration-300 hover:scale-[1.02] hover:bg-white/85 dark:hover:bg-nightblue-90/65 hover:shadow-md">
+            
+            <!-- Left Side: Dynamic Compass (Slightly Smaller for Single Row) -->
             <div
-              class="relative flex items-center justify-center h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 rounded-full border border-solid border-nightblue-100/10 dark:border-white/10 bg-gradient-to-b from-white/80 to-clear/50 dark:from-nightblue-90/80 dark:to-nightblue-100/40 flex-shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_2px_8px_rgba(255,255,255,0.6)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3),inset_0_1px_4px_rgba(255,255,255,0.1)]">
-
-              <!-- Outer tick ring for degree intervals (archery instrument styling) -->
+              class="relative flex items-center justify-center h-16 w-16 md:h-20 md:w-20 rounded-full border border-solid border-nightblue-100/10 dark:border-white/10 bg-gradient-to-b from-white/80 to-clear/50 dark:from-nightblue-90/80 dark:to-nightblue-100/40 flex-shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-[0_4px_16px_rgba(0,0,0,0.06),inset_0_1px_4px_rgba(255,255,255,0.6)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.2),inset_0_0.5px_2px_rgba(255,255,255,0.1)]">
               <svg viewBox="0 0 100 100"
                 class="absolute w-full h-full text-nightblue-100/10 dark:text-white/10 select-none pointer-events-none animate-[spin_60s_linear_infinite]"
                 aria-hidden="true">
-                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="0.5" stroke-dasharray="1.5 1.5"
-                  fill="none" />
-                <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="0.5" stroke-dasharray="3 6"
-                  fill="none" />
-                <!-- 12 Compass Dial Tick marks (every 30 degrees) -->
+                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="0.5" stroke-dasharray="1.5 1.5" fill="none" />
+                <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="0.5" stroke-dasharray="3 6" fill="none" />
                 <line x1="50" y1="8" x2="50" y2="12" stroke="currentColor" stroke-width="0.8" />
                 <line x1="50" y1="88" x2="50" y2="92" stroke="currentColor" stroke-width="0.8" />
                 <line x1="8" y1="50" x2="12" y2="50" stroke="currentColor" stroke-width="0.8" />
                 <line x1="88" y1="50" x2="92" y2="50" stroke="currentColor" stroke-width="0.8" />
-
-                <line x1="29" y1="13.4" x2="31" y2="16.9" stroke="currentColor" stroke-width="0.5" />
-                <line x1="71" y1="13.4" x2="69" y2="16.9" stroke="currentColor" stroke-width="0.5" />
-                <line x1="29" y1="86.6" x2="31" y2="83.1" stroke="currentColor" stroke-width="0.5" />
-                <line x1="71" y1="86.6" x2="69" y2="83.1" stroke="currentColor" stroke-width="0.5" />
-
-                <line x1="13.4" y1="29" x2="16.9" y2="31" stroke="currentColor" stroke-width="0.5" />
-                <line x1="86.6" y1="29" x2="83.1" y2="31" stroke="currentColor" stroke-width="0.5" />
-                <line x1="13.4" y1="71" x2="16.9" y2="69" stroke="currentColor" stroke-width="0.5" />
-                <line x1="86.6" y1="71" x2="83.1" y2="69" stroke="currentColor" stroke-width="0.5" />
               </svg>
-
-              <!-- Compass Cardinal Points -->
-              <span
-                class="absolute top-1.5 left-1/2 -translate-x-1/2 text-[9px] sm:text-[10px] md:text-[11px] font-black text-orange dark:text-orange-80 leading-none select-none tracking-tight">N</span>
-              <span
-                class="absolute bottom-1.5 left-1/2 -translate-x-1/2 text-[9px] sm:text-[10px] md:text-[11px] font-bold text-nightblue-50/70 dark:text-white/30 leading-none select-none">S</span>
-              <span
-                class="absolute left-2 top-1/2 -translate-y-1/2 text-[9px] sm:text-[10px] md:text-[11px] font-bold text-nightblue-50/70 dark:text-white/30 leading-none select-none">O</span>
-              <span
-                class="absolute right-2 top-1/2 -translate-y-1/2 text-[9px] sm:text-[10px] md:text-[11px] font-bold text-nightblue-50/70 dark:text-white/30 leading-none select-none">E</span>
+              <span class="absolute top-1 text-[8px] md:text-[9px] font-black text-orange dark:text-orange-80 leading-none select-none tracking-tight">N</span>
+              <span class="absolute bottom-1 text-[8px] md:text-[9px] font-bold text-nightblue-50/70 dark:text-white/30 leading-none select-none">S</span>
+              <span class="absolute left-1.5 top-1/2 -translate-y-1/2 text-[8px] md:text-[9px] font-bold text-nightblue-50/70 dark:text-white/30 leading-none select-none">O</span>
+              <span class="absolute right-1.5 top-1/2 -translate-y-1/2 text-[8px] md:text-[9px] font-bold text-nightblue-50/70 dark:text-white/30 leading-none select-none">E</span>
 
               <!-- Bespoke Dual-Tone Archery Arrow pointer with realistic drop shadow -->
               <svg viewBox="0 0 24 24"
                 [style.transform]="'rotate(' + weatherModel.winddirection_10m[weatherIndex] + 'deg)'"
-                class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 transition-transform duration-700 ease-out text-amber-500 dark:text-amber-400 drop-shadow-[0_4px_6px_rgba(255,119,0,0.15)] dark:drop-shadow-[0_4px_8px_rgba(255,119,0,0.3)] select-none pointer-events-none"
+                class="w-10 h-10 md:w-14 md:h-14 transition-transform duration-700 ease-out text-amber-500 dark:text-amber-400 drop-shadow-[0_2px_4px_rgba(255,119,0,0.15)] dark:drop-shadow-[0_2px_4px_rgba(255,119,0,0.3)] select-none pointer-events-none"
                 aria-hidden="true">
                 <defs>
-                  <!-- High-tech linear gradients for arrow styling -->
                   <linearGradient id="arrowShaft" x1="0" y1="0" x2="1" y2="0">
                     <stop offset="0%" stop-color="#ff7700" />
                     <stop offset="50%" stop-color="#f9a45e" />
@@ -93,30 +72,28 @@
                     <stop offset="100%" stop-color="#b5a964" />
                   </linearGradient>
                 </defs>
-                <!-- Central arrow shaft -->
                 <line x1="12" y1="5.5" x2="12" y2="21" stroke="#ff7700" stroke-width="1.8" stroke-linecap="round" />
-                <!-- Broadhead arrowhead point (metallic gold/orange) -->
-                <polygon points="12,2 6,8.5 12,6.5 18,8.5" fill="url(#arrowHead)" stroke="none"
-                  stroke-linejoin="round" />
-                <!-- Slanted left fletching (feather) -->
+                <polygon points="12,2 6,8.5 12,6.5 18,8.5" fill="url(#arrowHead)" stroke="none" stroke-linejoin="round" />
                 <polygon points="12,14 8,16.5 8,19.5 12,18.5" fill="#ff7700" opacity="0.9" />
-                <!-- Slanted right fletching (feather) -->
                 <polygon points="12,14 16,16.5 16,19.5 12,18.5" fill="#ff7700" opacity="0.9" />
-                <!-- Custom archery arrow nock at the very tail -->
-                <polyline points="11,21 12,20 13,21" fill="none" stroke="#ff7700" stroke-width="1.5"
-                  stroke-linecap="round" />
+                <polyline points="11,21 12,20 13,21" fill="none" stroke="#ff7700" stroke-width="1.5" stroke-linecap="round" />
               </svg>
             </div>
-            <div class="min-w-0 flex-1 w-full text-left">
-              <span
-                class="text-[10px] sm:text-xs font-bold text-nightblue-50 dark:text-nightblue-50/80 uppercase tracking-widest block">Viento</span>
 
-              <!-- Two-row stacked information for wind speed and gusts to prevent overflow -->
-              <div class="flex flex-col items-start gap-y-2.5 mt-2.5">
-                <!-- Wind Speed (Wind Icon) -->
+            <!-- Right Side: Metrics arranged horizontally -->
+            <div class="min-w-0 flex-1 flex flex-col justify-center">
+              <div class="flex items-center justify-between border-b border-solid border-nightblue-100/10 dark:border-white/10 pb-1.5 mb-1.5 select-none">
+                <span class="text-[10px] sm:text-xs font-black text-nightblue-80 dark:text-nightblue-20 uppercase tracking-widest">Viento</span>
+                <span class="text-[9px] font-extrabold text-orange uppercase tracking-wider">
+                  {{windDirection}} ({{weatherModel.winddirection_10m[weatherIndex]}}°)
+                </span>
+              </div>
+              
+              <!-- Metrics in a side-by-side flex row -->
+              <div class="flex flex-row items-center justify-start gap-x-6 sm:gap-x-8">
+                <!-- Wind Speed -->
                 <div class="flex items-center gap-2">
-                  <!-- Premium Custom Wind Icon SVG -->
-                  <svg viewBox="0 0 24 24" class="w-6 h-6 sm:w-8 sm:h-8 text-orange flex-shrink-0" fill="none"
+                  <svg viewBox="0 0 24 24" class="w-5 h-5 sm:w-6 sm:h-6 text-orange flex-shrink-0" fill="none"
                     stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
                     aria-hidden="true">
                     <path d="M9.59 4.59A2 2 0 1 1 11 8H2" />
@@ -125,68 +102,38 @@
                   </svg>
                   <div class="flex flex-col items-start leading-none">
                     <div class="flex items-baseline gap-0.5">
-                      <span
-                        class="text-xl sm:text-2xl md:text-3xl font-black text-nightblue dark:text-white tracking-tight"
+                      <span class="text-lg sm:text-xl font-black text-nightblue dark:text-white tracking-tight"
                         style="font-variant-numeric: tabular-nums;">
                         {{weatherModel.windspeed_10m[weatherIndex]}}
                       </span>
-                      <span
-                        class="text-[10px] sm:text-xs font-bold text-nightblue-50 dark:text-nightblue-50/70 ml-0.5">km/h</span>
+                      <span class="text-[9px] sm:text-[10px] font-bold text-nightblue-50 dark:text-nightblue-50/70 ml-0.5">km/h</span>
                     </div>
-                    <span
-                      class="text-[9px] font-semibold text-nightblue-60 dark:text-nightblue-40/80 opacity-90 uppercase tracking-wider mt-0.5">Velocidad</span>
+                    <span class="text-[8px] font-bold text-nightblue-60 dark:text-nightblue-45 uppercase tracking-wider mt-0.5">Velocidad</span>
                   </div>
                 </div>
 
-                <!-- Gusts (Wind Cone SVG) -->
+                <!-- Gusts -->
                 <div class="flex items-center gap-2">
-                  <svg viewBox="0 0 24 24" class="w-6 h-6 sm:w-8 sm:h-8 text-red-500 dark:text-red-400 flex-shrink-0"
+                  <svg viewBox="0 0 24 24" class="w-5 h-5 sm:w-6 sm:h-6 text-red-500 dark:text-red-400 flex-shrink-0"
                     fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
                     aria-hidden="true">
-                    <!-- Pole/Mast -->
                     <line x1="5" y1="22" x2="5" y2="2" />
-                    <!-- Windsock bracket -->
                     <path d="M5,4 L8,5 L8,11 L5,12 Z" fill="currentColor" fill-opacity="0.15" />
-                    <!-- Windsock body segments -->
                     <path d="M8,5 L14,6.5 L14,9.5 L8,11 Z" fill="currentColor" fill-opacity="0.25" />
                     <path d="M14,6.5 L19,7.5 L19,8.5 L14,9.5 Z" fill="currentColor" fill-opacity="0.5" />
                     <path d="M19,7.5 L23,8 L23,8 L19,8.5 Z" fill="currentColor" />
                   </svg>
                   <div class="flex flex-col items-start leading-none">
                     <div class="flex items-baseline gap-0.5">
-                      <span
-                        class="text-xl sm:text-2xl md:text-3xl font-black text-nightblue dark:text-white tracking-tight"
+                      <span class="text-lg sm:text-xl font-black text-nightblue dark:text-white tracking-tight"
                         style="font-variant-numeric: tabular-nums;">
                         {{weatherModel.windgusts_10m[weatherIndex]}}
                       </span>
-                      <span
-                        class="text-[10px] sm:text-xs font-bold text-nightblue-50 dark:text-nightblue-50/70 ml-0.5">km/h</span>
+                      <span class="text-[9px] sm:text-[10px] font-bold text-nightblue-50 dark:text-nightblue-50/70 ml-0.5">km/h</span>
                     </div>
-                    <span
-                      class="text-[9px] font-semibold text-nightblue-60 dark:text-nightblue-40/80 opacity-90 uppercase tracking-wider mt-0.5">Rachas</span>
+                    <span class="text-[8px] font-bold text-nightblue-60 dark:text-nightblue-45 uppercase tracking-wider mt-0.5">Rachas</span>
                   </div>
                 </div>
-              </div>
-
-              <!-- Direction & Rumbo with dynamic compass indicator arrow -->
-              <div
-                class="flex flex-wrap items-center justify-start gap-2 mt-3.5 pt-2.5 border-t border-solid border-nightblue-100/10 dark:border-white/10">
-                <span class="text-[10px] sm:text-xs font-bold text-nightblue-60/90 dark:text-nightblue-50/90"
-                  style="font-variant-numeric: tabular-nums;">
-                  Rumbo: <span class="text-orange font-extrabold">{{windDirection}}</span>
-                  ({{weatherModel.winddirection_10m[weatherIndex]}}°)
-                </span>
-                <svg viewBox="0 0 24 24"
-                  [style.transform]="'rotate(' + weatherModel.winddirection_10m[weatherIndex] + 'deg)'"
-                  class="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-500 ease-out text-amber-500 dark:text-amber-400 inline-block drop-shadow-sm select-none pointer-events-none"
-                  aria-hidden="true">
-                  <line x1="12" y1="5" x2="12" y2="21" stroke="currentColor" stroke-width="1.5"
-                    stroke-linecap="round" />
-                  <polygon points="12,2 8,7 12,5.5 16,7" fill="currentColor" stroke="currentColor" stroke-width="0.5"
-                    stroke-linejoin="round" />
-                  <polygon points="12,14 9,16.5 9,19 12,18" fill="currentColor" opacity="0.85" />
-                  <polygon points="12,14 15,16.5 15,19 12,18" fill="currentColor" opacity="0.85" />
-                </svg>
               </div>
             </div>
           </div>
@@ -257,43 +204,75 @@
             </div>
           </div>
 
-          <!-- Card 3: Relative Humidity -->
+          <!-- Card 3: Atmosphere (Combined Humidity & Cloud Cover) -->
           <div
-            class="group col-span-1 bg-white/65 dark:bg-nightblue-90/50 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 rounded-2xl p-4 sm:p-5 lg:py-4 lg:px-5 flex items-center gap-3.5 transition-all duration-300 hover:scale-[1.03] hover:bg-white/85 dark:hover:bg-nightblue-90/65 hover:shadow-md">
-            <div
-              class="p-2 rounded-xl bg-teal-100/80 dark:bg-teal-900/30 text-teal-500 dark:teal-400 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-              <ion-icon name="water-outline" class="text-lg block"></ion-icon>
+            class="group col-span-1 bg-white/65 dark:bg-nightblue-90/50 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 rounded-2xl p-4 sm:p-5 lg:py-4 lg:px-5 flex flex-col justify-between transition-all duration-300 hover:scale-[1.03] hover:bg-white/85 dark:hover:bg-nightblue-90/65 hover:shadow-md">
+            <div class="flex items-center gap-2 mb-2 select-none">
+              <div class="p-1.5 rounded-lg bg-teal-100/80 dark:bg-teal-900/30 text-teal-500 dark:text-teal-400 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                <ion-icon name="water-outline" class="text-base block"></ion-icon>
+              </div>
+              <span class="text-[10px] sm:text-xs font-black text-nightblue-80 dark:text-nightblue-20 uppercase tracking-widest">Atmósfera</span>
             </div>
-            <div class="min-w-0 flex-1">
-              <span
-                class="text-[10px] sm:text-xs font-black text-nightblue-80 dark:text-nightblue-20 uppercase tracking-widest block">Humedad</span>
-              <span class="text-xl sm:text-2xl font-black text-nightblue dark:text-white block leading-tight mt-0.5"
-                style="font-variant-numeric: tabular-nums;">
-                {{weatherModel.relativehumidity_2m[weatherIndex]}}%
-              </span>
-              <span class="text-[10px] sm:text-xs font-bold text-nightblue-60/90 dark:text-nightblue-50/90 block mt-1">
-                Relativa
-              </span>
+            
+            <div class="grid grid-cols-2 gap-4 divide-x divide-solid divide-nightblue-100/10 dark:divide-white/10">
+              <!-- Humidity Section -->
+              <div class="flex flex-col text-left">
+                <span class="text-[9px] font-bold text-nightblue-50 dark:text-nightblue-50/70 uppercase tracking-wider block">Humedad</span>
+                <span class="text-lg sm:text-xl font-black text-nightblue dark:text-white leading-tight mt-1" style="font-variant-numeric: tabular-nums;">
+                  {{weatherModel.relativehumidity_2m[weatherIndex]}}%
+                </span>
+                <span class="text-[9px] font-semibold text-nightblue-60 dark:text-nightblue-50/80 mt-0.5">Relativa</span>
+              </div>
+              
+              <!-- Cloud Cover Section -->
+              <div class="flex flex-col text-left pl-4">
+                <span class="text-[9px] font-bold text-nightblue-50 dark:text-nightblue-50/70 uppercase tracking-wider block">Nubosidad</span>
+                <span class="text-lg sm:text-xl font-black text-nightblue dark:text-white leading-tight mt-1" style="font-variant-numeric: tabular-nums;">
+                  {{weatherModel.cloudcover[weatherIndex]}}%
+                </span>
+                <span class="text-[9px] font-semibold text-nightblue-60 dark:text-nightblue-50/80 mt-0.5">Cielo cubierto</span>
+              </div>
             </div>
           </div>
 
-          <!-- Card 4: Cloud Cover -->
+          <!-- Card 5: UV Index -->
           <div
-            class="group col-span-1 bg-white/65 dark:bg-nightblue-90/50 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 rounded-2xl p-4 sm:p-5 lg:py-4 lg:px-5 flex items-center gap-3.5 transition-all duration-300 hover:scale-[1.03] hover:bg-white/85 dark:hover:bg-nightblue-90/65 hover:shadow-md">
-            <div
-              class="p-2 rounded-xl bg-indigo-100/80 dark:bg-indigo-900/30 text-indigo-500 dark:text-indigo-400 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-              <ion-icon name="cloudy-outline" class="text-lg block"></ion-icon>
+            class="group col-span-1 bg-white/65 dark:bg-nightblue-90/50 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 rounded-2xl p-4 sm:p-5 lg:py-4 lg:px-5 flex flex-col justify-between transition-all duration-300 hover:scale-[1.03] hover:bg-white/85 dark:hover:bg-nightblue-90/65 hover:shadow-md">
+            <div class="flex items-center gap-3.5">
+              <div
+                class="p-2 rounded-xl bg-amber-100/80 dark:bg-amber-900/30 text-amber-500 dark:text-amber-400 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                <ion-icon name="sunny" class="text-lg block"></ion-icon>
+              </div>
+              <div class="min-w-0 flex-1">
+                <span
+                  class="text-[10px] sm:text-xs font-black text-nightblue-80 dark:text-nightblue-20 uppercase tracking-widest block">Índice UV</span>
+                <div class="flex items-baseline gap-2 mt-0.5">
+                  <span class="text-xl sm:text-2xl font-black text-nightblue dark:text-white leading-none"
+                    style="font-variant-numeric: tabular-nums;">
+                    {{weatherModel.uv_index[weatherIndex]}}
+                  </span>
+                  <span class="text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-full leading-none transition-colors duration-300"
+                        [ngClass]="{
+                          'bg-green-500/20 text-green-600 dark:text-green-400': weatherModel.uv_index[weatherIndex] < 3,
+                          'bg-yellow-500/20 text-yellow-600 dark:text-yellow-400': weatherModel.uv_index[weatherIndex] >= 3 && weatherModel.uv_index[weatherIndex] < 6,
+                          'bg-orange/20 text-orange dark:text-orange-40': weatherModel.uv_index[weatherIndex] >= 6 && weatherModel.uv_index[weatherIndex] < 8,
+                          'bg-red-500/20 text-red-600 dark:text-red-400': weatherModel.uv_index[weatherIndex] >= 8 && weatherModel.uv_index[weatherIndex] < 11,
+                          'bg-purple-500/20 text-purple-600 dark:text-purple-400': weatherModel.uv_index[weatherIndex] >= 11
+                        }">
+                    {{ weatherModel.uv_index[weatherIndex] < 3 ? 'Bajo' : 
+                       weatherModel.uv_index[weatherIndex] < 6 ? 'Moderado' : 
+                       weatherModel.uv_index[weatherIndex] < 8 ? 'Alto' : 
+                       weatherModel.uv_index[weatherIndex] < 11 ? 'Muy Alto' : 'Extremo' }}
+                  </span>
+                </div>
+              </div>
             </div>
-            <div class="min-w-0 flex-1">
-              <span
-                class="text-[10px] sm:text-xs font-black text-nightblue-80 dark:text-nightblue-20 uppercase tracking-widest block">Nubosidad</span>
-              <span class="text-xl sm:text-2xl font-black text-nightblue dark:text-white block leading-tight mt-0.5"
-                style="font-variant-numeric: tabular-nums;">
-                {{weatherModel.cloudcover[weatherIndex]}}%
-              </span>
-              <span class="text-[10px] sm:text-xs font-bold text-nightblue-60/90 dark:text-nightblue-50/90 block mt-1">
-                Cielo cubierto
-              </span>
+            
+            <!-- Beautiful Gradient Slider Track -->
+            <div class="relative w-full h-2 rounded-full mt-4 bg-gradient-to-r from-[#32d74b] via-[#acff2f] via-[#ffd60a] via-[#ff9f0a] via-[#ff453a] via-[#ff375f] to-[#bf5af2] overflow-visible">
+              <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-white border-[3px] border-solid border-[#3880ff] shadow-md transition-all duration-500 ease-out"
+                   [style.left.%]="(weatherModel.uv_index[weatherIndex] > 12 ? 12 : weatherModel.uv_index[weatherIndex]) / 12 * 100">
+              </div>
             </div>
           </div>
 

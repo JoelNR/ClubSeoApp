@@ -92,7 +92,7 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
     const headers = {
       'Accept': 'application/json',
     }
-    this.http.get<GetWeatherApiResponse>('https://api.open-meteo.com/v1/forecast?latitude=28.07099441390725&longitude=-15.466435495425296&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,precipitation_probability,weathercode,cloudcover,windspeed_10m,winddirection_10m,windgusts_10m&start_date='
+    this.http.get<GetWeatherApiResponse>('https://api.open-meteo.com/v1/forecast?latitude=28.07099441390725&longitude=-15.466435495425296&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,precipitation_probability,weathercode,cloudcover,windspeed_10m,winddirection_10m,windgusts_10m,uv_index&start_date='
     + date + 
     '&end_date=' + date
     , {
@@ -119,6 +119,7 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
     this.weatherModel.winddirection_10m = this.weatherModel.winddirection_10m.slice(9, 22);
     this.weatherModel.windgusts_10m = this.weatherModel.windgusts_10m.slice(9, 22);
     this.weatherModel.windspeed_10m = this.weatherModel.windspeed_10m.slice(9, 22);
+    this.weatherModel.uv_index = this.weatherModel.uv_index.slice(9, 22).map(val => Math.round(val));
 
     for (let index = 0; index < this.weatherModel.time.length; index++) {
       this.weatherModel.time[index] = this.weatherModel.time[index].split('T')[1];

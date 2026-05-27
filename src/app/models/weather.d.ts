@@ -10,6 +10,7 @@ export interface WeatherModel {
     windspeed_10m: number[]
     weathercode: number[]
     cloudcover: number[]
+    uv_index: number[]
 }
 
 export interface WeatherModelUnits {
@@ -24,6 +25,7 @@ export interface WeatherModelUnits {
     windspeed_10m: String
     weathercode: String
     cloudcover: String
+    uv_index: String
 }
 
 
