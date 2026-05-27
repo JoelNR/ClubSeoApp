@@ -1,6 +1,7 @@
 export interface WeatherModel {
     apparent_temperature: number[]
     precipitation: number[]
+    precipitation_probability: number[]
     relativehumidity_2m: number[]
     temperature_2m: number[] 
     time: string[]
@@ -9,11 +10,13 @@ export interface WeatherModel {
     windspeed_10m: number[]
     weathercode: number[]
     cloudcover: number[]
+    uv_index: number[]
 }
 
 export interface WeatherModelUnits {
     apparent_temperature: String
     precipitation: String
+    precipitation_probability: String
     relativehumidity_2m: String
     temperature_2m: String 
     time: String 
@@ -22,6 +25,7 @@ export interface WeatherModelUnits {
     windspeed_10m: String
     weathercode: String
     cloudcover: String
+    uv_index: String
 }
 
 

@@ -31,3 +31,14 @@ npm-debug.log*
 /plugins
 /www
 /android
+
+# Playwright
+/playwright-report
+/test-results
+/playwright/.local-browsers
+
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+

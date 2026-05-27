@@ -17,3 +17,93 @@ ion-item {
 ion-item::part(native) {
     --border-style: none;
 }
+
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
+}
+
+/* Premium Range Input Styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+  padding: 12px 0; // Generously expands vertical touch/click target area
+
+  &:focus {
+    outline: none;
+  }
+
+  // Webkit (Chrome, Safari, Opera, Edge)
+  &::-webkit-slider-runnable-track {
+    background: rgba(21, 34, 79, 0.08);
+    height: 10px;
+    border-radius: 9999px;
+    transition: background-color 0.2s ease;
+  }
+
+  :host-context(.dark) &::-webkit-slider-runnable-track,
+  .dark &::-webkit-slider-runnable-track {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -8px; // Perfectly centers the 26px thumb on the 10px track
+    background-color: var(--ion-color-primary, #f9a45e);
+    height: 26px;
+    width: 26px;
+    border-radius: 50%;
+    border: 3.5px solid #fff;
+    box-shadow: 0 4px 12px rgba(249, 164, 94, 0.45);
+    transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.15s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(1.3); // Expands to 34px under active touch/drag!
+      background-color: #ff7700;
+      box-shadow: 0 6px 16px rgba(255, 119, 0, 0.5);
+    }
+  }
+
+  // Firefox
+  &::-moz-range-track {
+    background: rgba(21, 34, 79, 0.08);
+    height: 10px;
+    border-radius: 9999px;
+  }
+
+  :host-context(.dark) &::-moz-range-track,
+  .dark &::-moz-range-track {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  &::-moz-range-thumb {
+    background-color: var(--ion-color-primary, #f9a45e);
+    height: 26px;
+    width: 26px;
+    border-radius: 50%;
+    border: 3.5px solid #fff;
+    box-shadow: 0 4px 12px rgba(249, 164, 94, 0.45);
+    transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.15s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(1.3);
+      background-color: #ff7700;
+      box-shadow: 0 6px 16px rgba(255, 119, 0, 0.5);
+    }
+  }
+}

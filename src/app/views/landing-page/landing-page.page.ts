@@ -22,11 +22,22 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
   weatherUnits: WeatherModelUnits
   selectedTime: string
   weatherCondition: string
-  weatherIndex: number = 0
+  weatherIndex: number = 8
   windDirection: string
   progress: number = 0
   userLogged: boolean = false
   isMember: boolean = false
+
+  tempPath: string = ''
+  tempAreaPath: string = ''
+  windSpeedPath: string = ''
+  windSpeedAreaPath: string = ''
+  windGustsPath: string = ''
+  tempPoints: any[] = []
+  windSpeedPoints: any[] = []
+  windGustsPoints: any[] = []
+  timeLabels: any[] = []
+  showChart: boolean = false
 
   constructor(private newsService: NewsService,
     private http: HttpClient,
@@ -81,7 +92,7 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
     const headers = {
       'Accept': 'application/json',
     }
-    this.http.get<GetWeatherApiResponse>('https://api.open-meteo.com/v1/forecast?latitude=28.0712&longitude=-15.4672&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,weathercode,cloudcover,windspeed_10m,winddirection_10m,windgusts_10m&start_date='
+    this.http.get<GetWeatherApiResponse>('https://api.open-meteo.com/v1/forecast?latitude=28.07099441390725&longitude=-15.466435495425296&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,precipitation_probability,weathercode,cloudcover,windspeed_10m,winddirection_10m,windgusts_10m,uv_index&start_date='
     + date + 
     '&end_date=' + date
     , {
@@ -99,6 +110,7 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
   private treatWeatherData() {
     this.weatherModel.apparent_temperature = this.weatherModel.apparent_temperature.slice(9, 22);
     this.weatherModel.precipitation = this.weatherModel.precipitation.slice(9, 22);
+    this.weatherModel.precipitation_probability = this.weatherModel.precipitation_probability.slice(9, 22);
     this.weatherModel.relativehumidity_2m = this.weatherModel.relativehumidity_2m.slice(9, 22);
     this.weatherModel.weathercode = this.weatherModel.weathercode.slice(9, 22);
     this.weatherModel.temperature_2m = this.weatherModel.temperature_2m.slice(9, 22);
@@ -107,13 +119,16 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
     this.weatherModel.winddirection_10m = this.weatherModel.winddirection_10m.slice(9, 22);
     this.weatherModel.windgusts_10m = this.weatherModel.windgusts_10m.slice(9, 22);
     this.weatherModel.windspeed_10m = this.weatherModel.windspeed_10m.slice(9, 22);
+    this.weatherModel.uv_index = this.weatherModel.uv_index.slice(9, 22).map(val => Math.round(val));
 
     for (let index = 0; index < this.weatherModel.time.length; index++) {
       this.weatherModel.time[index] = this.weatherModel.time[index].split('T')[1];
     }
+    this.weatherIndex = 8;
     this.selectedTime = this.weatherModel.time[8];
     this.parseWeatherCode(this.weatherModel.weathercode[8])
     this.parseWindDirection(this.weatherModel.winddirection_10m[8])
+    this.generateSvgCharts();
   }
 
   changeTime(event:any){
@@ -126,6 +141,27 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
         return
       }
     }
+  }
+
+  changeTimeSlider(event: any) {
+    const index = event.detail.value;
+    if (index === undefined || index === null) return;
+    this.selectTimeIndex(index);
+  }
+
+  onSliderChange(event: any) {
+    const val = parseInt(event.target.value, 10);
+    if (!isNaN(val)) {
+      this.selectTimeIndex(val);
+    }
+  }
+
+  selectTimeIndex(index: number) {
+    if (index < 0 || index >= this.weatherModel.time.length) return;
+    this.weatherIndex = index;
+    this.selectedTime = this.weatherModel.time[index];
+    this.parseWeatherCode(this.weatherModel.weathercode[index]);
+    this.parseWindDirection(this.weatherModel.winddirection_10m[index]);
   }
 
   parseWeatherCode(apiCode: number){
@@ -171,5 +207,69 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
     'Sur','Sursudoeste','Sudoeste','Oestesudoeste','Oeste','Oestenoroeste','Noroeste','Nornoroeste','Norte']
 
     this.windDirection =directionCode[Math.round(grades/22.5)] 
+  }
+
+  generateSvgCharts() {
+    const times = this.weatherModel.time;
+    const temps = this.weatherModel.temperature_2m;
+    const windSpeeds = this.weatherModel.windspeed_10m;
+    const windGusts = this.weatherModel.windgusts_10m;
+
+    const width = 600;
+    const height = 240;
+    const paddingLeft = 60;
+    const paddingRight = 40;
+    const paddingTop = 40;
+    const paddingBottom = 45;
+
+    const chartWidth = width - paddingLeft - paddingRight;
+    const chartHeight = height - paddingTop - paddingBottom;
+
+    // 1. Temp scale
+    const minTemp = Math.min(...temps) - 1;
+    const maxTemp = Math.max(...temps) + 1;
+    const tempRange = maxTemp - minTemp || 1;
+
+    // 2. Wind scale (shared for speed and gusts)
+    const maxWind = Math.max(...windSpeeds, ...windGusts, 10) + 2;
+    const windRange = maxWind || 1;
+
+    this.tempPoints = [];
+    this.windSpeedPoints = [];
+    this.windGustsPoints = [];
+    this.timeLabels = [];
+
+    let tempPointsStr: string[] = [];
+    let windSpeedPointsStr: string[] = [];
+    let windGustsPointsStr: string[] = [];
+
+    const numPoints = times.length;
+    for (let i = 0; i < numPoints; i++) {
+      const x = paddingLeft + (i * (chartWidth / (numPoints - 1)));
+      
+      // Calculate Y coords (inverted in SVG)
+      const yTemp = paddingTop + chartHeight - ((temps[i] - minTemp) / tempRange) * chartHeight;
+      const yWindSpeed = paddingTop + chartHeight - (windSpeeds[i] / windRange) * chartHeight;
+      const yWindGusts = paddingTop + chartHeight - (windGusts[i] / windRange) * chartHeight;
+
+      this.tempPoints.push({ x, y: yTemp, value: temps[i], time: times[i] });
+      this.windSpeedPoints.push({ x, y: yWindSpeed, value: windSpeeds[i], time: times[i] });
+      this.windGustsPoints.push({ x, y: yWindGusts, value: windGusts[i], time: times[i] });
+
+      tempPointsStr.push(`${x},${yTemp}`);
+      windSpeedPointsStr.push(`${x},${yWindSpeed}`);
+      windGustsPointsStr.push(`${x},${yWindGusts}`);
+
+      // Add label for hours (every 2 hours to avoid overlap)
+      if (i % 2 === 0 || i === numPoints - 1) {
+        this.timeLabels.push({ x, label: times[i] });
+      }
+    }
+
+    this.tempPath = 'M ' + tempPointsStr.join(' L ');
+    this.tempAreaPath = `M ${paddingLeft},${paddingTop + chartHeight} L ` + tempPointsStr.join(' L ') + ` L ${paddingLeft + chartWidth},${paddingTop + chartHeight} Z`;
+    this.windSpeedPath = 'M ' + windSpeedPointsStr.join(' L ');
+    this.windSpeedAreaPath = `M ${paddingLeft},${paddingTop + chartHeight} L ` + windSpeedPointsStr.join(' L ') + ` L ${paddingLeft + chartWidth},${paddingTop + chartHeight} Z`;
+    this.windGustsPath = 'M ' + windGustsPointsStr.join(' L ');
   }
 }
