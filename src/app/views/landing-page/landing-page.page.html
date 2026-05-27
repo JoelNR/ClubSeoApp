@@ -57,26 +57,62 @@
               <span class="absolute right-1.5 top-1/2 -translate-y-1/2 text-[8px] md:text-[9px] font-bold text-nightblue-50/70 dark:text-white/30 leading-none select-none">E</span>
 
               <!-- Bespoke Dual-Tone Archery Arrow pointer with realistic drop shadow -->
-              <svg viewBox="0 0 24 24"
+              <svg viewBox="0 0 100 100"
                 [style.transform]="'rotate(' + weatherModel.winddirection_10m[weatherIndex] + 'deg)'"
-                class="w-10 h-10 md:w-14 md:h-14 transition-transform duration-700 ease-out text-amber-500 dark:text-amber-400 drop-shadow-[0_2px_4px_rgba(255,119,0,0.15)] dark:drop-shadow-[0_2px_4px_rgba(255,119,0,0.3)] select-none pointer-events-none"
+                class="w-12 h-12 md:w-16 md:h-16 transition-transform duration-700 ease-out drop-shadow-[0_3px_6px_rgba(0,0,0,0.16)] dark:drop-shadow-[0_4px_8px_rgba(0,0,0,0.4)] select-none pointer-events-none"
                 aria-hidden="true">
                 <defs>
-                  <linearGradient id="arrowShaft" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stop-color="#ff7700" />
-                    <stop offset="50%" stop-color="#f9a45e" />
-                    <stop offset="100%" stop-color="#ff7700" />
+                  <!-- Shaft Gradient (Golden/Amber 3D effect) -->
+                  <linearGradient id="shaftGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#f5be24" />
+                    <stop offset="30%" stop-color="#fcd34d" />
+                    <stop offset="70%" stop-color="#f5be24" />
+                    <stop offset="100%" stop-color="#d97706" />
                   </linearGradient>
-                  <linearGradient id="arrowHead" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#ff7700" />
-                    <stop offset="100%" stop-color="#b5a964" />
+                  
+                  <!-- Arrowhead Left (Light Golden-Orange) -->
+                  <linearGradient id="headLeftGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffb703" />
+                    <stop offset="100%" stop-color="#fb8500" />
+                  </linearGradient>
+
+                  <!-- Arrowhead Right (Vibrant Gold-Orange Shadow) -->
+                  <linearGradient id="headRightGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#fb8500" />
+                    <stop offset="100%" stop-color="#d97706" />
+                  </linearGradient>
+
+                  <!-- Left Feather Gradient (Vibrant Orange-Red) -->
+                  <linearGradient id="featherLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#f97316" />
+                    <stop offset="100%" stop-color="#ea580c" />
+                  </linearGradient>
+
+                  <!-- Right Feather Gradient (Darker Red) -->
+                  <linearGradient id="featherRight" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#dc2626" />
+                    <stop offset="100%" stop-color="#991b1b" />
                   </linearGradient>
                 </defs>
-                <line x1="12" y1="5.5" x2="12" y2="21" stroke="#ff7700" stroke-width="1.8" stroke-linecap="round" />
-                <polygon points="12,2 6,8.5 12,6.5 18,8.5" fill="url(#arrowHead)" stroke="none" stroke-linejoin="round" />
-                <polygon points="12,14 8,16.5 8,19.5 12,18.5" fill="#ff7700" opacity="0.9" />
-                <polygon points="12,14 16,16.5 16,19.5 12,18.5" fill="#ff7700" opacity="0.9" />
-                <polyline points="11,21 12,20 13,21" fill="none" stroke="#ff7700" stroke-width="1.5" stroke-linecap="round" />
+
+                <!-- 1. The Wooden/Gold Shaft -->
+                <rect x="48.5" y="16" width="3" height="66" rx="1.5" fill="url(#shaftGrad)" />
+
+                <!-- 2. The Nock (bottom tip of shaft) -->
+                <path d="M48.5,82 L51.5,82 L51.5,85 C51.5,86 48.5,86 48.5,85 Z" fill="#d97706" />
+
+                <!-- 3. Two Symmetrical Slim Conic-Shaped Feathers (Vanes) -->
+                <!-- Left Vane (Bright Orange-Red) -->
+                <path d="M48.5,60 L35,76 L39,79 L48.5,73 Z" fill="url(#featherLeft)" />
+
+                <!-- Right Vane (Darker Red) -->
+                <path d="M51.5,60 L65,76 L61,79 L51.5,73 Z" fill="url(#featherRight)" />
+
+                <!-- 4. 3D Faceted Slim Bullet/Conic Arrowhead (pointing strictly UP to 0 deg/North) -->
+                <!-- Left Face -->
+                <path d="M50,2 L43,28 L50,23 Z" fill="url(#headLeftGrad)" />
+                <!-- Right Face -->
+                <path d="M50,2 L57,28 L50,23 Z" fill="url(#headRightGrad)" />
               </svg>
             </div>
 
