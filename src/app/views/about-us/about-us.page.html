@@ -1,62 +1,84 @@
 <ion-content>
-  <div class="flex flex-col h-full">
+  <div class="flex flex-col h-full bg-gradient-to-b from-clear to-white dark:from-nightblue-10 dark:to-nightblue-90">
     <app-header></app-header>
     <div class="flex flex-col grow text-justify w-full lg:max-w-290 px-5 sm:px-8 mx-auto" [ngClass]="{'pb-14' : mobile}">
-      <h1 class="pb-6 text-center uppercase" [ngClass]="{'pt-28' : !mobile, 'pt-8': mobile}">
+      
+      <!-- Premium Page Title -->
+      <h1 class="pb-2 text-center uppercase font-black tracking-widest text-nightblue dark:text-white" [ngClass]="{'pt-28' : !mobile, 'pt-8': mobile}">
         Sobre el SEO      
       </h1>
-      <div class="w-full flex flex-col sm:flex-row pb-12">
-        <div class="w-full">
-          <div class="flex flex-col sm:mb-4 sm:flex-row w-full">
-            <div class="w-full sm:w-2/3 p-4 mb-4 h-fit border border-solid border-nightblue-80 dark:border-clear rounded-2xl">
-              <p class="pb-4">
-                El Club deportivo SEO realiza su desarrollo principal en la isla de Gran Canaria. Creado para acercar el Tiro con Arco a personas de todas las edades, contando con la experiencia de más de quince años en sistemas específicos de formación y enseñanza de arqueros.
-              </p>
-              <p class="pb-4">
-                Al contar con un gran número de monitores de arco, en el SEO puedes encontrar respuesta a todas tus inquietudes y objetivos. 
-                El equipo humano que dirije el club está volcado en que todos sus miembros disfruten del deporte en un ambiente distendido y familiar.
-              </p>
-              <p class="">
-                Comprueba por qué el Tiro con Arco es un deporte que, poco a poco, se abre paso como una alternativa real para tu tiempo de ocio.
-              </p>
-            </div>
-            <div class="w-full flex justify-center sm:w-1/3 sm:ml-4 mb-4 h-fit">
-              <img src="/assets/img/about-us1.jpg" width="300" height="200" loading="lazy" class="rounded-2xl object-cover h-fit" alt="Entrenamiento de tiro con arco en Gran Canaria">
-            </div>
-          </div>
-          <div class="flex flex-col sm:mb-4 sm:flex-row w-full">              
-            <div class="w-full hidden sm:flex justify-center sm:w-1/3 sm:mr-4 mb-4 h-fit">
-                <img src="/assets/img/cinco.jpeg" width="300" height="200" loading="lazy" class="rounded-2xl object-cover h-fit" alt="Integrantes del club deportivo SEO">
-            </div>
-            <div class="w-full sm:w-2/3 p-4 mb-4 h-fit border border-solid border-nightblue-80 dark:border-clear rounded-2xl">
+      <p class="text-center pb-8 text-nightblue-60 dark:text-nightblue-50 font-medium">
+        Conoce nuestra trayectoria, valores y el espacio que hemos creado para arqueros de todos los niveles
+      </p>
 
-              <p class="pb-4">
-                El Club Deportivo SEO apuesta por una promoción asequible. Las cuotas del club son de 25 euros mensuales. Esta cuota incluye el uso de todo el material del club que esté disponible los primeros meses y la atención por parte de los monitores y/o entrenadores en los horarios establecidos.
-              </p>
-              <p class="pb-4">
-                Anímate y <span routerLink="/iniciacion" class="underline text-orange cursor-pointer">ven a probar</span>, el primer día no hay ningún coste. Conócenos, conoce nuestro club, prueba el tiro con arco y después decide.
-              </p>
-              <p class="pb-4">
-                Nuestro horario actual tiene cuatro días de entreno. En las tardes de 17:30 a 20:30 de los lunes, miercoles y viernes y sábados de 9:00 a 12:00.
-              </p>
-              <p>Actualmente, entrenamos en Centro Deportivo de San Lorenzo. Nos puedes encontrar en el siguiente enlace de <a target="_blank" href="https://maps.app.goo.gl/3C4FbFnZ2E69hYYS6" class="underline text-orange cursor-pointer">Google Maps</a>.</p>
+      <!-- Main Content Glassmorphism Box -->
+      <div class="relative w-full mb-12 rounded-3xl p-6 md:p-8 bg-gradient-to-br from-white/95 via-sky-50/45 to-white/80 dark:from-nightblue-100/90 dark:via-nightblue-90/80 dark:to-nightblue-100/70 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 shadow-xl shadow-nightblue-100/5 dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] transition-all duration-500 overflow-hidden">
+        
+        <!-- Glowing background decorations -->
+        <div class="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-orange/10 dark:bg-orange/20 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-48 h-48 rounded-full bg-primary/10 dark:bg-primary/20 blur-3xl pointer-events-none"></div>
+
+        <div class="relative w-full flex flex-col pb-6">
+          <div class="w-full">
+            
+            <!-- Section 1 -->
+            <div class="flex flex-col sm:mb-8 sm:flex-row w-full gap-6">
+              <div class="w-full sm:w-2/3 p-6 h-fit bg-white/50 dark:bg-nightblue-90/30 border border-solid border-nightblue-100/5 dark:border-white/5 rounded-2xl shadow-sm">
+                <p class="pb-4 text-nightblue-80 dark:text-nightblue-50 leading-relaxed">
+                  El Club deportivo SEO realiza su desarrollo principal en la isla de Gran Canaria. Creado para acercar el Tiro con Arco a personas de todas las edades, contando con la experiencia de más de quince años en sistemas específicos de formación y enseñanza de arqueros.
+                </p>
+                <p class="pb-4 text-nightblue-80 dark:text-nightblue-50 leading-relaxed">
+                  Al contar con un gran número de monitores de arco, en el SEO puedes encontrar respuesta a todas tus inquietudes y objetivos. 
+                  El equipo humano que dirije el club está volcado en que todos sus miembros disfruten del deporte en un ambiente distendido y familiar.
+                </p>
+                <p class="text-nightblue-80 dark:text-nightblue-50 leading-relaxed font-semibold">
+                  Comprueba por qué el Tiro con Arco es un deporte que, poco a poco, se abre paso como una alternativa real para tu tiempo de ocio.
+                </p>
+              </div>
+              <div class="w-full flex justify-center sm:w-1/3 h-fit group overflow-hidden rounded-2xl">
+                <img src="/assets/img/about-us1.jpg" width="300" height="200" loading="lazy" class="rounded-2xl object-cover h-full w-full transition-transform duration-500 group-hover:scale-103" alt="Entrenamiento de tiro con arco en Gran Canaria">
+              </div>
             </div>
-            <div class="w-full sm:hidden flex justify-center sm:w-1/3 sm:mr-4 mb-4 h-fit">
-              <img src="/assets/img/cinco.jpeg" width="300" height="200" loading="lazy" class="rounded-2xl object-cover h-fit" alt="Integrantes del club deportivo SEO">
+
+            <!-- Section 2 -->
+            <div class="flex flex-col sm:mb-8 sm:flex-row w-full gap-6">              
+              <div class="w-full hidden sm:flex justify-center sm:w-1/3 h-fit group overflow-hidden rounded-2xl">
+                  <img src="/assets/img/cinco.jpeg" width="300" height="200" loading="lazy" class="rounded-2xl object-cover h-full w-full transition-transform duration-500 group-hover:scale-103" alt="Integrantes del club deportivo SEO">
+              </div>
+              <div class="w-full sm:w-2/3 p-6 h-fit bg-white/50 dark:bg-nightblue-90/30 border border-solid border-nightblue-100/5 dark:border-white/5 rounded-2xl shadow-sm">
+                <p class="pb-4 text-nightblue-80 dark:text-nightblue-50 leading-relaxed">
+                  El Club Deportivo SEO apuesta por una promoción asequible. Las cuotas del club son de 25 euros mensuales. Esta cuota incluye el uso de todo el material del club que esté disponible los primeros meses y la atención por parte de los monitores y/o entrenadores en los horarios establecidos.
+                </p>
+                <p class="pb-4 text-nightblue-80 dark:text-nightblue-50 leading-relaxed">
+                  Anímate y <span routerLink="/iniciacion" class="underline text-orange-100 dark:text-orange font-bold cursor-pointer transition-colors hover:text-orange-80">ven a probar</span>, el primer día no hay ningún coste. Conócenos, conoce nuestro club, prueba el tiro con arco y después decide.
+                </p>
+                <p class="pb-4 text-nightblue-80 dark:text-nightblue-50 leading-relaxed">
+                  Nuestro horario actual tiene cuatro días de entreno. En las tardes de 17:30 a 20:30 de los lunes, miercoles y viernes y sábados de 9:00 a 12:00.
+                </p>
+                <p class="text-nightblue-80 dark:text-nightblue-50 leading-relaxed">
+                  Actualmente, entrenamos en Centro Deportivo de San Lorenzo. Nos puedes encontrar en el siguiente enlace de <a target="_blank" href="https://maps.app.goo.gl/3C4FbFnZ2E69hYYS6" class="underline text-orange-100 dark:text-orange font-bold cursor-pointer transition-colors hover:text-orange-80">Google Maps</a>.
+                </p>
+              </div>
+              <div class="w-full sm:hidden flex justify-center h-fit group overflow-hidden rounded-2xl">
+                <img src="/assets/img/cinco.jpeg" width="300" height="200" loading="lazy" class="rounded-2xl object-cover h-full w-full" alt="Integrantes del club deportivo SEO">
+              </div>
             </div>
-          </div>
-          <div class="flex flex-col sm:mb-4 sm:flex-row w-full">
-            <div class="w-full sm:w-2/3 p-4 mb-4 h-fit border border-solid border-nightblue-80 dark:border-clear rounded-2xl">
-              <p class="pb-4">
-                El tiro con arco es un deporte que desarrolla en nosotros importantes factores físicos y psicológicos tales como la psicomotricidad, la visualización o la capacidad de concentración.
-              </p>
-              <p>
-                Tienes que probarlo y comprobar cómo, a medida que vas avanzando en el conocimiento del deporte, más te enganchas. Entra en un colectivo sano, dinámico y muy entretenido.
-              </p>
+
+            <!-- Section 3 -->
+            <div class="flex flex-col sm:flex-row w-full gap-6">
+              <div class="w-full sm:w-2/3 p-6 h-fit bg-white/50 dark:bg-nightblue-90/30 border border-solid border-nightblue-100/5 dark:border-white/5 rounded-2xl shadow-sm">
+                <p class="pb-4 text-nightblue-80 dark:text-nightblue-50 leading-relaxed">
+                  El tiro con arco es un deporte que desarrolla en nosotros importantes factores físicos y psicológicos tales como la psicomotricidad, la visualización o la capacidad de concentración.
+                </p>
+                <p class="text-nightblue-80 dark:text-nightblue-50 leading-relaxed">
+                  Tienes que probarlo y comprobar cómo, a medida que vas avanzando en el conocimiento del deporte, más te enganchas. Entra en un colectivo sano, dinámico y muy entretenido.
+                </p>
+              </div>
+              <div class="w-full flex justify-center sm:w-1/3 h-fit group overflow-hidden rounded-2xl">
+                <img src="/assets/img/about-us3.jpg" width="300" height="200" loading="lazy" class="rounded-2xl object-cover h-full w-full transition-transform duration-500 group-hover:scale-103" alt="Práctica de tiro con arco">
+              </div>
             </div>
-            <div class="w-full flex justify-center sm:w-1/3 sm:ml-4 mb-4 h-fit">
-              <img src="/assets/img/about-us3.jpg" width="300" height="200" loading="lazy" class="rounded-2xl object-cover h-fit" alt="Práctica de tiro con arco">
-            </div>
+
           </div>
         </div>
       </div>
@@ -64,3 +86,4 @@
     <app-footer></app-footer>
   </div>
 </ion-content>
+
