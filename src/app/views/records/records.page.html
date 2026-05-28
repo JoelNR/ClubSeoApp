@@ -2,57 +2,88 @@
   <div class="flex flex-col h-full">
     <app-header></app-header>
     <div class="flex flex-col grow w-full lg:max-w-290 px-5 sm:px-8 mx-auto" [ngClass]="{'pb-14' : mobile}">
-      <h1 class="pb-6 text-center uppercase" [ngClass]="{'pt-28' : !mobile, 'pt-8': mobile}">
+      <h1 class="pb-2 text-center uppercase font-black tracking-widest text-nightblue dark:text-white" [ngClass]="{'pt-28' : !mobile, 'pt-8': mobile}">
         Nuestros records
       </h1>
-      <div [hidden]="filterInterface" class="w-full mb-5 sm:mb-8">
-        <ion-button color="primary h-5" (click)="filterInterface = true">
-          <div class="text-white">
+      <p class="text-center pb-8 text-nightblue-60 dark:text-nightblue-50 font-medium">
+        Marcas históricas y plusmarcas homologadas de nuestros arqueros
+      </p>
+
+      <!-- Filter Controls Row -->
+      <div class="flex flex-wrap gap-4 items-center justify-start mb-6">
+        <div [hidden]="filterInterface">
+          <ion-button color="primary" class="h-10 text-xs font-bold uppercase tracking-wider" (click)="filterInterface = true">
+            <ion-icon name="funnel-outline" slot="start" class="text-base"></ion-icon>
             Filtrar
-          </div>
-        </ion-button>
-      </div>
-      <div [hidden]="!filtered" class="w-full mb-5 sm:mb-8">
-        <ion-button color="primary h-5" (click)="reset()">
-          <div class="text-white">
+          </ion-button>
+        </div>
+        <div [hidden]="!filtered">
+          <ion-button color="primary" class="h-10 text-xs font-bold uppercase tracking-wider" (click)="reset()">
+            <ion-icon name="refresh-outline" slot="start" class="text-base"></ion-icon>
             Reiniciar filtro
-          </div>
-        </ion-button>
+          </ion-button>
+        </div>
       </div>
-      <div class="pb-4" *ngIf="filterInterface && !filtered">
-        <div class="flex flex-col sm:flex-row w-full items-center justify-center">
-          <div class="w-full pb-6 sm:pb-0 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <div class="py-3 text-start text-orange-100 text-xs">Modalidad</div>
-              <ion-list class="p-0 rounded-2xl border border-solid border-nightblue-100">
-                <ion-item class="bg-blue-50 text-nightblue border-0">
-                  <ion-select [placeholder]="userModality || 'Selecciona categoría'" [value]="userModality"
-                    (ionChange)="changeModality($event)">
+
+      <!-- Interactive Filter Container -->
+      <div class="my-4 relative rounded-3xl p-6 md:p-8 bg-gradient-to-br from-white/95 via-sky-50/45 to-white/80 dark:from-nightblue-100/90 dark:via-nightblue-90/80 dark:to-nightblue-100/70 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 shadow-xl shadow-nightblue-100/5 dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] transition-all duration-500 overflow-hidden" *ngIf="filterInterface && !filtered">
+        
+        <!-- Glowing background decorations -->
+        <div class="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-orange/10 dark:bg-orange/20 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-48 h-48 rounded-full bg-primary/10 dark:bg-primary/20 blur-3xl pointer-events-none"></div>
+
+        <h3 class="relative text-left text-sm font-black text-nightblue-80 dark:text-nightblue-20 uppercase tracking-widest mb-6 flex items-center gap-2 select-none">
+          <ion-icon name="options-outline" class="text-orange text-base"></ion-icon>
+          Panel de Filtros
+        </h3>
+
+        <div class="relative flex flex-col sm:flex-row w-full items-center justify-center">
+          <div class="w-full grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <!-- Modality -->
+            <div class="flex flex-col">
+              <span class="pb-2 text-start text-orange-100 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5">
+                <ion-icon name="map-outline" class="text-orange text-xs"></ion-icon>
+                Modalidad
+              </span>
+              <ion-list class="p-0 rounded-2xl border border-solid border-nightblue-100/10 dark:border-white/10 overflow-hidden">
+                <ion-item class="bg-blue-50/50 dark:bg-nightblue-90/30 text-nightblue border-0">
+                  <ion-select [placeholder]="userModality || 'Selecciona modalidad'" [value]="userModality"
+                    (ionChange)="changeModality($event)" class="text-sm font-semibold">
                     <ion-select-option *ngFor="let modality of modalityOptions"
                       [value]="modality">{{modality}}</ion-select-option>
                   </ion-select>
                 </ion-item>
               </ion-list>
             </div>
-            <div>
-              <div class="py-3 text-start text-orange-100 text-xs">Categoría</div>
-              <ion-list class="p-0 rounded-2xl border border-solid border-nightblue-100">
-                <ion-item class="bg-blue-50 text-nightblue border-0">
+
+            <!-- Category -->
+            <div class="flex flex-col">
+              <span class="pb-2 text-start text-orange-100 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5">
+                <ion-icon name="git-branch-outline" class="text-orange text-xs"></ion-icon>
+                Categoría
+              </span>
+              <ion-list class="p-0 rounded-2xl border border-solid border-nightblue-100/10 dark:border-white/10 overflow-hidden">
+                <ion-item class="bg-blue-50/50 dark:bg-nightblue-90/30 text-nightblue border-0">
                   <ion-select [placeholder]="userCategory || 'Selecciona categoría'" [value]="userCategory"
-                    (ionChange)="changeCategory($event)">
+                    (ionChange)="changeCategory($event)" class="text-sm font-semibold">
                     <ion-select-option *ngFor="let category of categoryOptions"
                       [value]="category">Arco {{category}}</ion-select-option>
                   </ion-select>
                 </ion-item>
               </ion-list>
             </div>
-            <div>
-              <div class="pt-3 text-start text-orange-100 text-xs">Distancia</div>
-              <ion-list class="mt-4 p-0 rounded-2xl border border-solid border-nightblue-100">
-                <ion-item class="bg-blue-50 text-nightblue border-0">
+
+            <!-- Distance -->
+            <div class="flex flex-col">
+              <span class="pb-2 text-start text-orange-100 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5">
+                <ion-icon name="resize-outline" class="text-orange text-xs"></ion-icon>
+                Distancia
+              </span>
+              <ion-list class="p-0 rounded-2xl border border-solid border-nightblue-100/10 dark:border-white/10 overflow-hidden">
+                <ion-item class="bg-blue-50/50 dark:bg-nightblue-90/30 text-nightblue border-0">
                   <ion-select [disabled]="!userCategory"
-                    [placeholder]="userCategory ? 'Selecciona una distancia' : 'Seleccione una categoría primero'"
-                    [value]="userDistance" (ionChange)="changeDistance($event)">
+                    [placeholder]="userCategory ? 'Selecciona distancia' : 'Elige categoría primero'"
+                    [value]="userDistance" (ionChange)="changeDistance($event)" class="text-sm font-semibold">
                     <ion-select-option *ngFor="let distance of distanceOptions" [value]="distance">{{distance}}
                       metros</ion-select-option>
                   </ion-select>
@@ -61,61 +92,87 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-col sm:mt-4 sm:flex-row w-full sm:justify-between">
-          <ion-button class="h-7 w-full sm:max-w-xs" [disabled]="!userCategory || !userDistance"
-            color="primary" expand="block" (click)="filter()">
-            Filtrar
+
+        <div class="relative flex flex-col sm:flex-row w-full sm:justify-between gap-4 mt-8 pt-6 border-t border-solid border-nightblue-100/10 dark:border-white/10">
+          <ion-button class="h-10 w-full sm:max-w-xs text-xs font-bold uppercase tracking-wider" [disabled]="!userCategory || !userDistance"
+            color="primary" (click)="filter()">
+            <ion-icon name="checkmark-outline" slot="start" class="text-base"></ion-icon>
+            Aplicar Filtro
           </ion-button>
-          <div class="mt-4 sm:m-0 w-full flex justify-end">
-            <ion-button class="h-7 w-fit" color="primary" size="small" expand="block" (click)="filterInterface = false">
-              Ocultar
-            </ion-button>
+          <div class="w-full flex justify-end">
+            <button class="flex items-center gap-2 px-6 py-2.5 rounded-full border border-solid border-orange/40 hover:border-orange/70 dark:border-white/15 dark:hover:border-white/30 bg-orange-40/15 hover:bg-orange-40/30 dark:bg-white/5 dark:hover:bg-white/10 text-orange font-extrabold text-xs uppercase tracking-wider transition-all duration-300 hover:scale-[1.03] active:scale-95 focus:outline-none" (click)="filterInterface = false">
+              <ion-icon class="text-base" name="eye-off-outline"></ion-icon>
+              Ocultar Panel
+            </button>
           </div>
         </div>
-
       </div>
 
-      <div *ngIf="this.userModality == 'Aire libre' || !filtered" class="w-full mb-8 rounded-3xl border border-solid dark:border-clear border-nightblue-100 p-4">
-        <h2 (click)="openOutdoor = !openOutdoor" [ngClass]="{'pb-6': openOutdoor}" class="w-full flex justify-between items-center">
-          Records de aire libre
-          <ion-icon  class="transition duration-300 text-2xl" color="primary" [ngClass]="{'transform rotate-180': openOutdoor}" name="chevron-down-circle-outline"></ion-icon>
+      <!-- Outdoors Records Section -->
+      <div *ngIf="this.userModality == 'Aire libre' || !filtered" class="my-6 relative rounded-3xl p-6 md:p-8 bg-gradient-to-br from-white/95 via-sky-50/45 to-white/80 dark:from-nightblue-100/90 dark:via-nightblue-90/80 dark:to-nightblue-100/70 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 shadow-xl shadow-nightblue-100/5 dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] transition-all duration-500 overflow-hidden">
+        <!-- Glowing background decorations -->
+        <div class="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-orange/10 dark:bg-orange/20 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-48 h-48 rounded-full bg-primary/10 dark:bg-primary/20 blur-3xl pointer-events-none"></div>
+
+        <h2 (click)="openOutdoor = !openOutdoor" [ngClass]="{'pb-6': openOutdoor}" class="relative w-full flex justify-between items-center text-base md:text-lg font-black text-nightblue dark:text-white uppercase tracking-widest cursor-pointer select-none m-0">
+          <span class="flex items-center gap-2">
+            <ion-icon name="ribbon-outline" class="text-orange text-xl"></ion-icon>
+            Records de aire libre
+          </span>
+          <ion-icon class="transition duration-300 text-2xl text-orange hover:scale-110" [ngClass]="{'transform rotate-180': openOutdoor}" name="chevron-down-circle-outline"></ion-icon>
         </h2>  
-        <div *ngIf="openOutdoor" class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
-          <div *ngFor="let record of outdoorRecords; let i = index;">
-            <app-club-records-card [record]="record"></app-club-records-card>
+        <div *ngIf="openOutdoor" class="relative grid grid-cols-1 md:grid-cols-2 gap-6 items-end mt-4">
+          <div *ngFor="let record of outdoorRecords; let i = index;" class="w-full flex">
+            <app-club-records-card [record]="record" class="w-full flex flex-col"></app-club-records-card>
           </div>            
         </div>
-        <p *ngIf="outdoorRecords.length == 0 && openOutdoor">
+        <p *ngIf="outdoorRecords.length == 0 && openOutdoor" class="relative text-sm text-nightblue-60 dark:text-nightblue-50 font-semibold mt-4">
           Actualmente no existe ningún record de aire libre.
         </p>        
       </div>
-      <div *ngIf="this.userModality == 'Sala' || !filtered" class="w-full mb-8 rounded-3xl border border-solid dark:border-clear border-nightblue-100 p-4">
-        <h2 (click)="openIndoor = !openIndoor" [ngClass]="{'pb-6': openIndoor}" class="pb-6 w-full flex justify-between items-center">
-          Records de sala
-          <ion-icon  class="transition duration-300 text-2xl" color="primary" [ngClass]="{'transform rotate-180': openIndoor}" name="chevron-down-circle-outline"></ion-icon>
+
+      <!-- Indoors Records Section -->
+      <div *ngIf="this.userModality == 'Sala' || !filtered" class="my-6 relative rounded-3xl p-6 md:p-8 bg-gradient-to-br from-white/95 via-sky-50/45 to-white/80 dark:from-nightblue-100/90 dark:via-nightblue-90/80 dark:to-nightblue-100/70 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 shadow-xl shadow-nightblue-100/5 dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] transition-all duration-500 overflow-hidden">
+        <!-- Glowing background decorations -->
+        <div class="absolute -top-24 -left-24 w-48 h-48 rounded-full bg-orange/10 dark:bg-orange/20 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-48 h-48 rounded-full bg-primary/10 dark:bg-primary/20 blur-3xl pointer-events-none"></div>
+
+        <h2 (click)="openIndoor = !openIndoor" [ngClass]="{'pb-6': openIndoor}" class="relative w-full flex justify-between items-center text-base md:text-lg font-black text-nightblue dark:text-white uppercase tracking-widest cursor-pointer select-none m-0">
+          <span class="flex items-center gap-2">
+            <ion-icon name="podium-outline" class="text-orange text-xl"></ion-icon>
+            Records de sala
+          </span>
+          <ion-icon class="transition duration-300 text-2xl text-orange hover:scale-110" [ngClass]="{'transform rotate-180': openIndoor}" name="chevron-down-circle-outline"></ion-icon>
         </h2>
-        <div *ngIf="openIndoor" class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div *ngFor="let record of indoorRecords; let i = index;">
-            <app-club-records-card [record]="record"></app-club-records-card>
+        <div *ngIf="openIndoor" class="relative grid grid-cols-1 md:grid-cols-2 gap-6 items-end mt-4">
+          <div *ngFor="let record of indoorRecords; let i = index;" class="w-full flex">
+            <app-club-records-card [record]="record" class="w-full flex flex-col"></app-club-records-card>
           </div>            
         </div>
-
-        <p *ngIf="indoorRecords.length == 0 && openIndoor">
+        <p *ngIf="indoorRecords.length == 0 && openIndoor" class="relative text-sm text-nightblue-60 dark:text-nightblue-50 font-semibold mt-4">
           Actualmente no existe ningún record de sala.
         </p>
       </div>
-      <div *ngIf="this.userModality == 'Pase de nivel' || !filtered" class="w-full mb-8 rounded-3xl border border-solid dark:border-clear border-nightblue-100 p-4">
-        <h2 (click)="openLevelPass = !openLevelPass" [ngClass]="{'pb-6': openLevelPass}" class="pb-6 w-full flex justify-between items-center">
-          Records de pase de nivel
-          <ion-icon  class="transition duration-300 text-2xl" color="primary" [ngClass]="{'transform rotate-180': openLevelPass}" name="chevron-down-circle-outline"></ion-icon>
+
+      <!-- Level Pass Records Section -->
+      <div *ngIf="this.userModality == 'Pase de nivel' || !filtered" class="my-6 relative rounded-3xl p-6 md:p-8 bg-gradient-to-br from-white/95 via-sky-50/45 to-white/80 dark:from-nightblue-100/90 dark:via-nightblue-90/80 dark:to-nightblue-100/70 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 shadow-xl shadow-nightblue-100/5 dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] transition-all duration-500 overflow-hidden">
+        <!-- Glowing background decorations -->
+        <div class="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-orange/10 dark:bg-orange/20 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-48 h-48 rounded-full bg-primary/10 dark:bg-primary/20 blur-3xl pointer-events-none"></div>
+
+        <h2 (click)="openLevelPass = !openLevelPass" [ngClass]="{'pb-6': openLevelPass}" class="relative w-full flex justify-between items-center text-base md:text-lg font-black text-nightblue dark:text-white uppercase tracking-widest cursor-pointer select-none m-0">
+          <span class="flex items-center gap-2">
+            <ion-icon name="trending-up-outline" class="text-orange text-xl"></ion-icon>
+            Records de pase de nivel
+          </span>
+          <ion-icon class="transition duration-300 text-2xl text-orange hover:scale-110" [ngClass]="{'transform rotate-180': openLevelPass}" name="chevron-down-circle-outline"></ion-icon>
         </h2>
-        <div *ngIf="openLevelPass" class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div *ngFor="let record of levelPassRecords; let i = index;">
-            <app-club-records-card [record]="record"></app-club-records-card>
+        <div *ngIf="openLevelPass" class="relative grid grid-cols-1 md:grid-cols-2 gap-6 items-end mt-4">
+          <div *ngFor="let record of levelPassRecords; let i = index;" class="w-full flex">
+            <app-club-records-card [record]="record" class="w-full flex flex-col"></app-club-records-card>
           </div>            
         </div>
-
-        <p *ngIf="levelPassRecords.length == 0 && openLevelPass">
+        <p *ngIf="levelPassRecords.length == 0 && openLevelPass" class="relative text-sm text-nightblue-60 dark:text-nightblue-50 font-semibold mt-4">
           Actualmente no existe ningún record de pase de nivel.
         </p>
       </div>

@@ -1,3 +1,4 @@
-<div (click)="showTimeElapsed=!showTimeElapsed" class="rounded-xl cursor-pointer px-3 text-xs py-0.5 text-nightblue  bg-yellow-500">
+<div (click)="showTimeElapsed=!showTimeElapsed" class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-orange-40/15 dark:bg-orange/10 text-orange dark:text-orange-80 border border-solid border-orange/20 text-[10px] font-black uppercase tracking-wider cursor-pointer select-none transition-all duration-300 hover:scale-[1.03] active:scale-95">
+  <ion-icon [name]="showTimeElapsed ? 'time-outline' : 'calendar-outline'" class="text-[11px] flex-shrink-0"></ion-icon>
   <span>{{getTimeElapsed(date)}}</span>
 </div>
