@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
-import SwiperCore, { Autoplay, Pagination } from 'swiper';
+import SwiperCore, { Autoplay, Navigation, Pagination, A11y, Keyboard } from 'swiper';
 
-SwiperCore.use([Autoplay, Pagination]);
+SwiperCore.use([Autoplay, Navigation, Pagination, A11y, Keyboard]);
 
 @Component({
   selector: 'app-landing-page-swiper',

@@ -1,0 +1,45 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.relative {
+  position: relative !important;
+}
+
+.absolute.inset-0 {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.bg-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.premium-cta-btn {
+  --box-shadow: 0 4px 14px 0 rgba(237, 122, 59, 0.4);
+  --border-radius: 30px;
+  --transition: all 0.3s ease;
+  margin: 0;
+
+  &:hover {
+    --box-shadow: 0 6px 20px 0 rgba(237, 122, 59, 0.6);
+    transform: translateY(-2px);
+
+    ion-icon {
+      transform: translateX(4px);
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
