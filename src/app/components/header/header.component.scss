@@ -53,10 +53,7 @@ ion-menu::part(container) {
     }
 }
 
-header{
-    border-color: black;
-    @media (prefers-color-scheme: dark) {
-        border-color: white;
-        background-color: var(--clear);
-    }
+header {
+    border-color: rgba(21, 34, 79, 0.1);
+    transition: all 0.3s ease;
 }

@@ -1,47 +1,72 @@
-<footer *ngIf="!mobile" class="flex justify-center w-full items-center align-center text-center inverse-gradient">
-  <div class="px-3.5 md:px-8 lg:px-32 w-full flex flex-col max-w-290 justify-center items-center">
-    <div class="pt-2 pb-6 items-center justify-center flex">
-      <img src="/assets/img/logo.png" alt="logo" class="h-10">
+<footer *ngIf="!mobile" class="w-full mt-auto py-14 border-t border-solid border-nightblue-100/10 dark:border-white/10 bg-gradient-to-br from-white/95 via-sky-50/45 to-white/80 dark:from-nightblue-100/90 dark:via-nightblue-90/80 dark:to-nightblue-100/70 backdrop-blur-xl transition-all duration-300">
+  <div class="px-5 sm:px-8 lg:px-32 w-full flex flex-col max-w-290 mx-auto justify-center items-center">
+    
+    <!-- Refined Inline Top Header instead of block circle badge -->
+    <div class="w-full flex items-center justify-between pb-8 mb-8 border-b border-solid border-nightblue-100/10 dark:border-white/10">
+      <div class="flex items-center gap-3">
+        <img src="/assets/img/logo.png" loading="lazy" alt="logo" width="48" height="42" class="h-10 w-auto dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.45)]">
+        <span class="text-sm font-black uppercase tracking-widest text-nightblue dark:text-white">Club Deportivo SEO</span>
+      </div>
+      <span class="text-xs font-semibold text-nightblue-60 dark:text-nightblue-50">Tiro con arco en Gran Canaria</span>
     </div>
 
-    <div
-      class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-24 place-items-center md:place-items-start w-full">
+    <!-- Footer Links Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-24 w-full pb-10 border-b border-solid border-nightblue-100/10 dark:border-white/10">
 
-      <div>
-        <div class="text-center md:text-left text-clear">Nuestras redes</div>
-        <h6 class="text-sm flex  pt-2 text-center md:text-left text-nightblue-100">
-          <ion-icon name="logo-instagram" color="clear" class="pr-2"></ion-icon>
-          <a target="_blank" href="https://www.instagram.com/clubdeportivoseo/">Instagram</a>
-        </h6>
-        <h6 class="flex text-sm  pt-2 text-center md:text-left text-nightblue-100">
-          <ion-icon name="logo-facebook" color="clear" class="pr-2"></ion-icon>
-          <a target="_blank" href="https://www.facebook.com/ClubDeportivoSEO">Facebook</a>
-        </h6>
+      <!-- Column 1: Social Networks -->
+      <div class="flex flex-col items-center sm:items-start text-center sm:text-left">
+        <h5 class="text-xs font-black uppercase tracking-widest text-orange dark:text-orange mb-4 select-none">
+          Nuestras Redes
+        </h5>
+        <div class="flex flex-col gap-2.5">
+          <a target="_blank" href="https://www.instagram.com/clubdeportivoseo/" class="flex items-center justify-center sm:justify-start gap-2 text-sm font-semibold text-nightblue-80 dark:text-nightblue-50 hover:text-orange-100 dark:hover:text-orange transition-colors duration-300">
+            <ion-icon name="logo-instagram" class="text-base text-nightblue-60 dark:text-nightblue-50"></ion-icon>
+            Instagram
+          </a>
+          <a target="_blank" href="https://www.facebook.com/ClubDeportivoSEO" class="flex items-center justify-center sm:justify-start gap-2 text-sm font-semibold text-nightblue-80 dark:text-nightblue-50 hover:text-orange-100 dark:hover:text-orange transition-colors duration-300">
+            <ion-icon name="logo-facebook" class="text-base text-nightblue-60 dark:text-nightblue-50"></ion-icon>
+            Facebook
+          </a>
+        </div>
       </div>
 
-      <div>
-        <h5 class="text-center md:text-left text-clear">Federaciones</h5>
-        <h6 class="text-sm  pt-2 text-center md:text-left text-nightblue-100">
-          <a target="_blank" href="https://www.fecta.org/">Federación Canaria</a>
-        </h6>
-        <h6 class="text-sm  pt-2 text-center md:text-left text-nightblue-100">
-          <a target="_blank" href="https://www.federarco.es/">Federación Española</a>
-        </h6>
+      <!-- Column 2: Federations -->
+      <div class="flex flex-col items-center sm:items-start text-center sm:text-left">
+        <h5 class="text-xs font-black uppercase tracking-widest text-orange dark:text-orange mb-4 select-none">
+          Federaciones
+        </h5>
+        <div class="flex flex-col gap-2.5">
+          <a target="_blank" href="https://www.fecta.org/" class="text-sm font-semibold text-nightblue-80 dark:text-nightblue-50 hover:text-orange-100 dark:hover:text-orange transition-colors duration-300">
+            Canaria (FECTA)
+          </a>
+          <a target="_blank" href="https://www.federarco.es/" class="text-sm font-semibold text-nightblue-80 dark:text-nightblue-50 hover:text-orange-100 dark:hover:text-orange transition-colors duration-300">
+            Española (RFETA)
+          </a>
+        </div>
       </div>
 
-      <div>
-        <h5 class="text-center md:text-left text-clear">Ayuda</h5>
-        <h6 class="pt-2 text-center text-sm  md:text-left text-nightblue-100">
-          <a href="mailto:tiroconarcoseo@gmail.com">Contacto</a>
-        </h6>
-        <h6 class="pt-2 text-center text-sm md:text-left text-nightblue-100">
-          <a target="_blank" href="https://drive.google.com/file/d/1SOLmDBsbgnKW67HfmSqIYq2XZAYgNS6D/view?usp=sharing">Normativa</a>
-        </h6>
+      <!-- Column 3: Help -->
+      <div class="flex flex-col items-center sm:items-start text-center sm:text-left">
+        <h5 class="text-xs font-black uppercase tracking-widest text-orange dark:text-orange mb-4 select-none">
+          Soporte y Ayuda
+        </h5>
+        <div class="flex flex-col gap-2.5">
+          <a href="mailto:tiroconarcoseo@gmail.com" class="flex items-center justify-center sm:justify-start gap-2 text-sm font-semibold text-nightblue-80 dark:text-nightblue-50 hover:text-orange-100 dark:hover:text-orange transition-colors duration-300">
+            <ion-icon name="mail-outline" class="text-base text-nightblue-60 dark:text-nightblue-50"></ion-icon>
+            Contacto
+          </a>
+          <a target="_blank" href="https://drive.google.com/file/d/1SOLmDBsbgnKW67HfmSqIYq2XZAYgNS6D/view?usp=sharing" class="flex items-center justify-center sm:justify-start gap-2 text-sm font-semibold text-nightblue-80 dark:text-nightblue-50 hover:text-orange-100 dark:hover:text-orange transition-colors duration-300">
+            <ion-icon name="document-text-outline" class="text-base text-nightblue-60 dark:text-nightblue-50"></ion-icon>
+            Normativa Club
+          </a>
+        </div>
       </div>
     </div>
 
-    <div class="pb-2 pt-4 text-xs">
-      @JoelNR
+    <!-- Bottom Credits Info -->
+    <div class="pt-6 w-full flex flex-col sm:flex-row justify-between items-center text-xs font-semibold text-nightblue-60 dark:text-nightblue-50 gap-2 select-none">
+      <span>© 2026 Club Deportivo SEO Gran Canaria.</span>
+      <span class="hover:text-orange-100 dark:hover:text-orange transition-colors duration-300 cursor-pointer">Desarrollado por @JoelNR</span>
     </div>
   </div>
 </footer>

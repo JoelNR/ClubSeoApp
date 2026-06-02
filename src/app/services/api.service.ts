@@ -3,12 +3,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Api {
-    protected host: string = 'https://seotiroconarco.com/assets'
+    protected host: string = environment.host;
     private static token?: string = null;
 
     constructor(protected http: HttpClient) {

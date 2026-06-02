@@ -11,6 +11,8 @@ export class SwiperItemComponent extends CapacitorBase implements OnInit {
   @Input() description: string
   @Input() imgSrc: string
   @Input() buttonLink: string
+  @Input() fetchPriority: 'high' | 'low' | 'auto' = 'auto';
+  @Input() objectPosition: string = 'center';
   
   constructor() {
     super()

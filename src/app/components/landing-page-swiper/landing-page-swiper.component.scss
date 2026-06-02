@@ -1,0 +1,133 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+::ng-deep {
+
+  // ==========================================
+  // MOBILE STYLES (Default / max-width: 639px)
+  // ==========================================
+  
+  // Hide navigation arrows on mobile
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none !important;
+  }
+
+  // Show & style pagination pills beautifully on mobile
+  .swiper-pagination {
+    display: flex !important;
+    bottom: 16px !important;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    z-index: 30 !important;
+  }
+
+  .swiper-pagination-bullet {
+    width: 10px !important;
+    height: 10px !important;
+    background: rgba(0, 0, 0, 0.25) !important;
+    opacity: 1 !important;
+    border-radius: 9999px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    margin: 0 !important;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.45) !important;
+    }
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 28px !important;
+    background: var(--ion-color-primary) !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 0 12px rgba(237, 122, 59, 0.6) !important;
+  }
+
+  // Dark Mode mobile pagination pills
+  .dark {
+    .swiper-pagination-bullet {
+      background: rgba(255, 255, 255, 0.35) !important;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.5) !important;
+      }
+    }
+    
+    .swiper-pagination-bullet-active {
+      background: var(--ion-color-primary) !important;
+    }
+  }
+
+  // ==========================================
+  // DESKTOP STYLES (min-width: 640px)
+  // ==========================================
+  @media (min-width: 640px) {
+    // Hide pagination pills on desktop
+    .swiper-pagination {
+      display: none !important;
+    }
+
+    // Show and float navigation arrows on the border of the card
+    .swiper-button-prev,
+    .swiper-button-next {
+      display: flex !important;
+      width: 40px !important;
+      height: 40px !important;
+      background: rgba(255, 255, 255, 0.85) !important;
+      backdrop-filter: blur(8px) !important;
+      -webkit-backdrop-filter: blur(8px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.5) !important;
+      border-radius: 50% !important;
+      color: var(--ion-color-primary) !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      z-index: 40 !important;
+      
+      // Compact arrow icon size
+      &::after {
+        font-size: 14px !important;
+        font-weight: bold !important;
+      }
+
+      &:hover {
+        background: var(--ion-color-primary) !important;
+        color: #ffffff !important;
+        border-color: var(--ion-color-primary) !important;
+        box-shadow: 0 6px 20px rgba(237, 122, 59, 0.35) !important;
+        transform: scale(1.08);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    // Float exactly half-outside on the card borders
+    .swiper-button-prev {
+      left: -20px !important;
+    }
+
+    .swiper-button-next {
+      right: -20px !important;
+    }
+
+    // Dark Mode Desktop Overrides
+    .dark {
+      .swiper-button-prev,
+      .swiper-button-next {
+        background: rgba(15, 23, 42, 0.85) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        color: #ffffff !important;
+
+        &:hover {
+          background: var(--ion-color-primary) !important;
+          color: #ffffff !important;
+          border-color: var(--ion-color-primary) !important;
+        }
+      }
+    }
+  }
+}

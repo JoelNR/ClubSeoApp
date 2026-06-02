@@ -1,11 +1,11 @@
 <ion-item class="rounded-xl mt-2 text-white" lines="none">
 
   <app-password-input-visibility *ngIf="type==='password'">
-      <ion-input type="{{type}}" autocomplete [(ngModel)]="value" (ngModelChange)="valueChange.emit(value)" (ionFocus)="errorMessage = null" (ionBlur)="OnUdateInputText(matchingValue)" placeholder="{{placeholder}}">
+      <ion-input type="{{type}}" [attr.aria-label]="placeholder" autocomplete [(ngModel)]="value" (ngModelChange)="valueChange.emit(value)" (ionFocus)="errorMessage = null" (ionBlur)="OnUdateInputText(matchingValue)" placeholder="{{placeholder}}">
       </ion-input>
   </app-password-input-visibility >
 
-  <ion-input *ngIf="type !='password'" [value]="value" autocomplete class="flex-row-reverse" name="input" id="input" #input="ngModel" type="{{type}}" [(ngModel)]="value" (ngModelChange)="valueChange.emit(value)" (ionFocus)="checkFocus()"
+  <ion-input *ngIf="type !='password'" [value]="value" [attr.aria-label]="placeholder" autocomplete class="flex-row-reverse" name="input" id="input" #input="ngModel" type="{{type}}" [(ngModel)]="value" (ngModelChange)="valueChange.emit(value)" (ionFocus)="checkFocus()"
       (ionBlur)="OnUdateInputText(null)" placeholder="{{placeholder}}">
       <svg *ngIf=" (isShown && input.valid && value !== undefined && value!==null && errorMessage===null) || (errorMessage === 'valid')" class=" icon" width="19" height="15" viewBox="0 0 19 15" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M18.2988 0.868321C18.7059 1.24151 18.7334 1.87408 18.3602 2.2812L7.3602 14.2812C7.1759 14.4823 6.91746 14.5993 6.64477 14.6052C6.37208 14.6112 6.10881 14.5054 5.91594 14.3126L0.91594 9.31258C0.525416 8.92206 0.525416 8.28889 0.91594 7.89837C1.30646 7.50784 1.93963 7.50784 2.33015 7.89837L6.59163 12.1598L16.8859 0.92975C17.2591 0.522631 17.8917 0.495128 18.2988 0.868321Z" fill="var(--aquamarin-80)"/>

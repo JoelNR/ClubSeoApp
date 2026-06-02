@@ -1,19 +1,52 @@
 ion-searchbar {
-    --color: @apply text-nightblue-100;
-    --border-radius: 30px;
-    --icon-color: @apply text-nightblue-100;
-    --placeholder-color: @apply text-nightblue-100;
-    --box-shadow: none;
-    --placeholder-font-weight: 500;
-    --placeholder-opacity: 0.75;
+    --color: var(--nightblue-100);
+    --border-radius: 9999px;
+    --background: rgba(255, 255, 255, 0.7);
+    --icon-color: var(--orange);
+    --placeholder-color: var(--nightblue-60);
+    --box-shadow: 0 4px 20px -2px rgba(21, 34, 79, 0.05);
+    --placeholder-font-weight: 600;
+    --placeholder-opacity: 0.8;
     padding: 0px;
-    @apply rounded-3xl  text-left w-full;
-     ::ng-deep {
+    margin: 0px;
+    @apply rounded-full text-left w-full transition-all duration-300;
+
+    &:focus-within {
+        --box-shadow: 0 10px 25px -5px rgba(237, 122, 59, 0.15);
+        transform: scale(1.01);
+    }
+
+    ::ng-deep {
         .searchbar-input-container {
-            @apply rounded-3xl;
+            @apply rounded-full;
+            border: 1px solid rgba(21, 34, 79, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .searchbar-input {
+            font-family: 'Outfit', 'Inter', sans-serif !important;
+            font-size: 0.95rem !important;
+            padding-inline-start: 48px !important;
         }
     }
-    input {
-        @apply py-3;
+}
+
+@media (prefers-color-scheme: dark) {
+    ion-searchbar {
+        --background: rgba(30, 41, 59, 0.5);
+        --color: #ffffff;
+        --placeholder-color: var(--nightblue-60);
+        --box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+
+        &:focus-within {
+            --box-shadow: 0 10px 25px -5px rgba(237, 122, 59, 0.25);
+        }
+
+        ::ng-deep {
+            .searchbar-input-container {
+                border: 1px solid rgba(255, 255, 255, 0.08);
+            }
+        }
     }
 }

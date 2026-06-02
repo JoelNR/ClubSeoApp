@@ -17,11 +17,11 @@ module.exports = {
             DEFAULT: '#b5a964',
         },
         orange: {
-            DEFAULT: '#f9a45e',
-            '100':'#ff7700',
-            '80': '#fabb86',
-            '60': '#fcd1ae',
-            '40': '#fde8d6',
+            DEFAULT: 'var(--orange)',
+            '100':'var(--orange-100)',
+            '80': 'var(--orange-80)',
+            '60': 'var(--orange-60)',
+            '40': 'var(--orange-40)',
         },
         nightblue: {
             DEFAULT: '#15224f',
@@ -34,11 +34,11 @@ module.exports = {
             '10': '#f6f6f8'
         },
         alert: {
-            '100': '#F45C5C',
-            '80': '#FF8C8C',
-            '60': '#FFC9C9',
-            '50': '#FFE4E4',
-            'green': '#ECFFB5',
+            '100': 'var(--alert-100)',
+            '80': 'var(--alert-80)',
+            '60': 'var(--alert-60)',
+            '50': 'var(--alert-50)',
+            'green': 'var(--alert-green)',
         },
         skyblue: {
             DEFAULT: '#DEF0F4',

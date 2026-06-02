@@ -1,13 +1,13 @@
 <ion-content>
-  <div class="flex flex-col h-full">
+  <div class="flex flex-col min-h-full">
     <app-header></app-header>
     <div class="flex flex-col grow w-full lg:max-w-290 px-5 sm:px-8 mx-auto" [ngClass]="{'pb-14' : mobile}">
       <h1 class="pb-6 text-center uppercase" [ngClass]="{'pt-28' : !mobile, 'pt-8': mobile}">
         Club deportivo SEO
       </h1>
-      <h3 class="text-center pb-6">
+      <h2 class="text-center pb-6">
         Tiro con arco en Gran Canaria
-      </h3>
+      </h2>
       <div class="h-fit w-full">
         <app-landing-page-swiper [isMember]="isMember" [userLogged]="userLogged"></app-landing-page-swiper>
       </div>
@@ -328,7 +328,8 @@
           <div
             class="bg-white/60 dark:bg-nightblue-90/60 rounded-2xl p-4 border border-solid border-nightblue-100/10 dark:border-white/10 shadow-sm flex flex-col justify-center select-none">
             <input type="range" min="0" [max]="weatherModel.time.length - 1" step="1" [value]="weatherIndex"
-              (input)="onSliderChange($event)" class="w-full accent-orange cursor-pointer">
+              (input)="onSliderChange($event)" class="w-full accent-orange cursor-pointer"
+              aria-label="Seleccionar hora para la predicción del tiempo">
 
             <!-- HTML Step Tick Labels -->
             <div
@@ -469,20 +470,28 @@
         </div>
 
       </div>
-      <div class="mb-8 rounded-3xl p-4 md:pl-5 border border-solid dark:border-clear border-nightblue-100">
-        <div class="w-full flex px-2 pb-4 items-center justify-between">
-          <h3 class="flex items-center">
+      <div class="my-8 relative rounded-3xl p-6 md:p-8 bg-gradient-to-br from-white/95 via-sky-50/45 to-white/80 dark:from-nightblue-100/90 dark:via-nightblue-90/80 dark:to-nightblue-100/70 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 shadow-xl shadow-nightblue-100/5 dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] transition-all duration-500 overflow-hidden">
+        
+        <!-- Glowing background decorations -->
+        <div class="absolute -top-24 -left-24 w-48 h-48 rounded-full bg-orange/10 dark:bg-orange/20 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-48 h-48 rounded-full bg-primary/10 dark:bg-primary/20 blur-3xl pointer-events-none"></div>
+
+        <div class="relative w-full flex pb-6 items-center justify-between border-b border-solid border-nightblue-100/10 dark:border-white/10 mb-6">
+          <h3 class="text-left text-sm font-black text-nightblue-80 dark:text-nightblue-20 uppercase tracking-widest flex items-center gap-2 select-none m-0">
+            <ion-icon name="newspaper-outline" class="text-orange text-base"></ion-icon>
             Nuestras últimas noticias
           </h3>
-          <ion-button color="primary" class="h-7 lg:pr-2 xl:pr-3" routerLink="/noticias">
+          <ion-button color="primary" class="h-7 text-xs font-bold uppercase tracking-wider" routerLink="/noticias">
             Ver todas
           </ion-button>
         </div>
-        <ion-progress-bar *ngIf="newsArray.length == 0" class="rounded-xl px-4" [value]="progress"></ion-progress-bar>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-          <div *ngFor="let news of newsArray" class="px-2 pb-4 w-full">
+        
+        <ion-progress-bar *ngIf="newsArray.length == 0" class="rounded-xl px-4" [value]="progress" aria-label="Cargando noticias"></ion-progress-bar>
+        
+        <div class="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div *ngFor="let news of newsArray" class="w-full flex">
             <app-news-card [id]="news.id" [imgSrc]="news.image" [title]="news.title" [description]="news.content"
-              [date]="news.date"></app-news-card>
+              [date]="news.date" class="w-full flex"></app-news-card>
           </div>
         </div>
       </div>

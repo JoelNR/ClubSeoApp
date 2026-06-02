@@ -1,29 +1,70 @@
-<div [hidden]="!record.canary" class="w-full flex pb-2">
-  <ion-button  class="m-0 h-5 cursor-default" color="primary" size="small" fill="outline">
-    Record de canaria
-  </ion-button>
-</div>
-<div  class="p-3 h-fit rounded-xl border border-solid dark:border-clear border-nightblue-100 w-full">
-  <div class="w-full flex justify-between">
-      <p>
+<div class="relative group w-full p-5 rounded-2xl bg-white/65 dark:bg-nightblue-90/40 backdrop-blur-xl border border-solid border-nightblue-100/10 dark:border-white/10 shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-md hover:bg-white/85 dark:hover:bg-nightblue-90/60 overflow-hidden flex flex-col justify-between">
+  
+  <!-- Ribbon glow for canary records -->
+  <div *ngIf="record.canary" class="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-orange/10 dark:bg-orange/20 blur-2xl pointer-events-none"></div>
+
+  <!-- Header Row: Category & Score -->
+  <div class="w-full flex items-center justify-between border-b border-solid border-nightblue-100/10 dark:border-white/10 pb-3 mb-3">
+    <div class="flex items-center gap-2">
+      <div class="p-1.5 rounded-lg bg-orange/20 text-orange dark:text-orange-85 flex-shrink-0">
+        <ion-icon name="disc-outline" class="text-base block"></ion-icon>
+      </div>
+      <span class="text-xs font-black uppercase tracking-wider text-nightblue dark:text-white">
         Arco {{record.category}}
-      </p>
-      <p class="mx-1">
-        {{record.distance}} metros
-      </p>
-      <p>
-        {{record.points}} puntos
-      </p>
+      </span>
+    </div>
+    
+    <!-- Canary Badge (Optional) -->
+    <div *ngIf="record.canary" class="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-500/20 to-orange/20 text-orange dark:text-orange-80 border border-solid border-orange/20 text-[9px] font-black uppercase tracking-wider select-none">
+      <ion-icon name="ribbon-outline" class="text-[10px]"></ion-icon>
+      <span>Canarias</span>
+    </div>
   </div>
-  <div>
-    <div class="pt-4 flex w-full justify-between">
-      <p>
-        {{record.archer}}
-      </p>
-      <p class="mx-1">
-        {{record.competition}}
-      </p>
-      <app-date-chip [date]="record.date"></app-date-chip>
+
+  <!-- Body Metrics Row -->
+  <div class="grid grid-cols-2 gap-4 mb-4">
+    <!-- Distance -->
+    <div class="flex items-center gap-2.5">
+      <div class="p-2 rounded-xl bg-blue-100/80 dark:bg-blue-900/30 text-blue-500 dark:text-blue-400 flex-shrink-0">
+        <ion-icon name="resize-outline" class="text-base block"></ion-icon>
+      </div>
+      <div class="flex flex-col leading-none">
+        <span class="text-lg font-black text-nightblue dark:text-white tracking-tight" style="font-variant-numeric: tabular-nums;">
+          {{record.distance}}
+        </span>
+        <span class="text-[8px] font-bold text-nightblue-60 dark:text-nightblue-45 uppercase tracking-wider mt-0.5">Metros</span>
+      </div>
+    </div>
+
+    <!-- Points -->
+    <div class="flex items-center gap-2.5">
+      <div class="p-2 rounded-xl bg-teal-100/80 dark:bg-teal-900/30 text-teal-500 dark:text-teal-45 flex-shrink-0">
+        <ion-icon name="trophy-outline" class="text-base block"></ion-icon>
+      </div>
+      <div class="flex flex-col leading-none">
+        <span class="text-lg font-black text-nightblue dark:text-white tracking-tight" style="font-variant-numeric: tabular-nums;">
+          {{record.points}}
+        </span>
+        <span class="text-[8px] font-bold text-nightblue-60 dark:text-nightblue-45 uppercase tracking-wider mt-0.5">Puntos</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Archer Details & Date Section -->
+  <div class="w-full flex flex-col gap-2 pt-3 border-t border-solid border-nightblue-100/5 dark:border-white/5">
+    <div class="flex items-center justify-between text-xs">
+      <div class="flex items-center gap-1.5 min-w-0">
+        <ion-icon name="person-circle-outline" class="text-nightblue-60 dark:text-nightblue-55 text-base flex-shrink-0"></ion-icon>
+        <span class="font-bold text-nightblue dark:text-white truncate">
+          {{record.archer}}
+        </span>
+      </div>
+      <app-date-chip [date]="record.date" class="flex-shrink-0"></app-date-chip>
+    </div>
+
+    <div class="flex items-center gap-1.5 text-[10px] font-semibold text-nightblue-60 dark:text-nightblue-50/80 min-w-0">
+      <ion-icon name="ribbon-outline" class="text-sm flex-shrink-0"></ion-icon>
+      <span class="truncate">{{record.competition}}</span>
     </div>
   </div>
 </div>

@@ -1,73 +1,70 @@
-<header *ngIf="!mobile" class="w-full flex fixed top-0 z-10 justify-center items-center border-b border-solid bg-clear ">
-  <div class="justify-center flex w-full lg:max-w-290 xl:max-w-7xl">
-    <div class="py-2 flex items-center pl-5" [ngClass]="{'w-40 xl:w-44' : !userLogged}">
-      <img src="/assets/img/logo.png" routerLink="/" alt="logo" class="h-10 cursor-pointer">
+<!-- Desktop Navigation Header Bar (Hidden on smaller screens, flex on large) -->
+<header class="hidden lg:flex w-full fixed top-0 left-0 z-50 justify-center items-center bg-white/70 dark:bg-nightblue-90/75 backdrop-blur-xl border-b border-solid border-nightblue-100/10 dark:border-white/10 shadow-sm transition-all duration-300">
+  <div class="justify-between flex w-full lg:max-w-290 xl:max-w-7xl items-center px-6 h-16 md:h-20">
+    
+    <!-- Left: Brand Logo and Title -->
+    <div class="flex items-center gap-3 cursor-pointer" routerLink="/inicio">
+      <img src="/assets/img/logo.png" alt="logo" width="46" height="40" class="h-10 w-auto transition-transform duration-300 hover:scale-105 dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.45)]">
+      <span class="hidden sm:inline-block text-xs font-black uppercase tracking-widest text-nightblue dark:text-white select-none">SEO</span>
     </div>
-    <div class=" text-base hidden lg:flex text-center justify-center items-center">
-      <a *ngFor="let option of headerOptions" [routerLink]="option.link" class="px-5 items-center inline-flex">
-        <ion-icon color="primary" [name]="option.icon"></ion-icon>
-        <span class="pl-2" [ngClass]="{'text-orange-100': isActive(option.link)}">{{ option.label }}</span>
+    
+    <!-- Right: Desktop Navigation Options -->
+    <nav class="text-xs lg:text-sm flex items-center gap-1 font-bold h-full">
+      <a *ngFor="let option of headerOptions" [routerLink]="option.link" 
+         class="px-3 lg:px-4 h-10 rounded-full inline-flex items-center justify-center gap-1.5 text-nightblue-80 dark:text-nightblue-50 transition-all duration-300 hover:bg-nightblue-100/5 dark:hover:bg-white/5 hover:text-orange-100 dark:hover:text-orange whitespace-nowrap"
+         [ngClass]="{'bg-orange-40/20 dark:bg-white/5 text-orange-100 dark:text-orange border border-solid border-orange/20 dark:border-white/10': isActive(option.link)}">
+        <ion-icon class="text-base" [ngClass]="{'text-orange-100 dark:text-orange': isActive(option.link)}" [name]="option.icon"></ion-icon>
+        <span>{{ option.label }}</span>
       </a>
-    </div>
-    <div class="flex lg:hidden justify-end items-center pr-4 md:pr-9">
-      <ion-button (click)="openMenu()" id="main" color="primary" size="small" class="">
-        <div class="flex items-center">
-          <div class="justify-start pr-2">
-            <svg width="13" height="9" viewBox="0 0 13 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <line x1="0.5" y1="0.5" x2="12.5" y2="0.5" stroke="white" stroke-linecap="round"
-                stroke-linejoin="round" />
-              <line y1="4.5" x2="13" y2="4.5" stroke="white" />
-              <line y1="8.5" x2="13" y2="8.5" stroke="white" />
-            </svg>
-          </div>
-          Menú
-        </div>
-      </ion-button>
-      <ion-menu id="slide" side="end" [menuId]="'end' + trigger" type="overlay" contentId="main" [swipeGesture]="false">
-        <ion-header>
-          <ion-toolbar>
-            <div class="flex justify-end items-end place-content-end pr-4 h-full">
-              <ion-button (click)="closeMenu()" color="primary" size="small" class="button-menu">
-                <div class="flex items-center">
-                  <div class="justify-start pr-2">
-                    <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M0.292893 0.417893C0.683417 0.0273689 1.31658 0.0273689 1.70711 0.417893L7 5.71079L12.2929 0.417893C12.6834 0.0273689 13.3166 0.0273689 13.7071 0.417893C14.0976 0.808417 14.0976 1.44158 13.7071 1.83211L8.41421 7.125L13.7071 12.4179C14.0976 12.8084 14.0976 13.4416 13.7071 13.8321C13.3166 14.2226 12.6834 14.2226 12.2929 13.8321L7 8.53921L1.70711 13.8321C1.31658 14.2226 0.683417 14.2226 0.292893 13.8321C-0.0976311 13.4416 -0.0976311 12.8084 0.292893 12.4179L5.58579 7.125L0.292893 1.83211C-0.0976311 1.44158 -0.0976311 0.808417 0.292893 0.417893Z"
-                        fill="white" />
-                    </svg>
-                  </div>
-                  Menú
-                </div>
-              </ion-button>
-            </div>
-          </ion-toolbar>
-        </ion-header>
-        <ion-content>
-          <ion-list class="py-0 cursor-pointer">
-            <ion-item *ngFor="let option of headerOptions" class="px-5 flex items-center" (click)="navigate(option.link)">
-              <ion-icon color="primary" [name]="option.icon"></ion-icon>
-              <div class="pl-2" [ngClass]="{'text-orange-100': isActive(option.link)}">
-                {{option.label}}
-              </div>
-            </ion-item>
-          </ion-list>
-        </ion-content>
-      </ion-menu>
-    </div>
-
-    <div class="justify-end items-center pr-5 hidden lg:flex">
-      <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false" animated="false" dismiss-on-select="true" mode="ios" arrow="true">
-        <ng-template>
-          <ion-content class="border border-solid border-nightblue-100 dark:border-clear">
-            <div class="flex flex-col">
-              <div *ngFor="let option of profileOptions" [routerLink]="option.link" class="px-5 py-2 flex items-center cursor-pointer">
-                <ion-icon class="pr-2" color="primary" [name]="option.icon"></ion-icon>
-                <span [ngClass]="{'text-orange-100': isActive(option.link)}">{{ option.label }}</span>
-              </div>
-            </div>
-          </ion-content>
-        </ng-template>
-      </ion-popover>
-    </div>
+    </nav>
   </div>
 </header>
+
+<!-- Mobile Navigation Header Bar (Visible on smaller screens, hidden on large) -->
+<div class="lg:hidden w-full h-16 flex fixed top-0 left-0 z-50 justify-between items-center px-5 bg-white/80 dark:bg-nightblue-90/85 backdrop-blur-md border-b border-solid border-nightblue-100/10 dark:border-white/10 shadow-sm transition-all">
+  <div class="flex items-center gap-2 cursor-pointer" routerLink="/inicio">
+    <img src="/assets/img/logo.png" alt="logo" width="40" height="35" class="h-8 w-auto">
+    <span class="text-xs font-black uppercase tracking-widest text-nightblue dark:text-white select-none">SEO</span>
+  </div>
+  
+  <button (click)="openProfileMenu = !openProfileMenu" class="flex items-center justify-center p-2.5 rounded-xl bg-orange/15 active:scale-95 text-orange transition-all duration-200 focus:outline-none">
+    <svg width="20" height="16" viewBox="0 0 20 16" fill="none" class="stroke-current stroke-2" xmlns="http://www.w3.org/2000/svg">
+      <!-- Hamburger State (Three standard parallel lines) -->
+      <g *ngIf="!openProfileMenu">
+        <line x1="2" y1="3" x2="18" y2="3" stroke-linecap="round" />
+        <line x1="2" y1="8" x2="18" y2="8" stroke-linecap="round" />
+        <line x1="2" y1="13" x2="18" y2="13" stroke-linecap="round" />
+      </g>
+      <!-- 'X' Close State (Two perfect diagonal crossing lines) -->
+      <g *ngIf="openProfileMenu">
+        <line x1="3" y1="2" x2="17" y2="14" stroke-linecap="round" />
+        <line x1="17" y1="2" x2="3" y2="14" stroke-linecap="round" />
+      </g>
+    </svg>
+  </button>
+</div>
+
+<!-- Mobile Sleek Hamburger Dropdown Menu Overlay (Visible on smaller screens when openProfileMenu is active) -->
+<div *ngIf="openProfileMenu" 
+     class="lg:hidden fixed inset-0 top-16 z-40 w-full bg-white/95 dark:bg-nightblue-90/95 backdrop-blur-xl transition-all duration-350 overflow-hidden flex flex-col justify-start border-b border-solid border-nightblue-100/10 dark:border-white/10 animate-[fadeIn_0.2s_ease-out]">
+  
+  <nav class="flex flex-col p-6 gap-3">
+    <!-- Compact Home link inside list -->
+    <a (click)="openProfileMenu = false" routerLink="/inicio" 
+       class="w-full px-5 py-3 rounded-2xl flex items-center gap-3 text-nightblue dark:text-white font-extrabold uppercase tracking-wide text-xs bg-nightblue-100/5 dark:bg-white/5 border border-solid border-nightblue-100/5 dark:border-white/5"
+       routerLinkActive="bg-orange-40/25 dark:bg-orange/20 text-orange-100 dark:text-orange border-orange/20">
+      <ion-icon class="text-lg text-orange" name="home-outline"></ion-icon>
+      <span>Inicio</span>
+    </a>
+
+    
+    <a *ngFor="let option of headerOptions" 
+       (click)="openProfileMenu = false" 
+       [routerLink]="option.link" 
+       class="w-full px-5 py-3 rounded-2xl flex items-center gap-3 text-nightblue dark:text-white font-extrabold uppercase tracking-wide text-xs bg-nightblue-100/5 dark:bg-white/5 border border-solid border-nightblue-100/5 dark:border-white/5"
+       routerLinkActive="bg-orange-40/25 dark:bg-orange/20 text-orange-100 dark:text-orange border-orange/20">
+      <ion-icon class="text-lg text-orange" [name]="option.icon"></ion-icon>
+      <span>{{option.label}}</span>
+    </a>
+  </nav>
+</div>

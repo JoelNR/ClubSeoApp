@@ -39,6 +39,8 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
   timeLabels: any[] = []
   showChart: boolean = false
 
+  private progressInterval: any
+
   constructor(private newsService: NewsService,
     private http: HttpClient,
     private toastController: ToastController) { 
@@ -46,14 +48,22 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
   }
 
   ngOnInit() {
-    setInterval(() => {
-      if(this.progress <= 0,9){
+    this.progressInterval = setInterval(() => {
+      if(this.progress <= 0.9){
          this.progress += 0.01;
+      } else {
+        clearInterval(this.progressInterval);
       }
     }, 50)
     this.getNews()
     this.getWeather(dayjs().format('YYYY-MM-DD'))
     this.cookiesInform()
+  }
+
+  ngOnDestroy() {
+    if (this.progressInterval) {
+      clearInterval(this.progressInterval);
+    }
   }
 
   private getNews() {
