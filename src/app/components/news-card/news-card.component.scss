@@ -1,0 +1,53 @@
+dialog {
+  border: none;
+  border-radius: 1.5rem;
+  padding: 0;
+  max-width: 90vw;
+  width: 32.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  background: transparent;
+  color: inherit;
+  outline: none;
+  
+  &::backdrop {
+    background-color: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  
+  &[open] {
+    animation: show 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+}
+
+@keyframes show {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// Custom modern scrollbar for readability
+.overflow-y-auto {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(249, 115, 22, 0.3) transparent;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(249, 115, 22, 0.3);
+    border-radius: 20px;
+    
+    &:hover {
+      background-color: rgba(249, 115, 22, 0.5);
+    }
+  }
+}
