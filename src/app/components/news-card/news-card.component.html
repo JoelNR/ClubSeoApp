@@ -47,8 +47,7 @@
     </h3>
     
     <!-- Scrollable container for text content -->
-    <div class="max-h-60 overflow-y-auto pr-1 text-sm text-nightblue-80 dark:text-nightblue-20 leading-relaxed text-justify mb-6 whitespace-pre-line">
-      {{description}}
+    <div class="max-h-60 overflow-y-auto pr-1 text-sm text-nightblue-80 dark:text-nightblue-20 leading-relaxed text-justify mb-6 whitespace-normal rich-text-content" [innerHTML]="description | markdown">
     </div>
 
     <!-- Dialog footer action -->

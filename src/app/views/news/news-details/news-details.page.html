@@ -21,9 +21,8 @@
           <div class="pb-4 w-full flex justify-end">
             <app-date-chip [date]="newsModel.date"></app-date-chip>
           </div>
-          <ion-textarea readonly="true" class="cursor-none text-justify cursor- w-full h-full">
-            {{newsModel.content}}
-          </ion-textarea>
+          <div class="text-justify w-full h-full text-sm text-nightblue-80 dark:text-nightblue-20 leading-relaxed whitespace-normal rich-text-content" [innerHTML]="newsModel.content | markdown">
+          </div>
         </div>
         <div class="w-full flex sm:hidden sm:w-1/3 justify-center rounded-2xl mt-4">
           <img [src]="newsModel.image" class="rounded-2xl object-cover" alt="">

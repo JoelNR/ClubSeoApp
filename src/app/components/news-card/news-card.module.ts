@@ -4,7 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { NewsCardComponent } from './news-card.component';
 import { DateChipModule } from '../date-chip/date-chip.module';
-
+import { MarkdownModule } from 'src/app/pipes/markdown/markdown.module';
 
 
 @NgModule({
@@ -13,7 +13,8 @@ import { DateChipModule } from '../date-chip/date-chip.module';
     CommonModule,
     IonicModule,
     RouterModule,
-    DateChipModule
+    DateChipModule,
+    MarkdownModule
   ],
   exports:[NewsCardComponent]
 })

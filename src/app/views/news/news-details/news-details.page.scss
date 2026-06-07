@@ -1,0 +1,14 @@
+::ng-deep .rich-text-content {
+  ul {
+    list-style-type: disc !important;
+    padding-left: 1.25rem !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  li {
+    margin-bottom: 0.35rem !important;
+    list-style-type: disc !important;
+    display: list-item !important;
+  }
+}
