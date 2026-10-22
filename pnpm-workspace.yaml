@@ -1,0 +1,10 @@
+packages:
+  - .
+
+allowBuilds:
+  esbuild: true
+
+overrides:
+  protractor: link:./mocks/empty-protractor
+  sourcemap-codec: npm:@jridgewell/sourcemap-codec@^1.4.15
+  tar: ^6.2.1

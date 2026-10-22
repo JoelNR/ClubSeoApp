@@ -28,6 +28,10 @@ const routes: Routes = [
     loadChildren: () => import('./views/initiation/initiation.module').then( m => m.InitiationPageModule)
   },
   {
+    path: 'aprende',
+    loadChildren: () => import('./views/learn/learn.module').then( m => m.LearnPageModule)
+  },
+  {
     path: 'competicion',
     loadChildren: () => import('./views/competitions/competitions.module').then( m => m.CompetitionsPageModule)
   },

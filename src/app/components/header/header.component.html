@@ -1,33 +1,66 @@
 <!-- Desktop Navigation Header Bar (Hidden on smaller screens, flex on large) -->
-<header class="hidden lg:flex w-full fixed top-0 left-0 z-50 justify-center items-center bg-white/70 dark:bg-nightblue-90/75 backdrop-blur-xl border-b border-solid border-nightblue-100/10 dark:border-white/10 shadow-sm transition-all duration-300">
-  <div class="justify-between flex w-full lg:max-w-290 xl:max-w-7xl items-center px-6 h-16 md:h-20">
-    
+<header class="hidden lg:flex w-full fixed top-0 left-0 z-50 justify-center items-center transition-all duration-500"
+  [ngClass]="overHero
+    ? 'bg-transparent border-b border-transparent'
+    : 'bg-white/70 dark:bg-nightblue-90/75 backdrop-blur-xl border-b border-solid border-nightblue-100/10 dark:border-white/10 shadow-sm'">
+  <div class="relative justify-between flex w-full items-center px-6 h-16 md:h-20 transition-all duration-500"
+    [ngClass]="overHero ? 'max-w-[1600px]' : 'lg:max-w-290 xl:max-w-7xl'">
+
     <!-- Left: Brand Logo and Title -->
-    <div class="flex items-center gap-3 cursor-pointer" routerLink="/inicio">
-      <img src="/assets/img/logo.png" alt="logo" width="46" height="40" class="h-10 w-auto transition-transform duration-300 hover:scale-105 dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.45)]">
-      <span class="hidden sm:inline-block text-xs font-black uppercase tracking-widest text-nightblue dark:text-white select-none">SEO</span>
-    </div>
-    
-    <!-- Right: Desktop Navigation Options -->
-    <nav class="text-xs lg:text-sm flex items-center gap-1 font-bold h-full">
-      <a *ngFor="let option of headerOptions" [routerLink]="option.link" 
-         class="px-3 lg:px-4 h-10 rounded-full inline-flex items-center justify-center gap-1.5 text-nightblue-80 dark:text-nightblue-50 transition-all duration-300 hover:bg-nightblue-100/5 dark:hover:bg-white/5 hover:text-orange-100 dark:hover:text-orange whitespace-nowrap"
-         [ngClass]="{'bg-orange-40/20 dark:bg-white/5 text-orange-100 dark:text-orange border border-solid border-orange/20 dark:border-white/10': isActive(option.link)}">
-        <ion-icon class="text-base" [ngClass]="{'text-orange-100 dark:text-orange': isActive(option.link)}" [name]="option.icon"></ion-icon>
+    <a routerLink="/inicio" class="flex items-center gap-3 cursor-pointer group">
+      <img src="/assets/img/logo-mark.png" alt="" width="60" height="52"
+        class="brand-logo transition-transform duration-300 group-hover:scale-105">
+      <span class="text-[10px] font-black uppercase tracking-[0.17em] select-none transition-colors duration-500 whitespace-nowrap"
+        [ngClass]="overHero ? 'text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.35)]' : 'text-nightblue dark:text-white'">Club Deportivo SEO</span>
+    </a>
+
+    <!-- Center: Desktop Navigation Options -->
+    <nav class="text-xs lg:text-sm flex items-center gap-1 font-bold transition-all duration-500"
+      [ngClass]="overHero
+        ? 'absolute left-1/2 -translate-x-1/2 rounded-full border border-solid border-white/15 bg-nightblue-90/40 px-1.5 py-1 backdrop-blur-2xl shadow-lg shadow-nightblue-90/20'
+        : 'h-full'">
+      <a *ngFor="let option of headerOptions" [routerLink]="option.link"
+         class="px-3 lg:px-4 h-9 rounded-full inline-flex items-center justify-center gap-1.5 transition-all duration-300 whitespace-nowrap"
+         [ngClass]="overHero
+           ? (isActive(option.link)
+              ? 'bg-white/15 text-white'
+              : 'text-white/80 hover:bg-white/10 hover:text-white')
+           : (isActive(option.link)
+              ? 'bg-orange-40/20 dark:bg-white/5 text-orange-100 dark:text-orange border border-solid border-orange/20 dark:border-white/10'
+              : 'text-nightblue-80 dark:text-nightblue-50 hover:bg-nightblue-100/5 dark:hover:bg-white/5 hover:text-orange-100 dark:hover:text-orange')">
+        <ion-icon class="text-base" *ngIf="!overHero"
+          [ngClass]="{'text-orange-100 dark:text-orange': isActive(option.link)}" [name]="option.icon"></ion-icon>
         <span>{{ option.label }}</span>
       </a>
     </nav>
+
+    <!-- Right: Quick call to action while the navigation floats over the hero image -->
+    <a *ngIf="overHero" routerLink="/iniciacion"
+       class="group inline-flex items-center gap-2 rounded-full border border-solid border-white/25 bg-white/10 px-5 py-2.5 text-xs font-bold text-white backdrop-blur-xl transition-all duration-300 hover:bg-white/20 hover:border-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80">
+      <span>Primera clase</span>
+      <ion-icon name="arrow-forward-outline" class="text-sm transition-transform duration-300 group-hover:translate-x-0.5"></ion-icon>
+    </a>
   </div>
 </header>
 
 <!-- Mobile Navigation Header Bar (Visible on smaller screens, hidden on large) -->
-<div class="lg:hidden w-full h-16 flex fixed top-0 left-0 z-50 justify-between items-center px-5 bg-white/80 dark:bg-nightblue-90/85 backdrop-blur-md border-b border-solid border-nightblue-100/10 dark:border-white/10 shadow-sm transition-all">
-  <div class="flex items-center gap-2 cursor-pointer" routerLink="/inicio">
-    <img src="/assets/img/logo.png" alt="logo" width="40" height="35" class="h-8 w-auto">
-    <span class="text-xs font-black uppercase tracking-widest text-nightblue dark:text-white select-none">SEO</span>
-  </div>
-  
-  <button (click)="openProfileMenu = !openProfileMenu" class="flex items-center justify-center p-2.5 rounded-xl bg-orange/15 active:scale-95 text-orange transition-all duration-200 focus:outline-none">
+<div class="lg:hidden w-full h-16 flex fixed top-0 left-0 z-50 justify-between items-center px-5 transition-all duration-500"
+  [ngClass]="overHero
+    ? 'bg-transparent'
+    : 'bg-white/80 dark:bg-nightblue-90/85 backdrop-blur-md border-b border-solid border-nightblue-100/10 dark:border-white/10 shadow-sm'">
+  <a routerLink="/inicio" class="flex items-center gap-2 cursor-pointer">
+    <img src="/assets/img/logo-mark.png" alt="" width="46" height="40" class="brand-logo">
+    <span class="text-[9px] font-black uppercase tracking-[0.14em] select-none whitespace-nowrap transition-colors duration-500"
+      [ngClass]="overHero ? 'text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.35)]' : 'text-nightblue dark:text-white'">Club Deportivo SEO</span>
+  </a>
+
+  <button (click)="openProfileMenu = !openProfileMenu"
+    [attr.aria-label]="openProfileMenu ? 'Cerrar menú' : 'Abrir menú'"
+    [attr.aria-expanded]="openProfileMenu"
+    class="flex items-center justify-center p-2.5 rounded-xl active:scale-95 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2"
+    [ngClass]="overHero
+      ? 'bg-white/10 border border-solid border-white/20 text-white backdrop-blur-xl focus-visible:ring-white/80'
+      : 'bg-orange/15 text-orange focus-visible:ring-orange'">
     <svg width="20" height="16" viewBox="0 0 20 16" fill="none" class="stroke-current stroke-2" xmlns="http://www.w3.org/2000/svg">
       <!-- Hamburger State (Three standard parallel lines) -->
       <g *ngIf="!openProfileMenu">
@@ -45,22 +78,22 @@
 </div>
 
 <!-- Mobile Sleek Hamburger Dropdown Menu Overlay (Visible on smaller screens when openProfileMenu is active) -->
-<div *ngIf="openProfileMenu" 
+<div *ngIf="openProfileMenu"
      class="lg:hidden fixed inset-0 top-16 z-40 w-full bg-white/95 dark:bg-nightblue-90/95 backdrop-blur-xl transition-all duration-350 overflow-hidden flex flex-col justify-start border-b border-solid border-nightblue-100/10 dark:border-white/10 animate-[fadeIn_0.2s_ease-out]">
-  
+
   <nav class="flex flex-col p-6 gap-3">
     <!-- Compact Home link inside list -->
-    <a (click)="openProfileMenu = false" routerLink="/inicio" 
+    <a (click)="openProfileMenu = false" routerLink="/inicio"
        class="w-full px-5 py-3 rounded-2xl flex items-center gap-3 text-nightblue dark:text-white font-extrabold uppercase tracking-wide text-xs bg-nightblue-100/5 dark:bg-white/5 border border-solid border-nightblue-100/5 dark:border-white/5"
        routerLinkActive="bg-orange-40/25 dark:bg-orange/20 text-orange-100 dark:text-orange border-orange/20">
       <ion-icon class="text-lg text-orange" name="home-outline"></ion-icon>
       <span>Inicio</span>
     </a>
 
-    
-    <a *ngFor="let option of headerOptions" 
-       (click)="openProfileMenu = false" 
-       [routerLink]="option.link" 
+
+    <a *ngFor="let option of headerOptions"
+       (click)="openProfileMenu = false"
+       [routerLink]="option.link"
        class="w-full px-5 py-3 rounded-2xl flex items-center gap-3 text-nightblue dark:text-white font-extrabold uppercase tracking-wide text-xs bg-nightblue-100/5 dark:bg-white/5 border border-solid border-nightblue-100/5 dark:border-white/5"
        routerLinkActive="bg-orange-40/25 dark:bg-orange/20 text-orange-100 dark:text-orange border-orange/20">
       <ion-icon class="text-lg text-orange" [name]="option.icon"></ion-icon>

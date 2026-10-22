@@ -1,13 +1,42 @@
 <ion-content>
   <div class="flex flex-col min-h-full">
-    <app-header></app-header>
-    <div class="flex flex-col grow w-full lg:max-w-290 px-5 sm:px-8 mx-auto" [ngClass]="{'pb-14' : mobile}">
-      <h1 class="pb-6 text-center uppercase" [ngClass]="{'pt-28' : !mobile, 'pt-8': mobile}">
-        Club deportivo SEO
-      </h1>
-      <h2 class="text-center pb-6">
-        Tiro con arco en Gran Canaria
-      </h2>
+    <app-header variant="hero"></app-header>
+
+    <!-- Hero: full-bleed photograph with the oversized title set into the landscape -->
+    <section id="hero-frame" class="hero-frame" aria-labelledby="hero-title">
+      <img src="/assets/img/hero.jpeg"
+           alt="Arqueros del Club Deportivo SEO en la línea de tiro, con las montañas de Gran Canaria al fondo"
+           class="hero-media" width="1280" height="853" fetchpriority="high" decoding="async">
+      <div class="hero-scrim" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <div class="hero-mark">
+          <img src="/assets/img/gran-canaria.png" alt="" class="hero-island" width="690" height="718" aria-hidden="true">
+        </div>
+
+        <h1 id="hero-title" class="hero-title">
+          <span class="hero-line">Tiro con arco</span>
+          <span class="hero-line hero-line--fade">en Gran Canaria</span>
+        </h1>
+
+        <p class="hero-sub">Ven a entrenar con nosotros y descubre el tiro con arco en Gran Canaria.</p>
+
+        <button type="button" class="hero-scroll" (click)="scrollToContent()" aria-label="Bajar al contenido">
+          <ion-icon name="chevron-down-outline" aria-hidden="true"></ion-icon>
+        </button>
+      </div>
+
+      <div class="hero-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 130" preserveAspectRatio="none">
+          <path fill="#ffffff" fill-opacity="0.35"
+            d="M0,78 C128,54 236,96 356,90 C486,84 554,46 700,54 C846,62 918,104 1064,96 C1188,89 1316,58 1440,70 L1440,130 L0,130 Z" />
+          <path class="hero-wave-front"
+            d="M0,88 C130,64 238,106 358,100 C488,94 556,56 702,64 C848,72 920,114 1066,106 C1190,99 1318,68 1440,80 L1440,130 L0,130 Z" />
+        </svg>
+      </div>
+    </section>
+
+    <div id="contenido" class="flex flex-col grow w-full lg:max-w-290 px-5 sm:px-8 mx-auto pt-8 sm:pt-12" [ngClass]="{'pb-14' : mobile}">
       <div class="h-fit w-full">
         <app-landing-page-swiper [isMember]="isMember" [userLogged]="userLogged"></app-landing-page-swiper>
       </div>

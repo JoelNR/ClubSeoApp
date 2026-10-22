@@ -26,6 +26,225 @@ ion-item::part(native) {
   }
 }
 
+/* ----------------------------------------------------------------------------
+ * Hero
+ * A full-bleed mountain photograph with the club name set into the landscape
+ * and a torn paper wave handing off to the page.
+ * ------------------------------------------------------------------------- */
+
+.hero-frame {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  height: clamp(600px, 100svh, 1040px);
+  margin: 0;
+  background: #0c1a30;
+}
+
+.hero-media {
+  position: absolute;
+  inset: -2%;
+  width: 104%;
+  height: 104%;
+  object-fit: cover;
+  object-position: center 42%;
+  filter: saturate(1.03) contrast(1.02);
+  animation: hero-settle 1.8s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(78% 62% at 50% 40%, rgba(8, 19, 38, 0.34), transparent 74%),
+    linear-gradient(
+      180deg,
+      rgba(8, 19, 38, 0.68) 0%,
+      rgba(8, 19, 38, 0.44) 26%,
+      rgba(8, 19, 38, 0.34) 48%,
+      rgba(8, 19, 38, 0.46) 78%,
+      rgba(8, 19, 38, 0.60) 100%
+    );
+}
+
+/* Fine film grain so the photograph and flat type feel printed together. */
+.hero-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.16;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: clamp(96px, 14vh, 168px) clamp(16px, 4vw, 48px) clamp(96px, 14vh, 152px);
+  text-align: center;
+  animation: hero-rise 0.9s 0.12s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+.hero-mark {
+  display: flex;
+  justify-content: center;
+  margin-bottom: clamp(18px, 3vh, 34px);
+}
+
+.hero-island {
+  height: clamp(60px, 6vh, 90px);
+  width: auto;
+  filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.38));
+}
+
+.hero-title {
+  margin: 0;
+  width: 100%;
+  font-family: "Anton", "Arial Narrow", Impact, sans-serif;
+  font-weight: 400;
+  font-size: clamp(2.9rem, min(14vw, 22vh), 15rem);
+  line-height: 0.82;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.hero-line {
+  display: block;
+  white-space: nowrap;
+}
+
+.hero-line--fade {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.99) 46%,
+    rgba(255, 255, 255, 0.74) 74%,
+    rgba(255, 255, 255, 0.28) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-sub {
+  position: relative;
+  margin: clamp(18px, 3vh, 30px) 0 0;
+  max-width: min(34rem, 90%);
+  font-size: clamp(0.95rem, 1.35vw, 1.2rem);
+  line-height: 1.45;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.94);
+  text-shadow:
+    0 1px 3px rgba(5, 13, 26, 0.85),
+    0 2px 22px rgba(5, 13, 26, 0.6);
+}
+
+/* Soft dark halo keeps the sentence readable over the busy foreground. */
+.hero-sub::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -22px -34px;
+  background: radial-gradient(58% 120% at 50% 50%, rgba(5, 13, 26, 0.6), rgba(5, 13, 26, 0) 76%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.hero-scroll {
+  margin-top: clamp(14px, 3vh, 30px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: hero-nudge 2.6s 1.6s ease-in-out infinite;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.45);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
+  }
+}
+
+.hero-wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  z-index: 3;
+  pointer-events: none;
+  line-height: 0;
+
+  svg {
+    display: block;
+    width: 100%;
+    height: clamp(58px, 7.5vw, 108px);
+  }
+}
+
+.hero-wave-front {
+  fill: var(--clear);
+}
+
+@keyframes hero-settle {
+  from { transform: scale(1.08); }
+  to { transform: scale(1); }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-nudge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+@media (max-width: 420px) {
+  .hero-content {
+    padding-bottom: 88px;
+  }
+
+  .hero-sub {
+    max-width: 26ch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-media,
+  .hero-content,
+  .hero-scroll {
+    animation: none;
+  }
+}
+
 /* Premium Range Input Styling */
 input[type="range"] {
   -webkit-appearance: none;

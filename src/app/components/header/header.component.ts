@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuController, PopoverController } from '@ionic/angular';
 import { CapacitorBase } from 'src/app/lib/CapacitorBase';
@@ -11,10 +11,16 @@ import { RegisterService } from 'src/app/services/register.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent extends CapacitorBase implements OnInit {
+export class HeaderComponent extends CapacitorBase implements OnInit, AfterViewInit, OnDestroy {
+  /** "hero" floats the navigation over the landing page image until the image scrolls away. */
+  @Input() variant: 'default' | 'hero' = 'default';
+  isScrolled: boolean = false;
+  private heroObserver?: IntersectionObserver;
+
   headerOptions = [
     { label: 'Sobre Nosotros',icon: 'reader-outline' , link: '/nosotros' },
     { label: 'Iniciación',icon: 'megaphone-outline', link: '/iniciacion' },
+    { label: 'Aprende',icon: 'school-outline', link: '/aprende' },
     { label: 'Competiciones',icon: 'trophy-outline', link: '/competicion' },
     { label: 'Plusmarcas',icon: 'sparkles-outline', link: '/plusmarcas' },
   ]
@@ -44,6 +50,27 @@ export class HeaderComponent extends CapacitorBase implements OnInit {
         })
       }      
     })
+  }
+
+  get overHero(): boolean {
+    return this.variant === 'hero' && !this.isScrolled;
+  }
+
+  ngAfterViewInit() {
+    if (this.variant !== 'hero' || typeof IntersectionObserver === 'undefined') { return; }
+    setTimeout(() => {
+      const hero = document.getElementById('hero-frame');
+      if (!hero) { return; }
+      this.heroObserver = new IntersectionObserver(
+        ([entry]) => this.isScrolled = !entry.isIntersecting,
+        { rootMargin: '-72px 0px 0px 0px', threshold: 0 }
+      );
+      this.heroObserver.observe(hero);
+    });
+  }
+
+  ngOnDestroy() {
+    this.heroObserver?.disconnect();
   }
 
   isActive(link: string) {
