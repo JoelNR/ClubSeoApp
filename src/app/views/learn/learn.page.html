@@ -51,6 +51,11 @@
       </section>
 
       <!-- Sticky section navigation -->
+      <div *ngIf="menuOpen"
+           (click)="closeMenu()"
+           class="fixed inset-0 z-20 bg-nightblue-100/40 dark:bg-black/60 lg:hidden"
+           aria-hidden="true"></div>
+
       <nav #navRoot
            class="sticky top-16 lg:top-20 z-30 -mx-5 sm:-mx-8 px-5 sm:px-8 bg-white/90 dark:bg-nightblue-90/90 backdrop-blur-xl border-y border-solid border-nightblue-100/10 dark:border-white/10 scroll-mt-16 lg:scroll-mt-20"
            aria-label="Secciones de la guía">
@@ -85,19 +90,19 @@
                 class="h-1 flex-1 rounded-full transition-colors duration-300"
                 [ngClass]="group === activeGroup
                   ? 'bg-orange'
-                  : (i < activeGroupIndex ? 'bg-orange/40' : 'bg-nightblue-100/10 dark:bg-white/10')"></span>
+                  : (i < activeGroupIndex ? 'bg-orange-40' : 'bg-nightblue-100/10 dark:bg-white/10')"></span>
         </div>
 
         <div *ngIf="menuOpen" id="section-index"
-             class="absolute inset-x-0 top-full max-h-[70vh] overflow-y-auto border-b border-solid border-nightblue-100/10 dark:border-white/10 bg-white dark:bg-nightblue-90 shadow-xl shadow-nightblue-100/20 dark:shadow-black/40">
-          <div class="grid gap-x-8 gap-y-6 px-5 py-5 sm:px-8 sm:py-6 md:grid-cols-2 xl:grid-cols-4">
+             class="absolute inset-x-0 top-full max-h-[calc(100dvh-9rem)] overflow-y-auto border-b border-solid border-nightblue-100/10 dark:border-white/10 bg-white dark:bg-nightblue-90 shadow-xl shadow-nightblue-100/20 dark:shadow-black/40 lg:max-h-[70vh]">
+          <div class="grid gap-x-8 gap-y-4 px-5 py-4 sm:px-8 sm:py-6 md:grid-cols-2 xl:grid-cols-4">
             <div *ngFor="let group of navGroups">
               <div class="flex items-center gap-2">
                 <ion-icon [name]="group.icon" class="text-sm text-orange"></ion-icon>
                 <h3 class="m-0 text-[10px] font-black uppercase tracking-[0.16em] text-nightblue dark:text-white">{{ group.title }}</h3>
               </div>
-              <p class="m-0 pb-2 pt-1 text-[11px] leading-snug text-nightblue-60 dark:text-nightblue-50">{{ group.hint }}</p>
-              <ul class="flex flex-col">
+              <p class="m-0 hidden pb-2 pt-1 text-[11px] leading-snug text-nightblue-60 dark:text-nightblue-50 sm:block">{{ group.hint }}</p>
+              <ul class="mt-1 flex flex-col sm:mt-0">
                 <li *ngFor="let section of group.sections">
                   <button type="button"
                           (click)="goTo(section.id)"

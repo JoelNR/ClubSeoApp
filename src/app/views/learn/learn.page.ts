@@ -706,7 +706,7 @@ export class LearnPage extends CapacitorBase implements AfterViewInit, OnDestroy
     }
     const offset = window.matchMedia('(min-width: 1024px)').matches ? 80 : 64;
     if (nav.getBoundingClientRect().top > offset + 2) {
-      nav.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      nav.scrollIntoView({ block: 'start', behavior: this.scrollBehavior() });
     }
   }
 
@@ -724,8 +724,10 @@ export class LearnPage extends CapacitorBase implements AfterViewInit, OnDestroy
     this.setActiveSection(id);
     const target = document.getElementById(id);
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.scrollIntoView({ behavior: this.scrollBehavior(), block: 'start' });
     }
+    // The panel is gone after choosing, so keep keyboard focus on its trigger.
+    this.indexButton?.nativeElement.focus({ preventScroll: true });
   }
 
   faceViewBox(face: FaceDiagram): string {
@@ -745,5 +747,9 @@ export class LearnPage extends CapacitorBase implements AfterViewInit, OnDestroy
     if (this.activeSection !== id) {
       this.activeSection = id;
     }
+  }
+
+  private scrollBehavior(): ScrollBehavior {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
   }
 }

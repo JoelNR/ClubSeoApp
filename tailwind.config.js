@@ -17,7 +17,7 @@ module.exports = {
             DEFAULT: '#b5a964',
         },
         orange: {
-            DEFAULT: 'var(--orange)',
+            DEFAULT: 'rgb(var(--orange-rgb) / <alpha-value>)',
             '100':'var(--orange-100)',
             '80': 'var(--orange-80)',
             '60': 'var(--orange-60)',
