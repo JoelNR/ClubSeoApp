@@ -1,0 +1,5 @@
+# Aprende es una sola página con navegación por anclas
+
+La página de aprendizaje se dirige a socios que nunca han competido y cubre trece temas cortos que se consultan de uno en uno, casi siempre desde el móvil y a menudo en el propio campo. Decidimos una única ruta `/aprende` con secciones ancladas y una barra de navegación pegajosa, en lugar de una página índice con subpáginas o pestañas.
+
+Una subpágina por tema multiplica las rutas y obliga a volver al índice entre lecturas; unas pestañas esconden contenido y rompen el desplazamiento continuo. La página única permite buscar con Ctrl+F, enlazar directamente a una sección desde el calendario o un correo, y funciona con una sola entrada de menú. El coste asumido es que la página es larga: por eso la navegación se agrupa en cuatro bloques y la barra de anclas se mantiene visible al pasar el héroe. En escritorio convive con el índice de tarjetas; en móvil el índice se oculta para que la barra sea la única navegación y el índice no ocupe varias pantallas antes del primer apartado.

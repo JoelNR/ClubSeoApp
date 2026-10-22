@@ -66,6 +66,13 @@ export class LandingPagePage extends CapacitorBase implements OnInit {
     }
   }
 
+  scrollToContent() {
+    const target = document.getElementById('contenido');
+    if (!target) { return; }
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  }
+
   private getNews() {
 
     this.newsService.news().subscribe(res => {

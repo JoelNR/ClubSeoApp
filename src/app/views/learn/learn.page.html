@@ -1,0 +1,911 @@
+<ion-content [fullscreen]="true">
+  <div class="flex flex-col min-h-full bg-gradient-to-b from-clear to-white dark:from-nightblue-90 dark:to-nightblue-90">
+    <app-header></app-header>
+
+    <main class="flex flex-col grow w-full lg:max-w-290 px-5 sm:px-8 mx-auto" [ngClass]="{'pb-14': mobile}">
+
+      <!-- Hero -->
+      <section class="pt-28 lg:pt-36 pb-10">
+        <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-12 items-center">
+          <div>
+            <span class="inline-flex items-center gap-2 rounded-full border border-solid border-orange/25 bg-orange/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-orange">
+              <ion-icon name="school-outline" class="text-sm"></ion-icon>
+              Guía del club
+            </span>
+            <h1 class="mt-5 text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-nightblue dark:text-white">
+              Aprende<span class="text-orange">.</span>
+            </h1>
+            <p class="mt-4 max-w-xl text-base sm:text-lg leading-relaxed text-nightblue-80 dark:text-nightblue-50">
+              Lo que pasa en una tirada, en el orden en que pasa. Para que tu primera competición no sea un examen
+              sorpresa: las líneas, las señales, las dianas y las ligas.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-2">
+              <span class="rounded-full border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/70 dark:bg-white/5 px-3 py-1 text-[11px] font-bold text-nightblue-60 dark:text-nightblue-50">
+                {{ sections.length }} apartados
+              </span>
+              <span class="rounded-full border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/70 dark:bg-white/5 px-3 py-1 text-[11px] font-bold text-nightblue-60 dark:text-nightblue-50">
+                4 modalidades
+              </span>
+              <span class="rounded-full border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/70 dark:bg-white/5 px-3 py-1 text-[11px] font-bold text-nightblue-60 dark:text-nightblue-50">
+                3 ligas
+              </span>
+            </div>
+          </div>
+
+          <div class="relative overflow-hidden rounded-3xl bg-nightblue-100 p-6 sm:p-7 shadow-xl shadow-nightblue-100/20">
+            <div class="absolute -top-20 -right-16 h-48 w-48 rounded-full bg-orange/20 blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -left-16 h-48 w-48 rounded-full bg-skyblue/20 blur-3xl pointer-events-none"></div>
+            <p class="relative text-[10px] font-black uppercase tracking-[0.2em] text-orange">
+              Lo esencial en 30 segundos
+            </p>
+            <ol class="relative mt-5 flex flex-col gap-4">
+              <li *ngFor="let item of essentials; let i = index" class="flex items-start gap-3">
+                <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-solid border-white/15 bg-white/5 text-[10px] font-black text-orange">
+                  {{ i + 1 }}
+                </span>
+                <span class="text-sm leading-relaxed text-white/85">{{ item }}</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sticky section navigation -->
+      <nav #navRoot
+           class="sticky top-16 lg:top-20 z-30 -mx-5 sm:-mx-8 px-5 sm:px-8 bg-white/90 dark:bg-nightblue-90/90 backdrop-blur-xl border-y border-solid border-nightblue-100/10 dark:border-white/10 scroll-mt-16 lg:scroll-mt-20"
+           aria-label="Secciones de la guía">
+        <div class="flex items-center justify-between gap-3 py-2.5">
+          <div class="flex min-w-0 items-center gap-3">
+            <span class="shrink-0 text-[10px] font-black tabular-nums tracking-widest">
+              <span class="text-orange">{{ sectionNumber(activeSection) }}</span>
+              <span class="text-nightblue-60 dark:text-nightblue-50">/{{ sections.length }}</span>
+            </span>
+            <div class="min-w-0 border-l border-solid border-nightblue-100/10 pl-3 dark:border-white/10">
+              <p class="m-0 truncate text-sm font-black text-nightblue dark:text-white">{{ activeSectionLabel }}</p>
+              <p class="m-0 truncate text-[10px] font-semibold text-nightblue-60 dark:text-nightblue-50">{{ activeGroup?.title }}</p>
+            </div>
+          </div>
+          <button #indexButton
+                  type="button"
+                  (click)="toggleMenu()"
+                  [attr.aria-expanded]="menuOpen"
+                  aria-controls="section-index"
+                  class="flex shrink-0 items-center gap-1.5 rounded-full border border-solid px-3.5 py-2 text-[11px] font-black transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 dark:focus-visible:ring-offset-nightblue-90"
+                  [ngClass]="menuOpen
+                    ? 'border-orange bg-orange text-white'
+                    : 'border-nightblue-100/10 dark:border-white/10 bg-white/70 dark:bg-white/5 text-nightblue-80 dark:text-nightblue-50 hover:border-orange/40 hover:text-orange'">
+            <ion-icon name="list-outline" class="text-sm"></ion-icon>
+            Índice
+            <ion-icon name="chevron-down-outline" class="text-xs transition-transform duration-200" [class.rotate-180]="menuOpen"></ion-icon>
+          </button>
+        </div>
+
+        <div class="flex gap-1 pb-2" aria-hidden="true">
+          <span *ngFor="let group of navGroups; let i = index"
+                class="h-1 flex-1 rounded-full transition-colors duration-300"
+                [ngClass]="group === activeGroup
+                  ? 'bg-orange'
+                  : (i < activeGroupIndex ? 'bg-orange/40' : 'bg-nightblue-100/10 dark:bg-white/10')"></span>
+        </div>
+
+        <div *ngIf="menuOpen" id="section-index"
+             class="absolute inset-x-0 top-full max-h-[70vh] overflow-y-auto border-b border-solid border-nightblue-100/10 dark:border-white/10 bg-white dark:bg-nightblue-90 shadow-xl shadow-nightblue-100/20 dark:shadow-black/40">
+          <div class="grid gap-x-8 gap-y-6 px-5 py-5 sm:px-8 sm:py-6 md:grid-cols-2 xl:grid-cols-4">
+            <div *ngFor="let group of navGroups">
+              <div class="flex items-center gap-2">
+                <ion-icon [name]="group.icon" class="text-sm text-orange"></ion-icon>
+                <h3 class="m-0 text-[10px] font-black uppercase tracking-[0.16em] text-nightblue dark:text-white">{{ group.title }}</h3>
+              </div>
+              <p class="m-0 pb-2 pt-1 text-[11px] leading-snug text-nightblue-60 dark:text-nightblue-50">{{ group.hint }}</p>
+              <ul class="flex flex-col">
+                <li *ngFor="let section of group.sections">
+                  <button type="button"
+                          (click)="goTo(section.id)"
+                          [attr.aria-current]="activeSection === section.id ? 'true' : null"
+                          class="flex w-full items-baseline gap-2.5 rounded-lg px-2 py-1.5 text-left text-[13px] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange"
+                          [ngClass]="activeSection === section.id
+                            ? 'bg-orange/10 font-bold text-orange'
+                            : 'font-semibold text-nightblue-80 dark:text-nightblue-50 hover:bg-nightblue-10/60 dark:hover:bg-white/5 hover:text-orange'">
+                    <span class="w-4 shrink-0 text-[10px] font-black tabular-nums text-nightblue-60 dark:text-nightblue-50">{{ sectionNumber(section.id) }}</span>
+                    <span class="min-w-0">{{ section.label }}</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- 01 · Las tres líneas -->
+      <section id="lineas" data-learn-section class="scroll-mt-32 lg:scroll-mt-36 pt-10">
+        <div class="flex items-start gap-3 pb-5">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-solid border-orange/20 bg-orange/10 text-sm font-black text-orange">01</span>
+          <div>
+            <h2 class="text-xl md:text-2xl font-black uppercase tracking-widest text-nightblue dark:text-white m-0">Las tres líneas</h2>
+            <p class="mt-1 text-sm text-nightblue-60 dark:text-nightblue-50">Tres marcas en el suelo, tres reglas distintas.</p>
+          </div>
+        </div>
+
+        <p class="max-w-3xl text-nightblue-80 dark:text-nightblue-50 leading-relaxed pb-5">
+          Hay una línea en la que te colocas, otra detrás en la que esperas y otra delante que decide si una flecha
+          cuenta o no. De atrás hacia delante: espera, línea de tiro y, ya camino de las dianas, la marca de 3 m.
+          Confundirlas es el error más común del primer día, así que vamos despacio.
+        </p>
+
+        <div class="mt-4 grid md:grid-cols-3 gap-4">
+          <div *ngFor="let linea of lineas"
+               class="flex flex-col rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/80 dark:bg-nightblue-100/70 backdrop-blur-xl p-5">
+            <div class="flex items-center gap-2 pb-2">
+              <ion-icon [name]="linea.icon" class="text-lg text-orange"></ion-icon>
+              <h3 class="m-0 text-sm font-black uppercase tracking-wider text-nightblue dark:text-white">{{ linea.name }}</h3>
+            </div>
+            <p class="grow text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">{{ linea.body }}</p>
+            <p class="mt-3 border-t border-solid border-nightblue-100/10 dark:border-white/10 pt-3 text-[11px] leading-snug font-semibold text-nightblue-60 dark:text-nightblue-50">
+              {{ linea.footnote }}
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-4 rounded-2xl border-l-4 border-solid border-orange bg-orange/5 p-5">
+          <p class="text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">
+            <strong class="text-nightblue dark:text-white">Ninguna flecha se repite.</strong>
+            Lo de la línea de 3 m no es repetir: es que esa flecha nunca llegó a contar como disparada. Si cruza la
+            línea, ya es una flecha tirada y se apunta, aunque esté en el suelo.
+          </p>
+        </div>
+      </section>
+
+      <!-- 02 · Turnos -->
+      <section id="turnos" data-learn-section class="scroll-mt-32 lg:scroll-mt-36 pt-12">
+        <div class="flex items-start gap-3 pb-5">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-solid border-orange/20 bg-orange/10 text-sm font-black text-orange">02</span>
+          <div>
+            <h2 class="text-xl md:text-2xl font-black uppercase tracking-widest text-nightblue dark:text-white m-0">Turnos: cuándo te toca</h2>
+            <p class="mt-1 text-sm text-nightblue-60 dark:text-nightblue-50">Tu diana y tu turno se sortean antes de empezar.</p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-4">
+          <div class="rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/80 dark:bg-nightblue-100/70 backdrop-blur-xl p-6">
+            <h3 class="m-0 pb-3 text-sm font-black uppercase tracking-wider text-nightblue dark:text-white">En la práctica</h3>
+            <ul class="flex flex-col gap-3">
+              <li class="flex gap-3 text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">
+                <ion-icon name="checkmark-circle-outline" class="mt-0.5 text-base text-alert-green"></ion-icon>
+                <span>Cada arquero tiene diana y turno asignados. En sala se tira por turnos <strong>AB</strong> y <strong>CD</strong>; en aire libre, por turnos dentro de tu misma diana.</span>
+              </li>
+              <li class="flex gap-3 text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">
+                <ion-icon name="checkmark-circle-outline" class="mt-0.5 text-base text-alert-green"></ion-icon>
+                <span>Solo está en la línea quien dispara. El resto espera detrás, con el material recogido.</span>
+              </li>
+              <li class="flex gap-3 text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">
+                <ion-icon name="checkmark-circle-outline" class="mt-0.5 text-base text-alert-green"></ion-icon>
+                <span>Al terminar tus flechas, vuelves detrás de la línea de espera aunque quede tiempo de tanda.</span>
+              </li>
+              <li class="flex gap-3 text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">
+                <ion-icon name="checkmark-circle-outline" class="mt-0.5 text-base text-alert-green"></ion-icon>
+                <span>Si algo va mal, se avisa al juez con la mano y sin moverte de donde estás.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-nightblue-100 p-6 text-white">
+            <h3 class="m-0 pb-3 text-sm font-black uppercase tracking-wider text-white">Lo que no se hace</h3>
+            <ul class="flex flex-col gap-3">
+              <li class="flex gap-3 text-sm leading-relaxed text-white/80">
+                <ion-icon name="close-circle-outline" class="mt-0.5 text-base text-orange"></ion-icon>
+                <span>Tensar el arco, con o sin flecha, si no estás en la línea de tiro.</span>
+              </li>
+              <li class="flex gap-3 text-sm leading-relaxed text-white/80">
+                <ion-icon name="close-circle-outline" class="mt-0.5 text-base text-orange"></ion-icon>
+                <span>Hablar con tu entrenador durante la tanda. La comunicación va en los descansos y detrás de la línea de espera.</span>
+              </li>
+              <li class="flex gap-3 text-sm leading-relaxed text-white/80">
+                <ion-icon name="close-circle-outline" class="mt-0.5 text-base text-orange"></ion-icon>
+                <span>Tocar el arco o las flechas de otro sin permiso.</span>
+              </li>
+              <li class="flex gap-3 text-sm leading-relaxed text-white/80">
+                <ion-icon name="close-circle-outline" class="mt-0.5 text-base text-orange"></ion-icon>
+                <span>Usar el móvil en la línea de tiro. Detrás de la línea de espera, en silencio y sin molestar.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 · Tiempo y señales -->
+      <section id="tiempo" data-learn-section class="scroll-mt-32 lg:scroll-mt-36 pt-12">
+        <div class="flex items-start gap-3 pb-5">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-solid border-orange/20 bg-orange/10 text-sm font-black text-orange">03</span>
+          <div>
+            <h2 class="text-xl md:text-2xl font-black uppercase tracking-widest text-nightblue dark:text-white m-0">Tiempo y señales</h2>
+            <p class="mt-1 text-sm text-nightblue-60 dark:text-nightblue-50">El reloj lo lleva el juez. Tú solo mira y escucha.</p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-4">
+          <div class="rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/80 dark:bg-nightblue-100/70 backdrop-blur-xl p-5 sm:p-6">
+            <h3 class="m-0 pb-4 text-sm font-black uppercase tracking-wider text-nightblue dark:text-white">La secuencia</h3>
+            <ol class="flex flex-col gap-3">
+              <li *ngFor="let signal of signals; let i = index" class="flex items-start gap-3">
+                <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full"
+                      [ngClass]="{
+                        'bg-nightblue-60': signal.tone === 'line',
+                        'bg-alert-green': signal.tone === 'start',
+                        'bg-gold': signal.tone === 'warn',
+                        'bg-alert-100': signal.tone === 'stop',
+                        'bg-orange': signal.tone === 'score'
+                      }"></span>
+                <div>
+                  <p class="m-0 text-xs font-black uppercase tracking-wider text-nightblue dark:text-white">{{ signal.signal }}</p>
+                  <p class="m-0 text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">{{ signal.meaning }}</p>
+                </div>
+              </li>
+            </ol>
+            <p class="mt-4 rounded-xl bg-nightblue-10/60 dark:bg-white/5 p-3 text-[11px] leading-snug font-semibold text-nightblue-60 dark:text-nightblue-50">
+              Si la luz y el silbido no coinciden, manda el silbido. Si hay reloj y luz, manda el reloj.
+            </p>
+          </div>
+
+          <div class="flex flex-col gap-4">
+            <div class="rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/80 dark:bg-nightblue-100/70 backdrop-blur-xl p-5 sm:p-6">
+              <h3 class="m-0 pb-3 text-sm font-black uppercase tracking-wider text-nightblue dark:text-white">Cuánto dura</h3>
+              <dl class="flex flex-col divide-y divide-nightblue-100/10 dark:divide-white/10">
+                <div *ngFor="let timing of timings" class="flex items-start justify-between gap-4 py-2.5">
+                  <dt class="text-xs font-bold text-nightblue-60 dark:text-nightblue-50">{{ timing.mode }}</dt>
+                  <dd class="m-0 text-right">
+                    <span class="block text-sm font-black text-nightblue dark:text-white">{{ timing.time }}</span>
+                    <span class="block text-[10px] text-nightblue-60 dark:text-nightblue-50">{{ timing.source }}</span>
+                  </dd>
+                </div>
+              </dl>
+              <p class="mt-2 text-[11px] leading-snug text-nightblue-60 dark:text-nightblue-50">
+                El reglamento WA también permite 30 segundos por flecha en tiradas internacionales. En el club
+                el temporizador va a 2 minutos por tanda de 3. Si dudas, pregunta antes de empezar: lo que
+                diga el juez es lo que vale.
+              </p>
+            </div>
+
+            <a routerLink="/timer"
+               class="group flex items-center justify-between gap-4 rounded-3xl border border-solid border-orange/25 bg-orange/10 p-5 transition-colors duration-300 hover:bg-orange/15">
+              <div>
+                <p class="m-0 text-xs font-black uppercase tracking-wider text-orange">Practica el ritmo</p>
+                <p class="m-0 text-sm font-semibold text-nightblue-80 dark:text-nightblue-50">Temporizador con silbato, verde, amarillo y rojo.</p>
+              </div>
+              <ion-icon name="arrow-forward-outline" class="text-xl text-orange transition-transform duration-300 group-hover:translate-x-0.5"></ion-icon>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 · Ropa -->
+      <section id="ropa" data-learn-section class="scroll-mt-32 lg:scroll-mt-36 pt-12">
+        <div class="flex items-start gap-3 pb-5">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-solid border-orange/20 bg-orange/10 text-sm font-black text-orange">04</span>
+          <div>
+            <h2 class="text-xl md:text-2xl font-black uppercase tracking-widest text-nightblue dark:text-white m-0">Ropa y equipación</h2>
+            <p class="mt-1 text-sm text-nightblue-60 dark:text-nightblue-50">Lo que pide el club no siempre es lo que exige el reglamento.</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4 items-start">
+          <div class="rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/80 dark:bg-nightblue-100/70 backdrop-blur-xl p-6">
+            <div class="flex items-center gap-2 pb-3">
+              <ion-icon name="people-outline" class="text-lg text-orange"></ion-icon>
+              <h3 class="m-0 text-sm font-black uppercase tracking-wider text-nightblue dark:text-white">Norma del club</h3>
+            </div>
+            <ul class="flex flex-col gap-2.5">
+              <li class="flex gap-2 text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50"><ion-icon name="ellipse" class="mt-2 text-[5px] text-orange"></ion-icon>No hace falta camiseta del club: vale cualquier camiseta deportiva que cumpla el reglamento.</li>
+              <li class="flex gap-2 text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50"><ion-icon name="ellipse" class="mt-2 text-[5px] text-orange"></ion-icon>Zapatillas deportivas cerradas, que cubran todo el pie. Nada de zapatos de trabajo.</li>
+              <li class="flex gap-2 text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50"><ion-icon name="ellipse" class="mt-2 text-[5px] text-orange"></ion-icon>Sin camuflaje ni patrones.</li>
+              <li class="flex gap-2 text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50"><ion-icon name="ellipse" class="mt-2 text-[5px] text-orange"></ion-icon>Falda o pantalón corto por debajo de la punta de los dedos.</li>
+              <li class="flex gap-2 text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50"><ion-icon name="ellipse" class="mt-2 text-[5px] text-orange"></ion-icon>Sin camisetas de tirantes.</li>
+              <li class="flex gap-2 text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50"><ion-icon name="ellipse" class="mt-2 text-[5px] text-orange"></ion-icon>Dorsal visible, si la tirada lo pide.</li>
+            </ul>
+          </div>
+
+          <div class="rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-nightblue-100 p-6 text-white">
+            <div class="flex items-center gap-2 pb-3">
+              <ion-icon name="document-text-outline" class="text-lg text-orange"></ion-icon>
+              <h3 class="m-0 text-sm font-black uppercase tracking-wider text-white">Reglamento</h3>
+            </div>
+            <ul class="flex flex-col gap-2.5">
+              <li class="flex gap-2 text-sm leading-relaxed text-white/80"><ion-icon name="ellipse" class="mt-2 text-[5px] text-orange"></ion-icon>Nada de denim, jeans ni camuflaje.</li>
+              <li class="flex gap-2 text-sm leading-relaxed text-white/80"><ion-icon name="ellipse" class="mt-2 text-[5px] text-orange"></ion-icon>Torso cubierto.</li>
+              <li class="flex gap-2 text-sm leading-relaxed text-white/80"><ion-icon name="ellipse" class="mt-2 text-[5px] text-orange"></ion-icon>Pantalón corto o falda hasta la punta de los dedos, no más corto.</li>
+              <li class="flex gap-2 text-sm leading-relaxed text-white/80"><ion-icon name="ellipse" class="mt-2 text-[5px] text-orange"></ion-icon>Calzado cerrado que cubra todo el pie. Es obligatorio: nada de sandalias ni chanclas.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-4 rounded-2xl border-l-4 border-solid border-orange bg-orange/5 p-5">
+          <p class="text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">
+            La ropa no te hace puntuar, pero una prenda fuera de norma sí puede costarte una advertencia del juez.
+            Si tienes dudas, pregunta antes de salir: cambiar de camiseta es más rápido que discutir en la línea.
+          </p>
+        </div>
+      </section>
+
+      <!-- 05 · Dianas -->
+      <section id="dianas" data-learn-section class="scroll-mt-32 lg:scroll-mt-36 pt-12">
+        <div class="flex items-start gap-3 pb-5">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-solid border-orange/20 bg-orange/10 text-sm font-black text-orange">05</span>
+          <div>
+            <h2 class="text-xl md:text-2xl font-black uppercase tracking-widest text-nightblue dark:text-white m-0">Las dianas</h2>
+            <p class="mt-1 text-sm text-nightblue-60 dark:text-nightblue-50">El color no es decoración: cada anillo vale un punto.</p>
+          </div>
+        </div>
+
+        <p class="max-w-3xl text-nightblue-80 dark:text-nightblue-50 leading-relaxed pb-5">
+          Una diana se reconoce por su tamaño y por cuántos anillos tiene. Las de sala y aire libre comparten colores;
+          la de campo y la figura 3D funcionan de otra manera.
+        </p>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div *ngFor="let face of faces"
+               class="flex flex-col overflow-hidden rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/80 dark:bg-nightblue-100/70 backdrop-blur-xl">
+            <div class="bg-white p-4">
+              <svg *ngIf="!face.custom"
+                   [attr.viewBox]="faceViewBox(face)"
+                   class="mx-auto h-auto w-full max-w-[190px]"
+                   role="img"
+                   [attr.aria-label]="'Diana ' + face.name">
+                <ng-container *ngIf="!face.triple">
+                  <circle cx="50" cy="50" r="50" fill="#FFFFFF" stroke="#C7CDD6" stroke-width="1"></circle>
+                  <circle *ngFor="let ring of face.rings"
+                          cx="50" cy="50"
+                          [attr.r]="ring.r * 50"
+                          [attr.fill]="ring.fill"
+                          [attr.stroke]="ring.stroke"
+                          stroke-width="0.35"></circle>
+                  <circle *ngIf="face.xRing" cx="50" cy="50" r="2.5" fill="none" stroke="#1B1B1B" stroke-width="0.6" stroke-dasharray="1 1"></circle>
+                </ng-container>
+
+                <ng-container *ngIf="face.triple">
+                  <ng-container *ngFor="let cy of tripleCentres()">
+                    <circle cx="50" [attr.cy]="cy" r="20" fill="#FFFFFF" stroke="#C7CDD6" stroke-width="1"></circle>
+                    <circle *ngFor="let ring of face.rings"
+                            cx="50" [attr.cy]="cy"
+                            [attr.r]="ring.r * 20"
+                            [attr.fill]="ring.fill"
+                            [attr.stroke]="ring.stroke"
+                            stroke-width="0.3"></circle>
+                  </ng-container>
+                </ng-container>
+              </svg>
+
+              <svg *ngIf="face.custom === 'animal'" viewBox="0 0 100 100" class="mx-auto h-auto w-full max-w-[190px]" role="img" aria-label="Figura 3D de un animal con la zona vital marcada">
+                <!-- antlers -->
+                <g fill="none" stroke="#8A7A63" stroke-width="1.1" stroke-linecap="round">
+                  <path d="M79 26 L76 18"></path>
+                  <path d="M76 21 L71 17"></path>
+                  <path d="M76 20 L82 15"></path>
+                </g>
+                <!-- legs -->
+                <g stroke="#8A7A63" stroke-width="2.4" stroke-linecap="round">
+                  <line x1="30" y1="64" x2="28" y2="86"></line>
+                  <line x1="41" y1="65" x2="41" y2="86"></line>
+                  <line x1="60" y1="65" x2="62" y2="86"></line>
+                  <line x1="68" y1="63" x2="70" y2="84"></line>
+                </g>
+                <!-- body, neck and head -->
+                <g fill="#C9B79C" stroke="#8A7A63" stroke-width="1.2" stroke-linejoin="round">
+                  <ellipse cx="45" cy="57" rx="28" ry="12"></ellipse>
+                  <path d="M63 48 L73 29 L82 30 L77 51 Z"></path>
+                  <path d="M71 29 L82 25 L92 31 L88 38 L77 37 Z"></path>
+                  <path d="M79 25 L77 20 L83 23 Z"></path>
+                  <path d="M18 52 L13 46 L16 57 Z"></path>
+                </g>
+                <!-- vital zone: 8, 10 and 11 -->
+                <circle cx="52" cy="55" r="12" fill="#E4D8C6" stroke="#8A7A63" stroke-width="0.8"></circle>
+                <circle cx="52" cy="55" r="7.4" fill="#D5C4AD" stroke="#8A7A63" stroke-width="0.7"></circle>
+                <circle cx="52" cy="55" r="3.2" fill="#F6C900" stroke="#8A7A63" stroke-width="0.6"></circle>
+                <text x="52" y="56.4" text-anchor="middle" font-family="inherit" font-size="3.8" font-weight="800" fill="#1B1B1B">11</text>
+                <text x="52" y="48.4" text-anchor="middle" font-family="inherit" font-size="3.8" font-weight="700" fill="#4A4034">10</text>
+                <text x="52" y="63.6" text-anchor="middle" font-family="inherit" font-size="3.8" font-weight="700" fill="#4A4034">8</text>
+                <text x="28" y="61" text-anchor="middle" font-family="inherit" font-size="3.8" font-weight="700" fill="#4A4034">5</text>
+              </svg>
+            </div>
+
+            <div class="flex grow flex-col border-t border-solid border-nightblue-100/10 dark:border-white/10 p-4">
+              <h3 class="m-0 text-sm font-black text-nightblue dark:text-white">{{ face.name }}</h3>
+              <p class="m-0 text-[11px] font-bold text-orange">{{ face.spec }}</p>
+              <p class="mt-2 text-xs leading-snug text-nightblue-60 dark:text-nightblue-50">{{ face.where }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 overflow-hidden rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/80 dark:bg-nightblue-100/70 backdrop-blur-xl">
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[680px] text-left text-sm">
+              <caption class="sr-only">Dónde se usa cada diana</caption>
+              <thead>
+                <tr class="bg-nightblue-10/60 dark:bg-white/5">
+                  <th scope="col" class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-nightblue-60 dark:text-nightblue-50">Diana</th>
+                  <th scope="col" class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-nightblue-60 dark:text-nightblue-50">Dónde</th>
+                  <th scope="col" class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-nightblue-60 dark:text-nightblue-50">Distancia</th>
+                  <th scope="col" class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-nightblue-60 dark:text-nightblue-50">Flechas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of faceUsage" class="border-t border-solid border-nightblue-100/10 dark:border-white/10">
+                  <td class="px-4 py-3 font-bold text-nightblue dark:text-white">{{ row.face }}</td>
+                  <td class="px-4 py-3 text-nightblue-80 dark:text-nightblue-50">{{ row.discipline }}</td>
+                  <td class="px-4 py-3 text-nightblue-80 dark:text-nightblue-50">{{ row.distance }}</td>
+                  <td class="px-4 py-3 text-nightblue-80 dark:text-nightblue-50">{{ row.arrows }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <p class="mt-3 text-[11px] leading-snug text-nightblue-60 dark:text-nightblue-50">
+          Existen más caras: 80 y 60 cm completas, triples de 60 cm y variantes R/C. La de campo se llama «de campo»
+          aunque sea de 80 cm: no es la misma que la 80 reducida de aire libre.
+        </p>
+      </section>
+
+      <!-- 06 · Modalidades -->
+      <section id="modalidades" data-learn-section class="scroll-mt-32 lg:scroll-mt-36 pt-12">
+        <div class="flex items-start gap-3 pb-5">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-solid border-orange/20 bg-orange/10 text-sm font-black text-orange">06</span>
+          <div>
+            <h2 class="text-xl md:text-2xl font-black uppercase tracking-widest text-nightblue dark:text-white m-0">Sala, aire libre, campo y 3D</h2>
+            <p class="mt-1 text-sm text-nightblue-60 dark:text-nightblue-50">Cuatro formas de competir.</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div *ngFor="let discipline of disciplines"
+               class="flex flex-col rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/80 dark:bg-nightblue-100/70 backdrop-blur-xl p-5 sm:p-6">
+            <div class="flex items-start justify-between gap-3 pb-3">
+              <div class="flex items-center gap-2">
+                <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-orange/10 text-orange">
+                  <ion-icon [name]="discipline.icon" class="text-lg"></ion-icon>
+                </span>
+                <div>
+                  <h3 class="m-0 text-sm font-black uppercase tracking-wider text-nightblue dark:text-white">{{ discipline.name }}</h3>
+                  <p class="m-0 text-[11px] font-bold text-nightblue-60 dark:text-nightblue-50">{{ discipline.headline }}</p>
+                </div>
+              </div>
+              <span class="shrink-0 rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-wider"
+                    [ngClass]="discipline.club === 'yes'
+                      ? 'bg-alert-green/10 text-alert-green'
+                      : 'bg-nightblue-100/5 dark:bg-white/5 text-nightblue-60 dark:text-nightblue-50'">
+                {{ discipline.club === 'yes' ? 'Competimos' : 'Solo explicativo' }}
+              </span>
+            </div>
+
+            <dl class="flex flex-col divide-y divide-nightblue-100/10 dark:divide-white/10">
+              <div *ngFor="let row of discipline.rows" class="flex items-start justify-between gap-4 py-2">
+                <dt class="text-[11px] font-bold uppercase tracking-wide text-nightblue-60 dark:text-nightblue-50">{{ row.label }}</dt>
+                <dd class="m-0 max-w-[62%] text-right text-xs font-semibold text-nightblue-80 dark:text-nightblue-50">{{ row.value }}</dd>
+              </div>
+            </dl>
+
+            <p class="mt-3 text-xs leading-relaxed text-nightblue-60 dark:text-nightblue-50">{{ discipline.note }}</p>
+          </div>
+        </div>
+
+        <div class="mt-4 rounded-2xl border-l-4 border-solid border-nightblue-60 bg-nightblue-10/50 dark:bg-white/5 p-5">
+          <p class="text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">
+            <strong class="text-nightblue dark:text-white">Nuestro club organiza y compite en sala y aire libre.</strong>
+            Campo y 3D aparecen en esta página para que sepas qué son cuando los veas en un calendario o en un
+            campeonato.
+          </p>
+        </div>
+      </section>
+
+      <!-- 07 · Puntuación -->
+      <section id="puntuacion" data-learn-section class="scroll-mt-32 lg:scroll-mt-36 pt-12">
+        <div class="flex items-start gap-3 pb-5">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-solid border-orange/20 bg-orange/10 text-sm font-black text-orange">07</span>
+          <div>
+            <h2 class="text-xl md:text-2xl font-black uppercase tracking-widest text-nightblue dark:text-white m-0">Puntuar</h2>
+            <p class="mt-1 text-sm text-nightblue-60 dark:text-nightblue-50">La flecha vale por donde pasa el tubo, no por donde entra la punta. Si el tubo toca el anillo de mayor valor entonces la flecha cuenta como superior. Si hay discrepancias entre arqueros de la diana el juez decide.</p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-4 items-start">
+          <div class="rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/80 dark:bg-nightblue-100/70 backdrop-blur-xl p-6">
+            <ul class="flex flex-col gap-3">
+              <li *ngFor="let rule of scoring" class="flex gap-3 text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">
+                <ion-icon name="ellipse" class="mt-2 shrink-0 text-[5px] text-orange"></ion-icon>
+                <span>{{ rule }}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="flex flex-col gap-4">
+            <div class="rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-nightblue-100 p-6 text-white">
+              <h3 class="m-0 pb-3 text-sm font-black uppercase tracking-wider text-white">Si hay empate</h3>
+              <dl class="flex flex-col gap-3">
+                <div>
+                  <dt class="text-[10px] font-black uppercase tracking-widest text-orange">Aire libre</dt>
+                  <dd class="m-0 text-sm text-white/80">Gana quien tenga más X. Si sigue el empate, más 10.</dd>
+                </div>
+                <div>
+                  <dt class="text-[10px] font-black uppercase tracking-widest text-orange">Sala</dt>
+                  <dd class="m-0 text-sm text-white/80">Gana quien tenga más 10. Si sigue el empate, más 9.</dd>
+                </div>
+                <div>
+                  <dt class="text-[10px] font-black uppercase tracking-widest text-orange">Eliminatoria</dt>
+                  <dd class="m-0 text-sm text-white/80">Shoot-off a una flecha: la más cercana al centro.</dd>
+                </div>
+              </dl>
+            </div>
+
+            <div class="rounded-2xl border-l-4 border-solid border-orange bg-orange/5 p-5">
+              <p class="text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">
+                Revisa tu tablilla antes de firmar: total, número de 10 y de X (o de 9 en sala). Una vez firmada,
+                corregirla es mucho más complicado.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 08 · Clasificatoria y eliminatorias -->
+      <section id="eliminatorias" data-learn-section class="scroll-mt-32 lg:scroll-mt-36 pt-12">
+        <div class="flex items-start gap-3 pb-5">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-solid border-orange/20 bg-orange/10 text-sm font-black text-orange">08</span>
+          <div>
+            <h2 class="text-xl md:text-2xl font-black uppercase tracking-widest text-nightblue dark:text-white m-0">Clasificatoria y eliminatorias</h2>
+            <p class="mt-1 text-sm text-nightblue-60 dark:text-nightblue-50">Dos formatos distintos, y solo uno es el de nuestras ligas.</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="rounded-3xl border border-solid border-orange/30 bg-orange/5 p-6">
+            <div class="flex items-center justify-between gap-3 pb-2">
+              <h3 class="m-0 text-sm font-black uppercase tracking-wider text-nightblue dark:text-white">Clasificatoria</h3>
+              <span class="rounded-full bg-orange text-white px-2.5 py-1 text-[9px] font-black uppercase tracking-wider">Siempre</span>
+            </div>
+            <p class="text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">
+              Todos tiran las mismas flechas y se ordenan por puntuación total. No hay rival directo: compites
+              contra la diana y contra el resto de la tabla.
+            </p>
+            <p class="mt-2 text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">
+              Es el formato de GPC, RAUS y las ligas de ATIRCA: 72 flechas al aire libre o 60 en sala.
+            </p>
+          </div>
+
+          <div class="rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/80 dark:bg-nightblue-100/70 backdrop-blur-xl p-6">
+            <div class="flex items-center justify-between gap-3 pb-2">
+              <h3 class="m-0 text-sm font-black uppercase tracking-wider text-nightblue dark:text-white">Eliminatorias</h3>
+              <span class="rounded-full bg-nightblue-100/5 dark:bg-white/10 px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-nightblue-60 dark:text-nightblue-50">Campeonatos</span>
+            </div>
+            <p class="text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">
+              Si hay corte en número de puestos se ordenan primero contra último, segundo contra penúltimo...etc según el clasificatorio. Se cruzan en enfrentamientos directos. Si ganas un enfrentamiento pasas a la siguiente fase.
+            </p>
+            <p class="mt-2 text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">
+              Aquí aparecen los sets, los puntos de set y los shoot-off. En nuestras ligas no los vas a necesitar.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-4 overflow-hidden rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/80 dark:bg-nightblue-100/70 backdrop-blur-xl">
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[640px] text-left text-sm">
+              <caption class="sr-only">Formato de eliminatorias por división</caption>
+              <thead>
+                <tr class="bg-nightblue-10/60 dark:bg-white/5">
+                  <th scope="col" class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-nightblue-60 dark:text-nightblue-50">División</th>
+                  <th scope="col" class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-nightblue-60 dark:text-nightblue-50">Formato</th>
+                  <th scope="col" class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-nightblue-60 dark:text-nightblue-50">Cómo se gana</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-t border-solid border-nightblue-100/10 dark:border-white/10">
+                  <td class="px-4 py-3 font-bold text-nightblue dark:text-white">Recurvo</td>
+                  <td class="px-4 py-3 text-nightblue-80 dark:text-nightblue-50">Sets de 3 flechas</td>
+                  <td class="px-4 py-3 text-nightblue-80 dark:text-nightblue-50">2 puntos por set ganado, 1 si empatas. Primero en llegar a 6.</td>
+                </tr>
+                <tr class="border-t border-solid border-nightblue-100/10 dark:border-white/10">
+                  <td class="px-4 py-3 font-bold text-nightblue dark:text-white">Compuesto</td>
+                  <td class="px-4 py-3 text-nightblue-80 dark:text-nightblue-50">5 tandas de 3 flechas</td>
+                  <td class="px-4 py-3 text-nightblue-80 dark:text-nightblue-50">Suma total de puntos. Gana el mayor acumulado.</td>
+                </tr>
+                <tr class="border-t border-solid border-nightblue-100/10 dark:border-white/10">
+                  <td class="px-4 py-3 font-bold text-nightblue dark:text-white">Empate</td>
+                  <td class="px-4 py-3 text-nightblue-80 dark:text-nightblue-50">Shoot-off</td>
+                  <td class="px-4 py-3 text-nightblue-80 dark:text-nightblue-50">Una flecha por arquero. Gana la más cercana al centro.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 09 · Imprevistos -->
+      <section id="imprevistos" data-learn-section class="scroll-mt-32 lg:scroll-mt-36 pt-12">
+        <div class="flex items-start gap-3 pb-5">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-solid border-orange/20 bg-orange/10 text-sm font-black text-orange">09</span>
+          <div>
+            <h2 class="text-xl md:text-2xl font-black uppercase tracking-widest text-nightblue dark:text-white m-0">Cuando algo sale mal</h2>
+            <p class="mt-1 text-sm text-nightblue-60 dark:text-nightblue-50">Casi todo tiene solución. Casi nada se arregla tocando la flecha.</p>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div *ngFor="let item of whatIfs"
+               class="flex flex-col rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/80 dark:bg-nightblue-100/70 backdrop-blur-xl p-5">
+            <div class="flex items-center gap-2 pb-2">
+              <ion-icon [name]="item.icon" class="text-lg text-orange"></ion-icon>
+              <h3 class="m-0 text-sm font-black text-nightblue dark:text-white">{{ item.title }}</h3>
+            </div>
+            <p class="m-0 text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">{{ item.body }}</p>
+          </div>
+        </div>
+
+        <div class="mt-4 rounded-2xl border-l-4 border-solid border-orange bg-orange/5 p-5">
+          <p class="text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">
+            <strong class="text-nightblue dark:text-white">Regla de oro:</strong>
+            no toques flechas, diana ni arco hasta que la tanda esté cantada y apuntada. Si algo no cuadra,
+            llama al juez y espera.
+          </p>
+        </div>
+      </section>
+
+      <!-- 10 · Matriz de distancias -->
+      <section id="matriz" data-learn-section class="scroll-mt-32 lg:scroll-mt-36 pt-12">
+        <div class="flex items-start gap-3 pb-5">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-solid border-orange/20 bg-orange/10 text-sm font-black text-orange">10</span>
+          <div>
+            <h2 class="text-xl md:text-2xl font-black uppercase tracking-widest text-nightblue dark:text-white m-0">Distancias y dianas</h2>
+            <p class="mt-1 text-sm text-nightblue-60 dark:text-nightblue-50">«¿A qué distancia tiro yo?» La respuesta, por categoría y división.</p>
+          </div>
+        </div>
+
+        <p class="max-w-3xl text-nightblue-80 dark:text-nightblue-50 leading-relaxed pb-3">
+          Estas son las distancias y dianas de la fase clasificatoria en las competiciones de la RFETA. Las
+          distancias son las mismas para hombres y mujeres; solo cambian en el Round 1440 (o el 720 de U15),
+          que son otra prueba.
+        </p>
+
+        <p class="lg:hidden pb-2 text-[11px] font-semibold text-orange">Desliza la tabla para ver todas las divisiones →</p>
+
+        <ng-template #emptyCell><span class="text-nightblue-50">—</span></ng-template>
+
+        <div class="overflow-hidden rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/80 dark:bg-nightblue-100/70 backdrop-blur-xl">
+          <div class="border-b border-solid border-nightblue-100/10 dark:border-white/10 bg-nightblue-100 px-4 py-3">
+            <h3 class="m-0 text-xs font-black uppercase tracking-widest text-white">Sala · 60 flechas · 18 m</h3>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[760px] text-left text-sm">
+              <caption class="sr-only">Distancias y dianas de la fase clasificatoria en sala por categoría y división</caption>
+              <thead>
+                <tr class="bg-nightblue-10/60 dark:bg-white/5">
+                  <th scope="col" class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-nightblue-60 dark:text-nightblue-50">Categoría</th>
+                  <th scope="col" class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-nightblue-60 dark:text-nightblue-50">Recurvo</th>
+                  <th scope="col" class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-nightblue-60 dark:text-nightblue-50">Compuesto</th>
+                  <th scope="col" class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-nightblue-60 dark:text-nightblue-50">Desnudo</th>
+                  <th scope="col" class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-nightblue-60 dark:text-nightblue-50">Tradicional / Longbow</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of matrixRows" class="border-t border-solid border-nightblue-100/10 dark:border-white/10">
+                  <th scope="row" class="px-4 py-3 text-left">
+                    <span class="block text-xs font-black text-nightblue dark:text-white">{{ row.category }}</span>
+                    <span class="block text-[10px] text-nightblue-60 dark:text-nightblue-50">{{ row.age }}</span>
+                  </th>
+                  <td *ngFor="let cell of row.cells" class="px-4 py-3">
+                    <ng-container *ngIf="cell; else emptyCell">
+                      <span class="block text-sm font-bold text-nightblue dark:text-white">{{ cell.distance }}</span>
+                      <span class="block text-[10px] text-nightblue-60 dark:text-nightblue-50">{{ cell.face }}</span>
+                    </ng-container>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="mt-4 overflow-hidden rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/80 dark:bg-nightblue-100/70 backdrop-blur-xl">
+          <div class="border-b border-solid border-nightblue-100/10 dark:border-white/10 bg-nightblue-100 px-4 py-3">
+            <h3 class="m-0 text-xs font-black uppercase tracking-widest text-white">Aire libre · 72 flechas</h3>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[760px] text-left text-sm">
+              <caption class="sr-only">Distancias y dianas de la fase clasificatoria al aire libre por categoría y división</caption>
+              <thead>
+                <tr class="bg-nightblue-10/60 dark:bg-white/5">
+                  <th scope="col" class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-nightblue-60 dark:text-nightblue-50">Categoría</th>
+                  <th scope="col" class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-nightblue-60 dark:text-nightblue-50">Recurvo</th>
+                  <th scope="col" class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-nightblue-60 dark:text-nightblue-50">Compuesto</th>
+                  <th scope="col" class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-nightblue-60 dark:text-nightblue-50">Desnudo</th>
+                  <th scope="col" class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-nightblue-60 dark:text-nightblue-50">Tradicional / Longbow</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of outdoorRows" class="border-t border-solid border-nightblue-100/10 dark:border-white/10">
+                  <th scope="row" class="px-4 py-3 text-left">
+                    <span class="block text-xs font-black text-nightblue dark:text-white">{{ row.category }}</span>
+                    <span class="block text-[10px] text-nightblue-60 dark:text-nightblue-50">{{ row.age }}</span>
+                  </th>
+                  <td *ngFor="let cell of row.cells" class="px-4 py-3">
+                    <ng-container *ngIf="cell; else emptyCell">
+                      <span class="block text-sm font-bold text-nightblue dark:text-white">{{ cell.distance }}</span>
+                      <span class="block text-[10px] text-nightblue-60 dark:text-nightblue-50">{{ cell.face }}</span>
+                    </ng-container>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="mt-3 rounded-2xl bg-nightblue-10/50 dark:bg-white/5 p-4">
+          <p class="text-[11px] leading-relaxed text-nightblue-60 dark:text-nightblue-50">
+            En tradicional y longbow la distancia es la misma, 30 m, pero cambia la diana: 80 cm reducida
+            para tradicional y 122 cm para longbow. Desnudo, tradicional y longbow se convocan en categoría
+            absoluta cuando no hay categorías por edad. El Round 1440 es una prueba aparte, de cuatro
+            distancias y 36 flechas en cada una (los U15 tiran el Round 720, de dos), y ahí sí cambian las
+            distancias entre hombres y mujeres.
+          </p>
+          <p class="mt-2 text-[11px] leading-relaxed font-semibold text-nightblue-60 dark:text-nightblue-50">
+            Fuente: RFETA, «Cuadro de dianas, piquetas y distancias». Última revisión de esta página: octubre de 2026.
+            Si tu convocatoria dice otra cosa, manda la convocatoria.
+          </p>
+          <a href="https://www.federarco.es/competiciones/de-interes/cuadro-dianas-piquetas-y-distancias"
+             target="_blank" rel="noopener noreferrer"
+             class="mt-2 inline-flex items-center gap-1 text-[11px] font-bold text-orange hover:underline">
+            Ver el cuadro oficial de la RFETA
+            <ion-icon name="open-outline" class="text-xs"></ion-icon>
+          </a>
+        </div>
+      </section>
+
+      <!-- 11 · Ligas -->
+      <section id="ligas" data-learn-section class="scroll-mt-32 lg:scroll-mt-36 pt-12">
+        <div class="flex items-start gap-3 pb-5">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-solid border-orange/20 bg-orange/10 text-sm font-black text-orange">11</span>
+          <div>
+            <h2 class="text-xl md:text-2xl font-black uppercase tracking-widest text-nightblue dark:text-white m-0">GPC, RAUS y ATIRCA</h2>
+            <p class="mt-1 text-sm text-nightblue-60 dark:text-nightblue-50">Tres nombres que verás en el calendario, y a veces dos en la misma tirada.</p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-4">
+          <div *ngFor="let league of leagues"
+               class="flex flex-col rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/80 dark:bg-nightblue-100/70 backdrop-blur-xl p-5 sm:p-6">
+            <div class="flex items-center justify-between gap-3 pb-3">
+              <div>
+                <p class="m-0 text-2xl font-black tracking-tight text-nightblue dark:text-white">{{ league.acronym }}</p>
+                <p class="m-0 text-[11px] font-bold text-orange">{{ league.tag }}</p>
+              </div>
+              <img *ngIf="league.logo" [src]="league.logo" alt="" loading="lazy" class="h-9 w-auto object-contain opacity-80">
+            </div>
+            <h3 class="m-0 pb-2 text-xs font-black uppercase tracking-wider text-nightblue-60 dark:text-nightblue-50">{{ league.name }}</h3>
+            <p class="grow text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">{{ league.body }}</p>
+            <a [href]="league.link" target="_blank" rel="noopener noreferrer"
+               class="mt-3 inline-flex items-center gap-1 text-[11px] font-bold text-orange hover:underline">
+              {{ league.linkLabel }}
+              <ion-icon name="open-outline" class="text-xs"></ion-icon>
+            </a>
+          </div>
+        </div>
+
+        <div class="mt-4 rounded-3xl border border-solid border-orange/25 bg-orange/5 p-5 sm:p-6">
+          <h3 class="m-0 pb-2 text-sm font-black uppercase tracking-wider text-orange">Una tirada, dos clasificaciones</h3>
+          <p class="text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">
+            En el calendario verás tiradas con dos nombres, por ejemplo <strong>«GPC IV ATIRCA III»</strong>.
+            No son dos competiciones: es la misma tirada y el mismo resultado cuenta para el ranking del GPC y para
+            la liga de ATIRCA. Te inscribes una vez y tiras una vez.
+          </p>
+        </div>
+
+        <p class="mt-3 text-[11px] leading-relaxed text-nightblue-60 dark:text-nightblue-50">
+          Las clasificaciones se publican en la web de la FECTA y en
+          <a href="https://clasificaciones.rfeta.es" target="_blank" rel="noopener noreferrer" class="font-bold text-orange hover:underline">clasificaciones.rfeta.es</a>.
+          Cada liga tiene su normativa de puntuación: lee la convocatoria antes de contar puntos.
+        </p>
+      </section>
+
+      <!-- 12 · Primera tirada -->
+      <section id="primera" data-learn-section class="scroll-mt-32 lg:scroll-mt-36 pt-12">
+        <div class="flex items-start gap-3 pb-5">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-solid border-orange/20 bg-orange/10 text-sm font-black text-orange">12</span>
+          <div>
+            <h2 class="text-xl md:text-2xl font-black uppercase tracking-widest text-nightblue dark:text-white m-0">Tu primera tirada, paso a paso</h2>
+            <p class="mt-1 text-sm text-nightblue-60 dark:text-nightblue-50">Del calendario a la firma de la tarjeta.</p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-4">
+          <ol class="flex flex-col">
+            <li *ngFor="let step of steps; let i = index; let last = last" class="flex gap-4">
+              <div class="flex flex-col items-center">
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-solid border-orange/30 bg-orange/10 text-[11px] font-black text-orange">
+                  {{ i + 1 }}
+                </span>
+                <span *ngIf="!last" class="w-px grow bg-nightblue-100/10 dark:bg-white/10"></span>
+              </div>
+              <div class="pb-5">
+                <div class="flex items-center gap-2">
+                  <ion-icon [name]="step.icon" class="text-sm text-nightblue-60 dark:text-nightblue-50"></ion-icon>
+                  <h3 class="m-0 text-sm font-black text-nightblue dark:text-white">{{ step.title }}</h3>
+                </div>
+                <p class="mt-1 text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">{{ step.body }}</p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="flex flex-col gap-4">
+            <div class="rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/80 dark:bg-nightblue-100/70 backdrop-blur-xl p-5 sm:p-6">
+              <h3 class="m-0 pb-3 text-sm font-black uppercase tracking-wider text-nightblue dark:text-white">Qué llevar</h3>
+              <ul class="flex flex-wrap gap-1.5">
+                <li *ngFor="let item of packingList"
+                    class="rounded-full border border-solid border-nightblue-100/10 dark:border-white/10 bg-nightblue-10/60 dark:bg-white/5 px-2.5 py-1 text-[11px] font-semibold text-nightblue-80 dark:text-nightblue-50">
+                  {{ item }}
+                </li>
+              </ul>
+            </div>
+
+            <div class="rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-nightblue-100 p-5 sm:p-6 text-white">
+              <h3 class="m-0 pb-2 text-sm font-black uppercase tracking-wider text-orange">A quién preguntar</h3>
+              <p class="text-sm leading-relaxed text-white/80">
+                Al monitor o al delegado del club. En la tirada, al juez, siempre desde detrás de la línea de espera
+                y sin interrumpir. Ninguna pregunta razonable molesta.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p class="mt-3 text-[11px] leading-relaxed text-nightblue-60 dark:text-nightblue-50">
+          Plazos, cuotas y horarios cambian cada temporada. Confirma siempre en la convocatoria y en la página de
+          competiciones antes de dar algo por hecho.
+        </p>
+      </section>
+
+      <!-- 13 · Glosario -->
+      <section id="glosario" data-learn-section class="scroll-mt-32 lg:scroll-mt-36 pt-12">
+        <div class="flex items-start gap-3 pb-5">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-solid border-orange/20 bg-orange/10 text-sm font-black text-orange">13</span>
+          <div>
+            <h2 class="text-xl md:text-2xl font-black uppercase tracking-widest text-nightblue dark:text-white m-0">Palabras que vas a oír</h2>
+            <p class="mt-1 text-sm text-nightblue-60 dark:text-nightblue-50">Vocabulario de línea, sin adornos.</p>
+          </div>
+        </div>
+
+        <dl class="grid sm:grid-cols-2 gap-x-6 gap-y-4">
+          <div *ngFor="let term of glossary" class="border-b border-solid border-nightblue-100/10 dark:border-white/10 pb-3">
+            <dt class="text-xs font-black uppercase tracking-wider text-nightblue dark:text-white">{{ term.term }}</dt>
+            <dd class="m-0 mt-1 text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">{{ term.definition }}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- Sources -->
+      <section class="pt-12">
+        <div class="rounded-3xl border border-solid border-nightblue-100/10 dark:border-white/10 bg-white/70 dark:bg-nightblue-100/60 backdrop-blur-xl p-5 sm:p-6">
+          <h2 class="m-0 pb-2 text-xs font-black uppercase tracking-widest text-nightblue dark:text-white">Fuentes y revisión</h2>
+          <p class="text-sm leading-relaxed text-nightblue-80 dark:text-nightblue-50">
+            Reglamento de World Archery (Libros 2, 3 y 4), «Cuadro de dianas, piquetas y distancias» de la RFETA y
+            calendario de la FECTA. Última revisión: octubre de 2026.
+          </p>
+          <div class="mt-3 flex flex-wrap gap-x-4 gap-y-2">
+            <a href="https://www.federarco.es/competiciones/de-interes/cuadro-dianas-piquetas-y-distancias" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[11px] font-bold text-orange hover:underline">
+              Cuadro RFETA <ion-icon name="open-outline" class="text-xs"></ion-icon>
+            </a>
+            <a href="https://www.worldarchery.sport/rulebook" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[11px] font-bold text-orange hover:underline">
+              Reglamento World Archery <ion-icon name="open-outline" class="text-xs"></ion-icon>
+            </a>
+            <a href="https://www.fecta.org/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[11px] font-bold text-orange hover:underline">
+              FECTA <ion-icon name="open-outline" class="text-xs"></ion-icon>
+            </a>
+            <a href="https://asociacionatirca.wixsite.com/atirca" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[11px] font-bold text-orange hover:underline">
+              ATIRCA <ion-icon name="open-outline" class="text-xs"></ion-icon>
+            </a>
+          </div>
+          <p class="mt-3 text-[11px] leading-relaxed text-nightblue-60 dark:text-nightblue-50">
+            Esta página explica el reglamento; no lo sustituye. Ante cualquier duda en la línea, la respuesta del
+            juez es la que vale.
+          </p>
+        </div>
+      </section>
+
+    </main>
+
+    <app-footer></app-footer>
+  </div>
+</ion-content>
